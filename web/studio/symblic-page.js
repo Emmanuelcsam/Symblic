@@ -44,17 +44,17 @@ show [a, legs].
     TJOB_ID = '';
   let TASK_OPTIONS = {}, TASK_SOURCE = '';
   let STRICT_MODEL_PINS = false;
-  let CTOR = { on: false, mode: 'linear', calls: '0' };   // checked construction, off by default (docs/symblic/CONSTRUCTORS.md)
+  let CTOR = { on: false, mode: 'linear', calls: '0' };   // checked construction, off by default (docs/reference/CONSTRUCTORS.md)
   let checkTimer = null, pollTimer = null, checkSeq = 0;
   let writeSettingsOpen = false;
   let writeDiagnostics = null, diagnosticReport = null, checkedSource = null, diagnosticSource = null;
   const linkedRun = new URLSearchParams(location.search).get('run') || '';
   if (/^[0-9a-f]{12}$/.test(linkedRun)) OPEN_ID = linkedRun;
-  // Build: a spec sheet (docs/symblic/SPEC-SHEETS.md) compiled server-side, units written by local models
+  // Build: a spec sheet (docs/reference/SPEC-SHEETS.md) compiled server-side, units written by local models
   const SHEET_KEY = 'symblic-v2-sheet';
   const BUILD_DEFAULT = ['ollama:qwen3:4b-instruct', 'ollama:phi4-mini', 'ollama:gemma3:4b'];
   let SHEET = '', SHEET_INFO = null, BUILD_BY = BUILD_DEFAULT.slice(), BUILD_OPTS = { samples: 5, retries: 3, rounds: 3 };
-  let BUILD_KEEP = '';                 // a spec build whose accepted units a rebuild keeps (docs/symblic/SPEC-SHEETS.md)
+  let BUILD_KEEP = '';                 // a spec build whose accepted units a rebuild keeps (docs/reference/SPEC-SHEETS.md)
   let BUILD_MODE = 'legacy', BUILD_BUDGET = 24000, BUILD_MANIFEST = null;
   let BUILD_PRESENTATION = 'compact', BUILD_DECLARATIONS = '';
   let BUILD_CANDIDATES = '', BUILD_PROBES = '', BUILD_EXTERNALS = '[]', BUILD_COMPARISON = null, BUILD_COMPARING = false;
@@ -122,7 +122,7 @@ show [a, legs].
   const ctorCalls = () => (/^\d{1,5}$/.test(CTOR.calls) && +CTOR.calls <= 10000 ? +CTOR.calls : null);
   function saveCtor() { try { sessionStorage.setItem(CTOR_KEY, JSON.stringify(CTOR)); } catch (_) { } }
 
-  // A paper (.symd: Markdown with ```symblic blocks, docs/symblic/LANGUAGE-3.md) is told apart by its fences or
+  // A paper (.symd: Markdown with ```symblic blocks, docs/reference/LANGUAGE-3.md) is told apart by its fences or
   // front matter; a program never contains ``` and never starts with ---.
   const isPaper = (text) => /^\s*(```|~~~)\s*(symblic|sym)\s*$/m.test(text) || /^---\s*$/m.test(String(text).split('\n')[0] || '');
   window.SymblicFormat = (text) => (isPaper(text) ? 'paper' : 'program');   // the agent picker edits only a program
@@ -688,7 +688,7 @@ show [a, legs].
       ${r.error ? `<div class="card">${pill(['resource', 'unavailable'].includes(r.error.kind) ? 'structured' : 'bad', 'line ' + (+(r.error.line || 0)))} ${esc(r.error.message || '')}</div>` : ''}
       <div class="rows">${(r.tests || []).map((t) => `<div class="row"><div class="grow"><div class="ttl">${pill(t.status === 'passed' ? 'good' : t.status === 'inconclusive' ? 'structured' : 'bad', t.status)} ${esc(t.title)}</div>
         ${t.error ? `<div class="sub">line ${+(t.error.line || 0)}: ${esc(t.error.message || '')}</div>` : ''}</div><span class="hint">line ${+t.line}</span></div>`).join('') || '<div class="empty">No tests.</div>'}</div>
-      <div class="hint">Tests here use the kernel only; a test that asks a model is certified from a terminal (bin/symblic certify).</div>`;
+      <div class="hint">Tests here use the kernel only; a test that asks a model is certified from a terminal (tools/symblic certify).</div>`;
   }
 
   function paintOut() {
@@ -756,7 +756,7 @@ show [a, legs].
   const TIGHTEN_PANEL = ['claude:haiku', 'codex', 'agy', 'ollama:qwen3:4b-instruct', 'ollama:llama3.2:1b'];
   function openTightenSheet() {
     if (CHECK && !CHECK.ok) { toast('Fix the errors first'); return; }
-    if (isPaper(SRC)) { toast('Tighten works on a program; compile the paper first (bin/symblic paper compile)'); return; }
+    if (isPaper(SRC)) { toast('Tighten works on a program; compile the paper first (tools/symblic paper compile)'); return; }
     const veil = document.createElement('div');
     veil.className = 'veil on';
     const sheet = document.createElement('div');
@@ -870,7 +870,7 @@ show [a, legs].
       <p class="hint">A spec sheet describes one file as small units of code, each with a contract and examples. It compiles
         into a Symblic program with no model involved. Every unit is written in a fresh context by the models ticked
         below, tested against its examples by the kernel's sandboxed JavaScript, and repaired with the failing examples
-        until it passes. The file is assembled only from units that passed. The format is in docs/symblic/SPEC-SHEETS.md.</p>
+        until it passes. The file is assembled only from units that passed. The format is in docs/reference/SPEC-SHEETS.md.</p>
       <div class="sy-actions"><button class="btn sm" id="syExample">Load the Tetris sheet</button>
         <button class="btn sm" id="syCheckSheet">Check</button></div>
       <label style="display:block;margin-top:12px">Build method
@@ -1314,7 +1314,7 @@ end.                               (a typed model function: same arguments, same
 import units.   import stats as st.   import fleiss_kappa from stats.   import "Saved program" as p.
 term cup means "the US legal cup, exactly 240 mL".   (every ask that uses the word is told the meaning)
 test "a unit square" do assert area(1) = 1. end.     (Run tests in Write; skipped in a run)</div>
-      <p>A <b>paper</b> (.symd) is Markdown: prose explains, <code>- **word**: meaning</code> defines, and <code>\`\`\`symblic</code> blocks are the statements. Compare agents on a paper to see whether groups of agents that knew nothing reproduce it, and which of its lines they read differently. A finished run can be <b>locked</b>: the lock replays it with no model at all. Details: docs/symblic/LANGUAGE-3.md.</p>
+      <p>A <b>paper</b> (.symd) is Markdown: prose explains, <code>- **word**: meaning</code> defines, and <code>\`\`\`symblic</code> blocks are the statements. Compare agents on a paper to see whether groups of agents that knew nothing reproduce it, and which of its lines they read differently. A finished run can be <b>locked</b>: the lock replays it with no model at all. Details: docs/reference/LANGUAGE-3.md.</p>
       <h3>Types (they become the answer's JSON Schema)</h3>
       <div class="codeblock">Int · Int in 1..10 · Number · Number to 2 places · Bool · Text · Text up to 60 words
 one of {red, gold, pale-yellow} · List of T length 3..5 · Set of T · Record {name: Text, n: Int}
@@ -1340,7 +1340,7 @@ one of {fruit: "botanically, grown from the flower", vegetable: "any other edibl
         <li><b>Tighten</b> proposes rewrites, retains original requirements and records adoption separately. Independent held-out requirements/examples test fidelity; a different panel alone cannot establish preserved intent.</li>
         <li><b>Checks:</b> ensure/assert enforce their encoded predicates. A passing check alone does not establish factual truth or that the predicate captures the author's intention.</li>
       </ul>
-      <p class="hint">Prior work and how Symblic relates to it: docs/symblic/PRIOR-ART.md. Specification: docs/symblic/SPEC.md.</p>
+      <p class="hint">Prior work and how Symblic relates to it: docs/reference/PRIOR-ART.md. Specification: docs/reference/SPEC.md.</p>
     </div>
     <div class="unit" id="syLib"></div>
     <div class="unit" id="syJobs"></div>`;
@@ -1565,11 +1565,17 @@ one of {fruit: "botanically, grown from the flower", vegetable: "any other edibl
         <h2>Symblic Academy & Mastery Platform</h2>
         <p class="hint">Practise Symblic construction and checking: explicit statements, kernel predicates, model proposals, evidence limits, flashcards, cloze exercises, syntax drills, quizzes, and guided projects. Study progress records practice, not certification.</p>
         <div style="display:flex; gap:12px; margin:16px 0; flex-wrap:wrap;">
-          <a class="btn primary" href="symblic-guides/index.html" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
-            <span>Open the guides</span>
+          <a class="btn primary" href="../academy/index.html" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+            <span>Launch Symblic Academy Subsite</span>
+            <span>↗</span>
           </a>
-          <span class="hint">The original host also served a separate Academy page (flashcards, cloze blanks, syntax drills, capstone projects); it is not part of this repository.</span>
+          <a class="btn alt" href="../academy/index.html#flashcards" style="text-decoration:none;">Spaced Repetition Flashcards</a>
+          <a class="btn alt" href="../academy/index.html#cloze" style="text-decoration:none;">Cloze Blanks</a>
+          <a class="btn alt" href="../academy/index.html#drills" style="text-decoration:none;">Syntax Drills</a>
+          <a class="btn alt" href="../academy/index.html#projects" style="text-decoration:none;">Capstone Projects</a>
+          <a class="btn alt" href="symblic-guides/index.html" style="text-decoration:none;">Open the guides</a>
         </div>
+        <p class="hint">The Academy is <code>web/academy/</code> in this repository. It works as static files (see its README) except for checking and previewing programs, which need a host.</p>
         <div class="card" style="margin-top:16px; padding:16px; border:1px solid var(--brd); border-radius:4px; background:var(--bg1);">
           <h3>Curriculum Highlights</h3>
           <ul style="padding-left:20px; line-height:1.7; margin-top:8px;">

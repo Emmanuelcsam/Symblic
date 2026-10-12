@@ -241,7 +241,7 @@ or platform.
 
 A first live check on a small program with one closed and one integer ask is reported to have given the run
 fingerprint `ed944e6a299b9b61` from llama3.2:1b (node-a), qwen3:4b (node-b), Claude Haiku and Codex alike. This is
-**reported, artifact not found**: only a handoff note (`~/.local/state/dashboard-reinforcements/c6d9-owner-handoff.md`)
+**reported, artifact not found**: only a private handoff note
 and a session transcript record the fingerprint, and the run records were not found.
 
 ## 2. Do different agents give the same answer? (16 questions, 7 applicators)

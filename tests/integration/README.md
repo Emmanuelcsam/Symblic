@@ -22,10 +22,11 @@ several minutes on a busy disk.
 
 ## Every module
 
-State as of the last full pass (44 modules run, 18 skipped, 0 failing):
+State as of the last full pass (45 modules run, 18 skipped, 0 failing):
 
 | Module | What it covers | State without the host |
 |---|---|---|
+| `test_symblic_academy_sources.py` | The Academy source route (integration/host/symblic_academy_sources.py): exact catalog rows only, document roots, no symlinks, size limit, owner and GET checks through the engine's dispatch; then every row of the shipped catalog (web/academy/symblic-academy-content.js) under the document roots read byte for byte. | runs: 7 tests |
 | `test_symblic_agent_teams_english.py` | Team profiles through the English front end (symblic/english/authoring.py, the pure half of the host's English API). | runs: 9 tests |
 | `test_symblic_catalog_focus.py` | Strict optional catalog selection through pure, CLI and owner API entry points. | skipped: needs 'automation_engine', which is not part of this repository |
 | `test_symblic_constructor_api.py` | Host-only: the original host's run API with constructor options (start policy, resume refusals, routing). | skipped: needs 'automation_engine', which is not part of this repository |

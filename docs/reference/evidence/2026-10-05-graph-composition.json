@@ -1,0 +1,70 @@
+{
+  "at": "2026-10-05T10:52:44.532435+00:00",
+  "installed_guards": 13,
+  "dependency_guards": 255,
+  "http": {
+    "asset": {
+      "status": 200
+    },
+    "example": {
+      "status": 200
+    },
+    "compose": {
+      "status": 200,
+      "nodes": 4,
+      "graph_hash": "eaf3a39b4c58f6d7cd9fd77c9390274ca671f41944b10b0a82e3dc65720442f9",
+      "manifest_sha256": "74a3e57d0588e8d3d76a964936b8a8c2c438cbd4ef7a435755e34ebdbb1ad1f7"
+    },
+    "check": {
+      "status": 200
+    },
+    "meta": {
+      "status": 200
+    }
+  },
+  "native": {
+    "status": "succeeded",
+    "leaves": 4,
+    "answer": 18,
+    "model_calls": 0,
+    "reserved_calls": 4,
+    "completed_replay_identical": true
+  },
+  "scope": "Pure live HTTP authoring/check only; service-Python GraphRun uses temporary RAM store and a provider that refuses every call; no production run created",
+  "version": 1,
+  "feature": "reusable_graph_authoring",
+  "install_plan_sha256": "2808d82fd59b8c099e600d01557772aea5bc779bbce700ffa5d4f929ceba02e9",
+  "ui_payload_sha256": "726af98f012e164c2058c59d52a991d6db2b9978cecd9ed7205ce6b38c626548",
+  "tests": {
+    "python": "29 cases: initial28pass1privatefixturepatherror; corrected shipped-example case passes. Runtime unchanged by fixture correction.",
+    "browser_integrated": {
+      "passed": 9,
+      "seconds": 44.150880091
+    },
+    "browser_numeric_and_malformed": {
+      "passed": 2,
+      "seconds": 30.882873352
+    },
+    "actual_source_scanner": {
+      "passed": 3
+    },
+    "independent_numeric_fixtures": 51,
+    "devcheck_blocking": false
+  },
+  "scanner_probe": {
+    "malformed_characters": 1048576,
+    "elapsed_ms": 7.67756399999999,
+    "measurement_scope": "One independent local scanner measurement, not a whole-page latency guarantee"
+  },
+  "restart": {
+    "process_changed": true,
+    "http": 200
+  },
+  "limitations": [
+    "One inline composition level; up to128 expanded leaves",
+    "No new executor or training/backpropagation",
+    "Browser exact integers limited to safe JSON range; CLI preserves larger exact integer inputs",
+    "No new local-model quality or token-economics measurement"
+  ],
+  "publication_note": "Edited for publication on 2026-10-12: two process ids were removed; the pair is replaced by \"process_changed\": true. Other values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

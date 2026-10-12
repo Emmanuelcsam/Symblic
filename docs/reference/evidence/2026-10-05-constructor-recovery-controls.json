@@ -18,8 +18,7 @@
     "http": 200,
     "payloads": 12,
     "plan_sha256": "28a8d2f23351c1bbf3f7e12098c0173c5477e2b33a0d2d57be68b7aff56e837a",
-    "service_pid_after": 2031955,
-    "service_pid_before": 2000484,
+    "process_changed": true,
     "unchanged_guards": 378
   },
   "journal_version": 3,
@@ -70,5 +69,5 @@
   "scope": "constructor crash recovery, portable export integrity and optional Write controls",
   "source_manifest_sha256": "76a10ec8f9750578203ceb7d0a1a4ea0e2f5658b5d8c5e01b97ccef341acfaaa",
   "status": "installed and live verified",
-  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). On 2026-10-12 two process ids were removed; the pair is replaced by \"process_changed\": true. Other values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
 }

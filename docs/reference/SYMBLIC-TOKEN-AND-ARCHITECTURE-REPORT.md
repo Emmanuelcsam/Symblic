@@ -7,7 +7,7 @@
 **A Comprehensive Compendium of Findings, Benchmarks, and Systems Analysis**
 
 - **Date:** October 4, 2026
-- **Authors & Dialogue:** the operator, Antigravity (Gemini 3.8 Flash), Claude (terminal `f5b1`), Codex (terminal `69f0`)
+- **Authors & Dialogue:** the operator, Antigravity (Gemini 3.8 Flash), Claude and Codex (one terminal session each)
 
 > **Evidence clarification — 2026-10-05.** This document preserves the October 4 dialogue's proposals and reported figures. The original full prompts, output transcripts, tokenizer pins and provider usage receipts are not supplied here; its numerical savings and cluster success rates are **unreplicated historical claims**, not current measured guarantees. Revised explanations below distinguish implemented interfaces, conditional checks and proposed experiments. Examples are historical illustrations unless linked to a checked fixture. No feature or hardware class is excluded by this review.
 
@@ -272,8 +272,8 @@ Checked escalation can try a declared small-model route and then another route w
 ## 11. Cross-Agent Dispatch & Actionable Directives for Claude and Codex
 
 On October 4, 2026, at 20:45 (host local time), these findings were formally transmitted to:
-* **Claude (`PTY f5b1` / `dash-f5b1788209dd`)**
-* **Codex (`PTY 69f0` / `dash-69f01f8dfe0b`)**
+* **Claude** (a Claude session in a terminal on the host)
+* **Codex** (a Codex session in a terminal on the host)
 * **Shared Coordination Log:** `~/.local/state/symblic-reform-coordination-20261004.md` (a private record of the original host)
 
 ### Historical proposals dispatched (not new agent authority):

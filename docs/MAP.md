@@ -28,6 +28,7 @@ message or an old run record.
 | `scripts/*symblic*` | [`tools/scripts/`](../tools/scripts/) (one moved to `symblic/bench/`) | benchmark, audit and install scripts |
 | `automation-studio/` (the Symblic page and its assets) | [`web/studio/`](../web/studio/) | the browser page; it talked to the host's HTTP API |
 | `symblic-hub/` | [`web/hub/`](../web/hub/) | the hub page, its records and demos |
+| `symblic-learn.html`, `symblic-learn.js`, `symblic-learn.css`, `symblic-academy-content.js` (top level) | [`web/academy/`](../web/academy/README.md) | the Academy learning page (served at `/symblic-learn`) and its catalog; the page is `index.html` now, and the catalog's links are repository paths |
 | `tetris/` | [`kits/tetris/`](../kits/tetris/) | the Tetris kit |
 | `docs/symblic/*.md`, `*.json`, `*.svg` | [`docs/reference/`](reference/README.md) | same file names |
 | `docs/symblic/examples/` | [`examples/`](../examples/) and [`kits/`](../kits/) | programs, task files and records; the Kirby kit went to `kits/kirby/` |
@@ -228,7 +229,7 @@ Import names changed with the files: `import symblic_js` is now `from symblic.js
 | `scripts/install_symblic_node.py` | `integration/host/scripts/install_symblic_node.py` | moved again after the first move |
 | `scripts/symblic_local_beta.py` | `symblic/bench/local_beta.py` |  |
 | `scripts/build_symblic_guides.cjs` | `tools/scripts/build_symblic_guides.cjs` |  |
-| `scripts/index_symblic_to_bookfeed.py` | `tools/scripts/index_symblic_to_bookfeed.py` | not at this path any more (renamed or merged by a later reorganization; see the package README) |
+| (the host's script that indexed the documents into its reading app) | `integration/host/scripts/index_symblic_to_reader.py` | moved and renamed after the first move |
 | `scripts/install_symblic_tools.py` | `tools/scripts/install_symblic_tools.py` |  |
 | `scripts/symblic_conformance.py` | `tools/scripts/symblic_conformance.py` |  |
 | `scripts/symblic_contract_pilot.py` | `tools/scripts/symblic_contract_pilot.py` |  |
@@ -247,7 +248,7 @@ Import names changed with the files: `import symblic_js` is now `from symblic.js
 
 ## Browser pages
 
-<details><summary>86 files</summary>
+<details><summary>90 files</summary>
 
 | Old path | New path | Note |
 |---|---|---|
@@ -337,6 +338,10 @@ Import names changed with the files: `import symblic_js` is now `from symblic.js
 | `automation-studio/symblic-workcards.js` | `web/studio/symblic-workcards.js` |  |
 | `automation-studio/symblic.css` | `web/studio/symblic.css` |  |
 | `automation-studio/symblic.html` | `web/studio/symblic.html` |  |
+| `symblic-learn.html` | `web/academy/index.html` | loads its files by relative paths, with `web/hub/standalone-shell.js` when the host's page library is absent |
+| `symblic-learn.js` | `web/academy/symblic-learn.js` | the research reader loads catalog documents as static files; check and preview need the host |
+| `symblic-learn.css` | `web/academy/symblic-learn.css` |  |
+| `symblic-academy-content.js` | `web/academy/symblic-academy-content.js` | source and reference links rewritten to repository paths; entries for documents not in this repository removed |
 
 </details>
 
@@ -351,7 +356,7 @@ Import names changed with the files: `import symblic_js` is now `from symblic.js
 Run a package's tests with `DASH_TEST=1 python3 -m unittest discover -s tests/<package> -t .` from the repository
 root. Tests of host-only code are in `tests/integration/` and skip themselves where the host is missing.
 
-<details><summary>349 test files</summary>
+<details><summary>351 test files</summary>
 
 | Old path | New path | Note |
 |---|---|---|
@@ -391,6 +396,7 @@ root. Tests of host-only code are in `tests/integration/` and skip themselves wh
 | `tests/test_symblic_bench_matched.py` | `tests/bench/test_symblic_bench_matched.py` |  |
 | `tests/test_symblic_eval_protocol.py` | `tests/bench/test_symblic_eval_protocol.py` |  |
 | `tests/test_symblic_local_beta.py` | `tests/bench/test_symblic_local_beta.py` |  |
+| `tests/browser/academy-depth.mjs` | `tests/browser/symblic-academy.mjs` | the page is `/web/academy/index.html` now, and its reader loads documents as files instead of calling the host's source API |
 | `tests/browser/symblic-atomic.mjs` | `tests/browser/symblic-atomic.mjs` |  |
 | `tests/browser/symblic-autogen.mjs` | `tests/browser/symblic-autogen.mjs` |  |
 | `tests/browser/symblic-beta.mjs` | `tests/browser/symblic-beta.mjs` |  |
@@ -704,5 +710,6 @@ root. Tests of host-only code are in `tests/integration/` and skip themselves wh
 | `tests/test_symblic_docs_audit.py` | `tests/tools/test_symblic_docs_audit.py` | moved again after the first move |
 | `tests/test_symblic_refresh_catalog.py` | `tests/tools/test_symblic_refresh_catalog.py` | moved again after the first move |
 | `tests/test_symblic_reinforcement_stats.py` | `tests/tools/test_symblic_reinforcement_stats.py` | moved again after the first move |
+| `tests/test_academy_depth.py` | `tests/web/test_symblic_academy.py`, `tests/integration/test_symblic_academy_sources.py` | the Symblic half only: the catalog checks, and the checks of the source route; the cases for another course of the host were left out |
 
 </details>

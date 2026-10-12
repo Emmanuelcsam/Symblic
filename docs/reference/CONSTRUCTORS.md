@@ -1,7 +1,7 @@
 # Optional checked constructors
 
 Installed and live-verified on 5 October 2026; see the
-initial release receipt (not included in this repository) and the
+[initial release receipt](evidence/2026-10-05-constructors.json) and the
 [recovery and controls amendment](evidence/2026-10-05-constructor-recovery-controls.json).
 
 The optional constructor integrates with the statement runner, CLI and operator

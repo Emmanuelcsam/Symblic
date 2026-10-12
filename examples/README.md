@@ -13,14 +13,31 @@ reaches each package's own command directly.
 | file | what it shows | run |
 |---|---|---|
 | `02-flower-formal.sym` | a flower drawn entirely from formal statements; every applicator draws the same bytes | **no model**: `tools/symblic run examples/02-flower-formal.sym --max-calls 0` |
+| `03-flower-from-essay.sym` | the same kind of flower described in prose: a model turns the essay into a closed specification and the kernel draws it, so identical drawings mean the models read the essay the same way | asks a model |
+| `04-family-logic.sym` | a model lists the parent-child facts of a short story; the kernel's Datalog rules do the multi-hop reasoning (ancestors, cousins) | asks a model |
+| `06-small-model-council.sym` | a logic puzzle split into three small asks for a panel of small Ollama models with `effort=ultra` (one round in which each sees the others' anonymised answers); its `@node-a` ... placements name the original host's worker nodes, so change them to your servers | asks models |
+| `07-local-model-decisions.sym` | two closed, low-effort decisions about one message (a category and a yes/no) from a small local model | asks a model |
+| `08-v1-prose.sym` | the prose form of Symblic version 1 (`Program:`, `Use Model:`, one sentence per ask), which the legacy profile still reads | asks a model |
+| `09-council-and-triad.sym` | a council decision and a plan, then `delegate` to a coding agent; it needs an embedding host that provides councils and delegation, which this repository does not | asks models; starts an agent |
 | `10-kernel-identity.sym` | everything decided by the kernel (exact rationals, decimal trigonometry, Datalog rules, drawings); the fingerprints it shows must be the same on every machine | **no model**: `tools/symblic run examples/10-kernel-identity.sym --max-calls 0` |
 | `11-checked-routing.sym` | an ask the kernel can answer by itself because its finite domain admits one value (`solve=true`), and checked escalation when it may not | **no model**: `tools/symblic run examples/11-checked-routing.sym --by kernel --max-calls 0 --json` |
 | `12-finite-ambiguity.sym` | an intentional failure: two values satisfy the check, so the report must not claim a unique answer | **no model**: `tools/symblic run examples/12-finite-ambiguity.sym --by kernel --max-calls 0 --json` |
 | `14-question-order.sym` | a measurement of question-order effects on the models it runs with (it says nothing about people) | asks models; see the notes in the file |
+| `constructor.sym` | the smallest program for the linear constructor: one `Int` ask whose check is linear, so a solver can answer it instead of a model ([../docs/reference/CONSTRUCTOR-CLI.md](../docs/reference/CONSTRUCTOR-CLI.md)) | **no model** with `--constructor linear --max-calls 0` and a provisioned solver runtime ([CONSTRUCTOR-PROVISIONING.md](../docs/reference/CONSTRUCTOR-PROVISIONING.md)); otherwise asks a model |
+| `quadratic-witness.sym` | an exact finite quadratic minimization and its independent check ([../docs/reference/VARIATIONAL.md](../docs/reference/VARIATIONAL.md)) | **no model**: `tools/symblic run examples/quadratic-witness.sym --max-calls 0 --dir NEW_FOLDER` |
 | `cmatrix.sym` | "matrix rain": the kernel computes every character, position and shade; a player supplies the clock | **no model**: `tools/symblic run examples/cmatrix.sym --max-calls 0` |
 | `vorticity-construction.sym` | a discrete energy-method construction on a 5-vertex graph, one small model-built part per ask, every part checked (a synthetic example, not a fluid simulation) | asks models |
 | `stand-in-answer.py` | not a program: a stand-in for a model that answers an `Int` ask with 3 (or the number you give it), for trying `run` and `replay` without a model; see step 3 of the root README | **no model**: `SYMBLIC_COMMAND_STAND_IN="python3 $PWD/examples/stand-in-answer.py" tools/symblic run root.sym --by command:stand-in --dir NEW_FOLDER` |
 | `41-small-model-cup.sym` ... `46-small-model-gantry.sym` | checked playback of the code small models wrote on 2026-10-07 (the `small-model-*` folders below): the exact accepted functions and all their checks | **no model**: `tools/symblic run examples/44-small-model-math.sym --max-calls 0 --dir NEW_FOLDER` |
+
+## Crystals (`crystals/`)
+
+A *crystal* is a routine's answers over a finite list of inputs, frozen into a kernel table after a panel of models
+agreed on them; afterwards the table answers with no model call and refuses inputs it does not cover. `elements.sym`
+is the routine (is a chemical element a metal?) and `is_metal.crystal.sym` the crystal made from it on 2026-10-02
+(20 of 20 inputs kept); see [crystals/README.md](crystals/README.md).
+
+- **no model**: `tools/symblic test examples/crystals/is_metal.crystal.sym`
 
 ## Plain-English statements (`english/`)
 
@@ -67,6 +84,9 @@ code, the outputs, independent validators and an `evidence.json` record of every
 **no model** check: `python3 examples/small-model-math-20261007/verify.py`. These are finite synthetic tests, not a
 benchmark; each README says what its checks do and do not establish. The bundles' READMEs were edited for publication
 (names of the original private host removed); `evidence.json` records that edit, and every other file is unchanged.
+`artifacts.json` lists the files of the four bundles with their sizes and SHA-256 hashes; the original host served
+checked downloads from it (`integration/host/symblic_example_artifacts.py`). Its entries for the edited READMEs and
+`evidence.json` files were updated to the published bytes on 2026-10-12.
 
 ## Larger kits
 

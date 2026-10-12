@@ -5,7 +5,7 @@ construction are unchanged. `tools/symblic run --help` lists the optional contro
 Enabling a constructor requires the separately [provisioned host runtime](CONSTRUCTOR-PROVISIONING.md).
 
 ```sh
-tools/symblic run docs/symblic/examples/constructor.sym \
+tools/symblic run examples/constructor.sym \
   --constructor linear --dir /tmp/my-symblic-construction \
   --by ollama:llama3.2:1b --max-calls 2 --agent-json
 ```
@@ -73,9 +73,9 @@ predicates define acceptance. Keep source, inputs, policy and run records togeth
 For the checked-in example, this recipe permits no model fallback:
 
 ```sh
-tools/symblic check docs/symblic/examples/constructor.sym --agent-json
+tools/symblic check examples/constructor.sym --agent-json
 symblic_record="$(mktemp -d /tmp/symblic-constructor.XXXXXX)"
-tools/symblic run docs/symblic/examples/constructor.sym \
+tools/symblic run examples/constructor.sym \
   --constructor linear --dir "$symblic_record" \
   --by ollama:llama3.2:1b --max-calls 0 --agent-json > constructor-result.json
 python3 - <<'PYTHON'

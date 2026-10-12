@@ -1,0 +1,99 @@
+{
+  "ask_policy": 2,
+  "behavior": [
+    "Optional finite determination and empty-answer probing share a per-ask allowance: at most 50,000 charged kernel steps or one quarter of remaining parent steps.",
+    "Optional exhaustion records incomplete analysis and leaves budget for checked model construction; partial zero/one candidates never establish contradiction or uniqueness.",
+    "Explicit solving and kernel-only routes retain their existing full-budget behavior; determine=false remains a strict bypass of optional analysis only.",
+    "Per-run digest reuse is keyed only by immutable string values and complete predicate keys; mutable parsed statements are recomputed.",
+    "Claim JSON traversal retains first-error ordering and canonical bytes while keeping traversal scratch proportional to depth."
+  ],
+  "canonical_version": 3,
+  "date_utc": "2026-10-05T14:58:33.691267+00:00",
+  "deployment": {
+    "guards": 310,
+    "payload_files": 10,
+    "plan_sha256": "463fdf54686d3b1513d8583ad7b77de2c56b6fb8b333ce78c41ab38d5ebd990f",
+    "production_runs_created": 0,
+    "restarted": true
+  },
+  "evidence_sha256": {
+    "bookkeeping_v3": "3830022facdb8ac545e63e21a6dcbfa4b672b03e91b57d3c3df1a8186c9e7ee6",
+    "bookkeeping_v4": "d767fc631e51dff65edb14eaf3e0d8a2b05b26cb1f8875e53c69b93eff35509e",
+    "determination_candidate": "b5c5ca102d5665b9e704643f5ec2133ac40ff7c2218c70112697ce69a42cfb09",
+    "determination_review": "109cff06ff48eb8381241a94dd5a597a7ec41110906cbcfe25a1dca3ea92083f",
+    "live": "fd075c93cfa9bbb8fe8eb51d54e8444a556f1700109c19863d19f314c57f8b99",
+    "manifest": "59968e5ccbdccfb64dfaf4f47fc2c669985d8f6fcf1381b134819876a2128b26",
+    "root_review": "71a1ba33615582a337326bf9f7f12594636d00ba99ed95546498504059e5e24b"
+  },
+  "kernel_id": "1e87549328ddcdb6",
+  "parser_revision": 2,
+  "review_corrections": [
+    "Earlier eager traversal queued wide containers before refusal; replaced with lazy frames.",
+    "Earlier AST identity memo reused stale derivation after a valid nested-routine rewrite; all node-keyed caching removed.",
+    "An internal sentinel confused caller content with iterator exhaustion; exhaustion now uses StopIteration.",
+    "Installer first refused read-only new-test modes; normalized private payload modes before preparation, with no live write on refusal."
+  ],
+  "scope": [
+    "The quota bounds admitted kernel charges, not all wall time or memory before an aggregate charge.",
+    "A finite parity corpus and adversarial tests support the bookkeeping change; no general performance or model-quality claim is made.",
+    "Actual model replies remain checked; deterministic replay reuses recorded replies and does not establish equal fresh outputs across models."
+  ],
+  "status": "installed_and_live_verified",
+  "validation": {
+    "added_unchanged_test_modules_recheck": 83,
+    "combined_distinct_methods_passed": 291,
+    "d16_independent_native_parity_journeys": 6,
+    "d16_v4_focused_methods": 44,
+    "devcheck_blocking": 0,
+    "http_statuses": {
+      "bounded_analysis_preview": 200,
+      "catalog": 200,
+      "focused_catalog": 200,
+      "meta": 200,
+      "prior_contract": 200
+    },
+    "import_markers": 43,
+    "independent_determination_methods": 12,
+    "initial_run": {
+      "missing_sparse_test_modules": 3,
+      "passed": 208,
+      "reported": 211
+    },
+    "live": {
+      "actual_model_calls": 0,
+      "arithmetic": {
+        "#q": "1/2"
+      },
+      "ask_policy": 2,
+      "determination": {
+        "accepted": 1,
+        "assessment_budget": {
+          "charged": 50000,
+          "exhausted": true,
+          "limit": 50000,
+          "unit": "admitted_kernel_steps"
+        },
+        "checks": [
+          "x + x + x + x + x + x + x + x = 8"
+        ],
+        "domain": 20000,
+        "evaluated": 2941,
+        "exhaustive": false,
+        "line": 1,
+        "reason": "budget",
+        "scope": "declared_domain_and_encoded_predicates",
+        "verdict": "unassessed"
+      },
+      "fake_calls": 1,
+      "kernel_id": "1e87549328ddcdb6",
+      "remaining_kernel_steps": 149982,
+      "replay": {
+        "calls": 0,
+        "fingerprint": "6393f6c69bf8a38f",
+        "ok": true
+      }
+    },
+    "ruff": "E9,F clean"
+  },
+  "version": 1
+}

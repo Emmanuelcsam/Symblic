@@ -1,0 +1,113 @@
+{
+  "canonical_version": 3,
+  "changes": [
+    "Native determine=false skips runtime answer enumeration and empty-answer probes; returned answers still undergo declared checks.",
+    "proof_step/6 delegates one ordinal selection from an exact caller-authored command table, preserving premises, original goal and checked prefix.",
+    "The parent handoff example independently checks selected inference and type-sensitive canonical receipt identity before state adoption.",
+    "Bounded author diagnostics and answer-only retry feedback preserve preceding executed authority; future bindings do not become authority.",
+    "Execution pins now register43 Python files:35 required and8 optional, including the authoring helper."
+  ],
+  "compatibility": {
+    "capsule_layouts": [
+      "full",
+      "compact"
+    ],
+    "existing_template_contract_versions": "Five prior templates remain at5;16 compiled contract fixtures preserve exact bytes/data.",
+    "native_determination_default": "unchanged when determine is absent",
+    "old_kernel_recovery": "New semantic identity; replay must satisfy existing kernel and execution-pin compatibility gates."
+  },
+  "date_utc": "2026-10-05T12:34:25.873249+00:00",
+  "deployment": {
+    "dependency_guards": 260,
+    "effective_dependencies": 59,
+    "effective_files": 231,
+    "payload_files": 30,
+    "plan_sha256": "b72f18da636217b2e3957e336d49afadc4013224763f55235dd420d8476ff9c8",
+    "rollback": "Exact-postimage guarded rollback bundle retained privately; reverse later layers first."
+  },
+  "evidence_sha256": {
+    "browser": "583df1e1eaab194c3608f7e0104a67fe020c591c86f907a74b91ef63f7b077e1",
+    "devcheck": "966e90ced24204008e3867851cbfc8d8d34a9f3943f6d50408b5bf848f2d73b9",
+    "final_affected_tests": "453f8e07381457cccb6de2168380efd89072fc99a5c02779f2eb6fd2cfce8cfc",
+    "independent_review": "a63eff2363dbdb8387a9b35edc9ecd262e699351e05b2b69e339ba3b9513476b",
+    "installation_manifest": "2985236a8b39e1d69ca7a12f0e87d9688a41ba762540501beac48691b3d75983",
+    "integration_tests": "2da9cad69d501b6fdefd5c7896fd5af9792c176ddd4bbce89d17c0817bf8ef50",
+    "live_verification": "5d3776607972f09e12799c1fd2ec1b1712bf5a6a487965390e3c3f84e32f3a6e",
+    "markers": "86a36b060bc8588c3c899881b73d32d15de0144c722b916224470ce994640500"
+  },
+  "execution_receipt_version": 2,
+  "kernel_id": "57eb572dd1395767",
+  "language": "2.5",
+  "limits": [
+    "No new small-model quality or overall cost improvement is claimed for this release.",
+    "proof_step acceptance establishes the selected inference validity; a valid partial inference need not advance the intended plan.",
+    "Deterministic acceptance and canonical output contracts do not guarantee every model can construct a satisfying answer.",
+    "Authoring, schema grammar, repairs and whole-project costs require separate measurement."
+  ],
+  "status": "installed_and_live_verified",
+  "validation": {
+    "affected_after_final_prompt_correction": {
+      "scope": "Final delegation, authoring, CLI/API and rendered full/compact prompt checks.",
+      "seconds": 15.78,
+      "tests_passed": 86
+    },
+    "browser": {
+      "journeys_passed": 2,
+      "scope": "Determination/provider receipt interface, accessibility and overflow checks with intercepted APIs.",
+      "seconds": 3.897289,
+      "views": [
+        "desktop light",
+        "phone dark"
+      ]
+    },
+    "combined_before_final_prompt_correction": {
+      "scope": "Temporary stores and fake providers; final ordinal-wire wording correction applied afterward.",
+      "seconds": 68.933,
+      "tests_passed": 388
+    },
+    "devcheck": {
+      "blocking_findings": 0,
+      "existing_warnings": 1,
+      "note": "Existing constant-string UI interpolation heuristic warning reviewed; sparse unrelated command-bar check skipped."
+    },
+    "independent_review": {
+      "execution_pin_build_and_validate": "passed",
+      "findings": "Closed API/preview option loss, type-confusable parent receipt acceptance, ordinal prompt contradiction and stale registry documentation.",
+      "native_diagnostic_merge": "exact",
+      "registered_source_markers": 43
+    },
+    "live": {
+      "arithmetic": {
+        "calls": 0,
+        "canonical": {
+          "#q": "1/2"
+        }
+      },
+      "graph": {
+        "answer": 18,
+        "calls": 0,
+        "completed_replay_identical": true,
+        "leaves": 4
+      },
+      "http_checks": {
+        "asset": 200,
+        "catalog": 200,
+        "compile_compact": 200,
+        "compile_full": 200,
+        "determine_default": 200,
+        "determine_false": 200,
+        "determine_true": 200,
+        "graph_compose": 200,
+        "graph_example": 200,
+        "malformed_determine": 400,
+        "meta": 200,
+        "preview_compact": 200,
+        "preview_full": 200
+      },
+      "production_runs_created": 0,
+      "real_model_calls": 0,
+      "service_restarted": true
+    }
+  },
+  "version": 1
+}

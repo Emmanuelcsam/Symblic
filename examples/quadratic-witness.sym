@@ -1,0 +1,10 @@
+program Exact quadratic witness.
+note This checks a supplied finite quadratic, not a physical component or natural-language interpretation.
+let A = [[4, 1], [1, 3]].
+let b = [1, 2].
+let equilibrium = quadratic_minimize(A, b).
+assert quadratic_verify(A, b, equilibrium).
+assert equilibrium.x = [1/11, 7/11].
+assert equilibrium.min_energy = -15/22.
+show equilibrium.x as "exact minimizer".
+show equilibrium.min_energy as "encoded minimum energy".

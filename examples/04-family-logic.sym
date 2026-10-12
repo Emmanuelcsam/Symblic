@@ -1,0 +1,23 @@
+program Family logic.
+note Models translate the story into facts; the kernel's Datalog engine does the multi-hop reasoning, which small models get wrong when they try it in their heads.
+
+given story: Text = """Ada is the mother of Ben. Ben is the father of Cleo and of Dov.
+Cleo is the mother of Eli. Dov is the father of Fay. Fay is the mother of Gus."""
+
+define Link as Record {parent: Text, child: Text}.
+ask links: List of Link "List every parent-child relation the story states, using first names exactly as written." from story with effort=high
+ensure len(links) = 6 else retry because "the story states six parent-child relations".
+
+for l in links do
+  fact parent(lower(l.parent), lower(l.child)).
+end.
+
+rule ancestor(X, Y) if parent(X, Y).
+rule ancestor(X, Z) if parent(X, Y) and ancestor(Y, Z).
+rule cousin(X, Y) if parent(P, X) and parent(Q, Y) and parent(G, P) and parent(G, Q) and P != Q.
+
+let descendants = query ancestor(ada, Who).
+let cousins_of_eli = query cousin(eli, C).
+assert "gus" in descendants.
+show descendants as "everyone descended from Ada".
+show cousins_of_eli as "Eli's first cousins".

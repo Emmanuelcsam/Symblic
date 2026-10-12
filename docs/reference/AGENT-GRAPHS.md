@@ -223,7 +223,7 @@ The installed [composition interface](GRAPH-COMPOSITION.md) expands named inline
 fragments with typed public ports into this same flat contract. Each leaf keeps
 its source, checks, permissions and limits. Expansion creates no worker or run;
 the ordinary Check → Run path and saved flat recovery remain authoritative.
-The 5 October graph release (not included in this repository) records
+The [5 October graph release](evidence/2026-10-05-graph-composition.json) records
 live expansion/checks and a temporary-store, zero-model native computation.
 
 ## Limits and routing evidence

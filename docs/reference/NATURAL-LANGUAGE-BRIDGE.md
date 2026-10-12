@@ -6,7 +6,7 @@
 
 Reform design and executable examples · 4 October 2026
 
-**Status updated 5 October 2026:** the proof/profile interfaces are included in the installed reform. The [5 October release evidence](evidence/2026-10-05-reform-install.json) and later parser receipt (not included in this repository) record scoped live checks. Examples and component tests do not establish universal execution or model performance; [REFORM-3](REFORM-3.md) retains those boundaries.
+**Status updated 5 October 2026:** the proof/profile interfaces are included in the installed reform. The [5 October release evidence](evidence/2026-10-05-reform-install.json) and later [parser receipt](evidence/2026-10-05-parser-repair.json) record scoped live checks. Examples and component tests do not establish universal execution or model performance; [REFORM-3](REFORM-3.md) retains those boundaries.
 
 Symblic's central idea is to program with small, explicit statements whose results can be composed. An LLM can construct a result, a program fragment or a logical derivation. A separate checker determines what that particular result establishes. The model remains a computational backend; writing every domain algorithm into the kernel is not required.
 

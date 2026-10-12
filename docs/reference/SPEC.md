@@ -10,7 +10,7 @@ statement captures an author's intention or that a model's answer describes the 
 
 This specification describes the installed reform, language version **2.5**, canonical version **3**.
 The [5 October release evidence](evidence/2026-10-05-reform-install.json) and later
-parser receipt (not included in this repository) record installation and scoped live checks,
+[parser receipt](evidence/2026-10-05-parser-repair.json) record installation and scoped live checks,
 not fresh cross-machine conformance or model-performance results. Historical model results remain in [RESULTS.md](RESULTS.md). See [EVIDENCE.md](EVIDENCE.md) for
 provenance and assurance limits, and [PRIOR-ART.md](PRIOR-ART.md) for the research comparison.
 

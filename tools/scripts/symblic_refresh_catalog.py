@@ -1,17 +1,31 @@
 #!/usr/bin/env python3
-"""Refresh only the Academy public source list; never rewrite authored curriculum.
+"""Refresh the source list of the Academy catalog; never rewrite the authored curriculum.
 
-Host-only in practice: the Academy was a learning page of the original host system. Its catalog,
-ROOT/symblic-academy-content.js (`window.SymblicAcademyContent = {...}`), is not part of this repository, and
-its source URLs use the host's path layout (/docs/symblic/NAME). integration/host/symblic_academy_sources.py
-served those sources to the page. The script is kept with its tests (tests/tools/) as a worked example of
-refreshing generated metadata without touching authored fields.
+The Academy page (web/academy/) teaches from an authored curriculum and lists the repository's documents in its
+research map. Both live in one catalog, web/academy/symblic-academy-content.js
+(`window.SymblicAcademyContent = {...}`). This script keeps the generated half of the source list in step with
+the files and leaves every other byte of the catalog as it is:
 
-    python3 tools/scripts/symblic_refresh_catalog.py --root ROOT [--check]
+- every bounded regular file with a public suffix (.md .sym .symd .json) under the document roots docs/,
+  examples/, benchmarks/ and kits/ gets a row; new rows are appended with a status that claims no validation;
+- every row whose URL is a repository path ("/docs/reference/SPEC.md") gets its title, headings, SHA-256 and
+  provenance rewritten from that file, wherever in the repository it is (a few authored rows point at benchmark
+  data under symblic/ or at example programs kept as test fixtures);
+- when a row's file is gone (moved or deleted), a generated row that nobody has changed is dropped and listed
+  under "removed": its status, description and lessons are the ones this script writes, it has no other fields,
+  and no lesson links it, so a refresh loses nothing it would not write again for the file's new path. Any other
+  row whose file is gone is an error, never a silent deletion: rename or remove that row, and the lesson links to
+  it, by hand first;
+- rows with external links (https://...) are kept exactly as written.
 
-Reads bounded regular files under ROOT/docs/symblic with the reader's public suffixes.
-Hashes/title/headings describe source bytes, never scientific validation status.
+    python3 tools/scripts/symblic_refresh_catalog.py [--root ROOT] [--catalog FILE] [--check]
+
+Hashes, titles and headings describe source bytes, never scientific validation status.
 Existing status, lesson links, descriptions and extra authored fields are preserved.
+Folders whose names start with '.' and cache folders (__pycache__, node_modules) are skipped. A symlink under a
+document root, a symlinked root, a symlinked catalog and any path through a symlink are refused.
+integration/host/symblic_academy_sources.py is the host-only route that served these documents to the page on
+the original host; the page in this repository reads them as static files.
 """
 from __future__ import annotations
 
@@ -19,14 +33,22 @@ import argparse
 import hashlib
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import re
 import tempfile
 
 MARKER = 'window.SymblicAcademyContent = '
+CATALOG = 'web/academy/symblic-academy-content.js'
+DOCUMENT_ROOTS = ('docs', 'examples', 'benchmarks', 'kits')
 SUFFIXES = {'.md', '.sym', '.symd', '.json'}
+SKIPPED_FOLDERS = {'__pycache__', 'node_modules'}
 MAX_BYTES = 1024 * 1024
 NEW_STATUS = 'Public source / indexed metadata; validation not inferred'
+# The fields of a row this script adds; a row with any other field was edited by hand.
+GENERATED_FIELDS = {'title', 'headings', 'sha256', 'url', 'status', 'description', 'lessons', 'provenance'}
+INDEXER = 'tools/scripts/symblic_refresh_catalog.py'
+SCOPE = 'source metadata only; lesson links and status do not certify coverage or validity'
+DEFAULT_DESCRIPTION = 'Public repository source; inspect its stated assumptions, version and evidence limits.'
 # Deliberate topic-to-existing-lesson links, not generated claims of lesson coverage.
 ASSOCIATIONS = {
     'FINITE-LOGIC.md': ('Facts & Rules', 'What an assertion really establishes'),
@@ -50,6 +72,14 @@ DESCRIPTIONS = {
     'REFORM-3.md': 'Design and integration record; read its dated component evidence and deployment qualifications.',
     'claims.json': 'Public claim registry; indexing preserves the file without independently verifying its entries.',
 }
+# Defaults for new rows by folder, used when DESCRIPTIONS has no entry for the file name.
+FOLDER_DESCRIPTIONS = {
+    'docs/essays': 'Speculative essay an AI model wrote while Symblic was built, kept as a historical record; its claims were not verified (see docs/essays/README.md).',
+}
+
+
+class MissingSource(ValueError):
+    """A catalog row names a well-formed repository path whose file is gone."""
 
 
 def _pairs(rows):
@@ -133,6 +163,60 @@ def _metadata(path, data):
             'sha256': hashlib.sha256(data).hexdigest()}
 
 
+def _bounded(path, url):
+    with path.open('rb') as handle:
+        data = handle.read(MAX_BYTES + 1)
+    if len(data) > MAX_BYTES:
+        raise ValueError('Public source exceeds Academy reader limit: ' + url)
+    return data
+
+
+def _document(root, url):
+    """The repository file an authored catalog URL names, read without following links."""
+    if not isinstance(url, str) or not url.startswith('/'):
+        raise ValueError('Catalog source is neither a repository path nor an https link: ' + repr(url))
+    relative = PurePosixPath(url[1:])
+    if (str(relative) != url[1:] or not relative.parts or relative.suffix not in SUFFIXES
+            or any(part.startswith('.') or part in SKIPPED_FOLDERS for part in relative.parts)):
+        raise ValueError('Catalog source is not a public repository document: ' + url)
+    path = root
+    for part in relative.parts:
+        path = path / part
+        if path.is_symlink():
+            raise ValueError('Refuse linked content named by the catalog: ' + url)
+    if not path.is_file():
+        raise MissingSource('A catalog source no longer resolves: ' + url)
+    return path, _bounded(path, url)
+
+
+def _discover(root):
+    """Every public document under the document roots: {url: (metadata, relative path)}, in path order."""
+    found = []
+    for name in DOCUMENT_ROOTS:
+        top = root / name
+        if top.is_symlink():
+            raise ValueError('Refuse symlinked public documentation roots')
+        if not top.is_dir():
+            continue
+        for current, folders, files in os.walk(top):
+            base = Path(current)
+            folders[:] = sorted(f for f in folders if not f.startswith('.') and f not in SKIPPED_FOLDERS)
+            for entry in [*folders, *files]:
+                if (base / entry).is_symlink():
+                    raise ValueError('Refuse linked content under the public documentation root')
+            for file in files:
+                source = base / file
+                if file.startswith('.') or source.suffix not in SUFFIXES or not source.is_file():
+                    continue
+                relative = source.relative_to(root)
+                url = '/' + relative.as_posix()
+                found.append((url, source, relative))
+    discovered = {}
+    for url, source, relative in sorted(found):
+        discovered[url] = (_metadata(source, _bounded(source, url)), relative)
+    return discovered
+
+
 def _lessons(levels, path):
     url = '/' + path.as_posix()
     wanted = set(ASSOCIATIONS.get(path.name, ()))
@@ -146,62 +230,85 @@ def _lessons(levels, path):
     return result
 
 
-def refresh(root, *, check=False):
+def _description(path):
+    if path.name in DESCRIPTIONS:
+        return DESCRIPTIONS[path.name]
+    folder = path.parent.as_posix()
+    return next((text for prefix, text in FOLDER_DESCRIPTIONS.items()
+                 if folder == prefix or folder.startswith(prefix + '/')), DEFAULT_DESCRIPTION)
+
+
+def _generated(row, levels):
+    """True for a row this script added and nobody has changed: dropping it, once its file is gone, loses nothing."""
+    url = row['url']
+    relative = PurePosixPath(url[1:])
+    linked = any(ref.get('url') == url for level in levels for bite in level.get('bites', [])
+                 for ref in bite.get('references', []))
+    return (not linked and set(row) <= GENERATED_FIELDS and row.get('status') == NEW_STATUS
+            and row.get('description') == _description(relative) and row.get('lessons') == _lessons(levels, relative))
+
+
+def _missing(row):
+    """The error for a row whose file is gone and that this script must not drop."""
+    url = row['url']
+    if row.get('status') == NEW_STATUS:
+        kind = ('A generated source row no longer resolves and is not dropped, because a lesson links it or its '
+                'fields are not the ones this script writes: ')
+    else:
+        kind = 'An authored source row no longer resolves: '
+    return ValueError(kind + url + '. Rename or remove the row, and any lesson references to it, in ' + CATALOG
+                      + ', then run this script again.')
+
+
+def _provenance(url, meta):
+    return {'kind': 'public_repository_source', 'path': url, 'sha256': meta['sha256'],
+            'indexer': INDEXER, 'scope': SCOPE}
+
+
+def refresh(root, *, check=False, catalog=None):
     root = Path(root).resolve()
-    path = root / 'symblic-academy-content.js'
+    path = Path(catalog) if catalog else root / CATALOG
     if path.is_symlink():
         raise ValueError('Refuse a symlinked Academy catalog')
     raw = path.read_text(encoding='utf-8')
-    catalog, begin, end = _catalog(raw)
-    public = root / 'docs' / 'symblic'
-    if (root / 'docs').is_symlink() or public.is_symlink():
-        raise ValueError('Refuse symlinked public documentation roots')
-    discovered = {}
-    for source in sorted(public.rglob('*')):
-        if source.is_symlink():
-            raise ValueError('Refuse linked content under the public documentation root')
-        if not source.is_file() or source.suffix not in SUFFIXES:
-            continue
-        with source.open('rb') as handle:
-            data = handle.read(MAX_BYTES + 1)
-        if len(data) > MAX_BYTES:
-            raise ValueError('Public source exceeds Academy reader limit: ' + str(source.relative_to(root)))
-        relative = source.relative_to(root)
-        discovered['/' + relative.as_posix()] = (_metadata(source, data), relative)
-    rows, seen, added, changed = [], set(), [], []
-    for old in catalog['sources']:
+    data, begin, end = _catalog(raw)
+    discovered = _discover(root)
+    rows, seen, added, changed, removed = [], set(), [], [], []
+    for old in data['sources']:
         url = old.get('url')
         if not isinstance(url, str) or url in seen:
             raise ValueError('Invalid or repeated source URL')
         seen.add(url)
         row = dict(old)
-        if url.startswith('/docs/symblic/'):
-            if url not in discovered:
-                raise ValueError('An authored source link no longer resolves: ' + url)
-            meta, relative = discovered[url]
+        if not url.startswith('https://'):
+            if url in discovered:
+                meta = discovered[url][0]
+            else:
+                try:
+                    source, content = _document(root, url)
+                except MissingSource:
+                    if not _generated(old, data['levels']):
+                        raise _missing(old) from None
+                    removed.append(url)
+                    continue
+                meta = _metadata(source, content)
             row.update(meta)
-            row['provenance'] = {'kind': 'public_repository_source', 'path': url,
-                                 'sha256': meta['sha256'], 'indexer': 'tools/scripts/symblic_refresh_catalog.py',
-                                 'scope': 'source metadata only; lesson links and status do not certify coverage or validity'}
+            row['provenance'] = _provenance(url, meta)
         if row != old:
             changed.append(url)
         rows.append(row)
     for url, (meta, relative) in discovered.items():
         if url in seen:
             continue
-        rows.append({**meta, 'url': url, 'status': NEW_STATUS,
-                     'description': DESCRIPTIONS.get(relative.name, 'Public repository source; inspect its stated assumptions, version and evidence limits.'),
-                     'lessons': _lessons(catalog['levels'], relative),
-                     'provenance': {'kind': 'public_repository_source', 'path': url,
-                                    'sha256': meta['sha256'], 'indexer': 'tools/scripts/symblic_refresh_catalog.py',
-                                    'scope': 'source metadata only; lesson links and status do not certify coverage or validity'}})
+        rows.append({**meta, 'url': url, 'status': NEW_STATUS, 'description': _description(relative),
+                     'lessons': _lessons(data['levels'], relative), 'provenance': _provenance(url, meta)})
         added.append(url)
     replacement = json.dumps(rows, ensure_ascii=False, indent=2).replace('\n', '\n  ')
     updated = raw[:begin] + replacement + raw[end:]
     stale = updated != raw
     if stale and not check:
         # Preserve the original mode and every byte outside the sources value.
-        fd, name = tempfile.mkstemp(prefix='.symblic-catalog-', suffix='.tmp', dir=root)
+        fd, name = tempfile.mkstemp(prefix='.symblic-catalog-', suffix='.tmp', dir=path.parent)
         try:
             with os.fdopen(fd, 'w', encoding='utf-8') as handle:
                 os.fchmod(handle.fileno(), path.stat().st_mode & 0o777)
@@ -210,17 +317,19 @@ def refresh(root, *, check=False):
         finally:
             if os.path.exists(name):
                 os.unlink(name)
-    return {'stale': stale, 'added': added, 'updated': changed, 'public_sources': len(discovered),
+    return {'stale': stale, 'added': added, 'updated': changed, 'removed': removed, 'public_sources': len(discovered),
             'catalog_sources': len(rows), 'written': stale and not check}
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parents[2])
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parents[2],
+                        help='Repository root (default: the checkout this script is in)')
+    parser.add_argument('--catalog', type=Path, help='Catalog file (default: ROOT/' + CATALOG + ')')
     parser.add_argument('--check', action='store_true', help='Read only; exit 1 when a refresh is needed')
     args = parser.parse_args(argv)
     try:
-        result = refresh(args.root, check=args.check)
+        result = refresh(args.root, check=args.check, catalog=args.catalog)
     except (OSError, ValueError) as exc:
         parser.error(str(exc))
     print(json.dumps(result, ensure_ascii=False))

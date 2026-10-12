@@ -1,0 +1,9 @@
+program Elements.
+note A routine whose answers can be compiled into the kernel: is an element (by name) a metal?
+note Two model families answer each element with three votes; crystallise keeps only unanimous answers.
+
+group panel = ["claude:haiku", "codex"].
+routine is_metal(element: Text) -> Bool with by=panel, effort=high do
+  ask metal: Bool "Is the chemical element {element} a metal? Answer true for a metal and false for a nonmetal or a noble gas."
+  return metal.
+end.

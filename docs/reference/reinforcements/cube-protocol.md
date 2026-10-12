@@ -153,7 +153,7 @@ accepts a boundary with a missing +y face and duplicated -z face. The edge
 This is a concrete topology counterexample, not a claim that two distinct
 valid cube point sets share that distance multiset.
 
-D. Minimal executable witness for c6d9; `congruent` is intentionally asserted true
+D. Minimal executable witness for the core session; `congruent` is intentionally asserted true
 to pin the baseline defect. After a core fix this assertion should be inverted
 in the integrated regression, not used as the desired contract:
 

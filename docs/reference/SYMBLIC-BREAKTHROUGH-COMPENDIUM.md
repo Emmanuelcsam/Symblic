@@ -253,7 +253,7 @@ part gives, and what it does not, is stated below.
 ## 4. File Types, Compilation & Runtime Pipeline
 
 ### File Types:
-1. **`.sym` (Symblic Source File):** Standard code file (e.g. `04-family-logic.sym` (not included in this repository),
+1. **`.sym` (Symblic Source File):** Standard code file (e.g. `examples/04-family-logic.sym`,
    `symblic/lang/library/units.sym`).
 2. **`.symd` (Symblic Literate Document / Paper):** Markdown with embedded executable ```` ```symblic ````
    blocks (examples in `docs/reference/papers/`).
@@ -629,8 +629,8 @@ show result.x.
   constitute a Lyapunov energy functional on semantic space. Two models can agree on a false extraction
   (yielding zero entropy). Lowering cross-model disagreement does not mathematically prove convergence to the
   author's intended meaning.
-- **Continuum PDE vs. Discrete Solver:** The continuum variational derivation in
-  `energy_method_for_vorticity_equation.pdf` ($\nabla \cdot (y \nabla \phi) = \Omega$) requires vanishing
+- **Continuum PDE vs. Discrete Solver:** The continuum variational derivation behind the vorticity example
+  ([VORTICITY-CONSTRUCTION.md](VORTICITY-CONSTRUCTION.md)) ($\nabla \cdot (y \nabla \phi) = \Omega$) requires vanishing
   boundary integrals, coercivity, and appropriate Sobolev spaces. In Symblic, the solver is strictly a finite,
   discrete rational matrix solver; it does not assemble PDEs, infer boundary conditions, or certify physical
   continuum components.
@@ -946,25 +946,25 @@ and designers such as Massimo Vignelli; Dieter Rams, an industrial designer, is 
 
 ```bash
 # Statically check syntax, types, and capability contracts (no model)
-./bin/symblic check my_program.sym
+tools/symblic check my_program.sym
 
 # Preview the exact capsule and JSON Schema of the first ask (no model call)
-./bin/symblic preview my_program.sym
+tools/symblic preview my_program.sym
 
 # Run with Claude (--dir FOLDER keeps the run record)
-./bin/symblic run my_program.sym --by claude:haiku
+tools/symblic run my_program.sym --by claude:haiku
 
 # Run locally on the worker node cluster
-./bin/symblic run my_program.sym --by ollama:qwen3:4b-instruct@node-a
+tools/symblic run my_program.sym --by ollama:qwen3:4b-instruct@node-a
 
 # Run the test blocks of a library module (kernel only unless --by)
-./bin/symblic test units                         # or: python3 symblic/lang/abstraction.py test symblic/lang/library/units.sym
+tools/symblic test units                         # or: python3 symblic/lang/abstraction.py test symblic/lang/library/units.sym
 
 # Freeze a finished run folder into a lockfile (writes <run_folder>/run.lock.json)
-./bin/symblic lock <run_folder>                  # or: python3 symblic/kernel/lockfile.py lock <run_folder>
+tools/symblic lock <run_folder>                  # or: python3 symblic/kernel/lockfile.py lock <run_folder>
 
 # Replay a frozen run offline with zero model calls
-./bin/symblic lock replay <run_folder>/run.lock.json   # or: python3 symblic/kernel/lockfile.py replay <lock file>
+tools/symblic lock replay <run_folder>/run.lock.json   # or: python3 symblic/kernel/lockfile.py replay <lock file>
 ```
 
 ---
@@ -1007,7 +1007,7 @@ REVIEW-2.3 outcomes.
    the existing type system already expresses them ([REVIEW-2.3.md](REVIEW-2.3.md), INTERSUBJECTIVITY row 1).
    The four parts are Marshall Rosenberg's Nonviolent Communication (observations, feelings, needs,
    requests), not Habermas's validity claims (truth, rightness, sincerity), which the draft mixed with them.
-   The related reconciliation proposal was built as the example `examples/13-two-accounts.sym`
+   The related reconciliation proposal was built as the example `tests/kernel/fixtures/13-two-accounts.sym`
    (INTERSUBJECTIVITY row 6). It splits two accounts into the four parts and rejects any item not quoted word for
    word from its own account. Which kind an item is, and which observations match, are model judgements.
 2. **Aumann Common Knowledge:** deferred as an engine (INTERSUBJECTIVITY row 5); the finite partition model was
@@ -1035,8 +1035,7 @@ logic, not a claim about Symblic's semantics:
 | **Categorical Flow** | Curry-Howard / Category Theory: Orthogonal proof vectors and commutative diagram pathways. | `docs/reference/symblic-minimal-commutative.svg`<br>`docs/reference/symblic-minimal-commutative.svg`<br>`symblic_icon_categorical_flow_1791055051617.jpg` |
 | **Monolithic Logic 'S'** | Pure architectural monogram fused from formal turnstiles and deduction axes. | `docs/reference/symblic-minimal-turnstile.svg`<br>`docs/reference/symblic-minimal-turnstile.svg`<br>`symblic_icon_monolithic_s_1791055065932.jpg` |
 
-The `symblic_icon_*.jpg` drafts are not in the repository; they are in Antigravity's session folder
-(`~/.gemini/antigravity-cli/brain/cb867bcf-a440-490a-9c7f-a37ea83e1eb5/`). The SVG and PNG files are in
+The `symblic_icon_*.jpg` drafts are not in the repository; they stayed in the drafting agent's own working folder. The SVG and PNG files are in
 `docs/reference/`.
 
 ---

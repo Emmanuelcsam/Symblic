@@ -17,22 +17,22 @@ call is not newly reinterpreted as exact correctness.
 ## Freeze, run, resume and report
 
 A synthetic manifest is at
-`benchmarks/matched-example-v1.json` (not included in this repository) (manifest
+[`symblic/bench/data/matched-example-v1.json`](../../symblic/bench/data/matched-example-v1.json) (manifest
 format 1, which protocol 2 still accepts). Its `fake:*` labels are placeholders for
 injected test Applicators. Set explicit real applicator IDs before intentionally
 running a provider experiment.
 
 ```sh
-python3 symblic/bench/bench.py --suite matched --out /tmp/matched-example \
-  --matched-manifest docs/symblic/benchmarks/matched-example-v1.json --dry-run
-python3 symblic/bench/bench.py --suite matched --out /tmp/matched-example --report-only
+python3 -m symblic.bench.bench --suite matched --out /tmp/matched-example \
+  --matched-manifest symblic/bench/data/matched-example-v1.json --dry-run
+python3 -m symblic.bench.bench --suite matched --out /tmp/matched-example --report-only
 ```
 
 Neither command constructs Applicators or calls a provider. For an actual experiment,
 freeze a manifest with the intended model IDs, then run the same frozen assignment:
 
 ```sh
-python3 symblic/bench/bench.py --suite matched --out /path/to/experiment --resume
+python3 -m symblic.bench.bench --suite matched --out /path/to/experiment --resume
 ```
 
 The runner uses the existing `symblic.providers.applicators.Applicators` admission path, serially,

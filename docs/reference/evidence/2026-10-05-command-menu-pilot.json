@@ -1,0 +1,324 @@
+{
+  "audit_scope_clarification": {
+    "broader_historical_records": {
+      "cancelled": 10,
+      "done": 233,
+      "failed": 19,
+      "total": 262
+    },
+    "cancellation_limit": "The provider marks a row cancelled before stopping its unit; cancelled status alone is not proof of remote termination.",
+    "date_utc": "2026-10-05T13:38:05.889599+00:00",
+    "evidence_sha256": "4ebd4686bafe7b2aaa96f1bf6c0bb69c7b0aaf73615fc25ee129e3d5b9e4823a",
+    "final_audit": "Reread recorded terminal statuses and separately checked local controller exit/cgroup. It did not independently re-observe every remote worker unit as inactive.",
+    "menu12": "All12 were non-cache successful exit0 completions with no cancellation events. The frozen done path requires a bounded successful host command-exit observation.",
+    "unchanged": "Answers, grades, request assignment and token counters are unchanged. Power restoration is a separate observation."
+  },
+  "claim_limits": [
+    "Single selected frontier, three caller-authored choices and six paired configurations; no statistical significance or general model-quality conclusion.",
+    "Schema membership does not establish inference validity or goal closure.",
+    "Historical JSON/command and template pilots have different frozen runtimes/information and are not causal comparators.",
+    "No raw model answers, histories, host identifiers or private paths are included."
+  ],
+  "counterbalancing": "Six adjacent matched pairs; closing choice appears in each of three positions twice; arm order alternates. Seeds are not independent task samples or identical random draws under different schemas.",
+  "economics": {
+    "authoring_cost": null,
+    "duration_ms_total": 748017,
+    "duration_quantization": "Each provider duration is floored to integer milliseconds by the existing observer; independent audit retained the source nanoseconds and remainders.",
+    "interpretation": "64.8% fewer reported output tokens coexists with3.3% more input tokens and2.0% more reported input+output tokens; this is not overall task-cost savings.",
+    "raw_provider_duration_ns_total": 748023089379,
+    "reported_input_increase_fraction": 0.03319148936170202,
+    "reported_input_plus_output_enum": 11000,
+    "reported_input_plus_output_increase_fraction": 0.019935095039406603,
+    "reported_input_plus_output_text": 10785,
+    "reported_output_reduction_fraction": 0.6476190476190475,
+    "schema_grammar_tokens": null,
+    "scope": "Provider-reported counters,12/12coverage; schema grammar cost and wrapper inclusion unknown. Not authoring or full system cost.",
+    "wrapper_inclusion": "not_independently_metered"
+  },
+  "evidence_sha256": {
+    "exact_requests": "7e124150040de4c5b8cd1a5a84f17e1ff7183efff0be2969e2333d1baa01f392",
+    "freeze": "cf6588353266a7d4873f87cf3532ce00d25803b49f847f49adfc454e17389e7b",
+    "independent_audit": "472569698f35083e276fd8948abc8c6c1a6afa6d88a862615080d61d7acb0fac",
+    "offline_reference_counts": "d5327bb045efa84146144a24814e339e44d8a0dad5fa8b65a571b6187eb7ad86",
+    "power_restoration": "0be5f87d7f249cb7fb1414bc91ec4d7d6f0f601fce4e18787054674edd5cdf12",
+    "preregistration": "2df46c5b06dc6fc6e81054c215339a81df759fd9bafd98954bf088ce57c928a1",
+    "root_aggregate": "9b76e78f2dcaf3ce9d28735180834305d6fdbd914c15448786fe63e65b77239a",
+    "runtime_snapshot": "10be2397a22e1842e0afaf434c68c5db96242dbfcf787e59e605014b5486a04b",
+    "terminal_audit": "d7bf7c1cffe23222ec60ed758f814a3bef187f180c8424bb175b899904d3e4ad"
+  },
+  "experimental_kernel": "f14447f814751f21",
+  "information": "Both arms receive the same checked prefix, goal, full rules and ordered caller-authored commands. Native answer type/schema differs: Text versus exact-command Enum. Invalid inferences remain in the offered menu.",
+  "later_live_kernel_not_evaluated": "a26f3e0bee3c23d4",
+  "limits": {
+    "additional_shared_cleanup_seconds": 15,
+    "assignments": 12,
+    "calls_per_assignment": 1,
+    "cell_lifecycle_seconds": 120,
+    "controller_seconds": 1800,
+    "fallbacks": 0,
+    "repairs": 0,
+    "reruns": 0,
+    "warmups": 0
+  },
+  "models": [
+    "llama3.2:1b",
+    "granite3.3:2b",
+    "qwen3:4b-instruct"
+  ],
+  "observed_date_utc": "2026-10-05",
+  "results": {
+    "answered": 12,
+    "arms": {
+      "exact_command_enum": {
+        "answer_schema_valid": 6,
+        "assigned": 6,
+        "costs": {
+          "duration_ms": {
+            "known_subtotal": 391290,
+            "measured_attempts": 6,
+            "unknown_attempts": 0
+          },
+          "input_tokens": {
+            "known_subtotal": 10926,
+            "measured_attempts": 6,
+            "unknown_attempts": 0
+          },
+          "output_tokens": {
+            "known_subtotal": 74,
+            "measured_attempts": 6,
+            "unknown_attempts": 0
+          },
+          "schema_tokens": {
+            "known_subtotal": 0,
+            "measured_attempts": 0,
+            "unknown_attempts": 6
+          }
+        },
+        "exact_menu_member": 6,
+        "outer_schema_valid": 6,
+        "registered_launches": 6,
+        "semantic_closing": 3,
+        "strict_delivered_selection_success": 3
+      },
+      "exact_command_text": {
+        "answer_schema_valid": 6,
+        "assigned": 6,
+        "costs": {
+          "duration_ms": {
+            "known_subtotal": 356727,
+            "measured_attempts": 6,
+            "unknown_attempts": 0
+          },
+          "input_tokens": {
+            "known_subtotal": 10575,
+            "measured_attempts": 6,
+            "unknown_attempts": 0
+          },
+          "output_tokens": {
+            "known_subtotal": 210,
+            "measured_attempts": 6,
+            "unknown_attempts": 0
+          },
+          "schema_tokens": {
+            "known_subtotal": 0,
+            "measured_attempts": 0,
+            "unknown_attempts": 6
+          }
+        },
+        "exact_menu_member": 4,
+        "outer_schema_valid": 6,
+        "registered_launches": 6,
+        "semantic_closing": 2,
+        "strict_delivered_selection_success": 2
+      }
+    },
+    "assigned": 12,
+    "censored": 0,
+    "complete": 5,
+    "infrastructure_failures": 0,
+    "not_launched": 0,
+    "paired_success": {
+      "both": 2,
+      "enum_only": 1,
+      "neither": 3,
+      "text_only": 0
+    },
+    "pairs": [
+      {
+        "arms": {
+          "exact_command_enum": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "valid_closing",
+            "status": "complete",
+            "strict_delivered_selection_success": true,
+            "task_correct": true
+          },
+          "exact_command_text": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": false,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "invalid_inference_or_command",
+            "status": "failed",
+            "strict_delivered_selection_success": false,
+            "task_correct": false
+          }
+        },
+        "model": "llama3.2:1b",
+        "pair_id": "menu-pair-01",
+        "seed": 7
+      },
+      {
+        "arms": {
+          "exact_command_enum": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "valid_nonclosing",
+            "status": "failed",
+            "strict_delivered_selection_success": false,
+            "task_correct": false
+          },
+          "exact_command_text": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": false,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "invalid_inference_or_command",
+            "status": "failed",
+            "strict_delivered_selection_success": false,
+            "task_correct": false
+          }
+        },
+        "model": "llama3.2:1b",
+        "pair_id": "menu-pair-02",
+        "seed": 17
+      },
+      {
+        "arms": {
+          "exact_command_enum": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "invalid_inference_or_command",
+            "status": "failed",
+            "strict_delivered_selection_success": false,
+            "task_correct": false
+          },
+          "exact_command_text": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "invalid_inference_or_command",
+            "status": "failed",
+            "strict_delivered_selection_success": false,
+            "task_correct": false
+          }
+        },
+        "model": "granite3.3:2b",
+        "pair_id": "menu-pair-03",
+        "seed": 7
+      },
+      {
+        "arms": {
+          "exact_command_enum": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "valid_closing",
+            "status": "complete",
+            "strict_delivered_selection_success": true,
+            "task_correct": true
+          },
+          "exact_command_text": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "valid_closing",
+            "status": "complete",
+            "strict_delivered_selection_success": true,
+            "task_correct": true
+          }
+        },
+        "model": "granite3.3:2b",
+        "pair_id": "menu-pair-04",
+        "seed": 17
+      },
+      {
+        "arms": {
+          "exact_command_enum": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "valid_closing",
+            "status": "complete",
+            "strict_delivered_selection_success": true,
+            "task_correct": true
+          },
+          "exact_command_text": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "valid_closing",
+            "status": "complete",
+            "strict_delivered_selection_success": true,
+            "task_correct": true
+          }
+        },
+        "model": "qwen3:4b-instruct",
+        "pair_id": "menu-pair-05",
+        "seed": 7
+      },
+      {
+        "arms": {
+          "exact_command_enum": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "invalid_inference_or_command",
+            "status": "failed",
+            "strict_delivered_selection_success": false,
+            "task_correct": false
+          },
+          "exact_command_text": {
+            "answer_schema_valid": true,
+            "exact_command_menu_membership": true,
+            "raw_outer_schema_valid": true,
+            "semantic_category": "invalid_inference_or_command",
+            "status": "failed",
+            "strict_delivered_selection_success": false,
+            "task_correct": false
+          }
+        },
+        "model": "qwen3:4b-instruct",
+        "pair_id": "menu-pair-06",
+        "seed": 17
+      }
+    ],
+    "rejected": 7,
+    "semantic_categories": {
+      "invalid_inference_or_command": 6,
+      "valid_closing": 5,
+      "valid_nonclosing": 1
+    }
+  },
+  "scope": "One fixed supplied proof frontier; twelve one-call finite-selection assignments, six paired model/seed configurations. No proof search or whole-project benchmark.",
+  "seeds": [
+    7,
+    17
+  ],
+  "status": "completed_independently_regraded",
+  "temperature": 0,
+  "validation": {
+    "active_owned_calls": 0,
+    "checker_scope": "Independent decoding, schema, prefix reconstruction, command/session application and certificate recheck compose the same unchanged proof checker.",
+    "controller_exit_status": 0,
+    "independent_accounting_disagreements": 0,
+    "independent_grade_request_ownership_disagreements": 0,
+    "independent_mathematical_implementation": false,
+    "power_lease_restored_targets": 8,
+    "terminal_owned_calls": 12,
+    "unresolved_owned_calls": 0
+  },
+  "version": 1
+}

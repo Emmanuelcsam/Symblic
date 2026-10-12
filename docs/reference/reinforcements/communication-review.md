@@ -15,10 +15,10 @@ not establish that model-reply parsing or ensure retries work.
 - Checkout tested: `913dcf8887e477383ae0458f44721206f32eb5a3`;
   Symblic reports version `2.0`; system Python `3.11.2`, `x86_64`, one cluster node.
 - Language-authoring sources: [SPEC.md](../SPEC.md) and examples
-  01 (not included in this repository),
+  [01](../../../examples/01-four-plus-four.sym),
   [02](../../../examples/02-flower-formal.sym),
-  03 (not included in this repository),
-  04 (not included in this repository), and
+  [03](../../../examples/03-flower-from-essay.sym),
+  [04](../../../examples/04-family-logic.sym), and
   [10](../../../examples/10-kernel-identity.sym).
   Spec SHA-256: `82fb6a583cec1209be33f9726e68c5f4f1cbc7a268abfe05c704c84405724205`.
 - Read the required `CLAUDE.md`, working agreement, complete Automation Studio /

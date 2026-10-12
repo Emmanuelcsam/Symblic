@@ -1,0 +1,499 @@
+{
+  "version": 1,
+  "bundles": [
+    {
+      "id": "small-model-builds-20261007",
+      "title": "Checked small-model cup, chart and programs",
+      "examples": [
+        "41-small-model-cup",
+        "42-small-model-chart",
+        "43-small-model-programs"
+      ],
+      "files": [
+        {
+          "name": "41-small-model-cup.sym",
+          "path": "41-small-model-cup.sym",
+          "sha256": "c4d67644ca3d689718eea3415abc68e1f3c9a9d99eec71feae05895c92aa82c4",
+          "bytes": 9766
+        },
+        {
+          "name": "42-small-model-chart.sym",
+          "path": "42-small-model-chart.sym",
+          "sha256": "ae12c5313003378922f82ce93fc23ffd4c505cf664471afd5a1b7aede110d4db",
+          "bytes": 6066
+        },
+        {
+          "name": "43-small-model-programs.sym",
+          "path": "43-small-model-programs.sym",
+          "sha256": "2df3e8c30a7817fc33c54cf73597a97cc2f8e003590ef91e65b043e568aacc6e",
+          "bytes": 3297
+        },
+        {
+          "name": "README.md",
+          "path": "small-model-builds-20261007/README.md",
+          "sha256": "534ee17e06e23e608a0809d4494e9b0d805018d229e17b49b317a350ece1e0fc",
+          "bytes": 4054
+        },
+        {
+          "name": "alternate-cup.stl",
+          "path": "small-model-builds-20261007/alternate-cup.stl",
+          "sha256": "43fb743c9063dfa4c0bc44919144a05847f71063671351677bedad80393867b7",
+          "bytes": 1484
+        },
+        {
+          "name": "alternate-mesh.json",
+          "path": "small-model-builds-20261007/alternate-mesh.json",
+          "sha256": "eff5f68aa3f82983ba8d6fccd6d9a22a7af9bed3978435246f57be94f6c9301e",
+          "bytes": 1890
+        },
+        {
+          "name": "caps.js",
+          "path": "small-model-builds-20261007/caps.js",
+          "sha256": "e520586fc739613e53829cefd310dadb8d5040ca4da85e5efd3120121c5cc63a",
+          "bytes": 187
+        },
+        {
+          "name": "chart-preview.png",
+          "path": "small-model-builds-20261007/chart-preview.png",
+          "sha256": "85488bbfc7c4fc97c91ccf5ad5fe2dbd7a847769ac26242e511f6739adcfda37",
+          "bytes": 2770
+        },
+        {
+          "name": "chart.js",
+          "path": "small-model-builds-20261007/chart.js",
+          "sha256": "61476324385efde473102a61ef4f9ce4dfbf90a5639e5ca2d9656fae95117cba",
+          "bytes": 1027
+        },
+        {
+          "name": "chart.svg",
+          "path": "small-model-builds-20261007/chart.svg",
+          "sha256": "a5eb306ef5d385afcd5fb80fcb0f48ceac58281c3722a5dd45deb020c44ae53d",
+          "bytes": 988
+        },
+        {
+          "name": "cup.js",
+          "path": "small-model-builds-20261007/cup.js",
+          "sha256": "d86eb58f47a48ff179de6de7216531efc88c216c4bc41432ecf3dea5e88d6f1a",
+          "bytes": 2699
+        },
+        {
+          "name": "cup_assembler.js",
+          "path": "small-model-builds-20261007/cup_assembler.js",
+          "sha256": "8a0ea583f203a9d312cc99c7d71529b96cbc7935593ee539fff2e3b88c3c50b3",
+          "bytes": 1733
+        },
+        {
+          "name": "evidence.json",
+          "path": "small-model-builds-20261007/evidence.json",
+          "sha256": "15f7241a85fe3c3dbcedb5a7e57dbe45de0b63c1bd62c1e768fa0ce9668b319f",
+          "bytes": 26239
+        },
+        {
+          "name": "join_rings.js",
+          "path": "small-model-builds-20261007/join_rings.js",
+          "sha256": "82032f0e8e0dc68ec533b4ab080f2921dc7242d624b11439165d5f459cc460e4",
+          "bytes": 505
+        },
+        {
+          "name": "rect_ring.js",
+          "path": "small-model-builds-20261007/rect_ring.js",
+          "sha256": "aa4045d294e068c1f66f0dadc2d605d43af501629dc005be05bf51002dea4773",
+          "bytes": 267
+        },
+        {
+          "name": "snake.js",
+          "path": "small-model-builds-20261007/snake.js",
+          "sha256": "e88b7e4e71251eee781fb2e2e8ff2e726c48b2a40e19162436a9155a5c045c89",
+          "bytes": 290
+        },
+        {
+          "name": "target-cup.stl",
+          "path": "small-model-builds-20261007/target-cup.stl",
+          "sha256": "30fce825093ae2a06477cd851ff35c6456a28e7e21fd8e19800edb51e79b2bcf",
+          "bytes": 1484
+        },
+        {
+          "name": "target-mesh.json",
+          "path": "small-model-builds-20261007/target-mesh.json",
+          "sha256": "0d53d9061c9cafedc1ad4cf534889b571da23ebcb04ae82b0ddf8516661c47cc",
+          "bytes": 1854
+        },
+        {
+          "name": "totals.js",
+          "path": "small-model-builds-20261007/totals.js",
+          "sha256": "3e964e0cd9026147d401208ea5940c34a1ea880485f8864c3adde84706c4427a",
+          "bytes": 665
+        },
+        {
+          "name": "validate-chart.js",
+          "path": "small-model-builds-20261007/validate-chart.js",
+          "sha256": "583185a6bc3251e47a2ade92303bcf432b9c7406a1bb39188b8c50718cda700f",
+          "bytes": 4510
+        },
+        {
+          "name": "validate-cup.js",
+          "path": "small-model-builds-20261007/validate-cup.js",
+          "sha256": "eb8d2298fbda070cd8f71ea7ca9645a9806f42f1288996a12b7b0c5d2cadc919",
+          "bytes": 6139
+        },
+        {
+          "name": "validate_chart.py",
+          "path": "small-model-builds-20261007/validate_chart.py",
+          "sha256": "8756441b01118476969f9a2de936eb79b792a80c887f5afdf6f5a11779a244dd",
+          "bytes": 3335
+        },
+        {
+          "name": "validate_cup.py",
+          "path": "small-model-builds-20261007/validate_cup.py",
+          "sha256": "a0cf0b9803351d64837d6dfeded38f47483d66aa23e8a9c9b4fc4c179e88421d",
+          "bytes": 8913
+        },
+        {
+          "name": "verify.py",
+          "path": "small-model-builds-20261007/verify.py",
+          "sha256": "c81de620e2ea6b534cb6ee84c69bc562b8f62bd57a4fe2c90373d23992472180",
+          "bytes": 1170
+        }
+      ]
+    },
+    {
+      "id": "small-model-pricing-20261007",
+      "title": "Checked small-model pricing page",
+      "examples": [
+        "45-small-model-pricing"
+      ],
+      "files": [
+        {
+          "name": "45-small-model-pricing.sym",
+          "path": "45-small-model-pricing.sym",
+          "bytes": 6829,
+          "sha256": "d27c6af87dfced6bdfa23166d4fffd67c96b2bed05f56140d58d88ad245ffc99"
+        },
+        {
+          "name": "README.md",
+          "path": "small-model-pricing-20261007/README.md",
+          "bytes": 2608,
+          "sha256": "ad722329ee4f0212ef44fb6c4c2261bfed68907fae114112f133f3c0e2faa7a4"
+        },
+        {
+          "name": "browser-verification.json",
+          "path": "small-model-pricing-20261007/browser-verification.json",
+          "bytes": 1661,
+          "sha256": "5e8282b19446e47b546a9de3c2937b59d27707279861e2e4851e11cd8a915af3"
+        },
+        {
+          "name": "evidence.json",
+          "path": "small-model-pricing-20261007/evidence.json",
+          "bytes": 17228,
+          "sha256": "6c8ae87a3443e2ba86b1c91823e01f925a90ef2afe5b40f2c4b777357367e631"
+        },
+        {
+          "name": "plan_card.js",
+          "path": "small-model-pricing-20261007/plan_card.js",
+          "bytes": 377,
+          "sha256": "1124cedc0b0101130b365ababaf05c050815e6c7def4413f2f2c7fb62799af62"
+        },
+        {
+          "name": "pricing-desktop.png",
+          "path": "small-model-pricing-20261007/pricing-desktop.png",
+          "bytes": 17144,
+          "sha256": "cfdf1c0d482dfb133dd65415f4eef4739cfaac6eb13e1ac47766bd46c9a6fca9"
+        },
+        {
+          "name": "pricing-phone.png",
+          "path": "small-model-pricing-20261007/pricing-phone.png",
+          "bytes": 15472,
+          "sha256": "9cd62b4cc2ef80a88e8f625a5ebe86bb3ac9400f9c67555a84e0f1e19ab3063e"
+        },
+        {
+          "name": "pricing.html",
+          "path": "small-model-pricing-20261007/pricing.html",
+          "bytes": 1047,
+          "sha256": "9d982374153f25d42c05e3f1e3276a5fdda5bbd11f1e9a0e45fd2f7e3d5b0282"
+        },
+        {
+          "name": "pricing.js",
+          "path": "small-model-pricing-20261007/pricing.js",
+          "bytes": 457,
+          "sha256": "455d4291c3ed98c8dbcd3881950ac0815c72a0d5219445bb48545e5230a2d726"
+        },
+        {
+          "name": "pricing_style.js",
+          "path": "small-model-pricing-20261007/pricing_style.js",
+          "bytes": 489,
+          "sha256": "0917b6aaf576aae95ad0dd4aac44a848f5b0427bb3d00299ce0cdd39849fa4c0"
+        },
+        {
+          "name": "validate-pricing.js",
+          "path": "small-model-pricing-20261007/validate-pricing.js",
+          "bytes": 1778,
+          "sha256": "3de4c4341d10dcc5cf89334bf9f02c6fc3076c34f4712c1f6204a923cbafe735"
+        },
+        {
+          "name": "validate-style.js",
+          "path": "small-model-pricing-20261007/validate-style.js",
+          "bytes": 2073,
+          "sha256": "4b419a7a498c05b714e54a4b1bbc4b20a5273215eacb61a16ccb99a9992d0741"
+        },
+        {
+          "name": "validate_pricing.py",
+          "path": "small-model-pricing-20261007/validate_pricing.py",
+          "bytes": 3351,
+          "sha256": "b3c963a568876fdcd6ed6c4810367dfc2f1939b1f06101d4946ae56a1bfcb43e"
+        },
+        {
+          "name": "verify.py",
+          "path": "small-model-pricing-20261007/verify.py",
+          "bytes": 468,
+          "sha256": "f4bb378987012089601de59bfe6eaadb05b801ca3ea51030545c164642c9f10a"
+        }
+      ]
+    },
+    {
+      "id": "small-model-gantry-20261007",
+      "title": "Checked small-model gantry geometry",
+      "examples": [
+        "46-small-model-gantry"
+      ],
+      "files": [
+        {
+          "name": "46-small-model-gantry.sym",
+          "path": "46-small-model-gantry.sym",
+          "bytes": 9517,
+          "sha256": "19b7fb0e336f4e58203e95efbebad60063962314252f44a47cc23bafbc1075ea"
+        },
+        {
+          "name": "README.md",
+          "path": "small-model-gantry-20261007/README.md",
+          "bytes": 2786,
+          "sha256": "26e512304905af6d84b6b18a510d16a3545233e9fd176c1ffb68b9d4bd5d6215"
+        },
+        {
+          "name": "alternate-assembly.json",
+          "path": "small-model-gantry-20261007/alternate-assembly.json",
+          "bytes": 7691,
+          "sha256": "9b114c740b085bd3812aa36c75e991601f9b740ae4f78cc3f1924327ce528809"
+        },
+        {
+          "name": "alternate-base.stl",
+          "path": "small-model-gantry-20261007/alternate-base.stl",
+          "bytes": 684,
+          "sha256": "101eca3fd6ee9fe9d0d798acc38d6abcf7a7dffcb2db0ed7b266a761bdaf37f8"
+        },
+        {
+          "name": "alternate-carriage.stl",
+          "path": "small-model-gantry-20261007/alternate-carriage.stl",
+          "bytes": 684,
+          "sha256": "0a3020a0ef8a2996bad70a82d29b367acf9150fd2b98995c9da7a8965286e53c"
+        },
+        {
+          "name": "alternate-crossbar.stl",
+          "path": "small-model-gantry-20261007/alternate-crossbar.stl",
+          "bytes": 684,
+          "sha256": "5420c31e95722cac865c0726e7061340bbb67fc994f6917fb0f8a38331867007"
+        },
+        {
+          "name": "alternate-left_post.stl",
+          "path": "small-model-gantry-20261007/alternate-left_post.stl",
+          "bytes": 684,
+          "sha256": "c2aec053909550ec81174e859eaa3ad97e77f8b26abb8c942b3aa5ef72ad76f1"
+        },
+        {
+          "name": "alternate-right_post.stl",
+          "path": "small-model-gantry-20261007/alternate-right_post.stl",
+          "bytes": 684,
+          "sha256": "399e45463ecc2b720365b029c370ac4caf89782478fdede5964c595879002dc6"
+        },
+        {
+          "name": "assemblies.json",
+          "path": "small-model-gantry-20261007/assemblies.json",
+          "bytes": 52783,
+          "sha256": "cd60707ee0ca2b11d2fc6d8708d6bb81c32d2cd8e1383593e8a5a130d53d9d6c"
+        },
+        {
+          "name": "box.js",
+          "path": "small-model-gantry-20261007/box.js",
+          "bytes": 541,
+          "sha256": "44ed954dc41e898fefd295923f843743f90047266798078d094e8ef4172a29e3"
+        },
+        {
+          "name": "caps.js",
+          "path": "small-model-gantry-20261007/caps.js",
+          "bytes": 187,
+          "sha256": "e520586fc739613e53829cefd310dadb8d5040ca4da85e5efd3120121c5cc63a"
+        },
+        {
+          "name": "cases.json",
+          "path": "small-model-gantry-20261007/cases.json",
+          "bytes": 1616,
+          "sha256": "6247327064a18a04278a3f7f08565c228f4b2835d2bc01b0de80a2a9bb6f4c10"
+        },
+        {
+          "name": "evidence.json",
+          "path": "small-model-gantry-20261007/evidence.json",
+          "bytes": 25332,
+          "sha256": "185f68595ba46808986704e6c02c8193fb847888313888ff45b44649985a2a6e"
+        },
+        {
+          "name": "gantry.js",
+          "path": "small-model-gantry-20261007/gantry.js",
+          "bytes": 845,
+          "sha256": "ae956e4c53278f1a460a6e5a5a48071b0e9be950e441dfbff70127d333955951"
+        },
+        {
+          "name": "join_rings.js",
+          "path": "small-model-gantry-20261007/join_rings.js",
+          "bytes": 505,
+          "sha256": "82032f0e8e0dc68ec533b4ab080f2921dc7242d624b11439165d5f459cc460e4"
+        },
+        {
+          "name": "rect_ring.js",
+          "path": "small-model-gantry-20261007/rect_ring.js",
+          "bytes": 267,
+          "sha256": "aa4045d294e068c1f66f0dadc2d605d43af501629dc005be05bf51002dea4773"
+        },
+        {
+          "name": "target-assembly.json",
+          "path": "small-model-gantry-20261007/target-assembly.json",
+          "bytes": 7695,
+          "sha256": "8308d98830d689dbb53ea7609b178606a8e8b0a4f8beed6c7715b3db73c635a4"
+        },
+        {
+          "name": "target-base.stl",
+          "path": "small-model-gantry-20261007/target-base.stl",
+          "bytes": 684,
+          "sha256": "871261b6ece1a5dc206b9f4617d9c637830453cc9aa9001148063da4a7df0435"
+        },
+        {
+          "name": "target-carriage.stl",
+          "path": "small-model-gantry-20261007/target-carriage.stl",
+          "bytes": 684,
+          "sha256": "db5251038573d8eea7703f6482c33ea76e665ab9bb89057427337410874fb5b0"
+        },
+        {
+          "name": "target-crossbar.stl",
+          "path": "small-model-gantry-20261007/target-crossbar.stl",
+          "bytes": 684,
+          "sha256": "d5634a9f2c90dee6c3759511ac5ff48c533fda18d676a2dd53eec872c235dd7a"
+        },
+        {
+          "name": "target-left_post.stl",
+          "path": "small-model-gantry-20261007/target-left_post.stl",
+          "bytes": 684,
+          "sha256": "2741c78e469e1e58862a057a93e65af8b7ec34d8877e831498e018be4510ebc9"
+        },
+        {
+          "name": "target-right_post.stl",
+          "path": "small-model-gantry-20261007/target-right_post.stl",
+          "bytes": 684,
+          "sha256": "d368723ac08485564734a29ccade9116b149073199288912760bf5c7eb01ec23"
+        },
+        {
+          "name": "translate.js",
+          "path": "small-model-gantry-20261007/translate.js",
+          "bytes": 210,
+          "sha256": "774b7fd21e7e5ac8fd898e42878347a7dc6e444097d49e0f6d09314fcef050bc"
+        },
+        {
+          "name": "validate-gantry.js",
+          "path": "small-model-gantry-20261007/validate-gantry.js",
+          "bytes": 4188,
+          "sha256": "ec8b7b97e169564baa921c40a8c4cabbcd6a1d4d956b79eff45817b2046cda25"
+        },
+        {
+          "name": "validate_geometry.py",
+          "path": "small-model-gantry-20261007/validate_geometry.py",
+          "bytes": 5996,
+          "sha256": "610f059fe86224309165a0209e3001f9e75fd4922ee4a1ca8443086e402f16a7"
+        },
+        {
+          "name": "verify.py",
+          "path": "small-model-gantry-20261007/verify.py",
+          "bytes": 1097,
+          "sha256": "b8f118801907ce1d3cea1b9d7817006c809f7f84241c87d9eb628c3ebddb431b"
+        }
+      ]
+    },
+    {
+      "id": "small-model-math-20261007",
+      "title": "Checked small-model exact mathematics",
+      "examples": [
+        "44-small-model-math"
+      ],
+      "files": [
+        {
+          "name": "44-small-model-math.sym",
+          "path": "44-small-model-math.sym",
+          "sha256": "4decfe42e33c17afd2cb144dbce64e8bb730a7e8a9697586c387c747af0bf9fd",
+          "bytes": 9640
+        },
+        {
+          "name": "README.md",
+          "path": "small-model-math-20261007/README.md",
+          "sha256": "0801411793b2b09d57a8f1f93fe7a42ac4ecc778c8f400ace77e7d7b5d90d7e0",
+          "bytes": 2798
+        },
+        {
+          "name": "cases.json",
+          "path": "small-model-math-20261007/cases.json",
+          "sha256": "7fc27b6ac09494dacb27577f698c71d5b12fc8ffada9838a0288796f20d5cdc9",
+          "bytes": 3474
+        },
+        {
+          "name": "determinant.js",
+          "path": "small-model-math-20261007/determinant.js",
+          "sha256": "8e8a81832032e73b40cee3c33bd88a265818574d80d1e261ae42ce83d55164c4",
+          "bytes": 425
+        },
+        {
+          "name": "evidence.json",
+          "path": "small-model-math-20261007/evidence.json",
+          "sha256": "c749cab75fa84f47cdf54dbe8363b2dc96ae9fe3eeb34624567ac720e922d387",
+          "bytes": 15710
+        },
+        {
+          "name": "fraction.js",
+          "path": "small-model-math-20261007/fraction.js",
+          "sha256": "aec3ec8d1ece24d97cf65e3ea6b708911f2bb6232b528577fa938d621873de03",
+          "bytes": 305
+        },
+        {
+          "name": "rank.js",
+          "path": "small-model-math-20261007/rank.js",
+          "sha256": "d5b3d7a6877776ea5c3bb6a4855f0186d93893404edee831fe851de1d7141f72",
+          "bytes": 2233
+        },
+        {
+          "name": "solutions.json",
+          "path": "small-model-math-20261007/solutions.json",
+          "sha256": "13edafc30e3182996531024a68af7f68b270ff02d2946deaafbdf7d1f7fd6dcb",
+          "bytes": 2214
+        },
+        {
+          "name": "solver.js",
+          "path": "small-model-math-20261007/solver.js",
+          "sha256": "90ca0c4ce25f39ee9af16bf3f7fcfaaf5866191a92b2891717545d80fbdc2e3e",
+          "bytes": 989
+        },
+        {
+          "name": "spec-sheet.md",
+          "path": "small-model-math-20261007/spec-sheet.md",
+          "sha256": "8468d2e3604c1745dc67bedc89a05a4533e7b3b47ea1f50161e3f20fbcf3ddd0",
+          "bytes": 8264
+        },
+        {
+          "name": "validate_math.py",
+          "path": "small-model-math-20261007/validate_math.py",
+          "sha256": "0207e6a16b0129271ae428cb5a055c47751f2d8b8343488cff084c8fe74e324c",
+          "bytes": 2384
+        },
+        {
+          "name": "verify.py",
+          "path": "small-model-math-20261007/verify.py",
+          "sha256": "2fa8caf00ee9735b72d4470ca4cc8738449fe9d984f454d1cde37c34b0031970",
+          "bytes": 518
+        }
+      ]
+    }
+  ]
+}

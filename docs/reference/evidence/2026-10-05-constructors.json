@@ -1,0 +1,113 @@
+{
+  "at": "2026-10-05T18:42:29.687706+00:00",
+  "canonical_version": 3,
+  "capabilities": [
+    "optional native and owner-API construction from bounded linear formal contracts",
+    "original type and predicate checks before adoption",
+    "durable attempt accounting and retained-evidence recovery gates",
+    "solver-origin epistemic lineage and notebook import verification",
+    "exact portable lock replay without solver or model dispatch",
+    "agent CLI handoff recipe, checked help examples, format-aware agent picker"
+  ],
+  "checks": {
+    "combined_help_picker": {
+      "browser_journeys": 5,
+      "coverage": "mocked APIs, desktop light and phone dark, selected accessibility checks",
+      "manifest_sha256": "7698ec89be5b74facfded67f09a5d4aa12e52bfe73fdcf294162d1f35ee72c40",
+      "status": "PASS"
+    },
+    "integrated_native": {
+      "log_sha256": "136ee01bfb81fab8b4c7857f57252a688f03dc84111d23a2b665f24ae4185af4",
+      "methods": 204,
+      "seconds": 12.395,
+      "status": "PASS"
+    },
+    "picker": {
+      "browser_journeys": 13,
+      "manifest_sha256": "66be3d75d77703ebc64e2034476db2fc2f504f2292a1a1f8086ac6c2d6931a87",
+      "native_methods": 5,
+      "status": "PASS"
+    },
+    "real_cli": {
+      "commands": 6,
+      "manifest_sha256": "791472d12c4224378149c47d5530f4b61d083a92fb705111b2599e42c4fd9d82",
+      "model_calls": 0,
+      "portable_replay_exact_epistemic": true,
+      "resume_journal_unchanged": true,
+      "status": "PASS"
+    },
+    "real_native_solver": {
+      "accepted": 4,
+      "cgroup_memory_limit_bytes": 629145600,
+      "cgroup_peak_bytes": 99962880,
+      "contracts": 4,
+      "cpu_quota_percent": 50,
+      "exact_portable_replays": 4,
+      "manifest_sha256": "af2dcc21cdcf72ec4e4838db9809701a8694ae25e425886d9d1a33b4a99f65db",
+      "model_calls": 0,
+      "workers_reaped": 4
+    },
+    "scoped_backward_compatibility": {
+      "manifest_sha256": "54c3f77f818e078118e8a5a790204aabab589bebd82d90d179af9c5bffa78fd8",
+      "methods": 66,
+      "note": "separate suite, includes some overlap with native tests",
+      "seconds": 3.721,
+      "status": "PASS"
+    }
+  },
+  "cloud_review": {
+    "included_in_acceptance_results": false,
+    "scanner_omission": "server.py",
+    "session_id": "(removed for publication)",
+    "status": "dispatched separately; no findings received at publication"
+  },
+  "constructor_journal_version": 3,
+  "host_runtime": {
+    "manifest_sha256": "6834cb2a98317c91ce4b5a94c362b84c590c1104f3274132d6c95cdd448639e0",
+    "mode": "0600",
+    "package": "z3-solver==4.15.4.0",
+    "payload_bytes": 46450948,
+    "payload_files": 45,
+    "sha256": "e4dc5dc45848c8ca8b7d57950ddc9f1e1975054ab001fd3489355ee82abee9c7"
+  },
+  "install_manifest_sha256": "efa6dd39dd045e288c716d244ee32d7c27ec3ac6708de69366aa80a64faa7a5e",
+  "install_plan_sha256": "0ca44485a28108d2a4f44952f2d9051717a275863c409bec2f022f45b5f6bcdb",
+  "installed_files": 51,
+  "kernel_id": "e197577d5bef99e9",
+  "kind": "checked-constructor and authoring-tools installation",
+  "language_version": "2.5",
+  "live_verification": {
+    "canonical_output": 22,
+    "constructor_answers": 1,
+    "http": 200,
+    "http_assets_exact": 8,
+    "journal_rows_after_resume": 3,
+    "model_calls": 0,
+    "portable_lock_format": 3,
+    "portable_replay": {
+      "cached": 0,
+      "calls": 0,
+      "error": null,
+      "expected": "babaa87c43583639",
+      "fingerprint": "babaa87c43583639",
+      "ok": true,
+      "refused": [],
+      "status": "done"
+    },
+    "process_changed": true,
+    "resume_exact_epistemic": true,
+    "run_id": "d24ec549189b",
+    "run_unit_inactive": true
+  },
+  "schema": 1,
+  "scope_limits": [
+    "Linear Bool/Int/rational fragment and flat records; existing paths handle unsupported asks.",
+    "Exact replay of recorded accepted outcomes; fresh underconstrained output is not guaranteed identical across solvers or models.",
+    "Finite native/runtime checks, not a real-model quality benchmark or a universal determinism proof.",
+    "Export of repaired constructor journals currently refuses."
+  ],
+  "source_snapshot_sha256": "9df341ada8997734138c2fc7138e471f973ada0d1b7f008688ac6f944fb34dca",
+  "status": "installed, restarted and live-verified",
+  "unchanged_dependencies": 334,
+  "publication_note": "Edited for publication on 2026-10-12: the identifier of the separately dispatched cloud review session and two process ids were removed; the pair of process ids is replaced by \"process_changed\": true. Other values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

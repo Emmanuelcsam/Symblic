@@ -562,7 +562,7 @@ The vote is taken under three rotations of the option order, at three times the 
 
 The original's closing section said the treatise "has been formally committed" to three places. It had been saved there, not committed: on 2026-10-04, when this correction was written, `git status` still showed the file as untracked (`??`). The three places are:
 1. This file, `docs/reference/QUANTUM-FOUNDATIONS-OF-SYMBLIC.md`, written 2026-10-03 at 16:04 (host local time).
-2. A shorter copy in the agy session's "brain" folder, `~/.gemini/antigravity-cli/brain/cb867bcf-a440-490a-9c7f-a37ea83e1eb5/symblic_quantum_foundations.md`. It keeps the original claims.
+2. A shorter copy in the drafting agent's own working folder (not in this repository). It keeps the original claims.
 3. [SYMBLIC-BREAKTHROUGH-COMPENDIUM.md](SYMBLIC-BREAKTHROUGH-COMPENDIUM.md) §25, which summarised the original claims. It was corrected in the same 2026-10-04 set and now states each proposal and what became of it.
 
 [REVIEW-2.3.md](REVIEW-2.3.md), section "QUANTUM-FOUNDATIONS-OF-SYMBLIC.md", records what was done with each proposal.

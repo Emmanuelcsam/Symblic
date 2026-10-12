@@ -1,0 +1,5 @@
+given base: Int = 10.
+ask x: Int "Compute one more than base."
+ensure x = base + 1 else retry.
+let doubled = x * 2.
+show doubled.

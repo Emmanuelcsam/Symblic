@@ -96,6 +96,9 @@ purpose. See [symblic/providers/](symblic/providers/README.md). More to try:
   what small models built, each marked "no model" or "asks a model".
 - [kits/kirby/](kits/kirby/README.md): the full spec-sheet kit behind the measurements above (a 39-unit game level,
   a reference implementation, a strict harness, and the seven pages local models built). Its checks run with no model.
+- [web/academy/](web/academy/README.md): a self-paced course on the language (lessons with checkpoints, flashcards,
+  drills) with a reader for this repository's documents; it runs as static files from a served checkout. Its lessons
+  were written by AI agents and have not been reviewed.
 - `tools/symblic --help` lists every command.
 
 Run the tests of one package with `DASH_TEST=1 python3 -m unittest discover -s tests/<package> -t .` (for
@@ -132,7 +135,7 @@ Every folder below has a README; [symblic/README.md](symblic/README.md) shows ho
 | [`symblic/os/`](symblic/os/README.md) | A prototype command layer driven by Symblic. Not an operating system; its guest image is a stub. |
 | [`tools/`](tools/) | Command-line entry points (`tools/symblic`, `symblic-task`, `symblic-workcard`, ...) and scripts. |
 | [`examples/`](examples/README.md), [`kits/`](kits/README.md), [`benchmarks/`](benchmarks/README.md) | Programs, complete build kits with harnesses, and benchmark fixtures. |
-| [`web/`](web/) | The browser pages (editor, hub, records). They were served by the original host and need its HTTP API. |
+| [`web/`](web/) | The browser pages (editor, hub, records, and the [Academy](web/academy/README.md), a self-paced course). They were served by the original host; the editor needs its HTTP API, while most of the hub and the Academy work as static files. |
 | [`integration/host/`](integration/host/README.md) | Code that only ran inside the original host (HTTP routes, schedulers). Kept for reference; not runnable here. A few host-only features of the packages import it lazily; nothing in the steps above needs it. |
 | [`tests/`](tests/README.md) | One folder per package; `tests/integration/` covers host-only code and skips where the host is missing. |
 | [`docs/`](docs/README.md) | The language reference, measurements, design records, AI essays, and the [map of old names](docs/MAP.md). |

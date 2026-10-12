@@ -725,7 +725,7 @@ The counts below are scoped observations. They must not be added together as a u
 | Broad Symblic/SymblicOS regression | 203/203 modules with passing outcomes; 3,389 covered case executions; zero unresolved skips | Resolved coverage ledger: 140 remote modules / 2,342 executions plus 63 full-environment local modules / 1,047 executions. Earlier failures and reruns remain recorded; this is offline fake-provider and temporary-store coverage. |
 | Final expanded discrete prompt | Five focused checks, 1.326 seconds | Passed; native UTF-16 limit, full defaults and context, exact local/remote prompt files, and refusal before admission/provision/spawn. |
 | Node tool installation | the CLI agent/the local CLI-agent wrapper/three-agent-pipeline help/version and context doctor on node-a/b/d/f/h/i | Live prerequisite checks passed; isolated runtime installation and source-only bundles through the admitted cluster path. All six now have the combined v12 runtime: context handoff, review-evidence clarification, explicit discrete completion and completion-boundary correction, with 44 exact application-file pins, the reviewed the CLI agent wheel and help/version/context doctor checks verified per node. These installation checks made no model calls. Model capacity remains independently admitted, including node-h's unchanged 3 GiB Ollama ceiling. |
-| Dashboard deployment and responsive layout | Latest restart 3297765→3325190; HTTP 200; final desktop 1365×900 and dark phone 390×844 checks | Passed: all ten engine choices visible, text controls at least 16 px, no horizontal overflow, zero unopened lazy-panel iframes, and Run instruction placed before advanced settings and visible in the initial desktop view. The restart loads the repository-specific Apply notice; later static UI changes require no Python restart. This is deployment/UI evidence; the model task is recorded separately. |
+| Dashboard deployment and responsive layout | Latest restart (new process id); HTTP 200; final desktop 1365×900 and dark phone 390×844 checks | Passed: all ten engine choices visible, text controls at least 16 px, no horizontal overflow, zero unopened lazy-panel iframes, and Run instruction placed before advanced settings and visible in the initial desktop view. The restart loads the repository-specific Apply notice; later static UI changes require no Python restart. This is deployment/UI evidence; the model task is recorded separately. |
 | Live task-card reconnect | Reloads during active work, final desktop/dark-phone checks, and the completed two-step card | Passed: the existing card returned exactly once with zero POST tasks/start requests, the correct execution machine/workspace, separate the host source folder and Review/apply link. The final reload visibly retained both completed steps and introduced no overflow or duplicate submission. No unopened lazy-panel iframe was introduced. The operator closed only the dedicated test browser session afterward, preserving other sessions. |
 | Claude Cloud live smoke | New empty-source task and a follow-up | Both native turns completed; exact current message receipt observed, returned source scanned and fetched. |
 | Local replay of cloud artifact | Pure greeting module and three unit tests | Passed, 3/3 on Python 3.12.3 in private scratch; no live patch apply. |
@@ -757,12 +757,12 @@ The v12 second accepted commit is **a567d76d9fe8b1233bceb883c834d8e7117f22ad**. 
 
 The first 14B checkpoint is **f1ed8caed23787a3d7b43e76d4898aa59ed376b0**. Its complete 947-character diff makes four targeted changes to wall-test inputs while retaining the Snake rules implementation. The coordinating operator reconstructed the exact candidate from that immutable diff into isolated private scratch, inspected the code, verified both source hashes, and ran eight methods: the six generated tests and two independent methods covering 900 movement cases plus four invalid directions. All passed in 0.090 seconds. The 1,054-byte **snake_rules.py** has SHA-256 **92c03383b348eaa3f61923b57e0c177e39df8e4f911f79541e512929dfeffbab**; the 1,429-byte **test_snake_rules.py** has SHA-256 **954385df9ffe3bea126b51e4296a7940007d90f7dc8bc5280132ca383b085e15**. No manual program repair supplied those candidate changes. Because the originating build yielded, those checks did not mark it natively completed or advance the second line. After reviewing that exact candidate, the coordinating operator separately used the normal Work/Apply route to apply the one changed test file to the owned source project. Apply neither committed nor restarted the project; all six source-project tests then passed in 0.076 seconds. This was an operator-accepted application of independently checked model work, not a native team acceptance. The subsequent successful v12 native two-line trial started from that retained baseline and is accounted for separately above.
 
-The finished example is available at **~/symblicos/projects/symblic-qwen-demo-20261006** on the host. It contains **snake_rules.py**, **test_snake_rules.py** and the accepted **README.md**. The pure Python `move_head(head, direction, width, height)` function moves one grid cell for up/down/left/right, returns None on a wall collision and raises ValueError for an unknown direction. For example, moving right from (2, 2) on a 5×5 grid returns (3, 2). This constructed artifact demonstrates a small rules module, its tests and documentation.
+The finished example is available at **/srv/symblic/projects/symblic-qwen-demo-20261006** on the host. It contains **snake_rules.py**, **test_snake_rules.py** and the accepted **README.md**. The pure Python `move_head(head, direction, width, height)` function moves one grid cell for up/down/left/right, returns None on a wall collision and raises ValueError for an unknown direction. For example, moving right from (2, 2) on a 5×5 grid returns (3, 2). This constructed artifact demonstrates a small rules module, its tests and documentation.
 
 The operator inspected the final Work diff and the README’s 65 whitespace-separated words, including its example and test command. Normal Work/Apply added only README to that source project, without creating a commit or restarting anything. The 412-byte README hash matched the accepted native commit, and both Python file hashes remained unchanged. Isolated system Python then passed eight methods against the applied source: six generated tests and two independent methods covering 900 moves plus four invalid directions. The measured wall time was 0.116 seconds, with 0.016 seconds reported by the unittest runner. The additional independent methods remain verification evidence; the project’s six included tests can be rerun from its directory:
 
 ```bash
-cd ~/symblicos/projects/symblic-qwen-demo-20261006
+cd /srv/symblic/projects/symblic-qwen-demo-20261006
 python3 -m unittest -v test_snake_rules.py
 ```
 
@@ -841,7 +841,7 @@ The original host also had its own guides (agent operation, power management, it
 | [EXPENSE-HANDOFF.md](EXPENSE-HANDOFF.md) | A source-bound expense handoff between agents |
 | [EXPERIMENTS.md](EXPERIMENTS.md) | Executable research mechanisms |
 | [FINITE-LOGIC.md](FINITE-LOGIC.md) | Explicit finite-domain logic, version 1 |
-| FINITE-TRANSPORT-EXPERIMENTS.md (not included in this repository) | Finite sheaf and schema transport experiments |
+| [FINITE-TRANSPORT-EXPERIMENTS.md](FINITE-TRANSPORT-EXPERIMENTS.md) | Finite sheaf and schema transport experiments |
 | [GRAND-UNIFICATION-AND-STRING-THEORY.md](GRAND-UNIFICATION-AND-STRING-THEORY.md) | Mathematical research for Symblic: constructions, hypotheses and tests |
 | [GRAPH-COMPOSITION.md](GRAPH-COMPOSITION.md) | Reusable graph fragments |
 | [HPC-FOUNDATIONS.md](HPC-FOUNDATIONS.md) | Symblic on high-performance computing (HPC): proposals and status |
@@ -877,7 +877,7 @@ The original host also had its own guides (agent operation, power management, it
 | [QUANTUM-DETERMINISM-ANALYSIS.md](QUANTUM-DETERMINISM-ANALYSIS.md) | Quantum Mechanics and Computational Determinism: Does Quantum Mathematics Weaken or Strengthen Symblic's Invariants? |
 | [QUANTUM-FOUNDATIONS-OF-SYMBLIC.md](QUANTUM-FOUNDATIONS-OF-SYMBLIC.md) | Quantum Mathematical Foundations for Neuro-Symbolic Computation: Applying Quantum Mechanics to Symblic |
 | [REFORM-3.md](REFORM-3.md) | Symblic reform: executable statements, conditional evidence and agent networks |
-| REQUIREMENT-EXECUTION.md (not included in this repository) | Observed requirement checks |
+| [REQUIREMENT-EXECUTION.md](REQUIREMENT-EXECUTION.md) | Observed requirement checks |
 | [RESEARCH-ADOPTION.md](RESEARCH-ADOPTION.md) | Research adoption for Symblic |
 | [RESEARCH-AGREEMENT.md](RESEARCH-AGREEMENT.md) | Symblic: getting different LLMs to give the same answer |
 | [RESEARCH-GEOMETRY.md](RESEARCH-GEOMETRY.md) | Supplied geometry experiments, version 1 |
@@ -905,7 +905,7 @@ The original host also had its own guides (agent operation, power management, it
 | [VARIATIONAL.md](VARIATIONAL.md) | Exact finite quadratic minimization |
 | [VORTICITY-CONSTRUCTION.md](VORTICITY-CONSTRUCTION.md) | Constructing a finite energy witness |
 | [WORKCARDS.md](WORKCARDS.md) | Typed workcards and reviewer roles |
-| benchmarks/AMBIGUITY-DATA.md (not included in this repository) | Finite operator-intent dataset, version 1 |
+| [symblic/bench/data/ambiguity-v1.md](../../symblic/bench/data/ambiguity-v1.md) | Finite operator-intent dataset, version 1 |
 | [examples/agent-handoff.sheet.md](../../examples/agent-handoff.sheet.md) | handoff.js |
 | [examples/tetris.sheet.md](../../kits/tetris/sheets/tetris.sheet.md) | tetris.html |
 | [grammar/README.md](grammar/README.md) | Authoring contract 1 |

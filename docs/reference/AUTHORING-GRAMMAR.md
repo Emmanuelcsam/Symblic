@@ -167,6 +167,6 @@ python3 -m unittest tests.authoring.test_symblic_authoring
 These are finite conformance tests, not a proof that the EBNF describes every
 accepted input or that well-formed model output is correct. This source-only
 authoring interface is included in the installed 5 October reform; see the
-[release evidence](evidence/2026-10-05-reform-install.json). The separate finite-menu diagnostic (not included in this repository)
+[release evidence](evidence/2026-10-05-reform-install.json). The separate [finite-menu diagnostic](evidence/2026-10-05-command-menu-pilot.json)
 measured six paired configurations on one supplied frontier; it does not establish
 general model-quality or provider-decoding improvement.

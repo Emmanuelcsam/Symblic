@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Symblic Academy</title>
+  <meta name="theme-color" content="#f4f1eb">
+  <!-- The Symblic Academy, the learning page of the original host (served there at /symblic-learn). /studio.css and
+       /studio.js were the host's shared page library; ../hub/standalone-shell.js stands in for it when they are
+       absent, so the course, flashcards, drills and the research reader work as static files. Serve the repository
+       root (the reader fetches documents from docs/, examples/, benchmarks/ and kits/, and six from symblic/ and
+       tests/) and open /web/academy/.
+       Checking and previewing programs call the host API; see README.md in this folder. -->
+  <link rel="stylesheet" href="/studio.css">
+  <link rel="stylesheet" href="symblic-learn.css">
+</head>
+
+<body>
+  <script src="/studio.js"></script>
+  <script src="../hub/standalone-shell.js"></script>
+  <script src="symblic-academy-content.js"></script>
+  <script src="symblic-learn.js"></script>
+</body>
+
+</html>

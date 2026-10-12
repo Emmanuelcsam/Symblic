@@ -9,7 +9,7 @@ installation and compatibility correction to kernel `f14447f814751f21`, language
 catalog, compilation and strict-identity capability returned successful live
 responses; a pinned native computation returned exact `1/2` with zero model calls.
 
-The later parser repair (not included in this repository) is also installed
+The later [parser repair](evidence/2026-10-05-parser-repair.json) is also installed
 and live-verified, under its release kernel `a26f3e0bee3c23d4`. It removes repeated
 terminal-period suffix scans, turns excessive formal nesting into positioned
 syntax errors, and prevents those errors from becoming implicit model requests.
@@ -22,7 +22,7 @@ commands and the persistent epistemic notebook. Component tests use isolated
 stores, fake providers or pure computations. The local-model pilots below remain
 observations on their own earlier frozen configurations; installation does not
 turn them into measurements of this release. Reusable graph composition is now
-installed as a later addition: its release evidence (not included in this repository)
+installed as a later addition: its [release evidence](evidence/2026-10-05-graph-composition.json)
 records live expansion/checks and a four-leaf exact computation with zero model
 calls. The optional linear solver remains separate follow-up work.
 
@@ -276,7 +276,7 @@ grounding rules 3, before the current compact capsules, proof commands, routing 
 pending runtime repairs. Three local models (`llama3.2:1b`, `granite3.3:2b`,
 `qwen3:4b-instruct`) received fixed synthetic tasks under two explicit seeds at
 temperature zero. Those repeated configurations are not independent population
-samples. Aggregate evidence and source hashes (not included in this repository)
+samples. [Aggregate evidence and source hashes](evidence/2026-10-05-micro-v2-aggregate.json)
 retain the exact scope without publishing raw replies or private histories.
 
 | Condition | Assigned | Correct delivered outcome | Rejected/incorrect outcome | Correctness unknown |
@@ -320,7 +320,7 @@ four argument-count errors and two forbidden-formula errors; command rejections
 were two unknown rules and two invalid assumption references. These exact first
 checker errors guide format improvements without crediting invalid candidates as
 correct. All 12 jobs ended and the controller exited zero.
-The diagnostic aggregate (not included in this repository)
+[The diagnostic aggregate](evidence/2026-10-05-proof-command-diagnostic.json)
 binds these results to the frozen source and independent cleanup audit. It does
 not establish whole-project capability or a general token saving.
 
@@ -362,13 +362,13 @@ This supports offering explicit finite menus with subsequent proof checking;
 it does not establish general accuracy improvement, deterministic fresh outputs
 or efficacy across projects. Twelve owned calls are terminal, the controller
 exited successfully and the timed power lease was restored. The sanitized
-measurement receipt (not included in this repository) binds the exact
+[measurement receipt](evidence/2026-10-05-command-menu-pilot.json) binds the exact
 protocol, runtime, request, independent audit and terminal evidence.
 
 ### Model-first construction and exact agent handoffs — 5 October 2026 UTC
 
 Installed and live-verified at kernel `57eb572dd1395767`; see the
-deployment and validation receipt (not included in this repository).
+[deployment and validation receipt](evidence/2026-10-05-model-first-delegation.json).
 
 The optional [`proof_step`](PROOF-STEP-DELEGATION.md) template lets a parent retain the original
 premises, goal, checked prefix and exact command table while a fresh child selects one next inference.
@@ -459,7 +459,7 @@ reviewed handoff after runtime changes. API refusal preserves recorded run statu
 The host executor continues to retain any reduction in its allowed model budget.
 
 This guard is included in the installed 5 October reform. The later
-parser release (not included in this repository) records its release kernel
+[parser release](evidence/2026-10-05-parser-repair.json) records its release kernel
 and the refusal of incompatible continuation; later identities are recorded in
 the additions above. Saved records remain intact.
 
@@ -469,7 +469,7 @@ The 12-call command-menu pilot completed with successful host-observed command e
 
 ### Bounded construction analysis and bookkeeping — 5 October 2026 UTC
 
-Installed and live-verified: release receipt (not included in this repository). Optional determination and empty-answer probes now share at most 50,000 charged kernel steps or one quarter of the remaining budget. Exhaustion preserves an explicit incomplete result and budget for the model and its answer checks. Explicit solving and kernel-only behavior remain intact. Immutable-value digest reuse and depth-bounded traversal preserve checked provenance; mutable ASTs are never memoized. The combined release passes 291 distinct checks, plus independent component reviews. Live service-Python construction with a fake answer preserves more than 140,000 steps and its lock replays without a model.
+Installed and live-verified: [release receipt](evidence/2026-10-05-bounded-construction.json). Optional determination and empty-answer probes now share at most 50,000 charged kernel steps or one quarter of the remaining budget. Exhaustion preserves an explicit incomplete result and budget for the model and its answer checks. Explicit solving and kernel-only behavior remain intact. Immutable-value digest reuse and depth-bounded traversal preserve checked provenance; mutable ASTs are never memoized. The combined release passes 291 distinct checks, plus independent component reviews. Live service-Python construction with a fake answer preserves more than 140,000 steps and its lock replays without a model.
 
 ### Paired obligation pilot — 5 October 2026 UTC
 

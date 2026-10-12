@@ -362,7 +362,7 @@ show result.x.
 
 ### 2. What the Energy Analogy Does NOT Prove
 - **No Proof of Unique Prompt Meaning:** An entropy objective over model responses is an analogy; it does not constitute a Lyapunov energy functional on semantic space. Two models can agree on a false extraction (yielding zero entropy). Lowering cross-model disagreement does not mathematically prove convergence to the author's intended meaning.
-- **Continuum PDE vs. Discrete Solver:** The continuum variational derivation in `energy_method_for_vorticity_equation.pdf` ($\nabla \cdot (y \nabla \phi) = \Omega$) requires vanishing boundary integrals, coercivity, and appropriate Sobolev spaces. In Symblic, the solver is strictly a finite, discrete rational matrix solver; it does not assemble PDEs, infer boundary conditions, or certify physical continuum components.
+- **Continuum PDE vs. Discrete Solver:** The continuum variational derivation in a supplied two-page note (not in this repository) ($\nabla \cdot (y \nabla \phi) = \Omega$) requires vanishing boundary integrals, coercivity, and appropriate Sobolev spaces. In Symblic, the solver is strictly a finite, discrete rational matrix solver; it does not assemble PDEs, infer boundary conditions, or certify physical continuum components.
 - **Physical Strength Invariants:** In CAD/3D modeling, strain energy checks require material constitutive laws, boundary constraints, load distributions, and mesh convergence; an energy threshold alone does not certify physical component strength.
 
 ---

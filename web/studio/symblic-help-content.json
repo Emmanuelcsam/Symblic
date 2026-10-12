@@ -984,7 +984,7 @@
         ],
         [
           "Example",
-          "Tick the box, then run:\nprogram Hand off.\ndelegate job = 'Add a dark-mode toggle to the timesheet page.' to 'triad'.\nshow job.\n(Preview of this program fails at line 2 with the side-effects message, as designed.)"
+          "Tick the box, then run:\nprogram Hand off.\ndelegate job = 'Add a dark-mode toggle to the settings page of a small web app.' to 'triad'.\nshow job.\n(Preview of this program fails at line 2 with the side-effects message, as designed.)"
         ]
       ],
       "related": [
@@ -1001,7 +1001,7 @@
       "doubts": "The box also passes the first gate for act statements, but runs started here have no capability host, so observe/act then fail with 'no capability host is connected: act X cannot run here' (capabilities run under the host's runner). Preview, Compare agents and Tighten never allow side effects.",
       "load_example": {
         "format": "symblic",
-        "source": "use profile=verified.\nprogram Hand off.\ndelegate job = 'Add a dark-mode toggle to the timesheet page.' to 'triad'.\nshow job.\n",
+        "source": "use profile=verified.\nprogram Hand off.\ndelegate job = 'Add a dark-mode toggle to the settings page of a small web app.' to 'triad'.\nshow job.\n",
         "checked_profile": "verified",
         "sha256": "9eb8fd85d1c11c9557f14281883b22296f363dbd13bd6c2cfb3b822bd4b76513"
       }
@@ -8951,15 +8951,15 @@
       "sections": [
         [
           "What it is",
-          "A launch pad for the separate Symblic Academy course at /symblic-learn."
+          "A launch pad for the Symblic Academy, web/academy/ in this repository."
         ],
         [
           "What it does",
-          "Static: a heading, a description, 'Launch Symblic Academy Subsite ↗', four deep links (Spaced Repetition Flashcards, Cloze Blanks, Syntax Drills, Capstone Projects) and a 'Curriculum Highlights' card with five bullets (Construction and Checking, Explicit Context, Transactional Retry, Datalog & Finite Geometry, Epistemic Foundations). No API call."
+          "Static: a heading, a description, 'Launch Symblic Academy Subsite ↗', four deep links (Spaced Repetition Flashcards, Cloze Blanks, Syntax Drills, Capstone Projects), an 'Open the guides' link, a hint that the Academy is web/academy/ and needs a host only to check and preview programs, and a 'Curriculum Highlights' card with five bullets (Construction and Checking, Explicit Context, Transactional Retry, Datalog & Finite Geometry, Epistemic Foundations). No API call."
         ],
         [
           "How it works",
-          "Plain links to /symblic-learn.html in the same browser tab; the Academy is a separate Studio page whose progress lives only in this browser's localStorage."
+          "Plain links to ../academy/index.html (and its #flashcards, #cloze, #drills and #projects sections) and to the guides, in the same tab; progress lives only in this browser's localStorage."
         ],
         [
           "Inputs and options",
@@ -8980,9 +8980,9 @@
       ],
       "related": [],
       "sources": [
-        "symblic-learn.html",
-        "symblic-learn.js",
-        "symblic-academy-content.js"
+        "web/academy/index.html",
+        "web/academy/symblic-learn.js",
+        "web/academy/symblic-academy-content.js"
       ],
       "doubts": "None."
     },
@@ -9613,7 +9613,7 @@
         ],
         [
           "Example",
-          "Tick the box, then run (the three-agent pipeline runs on the host only):\ndelegate job = \"Add a dark-mode toggle to the timesheet page.\" to \"triad\" with cwd=\"~/project\".\nshow job."
+          "Tick the box, then run (the three-agent pipeline runs on the host only):\ndelegate job = \"Add a dark-mode toggle to the settings page of a small web app.\" to \"triad\" with cwd=\"~/project\".\nshow job."
         ]
       ],
       "related": [
@@ -9627,7 +9627,7 @@
       "doubts": "Whether `act` statements have an effect host in a Write-page run (outside the host runner) was not traced.",
       "load_example": {
         "format": "symblic",
-        "source": "use profile=verified.\ndelegate job = \"Add a dark-mode toggle to the timesheet page.\" to \"triad\" with cwd=\"~/project\".\nshow job.\n",
+        "source": "use profile=verified.\ndelegate job = \"Add a dark-mode toggle to the settings page of a small web app.\" to \"triad\" with cwd=\"~/project\".\nshow job.\n",
         "checked_profile": "verified",
         "sha256": "359675f77fe33578a60ff01e6bc9b1a3bfcdb2af374bfab58f624c1d225d505f"
       }

@@ -47,7 +47,7 @@
     "total_nonempty_lines": 2147
   },
   "deployment": {
-    "pid": 3833558,
+    "pid": "(removed for publication)",
     "routes": [
       {
         "path": "/symblic-forge",
@@ -552,7 +552,7 @@
   },
   "final_release_verification": {
     "observed_at": 1791384766.5167747,
-    "dashboard_pid": 3833558,
+    "dashboard_pid": "(removed for publication; the same process as deployment.pid)",
     "source_hashes_verified": 40,
     "design_units": 154,
     "named_test_references_resolved": 73,
@@ -562,5 +562,5 @@
     "original_book_prefix_preserved": true,
     "scope": "Final local source/document checks and cached operator API/store reads; no native dispatch."
   },
-  "publication_note": "Edited for publication on 2026-10-11: sections about two non-Symblic integrations of the original host (a CAD model and a self-hosted compute runtime) and one unrelated finding were removed. Everything else is unchanged."
+  "publication_note": "Edited for publication on 2026-10-11: sections about two non-Symblic integrations of the original host (a CAD model and a self-hosted compute runtime) and one unrelated finding were removed. On 2026-10-12 the host process id in deployment.pid and final_release_verification.dashboard_pid was removed. Everything else is unchanged."
 }

@@ -110,8 +110,8 @@ before(async()=>{
   if (available) await fs.mkdir(evidence, {recursive:true});   // no empty folder when every journey is skipped
   browser=await launch();
   files={'/symblic/':{body:await fs.readFile(path.join(root,'web/hub/index.html'),'utf8'),contentType:'text/html'},
-    '/symblic/autogen.js':{body:await fs.readFile(path.join(here,'autogen.js'),'utf8'),contentType:'text/javascript'},
-    '/symblic/autogen.css':{body:await fs.readFile(path.join(here,'autogen.css'),'utf8'),contentType:'text/css'}};
+    '/symblic/autogen.js':{body:await fs.readFile(path.join(here,'autogen.js'),'utf8'),contentType:'text/javascript'}};
+  // web/hub has no autogen.css, and the page does not ask for one.
 });
 after(async()=>await browser?.close());
 function fixture(options={}) {

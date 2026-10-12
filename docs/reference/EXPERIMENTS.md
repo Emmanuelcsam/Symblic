@@ -58,7 +58,7 @@ The envelope caps JSON at 1 MiB, 65536 nodes, depth 24, individual strings at 65
 | `one-use-resources` | Fold branch ownership, transfer and consumption intents; unresolved outcomes remain fenced and old outcomes cannot settle a later attempt. |
 | `saga-compensation-plan` | Build eligible compensations in reverse dependency order, preserve original action links, and retain crash/uncertainty states. |
 
-Detailed contracts: [source context](CONTEXT-EXPERIMENTS.md) , [Hamiltonian and Fisher geometry](RESEARCH-GEOMETRY.md), and finite sheaf/schema transport (not included in this repository). The [protocol contract](PROTOCOL-EXPERIMENTS.md) describes replay of supplied event streams; it does not send messages, reserve resources or execute compensations. Each catalog entry and result carries its own sources and limits.
+Detailed contracts: [source context](CONTEXT-EXPERIMENTS.md) , [Hamiltonian and Fisher geometry](RESEARCH-GEOMETRY.md), and [finite sheaf/schema transport](FINITE-TRANSPORT-EXPERIMENTS.md). The [protocol contract](PROTOCOL-EXPERIMENTS.md) describes replay of supplied event streams; it does not send messages, reserve resources or execute compensations. Each catalog entry and result carries its own sources and limits.
 
 [Documentation inventory](DOCUMENTATION-CONFORMANCE.md) accounts for code fences and runs explicitly declared inert cases. The [portable finite export](PORTABLE-FINITE.md) produces a local reproducible source bundle and checks its fixed conformance corpus outside the checkout; no artifact is published.
 

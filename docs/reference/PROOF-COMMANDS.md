@@ -167,7 +167,7 @@ and source-only CLI inspection. They use fake constructors. Any model-quality or
 cost comparison needs a separate frozen evaluation with both formats receiving
 the same proof information and clearly accounted construction budgets.
 
-The 5 October supplied-frontier diagnostic (not included in this repository)
+The [5 October supplied-frontier diagnostic](evidence/2026-10-05-proof-command-diagnostic.json)
 completed twelve one-call assignments without repairs. Commands delivered two of
 six accepted certificates (the two Qwen 4B configurations), JSON zero of six; the
 1B and 2B models accepted none. Both formats received the same premises, goal,
@@ -176,7 +176,7 @@ This isolates one inference interface, not whole-proof discovery. Schema validit
 was 12/12, distinct from logical validity. See [the measured scope](REFORM-3.md#completed-matched-integration-pilot--5-october-2026-utc)
 for costs, rejected cases and repeated-configuration limits.
 
-A later exact-command menu diagnostic (not included in this repository)
+A later [exact-command menu diagnostic](evidence/2026-10-05-command-menu-pilot.json)
 compares Text and Enum selection from the same three caller-authored commands.
 It records 2/6 versus 3/6 goal-closing answers on one supplied frontier and
 keeps format validity separate from inference validity. It uses a different

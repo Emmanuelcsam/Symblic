@@ -1,0 +1,5 @@
+Program: Vendor outreach brief.
+Module: Intake.
+Use Model: llama3.2:1b.
+Summarize the client request in one paragraph: a bakery wants weekly delivery of 40 kg of rye flour.
+Continue with context. Extract exactly 3 requirements as bullet points.

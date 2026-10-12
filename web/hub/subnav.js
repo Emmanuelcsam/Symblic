@@ -2,8 +2,8 @@
    Self-contained (styles injected), absolute links, no API calls, no layout decisions on
    requestAnimationFrame. Included with <script src="/symblic/subnav.js" defer>.
    HOST-ONLY: the links are the original host's routes (it served this folder at /symblic/ and web/studio at
-   /automation-studio/); no page in this repository includes this script. The host's terminal, Forge and
-   Academy pages, which the strip also linked, are not part of this repository. */
+   /automation-studio/); no page in this repository includes this script. The host's terminal and Forge pages,
+   which the strip also linked, are not part of this repository; its Academy page (/symblic-learn) is web/academy/. */
 (function () {
   'use strict';
   const LINKS = [

@@ -1,0 +1,31 @@
+program is_metal crystal.
+note Crystallised from routine is_metal (routine is_metal(element: Text) -> Bool) of a program with SHA-256 f58fa3ae327ce757…,
+note answered by claude:haiku, codex (model families: anthropic, openai) on 2026-10-02. 20 of 20 inputs kept: every ask behind each kept answer agreed at least 100%.
+note Kernel regime: lang 2.0, canon 2, geometry 2, unicode 15.0.0, max_digits 4000, id 91688870c1d072c2.
+note Inputs outside the table fail instead of guessing: call the routine itself for those.
+let is_metal_table = [
+  ["hydrogen", false],
+  ["helium", false],
+  ["lithium", true],
+  ["beryllium", true],
+  ["boron", false],
+  ["carbon", false],
+  ["nitrogen", false],
+  ["oxygen", false],
+  ["fluorine", false],
+  ["neon", false],
+  ["sodium", true],
+  ["magnesium", true],
+  ["aluminium", true],
+  ["silicon", false],
+  ["phosphorus", false],
+  ["sulfur", false],
+  ["chlorine", false],
+  ["argon", false],
+  ["potassium", true],
+  ["calcium", true]
+].
+function is_metal(element: Text) -> Bool = if any row in is_metal_table: row[1] = element then first([row[2] for row in is_metal_table if row[1] = element]) else fail("is_metal has no crystallised answer for this input (the crystal covers 20); call the routine itself").
+test "the table answers its own inputs" do
+  assert all row in is_metal_table: is_metal(row[1]) = row[2].
+end.

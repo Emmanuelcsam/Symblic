@@ -97,7 +97,7 @@ and routing from measured outcomes rather than self-confidence. These transfers 
 
 ## A numerical construction task from the vorticity energy method
 
-The supplied two-page `energy_method_for_vorticity_equation.pdf` gives
+A supplied two-page derivation (not in this repository) gives
 `div(y grad(phi)) = Omega` with positive `y`, declared boundary conditions and an energy functional whose
 stationary point solves the weak equation. The useful transfer is an explicit discrete energy problem with
 model-constructed operator and witness. The checker need not acquire a new PDE solver. The standard weak-form

@@ -1,0 +1,16 @@
+program Flower from an essay.
+note The essay is prose; the applicator translates it into a closed specification and the kernel draws it. Identical drawings from different agents mean they read the essay identically.
+
+given essay: Text = """The flower has exactly five petals arranged in a single ring.
+Each petal is heart-shaped, notched at the tip, and coloured a soft pink.
+The centre is a small golden disc. The flower stands on a green stem with two leaves.
+The first petal points straight up."""
+
+define FlowerSpec as Record {petals: Int in 3..24, shape: one of {round, pointed, heart, teardrop, spatula, fringed},
+                             layers: Int in 1..4, color: one of {red, pink, rose, orange, yellow, gold, white, violet, purple, blue},
+                             center: one of {brown, gold, yellow, black, green, white}, leaves: Int in 0..6, stem: Bool}.
+
+ask spec: FlowerSpec "Read the essay and give the flower's exact specification. Use only what the essay states." from essay with effort=high
+ensure spec.stem or spec.leaves = 0 else retry because "leaves grow on a stem".
+draw flower(spec, rotation=0) as "essay-flower.svg".
+show spec as "the specification every applicator should agree on".

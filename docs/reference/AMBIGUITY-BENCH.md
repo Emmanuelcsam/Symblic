@@ -8,7 +8,7 @@ It is available through `symblic/bench/bench.py --suite ambiguity` and the separ
 
 ## Data and interpretation
 
-The dataset contract (not included in this repository) describes 42 synthetic cases:
+The [dataset contract](../../symblic/bench/data/ambiguity-v1.md) describes 42 synthetic cases:
 14 scenario families, seven domains, 21 development cases and 21 held-out cases.
 Families do not cross splits. Each family has two identical public requests with
 different private operator intentions, plus an explicit clear control. Field positions

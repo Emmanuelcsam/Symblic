@@ -1,0 +1,15 @@
+program Small-model council.
+note Several small local models on different worker nodes answer each small statement with a fresh context, see each other's anonymised answers once (effort=ultra), and the kernel keeps only what is formally established between statements.
+
+group panel = ["ollama:qwen3:4b-instruct@node-a", "ollama:qwen3:4b-instruct@node-b", "ollama:llama3.2:1b@node-d",
+               "ollama:qwen3:4b-instruct@node-f", "ollama:llama3.2:1b@node-h"].
+use by = panel, effort = ultra.
+
+given puzzle: Text = "Three boxes are labelled apples, oranges and mixed. Every label is wrong. You draw one fruit from the box labelled mixed and it is an apple."
+
+ask mixed_holds: one of {apples, oranges, mixed} "What does the box labelled mixed actually contain?" from puzzle
+ask oranges_holds: one of {apples, oranges, mixed} "Given what the box labelled mixed contains, what does the box labelled oranges contain? Remember every label is wrong." from puzzle, mixed_holds
+ask apples_holds: one of {apples, oranges, mixed} "Given the other two boxes, what does the box labelled apples contain?" from puzzle, mixed_holds, oranges_holds
+ensure {mixed_holds, oranges_holds, apples_holds} = {"apples", "oranges", "mixed"} else retry because "each box holds a different content".
+ensure mixed_holds != "mixed" and oranges_holds != "oranges" and apples_holds != "apples" else retry because "every label is wrong".
+show [mixed_holds, oranges_holds, apples_holds] as "contents of the boxes labelled mixed, oranges, apples".

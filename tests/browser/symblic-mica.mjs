@@ -21,7 +21,7 @@ before(async()=>{
   if (available) await fs.mkdir(evidence, {recursive:true});   // no empty folder when every journey is skipped
   browser=await launch();
   let html=await fs.readFile(path.join(root,'web/hub/index.html'),'utf8');
-  files={'/symblic/':{body:html,contentType:'text/html'},'/symblic/mica.js':{body:await fs.readFile(path.join(here,'mica.js'),'utf8'),contentType:'text/javascript'},'/symblic/mica.css':{body:await fs.readFile(path.join(here,'mica.css'),'utf8'),contentType:'text/css'}};
+  files={'/symblic/':{body:html,contentType:'text/html'},'/symblic/mica.js':{body:await fs.readFile(path.join(here,'mica.js'),'utf8'),contentType:'text/javascript'}};   // web/hub has no mica.css, and the page does not ask for one
 });
 after(async()=>await browser?.close());
 function fixture(options={}) {

@@ -175,7 +175,7 @@ Human disagreements persist because:
 1. We can never inspect another person's raw qualia directly.
 2. However, **understanding does not require mystical telepathy.**
 3. Understanding is achieved when our mental model of the other agent demonstrates **maximal empirical adequacy across multiple independent, non-correlated observational frames** (linguistic, behavioral, structural).
-4. Evidential security (after Staley) ensures that our trust and interpretation do not hang on a single unverified utterance.
+4. Evidential security ensures that our trust and interpretation do not hang on a single unverified utterance.
 
 ---
 

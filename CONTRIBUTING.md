@@ -27,6 +27,13 @@ maintainer of this repository, open an issue saying so.
   unchecked answer through is a bug, even if the result looks right.
 - Every module has a docstring saying what it is for, what it depends on and what runs it, and every package has a
   README. Please keep them true when you change the code.
+- The Academy's catalog (`web/academy/symblic-academy-content.js`) records a hash of every document under `docs/`,
+  `examples/`, `benchmarks/` and `kits/`. After adding, moving, deleting or editing one, run
+  `python3 tools/scripts/symblic_refresh_catalog.py`; `tests/web` fails until the catalog matches the files. Six
+  rows also point at files under `symblic/bench/data/`, `symblic/authoring/grammar/` and `tests/kernel/fixtures/`;
+  after editing one of those, run the refresh too. The script drops the row of a moved or deleted document only
+  when it wrote the row and nobody has changed it; otherwise it stops and names the row, which you then rename or
+  remove by hand, together with the lesson links to it.
 - Code in `integration/host/` belonged to the private system Symblic was built in and does not run here. Porting a
   piece of it to something that runs anywhere is a welcome contribution.
 

@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "experiment": "micro-v2 frozen integration candidate",
+  "date_utc": "2026-10-05",
+  "scope": "Fixed synthetic tasks, three small local models, paired explicit seeds7/17 at temperature0; not held-out population inference or current-release benchmark. Raw replies and private histories omitted.",
+  "freeze_sha256": "ce1567d110230b0176d7f08f0e93237f32e92683a13da1635f9631c98efc6204",
+  "preregistration_sha256": "a602a7735361e00eb57aa1fffa351f0eca4a0fe667679d029eb5d94bf28486cf",
+  "components": {
+    "capsule_manifest": 3,
+    "grounding_rules": 3,
+    "excludes": [
+      "laneA",
+      "laneC",
+      "loaded-Python-identity",
+      "D9",
+      "proof-command",
+      "compact-capsule5"
+    ]
+  },
+  "assigned": 144,
+  "statuses": {
+    "censored": 28,
+    "complete": 96,
+    "failed": 19,
+    "infrastructure_failed": 1
+  },
+  "arms": {
+    "micro/plain": {
+      "assigned": 48,
+      "correct": 30,
+      "incorrect": 18,
+      "unknown": 0,
+      "dispatches": 48,
+      "schema_valid_attempts": 48,
+      "input_tokens_known": 7608,
+      "output_tokens_known": 336
+    },
+    "micro/template": {
+      "assigned": 48,
+      "correct": 30,
+      "incorrect": 18,
+      "unknown": 0,
+      "dispatches": 48,
+      "schema_valid_attempts": 48,
+      "input_tokens_known": 44680,
+      "output_tokens_known": 336
+    },
+    "proof/incremental": {
+      "assigned": 24,
+      "correct": 0,
+      "incorrect": 19,
+      "unknown": 5,
+      "dispatches": 71,
+      "schema_valid_attempts": 67,
+      "input_tokens_known": 113091,
+      "output_tokens_known": 2098
+    },
+    "proof/whole": {
+      "assigned": 24,
+      "correct": 0,
+      "incorrect": 0,
+      "unknown": 24,
+      "dispatches": 71,
+      "schema_valid_attempts": 46,
+      "input_tokens_known": 82171,
+      "output_tokens_known": 6775
+    }
+  },
+  "micro_joint_outcomes": {
+    "neither_correct": 14,
+    "both_correct": 26,
+    "plain_only": 4,
+    "template_only": 4
+  },
+  "provider_cost_coverage": {
+    "input_tokens": {
+      "known_subtotal": 247550,
+      "measured_attempts": 209,
+      "unknown_attempts": 29
+    },
+    "output_tokens": {
+      "known_subtotal": 9545,
+      "measured_attempts": 209,
+      "unknown_attempts": 29
+    },
+    "schema_tokens": {
+      "known_subtotal": 0,
+      "measured_attempts": 0,
+      "unknown_attempts": 238
+    }
+  },
+  "cleanup": {
+    "owned": 238,
+    "terminal_statuses": {
+      "cancelled": 10,
+      "done": 209,
+      "failed": 19
+    },
+    "active_owned": 0,
+    "nonterminal": 0,
+    "unknown_launch_outcomes": 0,
+    "all_parent_cleanup_ok": true
+  },
+  "operational_deviation": "Supervisor parent alone paused46.428s; children continued. One completed-cell parent cleanup delayed41.326s. No hard deadline crossed then; subsequent timing/cache effects not separately identified. All outcomes retained.",
+  "limits": [
+    "Schema tokens unmetered; known counters are subtotals, not complete token economics.",
+    "Plain/template micro conditions had identical paired answer schemas and instruction/data; framing/provenance/serialization were treatment.",
+    "Line task selected a numbered source line; host materialized exact span.",
+    "Proof whole/incremental conditions combine granularity and local repair feedback, six calls300s per cell.",
+    "No accepted proof in this frozen pilot; rejected and operationally unknown remain separate.",
+    "Later command-only diagnostic uses a separately frozen runtime and must be reported separately."
+  ],
+  "private_evidence_sha256": {
+    "MEASURED-REPORT.md": "e12ca4ee9c1437740057920d90fddc438fbf5299816b644c90f2a3cf7010f570",
+    "MEASUREMENT-MANIFEST.json": "12204b6dbfb6d77a86b0aadd21b5268cc34a995b0171cd4fbdea0b82d744bb6a",
+    "MEASURED-SUMMARY.json": "f251127b38a0cf9562a28bf63b7b6eaf4ec9c994ce57f2e3ef1f29b401d48926",
+    "COST-COVERAGE.json": "67acefdd678c8ca00ea534d9eb73dc257ad510bfc62b22081bb079c3e4f43644",
+    "CONTROL-AUDIT.json": "373266baa4f95db10ce573b174769934b646b023e821216a732bfe3a6908a3c6",
+    "FINAL-TERMINAL-AUDIT.json": "e49dd7b72f4f32c7ad33f5616240d2601e2a5e4b5cf85f90171867a96ebcbaa6",
+    "INDEPENDENT-PAIR-AUDIT.json": "8de6d12628f4432eb2a48bc9e177c406ab639e96c5764b64645191c7373b25c6",
+    "DEVIATION-ANALYSIS.json": "7e35d6f8e802a2506d8d486f560ffdf3a2126920179029309b0216a452a132c8"
+  }
+}

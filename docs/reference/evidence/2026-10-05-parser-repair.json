@@ -1,0 +1,116 @@
+{
+  "at": "2026-10-05T11:14:08.439213+00:00",
+  "http": {
+    "hostile_check": {
+      "status": 200,
+      "seconds": 1.3785892960149795,
+      "characters": 65535,
+      "code": "SYM_SYNTAX"
+    },
+    "formal_depth": {
+      "status": 200,
+      "seconds": 0.011339550139382482
+    },
+    "typo_depth": {
+      "status": 200,
+      "seconds": 0.009743422036990523
+    },
+    "long_arithmetic": {
+      "status": 200,
+      "seconds": 0.15101788588799536
+    },
+    "meta": {
+      "status": 200,
+      "seconds": 0.06038515083491802
+    },
+    "graph_example": {
+      "status": 200,
+      "seconds": 0.07098918710835278
+    },
+    "graph_compose": {
+      "status": 200,
+      "seconds": 0.18040751898661256
+    }
+  },
+  "installed_guards": 211,
+  "dependency_guards": 59,
+  "native": {
+    "kernel": {
+      "lang": "2.5",
+      "canon": 3,
+      "geometry": 2,
+      "unicode": "15.0.0",
+      "variational": 1,
+      "transport": 1,
+      "max_digits": 4000,
+      "capsule_manifest": 5,
+      "epistemic_runtime": 1,
+      "parser": 1,
+      "parser_limits": {
+        "syntax_depth": 60,
+        "ast_depth": 128
+      },
+      "epistemic": 1,
+      "module_logic": 1,
+      "profiles": 2,
+      "proof_terms": 1,
+      "proof_steps": 1,
+      "finite_logic": 1,
+      "proof_session": 1,
+      "proof_command": 1,
+      "discrete": 1,
+      "knowledge": 1,
+      "projection": 1,
+      "operators": 1,
+      "js": "6+node22.17.0+assets9e4d61505d824e78baadfcefb5f9cf541650b315ec7b11bd26cb762839fec6ad",
+      "js_declarations": "2+acorn8.8.1+node22.17.0+assetsc972fb55edc84e5ce398c24769706129058a8839225fa6cd4fcd67cd936a1a64",
+      "proof": 4,
+      "quantities": 1,
+      "grounding": 1,
+      "grounding_rules": 4,
+      "python": "3.12.3",
+      "id": "a26f3e0bee3c23d4"
+    },
+    "receipt_version": 2,
+    "arithmetic": {
+      "canonical": {
+        "#q": "1/2"
+      },
+      "calls": 0
+    },
+    "graph": {
+      "leaves": 4,
+      "answer": 18,
+      "calls": 0
+    }
+  },
+  "scope": "Read-only live HTTP; fresh service-Python pinned arithmetic and graph with temporary RAM state; no model, effect or production run",
+  "version": 1,
+  "feature": "native_parser_revision_1",
+  "plan_sha256": "15a3674a3adceb8999defe5aee619f52251ddff2949e1904b59f5157ca46eeac",
+  "source_sha256": "29ad6b296e12c7b883ddf8c7322c5aa1591799ce8b269a9d6b8232390c21e7c4",
+  "tests": {
+    "integrated": 306,
+    "integrated_seconds": 80.981,
+    "producer_focused": 58,
+    "producer_tokenizer_differential_cases": 6007,
+    "independent_tokenizer_cases": 1028,
+    "independent_hostile_entries": 11,
+    "devcheck_blocking": false
+  },
+  "compatibility": {
+    "syntax_depth": 60,
+    "ast_branch_depth": 128,
+    "unchanged_66_root_fixture": true,
+    "exact_100_and_128_term_sums": true,
+    "old_kernel": "f14447f814751f21",
+    "new_kernel": "a26f3e0bee3c23d4",
+    "old_saved_work": "Existing identity gates refuse incompatible continuation; saved records are retained"
+  },
+  "restart": {
+    "process_changed": true,
+    "http": 200
+  },
+  "measurement_limit": "Timings are observations on this host, not guaranteed deadlines for every parser input or arbitrary interpreter settings.",
+  "publication_note": "Edited for publication on 2026-10-12: two process ids were removed; the pair is replaced by \"process_changed\": true. Other values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

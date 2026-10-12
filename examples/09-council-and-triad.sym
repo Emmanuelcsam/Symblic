@@ -1,0 +1,9 @@
+program Council then Triad.
+note A decision too important for one model goes to a council of models (the council engine: this repository has no applicator for it, the original host had one); the agreed plan is then delegated to the agent named "triad" (an agent pipeline of the original host, not part of this repository).
+note Delegation starts a real agent, so this needs an embedding host that provides delegate, and side effects allowed.
+
+given goal: Text = "Add a dark-mode toggle to the settings page of a small web app."
+ask approach: one of {css-variables, separate-stylesheet, inline-styles} "Which approach should the change use?" from goal with by="council:panel", effort=high
+ask plan: Text up to 120 words "Write the implementation plan for the goal using the chosen approach." from goal, approach with by="claude:sonnet", effort=high
+delegate job = "{goal}\n\nApproach: {approach}\n\nPlan:\n{plan}" to "triad".
+show job.

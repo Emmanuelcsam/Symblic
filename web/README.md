@@ -1,13 +1,15 @@
 # web: the Symblic pages of the original host
 
 Symblic was built inside a private home-server system ("the host", see `integration/host/README.md`). The host
-served two groups of browser pages for it, kept here:
+served these browser pages for it, kept here:
 
 - `hub/` was served at `/symblic/`: an overview of the tools, the 2026-10-08 beta record, demos written by fresh
   agent sessions, the trial records and the measured "atomic" results.
 - `studio/` was served at `/automation-studio/`: the Symblic studio page (`symblic.html`: write, check, preview,
   run and compare programs, plus English, graphs, policies, memory, workcards, supervisor and help tabs), its
   static guides, and the host's general automation canvas that the Symblic text mode plugged into.
+- `academy/` was served at `/symblic-learn`: the Symblic Academy, a self-paced course (lessons with checkpoints,
+  flashcards, drills, quizzes) with a reader for the documents of this repository.
 
 **Most of these pages need a host to do anything beyond display.** The host provided a shared page library
 (`/studio.js`, `/studio.css`), and every button that checks, runs or saves calls its HTTP API, whose server side
@@ -21,6 +23,9 @@ Serve the folder with any static file server, because browsers refuse `fetch()` 
     python3 -m http.server --directory web 8000
     # then open http://localhost:8000/hub/ and http://localhost:8000/studio/symblic-guides/index.html
 
+The Academy's reader also loads documents from outside `web/`, so for it serve the repository root instead
+(`python3 -m http.server 8000` there) and open http://localhost:8000/web/academy/.
+
 | Part | Works as static files? | Notes |
 |---|---|---|
 | `hub/index.html` | Yes: overview, lanes, demos, records, For agents, Atomic results | `hub/standalone-shell.js` stands in for the host's page library when `/studio.js` is absent. The Construct and Autogen sections and the Atomic "Run it yourself" form call the host API and report an error without it. |
@@ -28,6 +33,7 @@ Serve the folder with any static file server, because browsers refuse `fetch()` 
 | `hub/records/` | Yes | Plain files: reviews, run logs, statements, task records, verification scripts. Paths inside them were rewritten to neutral ones (`/srv/symblic/projects/...`, `node-a`, `host-checkout/`). |
 | `hub/demos/graphview/`, `hub/demos/pcb/` | Yes | Pages written entirely by fresh agent sessions from English statements, with every generated script (the graph view's note data is fictional); kept as built, so they keep their own look. One change for publication: in `graphview/graph-input.js` the four variables that hold where a drag or touch began were renamed (`originX`, `originY`, `touchOriginX`, `touchOriginY`). The Kirby demo page is not included, only its statements. |
 | `hub/atomic/results.json` | Yes | The measured results the Atomic section shows. The study's sheets and built pages are not included. |
+| `academy/` | Yes, except Check and Preview | The course, the practice sections and the research reader (with the repository root served). `hub/standalone-shell.js` stands in for the host's page library here too. Check and Preview in Projects and Playground call the host API and, without it, say so and send nothing. See `academy/README.md`. |
 | `studio/symblic-guides/` | Yes | Static guides generated from `docs/reference/` by `tools/scripts/build_symblic_guides.cjs` (needs marked 15.0.12). Links back to the studio page need a host. |
 | `studio/symblic.html` | No | The studio page. It needs the host's page library, two host scripts that are not part of this repository (a team editor and a task composer) and the host API for every action. Its own scripts and styles are the `symblic-*.js` / `symblic-*.css` files next to it. |
 | `studio/symblic-help-content.json` | Data | The help text of the studio page, written for the host: topics about the host's other pages were removed and host names replaced by neutral words; file:line references are approximate. |
@@ -54,7 +60,7 @@ are reported as skipped (see `tests/browser/host-harness.mjs`).
 
 | Script | API prefix (server side) |
 |---|---|
-| `studio/symblic-page.js`, `symblic-english.js`, `hub/atomic/atomic.js` | `/api/automation/symblic/` (`integration/host/symblic_engine.py` and its sub-route modules) |
+| `studio/symblic-page.js`, `symblic-english.js`, `hub/atomic/atomic.js`, `academy/symblic-learn.js` (check and preview, only when the host's page library is loaded) | `/api/automation/symblic/` (`integration/host/symblic_engine.py` and its sub-route modules) |
 | `studio/symblic-experiments.js`, `-graphs.js`, `-inquiry.js`, `-intent.js`, `-logic.js`, `-memory.js`, `-policies.js`, `-supervisor.js`, `-workcards.js`, `hub/mica.js` | `/api/automation/symblic/<tab>/` (`integration/host/symblic_*_api.py`) |
 | `hub/autogen.js`, `studio/symblic-english.js` (catalog) | `/api/symblicos/` (`integration/host/symblicos_engine.py`) |
 | `studio/symblic-picker.js` | `/api/runner/engines` (the host runner's engine catalogue; not in this repository) |
@@ -65,6 +71,7 @@ are reported as skipped (see `tests/browser/host-harness.mjs`).
 ## Experimental and unmeasured
 
 Everything here is a user interface for the experiments described in `docs/reference/`. The pages were tested
-against fixtures (the journeys in `tests/browser/`), not with users. Results shown in the beta gallery, the demos
-and the atomic table are single recorded runs on the original host; they are evidence of what happened then, not
-measurements of reliability.
+against fixtures (the journeys in `tests/browser/`), not with users; the Academy was checked in headless Chromium
+when it was added, and its course, written by AI agents, has not been reviewed. Results shown in the beta gallery,
+the demos and the atomic table are single recorded runs on the original host; they are evidence of what happened
+then, not measurements of reliability.

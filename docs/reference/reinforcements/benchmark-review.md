@@ -4,7 +4,7 @@ This is a read-only source audit of `symblic/bench/bench.py` (`Bench`, suite cel
 `_base`, `_prose_correct`, `short_by`, `report`, `main`) against SPEC §§3–5, 8 and
 PRIOR-ART's agreement/council limits. It includes an independent stdlib-only helper,
 `tools/scripts/symblic_reinforcement_stats.py`. Core runner, UI and API adoption remain
-with c6d9/2272. No benchmark stores were read, no models called, and no new performance
+with the sessions that owned the core. No benchmark stores were read, no models called, and no new performance
 measurements are claimed. Examples and tests use synthetic data only.
 
 ## Source findings and concrete adoption priorities

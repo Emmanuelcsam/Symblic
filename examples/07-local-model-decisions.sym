@@ -1,0 +1,8 @@
+program Local-model decisions.
+note A small local model answers closed questions: each answer must be one of the listed options or a Bool, and any other reply fails its type check. Use it for fast typed decisions; check what matters with ensure.
+note The original version of this example used a local model service of the original host that answered in one forward pass without sampling; an Ollama model stands in here, and it is not guaranteed to give the same answer every time.
+
+given message: Text = "Hi! Your package could not be delivered. Click here within 24 hours to avoid losing it: http://bit.ly/x"
+ask kind: one of {personal, newsletter, phishing, receipt} "Classify the message." from message with by="ollama:qwen3:4b-instruct", effort=low
+ask urgent: Bool "Does the message ask the reader to act immediately?" from message with by="ollama:qwen3:4b-instruct", effort=low
+show [kind, urgent].

@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "experiment": "One-inference JSON-versus-command diagnostic",
+  "date_utc": "2026-10-05",
+  "scope": "One supplied checked modus-ponens frontier, two repeated configurations at temperature0 per model. Not whole-proof discovery, held-out population measurement or final-release benchmark. Raw replies omitted.",
+  "freeze_sha256": "2fe82deb4eff703cddb21656ffed6fd532a8f89c528892ae547300238dd4fc19",
+  "preregistration_sha256": "db1ab2a16bc9cceade3802a84dd844fcac473331fc22f91372e8797a201958e3",
+  "approval_sha256": "4bc2d43f7d302248461c78f8c9f352f7e844d2d9e9202ea01df0514833761157",
+  "arms": {
+    "command": {
+      "assigned": 6,
+      "correct": 2,
+      "rejected": 4,
+      "unknown": 0,
+      "outer_schema_valid": 6,
+      "input_tokens_known": 8994,
+      "output_tokens_known": 68,
+      "models": {
+        "granite3.3:2b": {
+          "assigned": 2,
+          "correct": 0
+        },
+        "llama3.2:1b": {
+          "assigned": 2,
+          "correct": 0
+        },
+        "qwen3:4b-instruct": {
+          "assigned": 2,
+          "correct": 2
+        }
+      }
+    },
+    "json": {
+      "assigned": 6,
+      "correct": 0,
+      "rejected": 6,
+      "unknown": 0,
+      "outer_schema_valid": 6,
+      "input_tokens_known": 10068,
+      "output_tokens_known": 194,
+      "models": {
+        "granite3.3:2b": {
+          "assigned": 2,
+          "correct": 0
+        },
+        "llama3.2:1b": {
+          "assigned": 2,
+          "correct": 0
+        },
+        "qwen3:4b-instruct": {
+          "assigned": 2,
+          "correct": 0
+        }
+      }
+    }
+  },
+  "controls": {
+    "calls_per_cell": 1,
+    "repairs": 0,
+    "fallbacks": 0,
+    "seeds": [
+      7,
+      17
+    ],
+    "temperature": 0,
+    "capsule": "full",
+    "same_premises_goal_checked_prefix_rule_semantics": true,
+    "different": [
+      "inference_wire",
+      "formula_representation",
+      "format_instructions",
+      "answer_schema"
+    ]
+  },
+  "cost_scope": "Observed provider counters; schema grammar tokens unknown all12, authoring effort unmeasured. No token/byte addition or whole-project economic claim.",
+  "first_checker_rejections": {
+    "json": {
+      "rule_arity": 4,
+      "unexpected_formula": 2
+    },
+    "command": {
+      "rule": 2,
+      "assumption_reference": 2
+    }
+  },
+  "valid_nonclosing": 0,
+  "cleanup": {
+    "owned": 12,
+    "terminal": 12,
+    "active_owned": 0,
+    "nonterminal": 0,
+    "all_parent_cleanup_ok": true
+  },
+  "controller": {
+    "exit_status": 0,
+    "result": "success",
+    "wall_seconds": 352.312,
+    "cpu_seconds": 25.828,
+    "peak_memory_mib": 172.359,
+    "peak_swap_bytes": 0
+  },
+  "private_evidence_sha256": {
+    "MEASURED-REPORT.md": "e91ae274874d6db7f0b7d12c10ab12b52adc8bad8258b397749582a1f48e8884",
+    "MEASUREMENT-MANIFEST.json": "6dc252f745eaa96a542055bc23c8886db2e437c71de4c100c4d13690c6c317c6",
+    "MEASURED-SUMMARY.json": "25d01f2a8dbbe176549e5062e7d5cbbaba3de6cbf5d0bb714b86d43fb74701ed",
+    "FINAL-TERMINAL-AUDIT.json": "47ececbd42e602fcb962b93c7d2b413269229f67a7b74699d212f57b572c0946",
+    "CONTROLLER-END.json": "d67aea2a4d5b86803695a102e20bce22ae27fb3df04370d3e2aeafebd77ea8ba",
+    "POSTHOC-FAILURE-CLASSIFICATION.json": "a143d7dee0095f36975a1ce5d1958e8c85cf1104e61b613102011cb17e753a39"
+  }
+}

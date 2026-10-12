@@ -1,8 +1,9 @@
 """HOST-ONLY: explicit checked example downloads under the original host's owner-only Symblic API.
 
 Why it is host-only: it answers through the host's HTTP handler and reads a source-controlled manifest
-(docs/symblic/examples/artifacts.json in the host checkout, not shipped here) under the host's path layout.
-The examples themselves are in examples/ of this repository; open them directly.
+(docs/symblic/examples/artifacts.json) under the host's path layout. The same manifest is shipped as
+examples/artifacts.json, with hashes of this repository's files; the examples themselves are in examples/ of
+this repository; open them directly.
 
 
 No directory listing, arbitrary docs path, execution, model call or mutable store.

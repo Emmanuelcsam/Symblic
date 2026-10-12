@@ -1,6 +1,6 @@
 # Symblic semantics review: compiler-design pass
 
-Date: 2026-10-02. Reinforcement `symrein-semantics` for the Symblic effort (PTY c6d9). Review only: no core
+Date: 2026-10-02. Reinforcement `symrein-semantics` for the Symblic effort. Review only: no core
 file was changed. This is a bounded first pass, not a literature survey.
 
 **Baseline.** Commit `1a13f18e33bee9dfb52b37ef78687d6f6c8e620c` (this checkout's "agents: baseline" commit,
@@ -248,7 +248,7 @@ lett y = 2.
 
 ### R2. `ensure … else retry` is not transactional and ignores KB data flow [measured]
 
-(a) Take `04-family-logic.sym` (not included in this repository), change its `assert "gus" in descendants.` to
+(a) Take `examples/04-family-logic.sym`, change its `assert "gus" in descendants.` to
 `ensure … else retry`, and use `effort=low`.
 - **Observed:** the first answer has the typo `Guss`. The run fails after 1 model call. `_anchors` gives
   `{5: 4}`: the new ensure, statement 12, has no anchor.

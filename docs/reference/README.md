@@ -63,6 +63,7 @@ The language reference, design records, measurements and research notes written 
 | [AUTOGEN.md](AUTOGEN.md), [RECURSION.md](RECURSION.md) | Autogen: regenerate, split and hand off agent attempts; the `until_done` rules and the papers they follow. **(host)** for the agent runs |
 | [LOCAL-AUTOGEN.md](LOCAL-AUTOGEN.md) | Autogen on the kernel lane with light local models. |
 | [INTERPRETER.md](INTERPRETER.md) | From an idea to a checked program through an intent record. **(host)** |
+| [REQUIREMENT-EXECUTION.md](REQUIREMENT-EXECUTION.md) | Which of an intent's requirements the checks of its linked run actually observed. **(host)** |
 | [FORGE.md](FORGE.md), [FORGE-ACCEPTANCE.md](FORGE-ACCEPTANCE.md) | The requirements workbench and its 154-unit acceptance map. |
 | [SUPERVISOR.md](SUPERVISOR.md) | Durable workflows of native programs on the host's scheduler. **(host)** |
 
@@ -99,6 +100,7 @@ Summarized, with sources, in [../HONEST-ASSESSMENT.md](../HONEST-ASSESSMENT.md).
 | [AMBIGUITY-BENCH.md](AMBIGUITY-BENCH.md) | A benchmark for recognizing and resolving an ambiguous request. |
 | [DISTILLATION.md](DISTILLATION.md) | The fine-tuning pipeline and its one small pilot. |
 | [EXPERIMENTS.md](EXPERIMENTS.md), [CONTEXT-EXPERIMENTS.md](CONTEXT-EXPERIMENTS.md), [PROTOCOL-EXPERIMENTS.md](PROTOCOL-EXPERIMENTS.md), [RESEARCH-GEOMETRY.md](RESEARCH-GEOMETRY.md) | Finite research experiments with exact receipts. |
+| [FINITE-TRANSPORT-EXPERIMENTS.md](FINITE-TRANSPORT-EXPERIMENTS.md) | Two more finite experiments: local-to-global consistency on a graph (a cellular sheaf) and maps and predicates between finite sets. |
 | [POLICY-LEARNING.md](POLICY-LEARNING.md), [POLICY-EXPERIMENTS.md](POLICY-EXPERIMENTS.md) | Choosing a routing policy from frozen candidates without fooling yourself. |
 | [INQUIRY.md](INQUIRY.md) | Choosing the next evidence method for a claim. |
 | [DOCUMENTATION-CONFORMANCE.md](DOCUMENTATION-CONFORMANCE.md), [documentation-cases.json](documentation-cases.json) | Which code examples in these documents are executed, and their pinned cases. |

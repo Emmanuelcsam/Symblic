@@ -114,9 +114,7 @@
     "independent_methods_passed": 7,
     "integrated_distinct_methods_passed": 138,
     "live": {
-      "after_pid": 1876541,
       "at": "2026-10-05T15:35:31.272203+00:00",
-      "before_pid": 1846766,
       "card_request_surfaces": "Both full and compact live previews equal exact independently captured fake dispatch surfaces",
       "dependency_guards": 74,
       "http": {
@@ -171,11 +169,13 @@
         },
         "template_id": "symblic.delegate/proof_step_card/9"
       },
+      "process_changed": true,
       "scope": "Read-only API; fake-only native service-Python task-card parent handoff and lock replay in a temporary folder; zero models/effects/production runs"
     },
     "native_registered_source_markers": 43,
     "prior_contracts_exact": 53,
     "ruff": "E9,F clean"
   },
-  "version": 1
+  "version": 1,
+  "publication_note": "Edited for publication on 2026-10-12: two process ids were removed; the pair is replaced by \"process_changed\": true. Other values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
 }

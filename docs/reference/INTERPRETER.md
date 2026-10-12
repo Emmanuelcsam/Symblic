@@ -181,7 +181,7 @@ budgets, coverage/refusal, erroneous acceptance, question counts, latency and
 cost, including failures in the denominator.
 
 The saved Interpreter view now distinguishes the static predicate map from
-observed execution checks (not included in this repository). Retained native checks are
+[observed execution checks](REQUIREMENT-EXECUTION.md). Retained native checks are
 joined only to the exact linked source, inputs, intent revision and execution
 pins. Missing, stale, provisional or ambiguous evidence remains unassessed;
 passing a predicate does not establish intended meaning or operator acceptance.

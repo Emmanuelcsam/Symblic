@@ -48,8 +48,8 @@ machine with a load average of 15 to 18; if a test fails only under load, please
   with `@unittest.expectedFailure`. They also failed on the original code; the comments above them say what
   disagrees. Decide which behaviour is right before removing the markers.
 - **Page journeys in `tests/browser/` are skipped** unless `SYMBLIC_BROWSER_HARNESS` names the host's Playwright
-  harness, which is not part of this repository ([`browser/README.md`](browser/README.md)). The Node-only page
-  tests there run anywhere.
+  harness, which is not part of this repository; the Academy's journeys need a harness that serves this repository
+  instead ([`browser/README.md`](browser/README.md)). The Node-only page tests there run anywhere.
 
 ## Layout
 
@@ -58,6 +58,7 @@ machine with a load average of 15 to 18; if a test fails only under load, please
 | `kernel/`, `providers/`, `adapters/`, `js/`, `lang/`, `spec/`, `english/`, `steps/`, `authoring/`, `delegate/`, `graph/`, `mica/`, `autogen/`, `linear/`, `constructor/`, `intent/`, `forge/`, `inquiry/`, `memory/`, `policy/`, `bench/`, `experiments/`, `distill/`, `portable/`, `os/` | The package of the same name under `symblic/` |
 | `integration/` | Host-only code (`integration/host/`); runs against fakes or skips with a reason |
 | `browser/` | The web pages (`web/`), with Node's test runner |
+| `web/` | The Academy's catalog (`web/academy/symblic-academy-content.js`): lesson shape, document hashes, and its teaching examples run on the kernel |
 | `kits/`, `examples/`, `tools/` | `kits/`, `examples/` and `tools/` |
 | `misc/` | The host's automation canvas node (skipped) and the frame validator of the studio page |
 | `fixtures/` | Recorded inputs shared by several test folders |
