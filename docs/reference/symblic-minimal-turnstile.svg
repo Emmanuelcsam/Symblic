@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <!-- Deep Matte Slate Black -->
+  <rect width="800" height="800" rx="40" fill="#0D0E12" />
+
+  <!-- The Semantic Entailment Glyph (⊨ / ⊢ Model Satisfaction Mark) -->
+  <g transform="translate(400, 360)">
+    <!-- Vertical Truth Axis (The Kernel Invariant) -->
+    <rect x="-100" y="-160" width="34" height="320" rx="4" fill="#FFFFFF" />
+
+    <!-- Upper Consequence Bar (Semantic Model Contract) -->
+    <path d="M -50,-80 H 60 C 95,-80 95,-10 60,-10 H -50" 
+          fill="none" 
+          stroke="#FFFFFF" 
+          stroke-width="34" 
+          stroke-linecap="square" />
+
+    <!-- Lower Consequence Bar (Kernel Verification & Proof) -->
+    <path d="M -50,10 H 60 C 95,10 95,80 60,80 H -50" 
+          fill="none" 
+          stroke="#FFFFFF" 
+          stroke-width="34" 
+          stroke-linecap="square" />
+
+    <!-- Terminal Proof Point (.) -->
+    <circle cx="95" cy="80" r="17" fill="#FFFFFF" />
+  </g>
+
+  <!-- Typography -->
+  <text x="400" y="630" 
+        font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Arial', sans-serif" 
+        font-size="40" 
+        font-weight="700" 
+        letter-spacing="18" 
+        fill="#FFFFFF" 
+        text-anchor="middle">
+    SYMBLIC
+  </text>
+  
+  <text x="400" y="670" 
+        font-family="Menlo, Monaco, 'Courier New', monospace" 
+        font-size="14" 
+        letter-spacing="8" 
+        fill="#7B8290" 
+        text-anchor="middle">
+    ⊢ ⊨ ∀ ∃
+  </text>
+</svg>

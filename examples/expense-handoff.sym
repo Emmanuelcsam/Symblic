@@ -1,0 +1,49 @@
+program SourceBoundExpenses.
+use profile=verified, context=none, effort=low, coercion=strict.
+import text as prose.
+
+given source: Any.
+given entries: List of Any length 1..32.
+given policy: Any.
+
+define WitnessSpan as Record {source_id: Text, revision: Int, source_sha256: Text, start: Int, end: Int, quote: Text}.
+define WitnessItem as Record {id: Text, span: WitnessSpan}.
+
+note Category and day are caller premises. A matching category is not a semantic classification proof.
+routine select_item(source: Any, contract: Any, expected_category: Text) -> Any with effort=low, context=none do
+  ask candidate: Record {contract_sha256: Text, items: List of WitnessItem length 1..1, category: one of {meal, hotel, travel, client_meal}} "Return the one caller-declared item with its exact ID and source span. Copy contract.sha256. Copy the caller's expected_category into category; this task does not infer reimbursement policy. Span offsets are zero-based Unicode code points, exclusive end. This is one independent item." from source, contract, expected_category with coercion=strict, context=none
+  let checked = verify_source_items(source, contract, {contract_sha256: candidate.contract_sha256, items: candidate.items}).
+  ensure checked.accepted and checked.enumeration_complete and candidate.category = expected_category else retry because "the item must match the complete one-item caller catalog and caller category: {checked.issues}".
+  return {id: checked.items[1].id, span: checked.items[1].span, category: candidate.category, receipt: checked}.
+end.
+
+let catalog = source_list_contract("trip-items", source, catalog=[{id: e.id, span: source_span(source, e.start, e.end)} for e in entries], require_nonempty=true).
+assert len(unique([e.id for e in entries])) = len(entries).
+note Each routine receives one exact source slice. No other expense or prior raw history is selected.
+for entry in entries do
+  let parent_span = source_span(source, entry.start, entry.end).
+  let item_source = source_record(entry.id, parent_span.quote, source.revision).
+  let item_span = source_span(item_source, 0, len(item_source.text)).
+  let item_contract = source_list_contract(entry.id, item_source, catalog=[{id: entry.id, span: item_span}], require_nonempty=true).
+  let selected = select_item(item_source, item_contract, entry.category).
+  let amount_contract = source_field_contract(entry.id, item_source, labels=[entry.label], region=item_span, separator="\n", prefix=" ", suffix=" " + entry.currency, currency=entry.currency).
+  let amount_receipt = prose.witnessed_number_in(item_source, amount_contract).
+  let amount = number(amount_receipt.value.numerator) / number(amount_receipt.value.denominator).
+  assert amount >= 0.
+  let rate = policy.rates[entry.currency].numerator / policy.rates[entry.currency].denominator.
+  let row = {id: selected.id, source_span: source_span(source, parent_span.start + selected.span.start, parent_span.start + selected.span.end), day: entry.day, category: selected.category, currency: amount_receipt.currency, amount: amount, usd: amount * rate, item_receipt: selected.receipt, amount_receipt: amount_receipt}.
+end.
+
+let coverage = verify_source_items(source, catalog, {contract_sha256: catalog.sha256, items: [{id: r.id, span: r.source_span} for r in row]}).
+assert coverage.accepted and coverage.enumeration_complete.
+let hotel_days = unique([r.day for r in row if r.category = "hotel"]).
+let hotel_daily = [{day: d, claimed: sum([r.usd for r in row if r.category = "hotel" and r.day = d]), approved: min(sum([r.usd for r in row if r.category = "hotel" and r.day = d]), policy.hotel_daily_cap)} for d in hotel_days].
+let nonhotel_approved = sum([if r.category = "meal" then min(r.usd, policy.meal_item_cap) else r.usd for r in row if r.category != "hotel"]).
+let total_claimed = sum([r.usd for r in row]).
+let total_approved = sum([d.approved for d in hotel_daily]) + nonhotel_approved.
+let total_disallowed = total_claimed - total_approved.
+assert total_approved >= 0 and total_approved <= total_claimed.
+assert all d in hotel_daily: d.approved <= policy.hotel_daily_cap and d.approved <= d.claimed.
+assert total_claimed = total_approved + total_disallowed.
+let result = {rows: row, catalog_receipt: coverage, hotel_daily: hotel_daily, totals: {claimed: total_claimed, approved: total_approved, disallowed: total_disallowed}, assurance: {field_values: "exact_source_bound_signed_decimals", completeness: "caller_declared_finite_catalog_only", arithmetic: "exact_rational_under_caller_rates_and_caps", category_and_day: "caller_premises_not_semantically_inferred", source_truth: "not_established", undeclared_expenses: "not_assessed", refunds: "negative_amounts_refused_by_declared_policy"}}.
+show result.

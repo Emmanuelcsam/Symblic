@@ -1,0 +1,948 @@
+{
+  "helper_sha256": "1a240592ab8604d9545e5873abead88b75c507a6a6441618814e763abc38c69d",
+  "fixtures": {
+    "native_error": {
+      "source": "let greeting = \"\ud83d\ude00\".\nlet x = 1 + ).",
+      "language": "native",
+      "report": {
+        "version": 1,
+        "language": "native",
+        "source_sha256": "eeac4a1feaded2e4e36cd43bc68fd00c700b9d48d9b3e33391b4eec1c4bc8cf4",
+        "source_length_utf16": 35,
+        "offset_encoding": "utf-16",
+        "available": true,
+        "ok": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "SYM_SYNTAX",
+            "message": "expected a value (found ')')",
+            "source": "native",
+            "line": 2,
+            "col": 13,
+            "start": 33,
+            "end": 34,
+            "position_kind": "token"
+          }
+        ],
+        "check": {
+          "ok": false,
+          "errors": [
+            {
+              "message": "expected a value (found ')')",
+              "line": 2,
+              "col": 13,
+              "kind": "syntax",
+              "code": "SYM_SYNTAX"
+            }
+          ],
+          "warnings": [],
+          "plan": [],
+          "name": "Untitled",
+          "profile": {}
+        },
+        "truncated": false,
+        "limits": {
+          "source_bytes": 400000,
+          "diagnostics": 200,
+          "message_chars": 4000
+        },
+        "scope": {
+          "execution": "not_run",
+          "provider_calls": 0,
+          "effects": "not_run",
+          "authority": "existing_source_checkers",
+          "static_lint": "existing_bounded_pure_predicate_probes",
+          "meaning": "Syntax, available static checks and authoring warnings; not runtime correctness or intent adequacy."
+        }
+      }
+    },
+    "native_warning": {
+      "source": "let x = missing.\nshow other.",
+      "language": "native",
+      "report": {
+        "version": 1,
+        "language": "native",
+        "source_sha256": "cf70aafc7bb4ed350d5a0a4d26ef813822460cf1ad91855342a0909d8865c06b",
+        "source_length_utf16": 28,
+        "offset_encoding": "utf-16",
+        "available": true,
+        "ok": true,
+        "diagnostics": [
+          {
+            "severity": "warning",
+            "code": "SYM_WARNING",
+            "message": "missing is read before anything binds it",
+            "source": "native",
+            "line": 1,
+            "col": 1,
+            "start": 0,
+            "end": 16,
+            "position_kind": "line"
+          },
+          {
+            "severity": "warning",
+            "code": "SYM_WARNING",
+            "message": "other is read before anything binds it",
+            "source": "native",
+            "line": 2,
+            "col": 1,
+            "start": 17,
+            "end": 28,
+            "position_kind": "line"
+          }
+        ],
+        "check": {
+          "ok": true,
+          "errors": [],
+          "warnings": [
+            {
+              "line": 1,
+              "message": "missing is read before anything binds it"
+            },
+            {
+              "line": 2,
+              "message": "other is read before anything binds it"
+            }
+          ],
+          "plan": [
+            {
+              "line": 1,
+              "kind": "let",
+              "depth": 0,
+              "label": "let x",
+              "binds": "x",
+              "reads": [
+                "missing"
+              ],
+              "class": "exact"
+            },
+            {
+              "line": 2,
+              "kind": "show",
+              "depth": 0,
+              "label": "show",
+              "reads": [
+                "other"
+              ],
+              "class": "exact"
+            }
+          ],
+          "name": "Untitled",
+          "profile": {
+            "exact": 2
+          },
+          "execution_profile": "legacy",
+          "callable_effects": {},
+          "asks": 0,
+          "predictability": 100,
+          "asks_detail": []
+        },
+        "truncated": false,
+        "limits": {
+          "source_bytes": 400000,
+          "diagnostics": 200,
+          "message_chars": 4000
+        },
+        "scope": {
+          "execution": "not_run",
+          "provider_calls": 0,
+          "effects": "not_run",
+          "authority": "existing_source_checkers",
+          "static_lint": "existing_bounded_pure_predicate_probes",
+          "meaning": "Syntax, available static checks and authoring warnings; not runtime correctness or intent adequacy."
+        }
+      }
+    },
+    "native_valid": {
+      "source": "let x = 1.\nshow x.",
+      "language": "native",
+      "report": {
+        "version": 1,
+        "language": "native",
+        "source_sha256": "39717f6aaaa9a94bb02967ee29353bd338699b079afbe9ec3cd6f05425e5bf37",
+        "source_length_utf16": 18,
+        "offset_encoding": "utf-16",
+        "available": true,
+        "ok": true,
+        "diagnostics": [],
+        "check": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "plan": [
+            {
+              "line": 1,
+              "kind": "let",
+              "depth": 0,
+              "label": "let x",
+              "binds": "x",
+              "class": "exact"
+            },
+            {
+              "line": 2,
+              "kind": "show",
+              "depth": 0,
+              "label": "show",
+              "reads": [
+                "x"
+              ],
+              "class": "exact"
+            }
+          ],
+          "name": "Untitled",
+          "profile": {
+            "exact": 2
+          },
+          "execution_profile": "legacy",
+          "callable_effects": {},
+          "asks": 0,
+          "predictability": 100,
+          "asks_detail": []
+        },
+        "truncated": false,
+        "limits": {
+          "source_bytes": 400000,
+          "diagnostics": 200,
+          "message_chars": 4000
+        },
+        "scope": {
+          "execution": "not_run",
+          "provider_calls": 0,
+          "effects": "not_run",
+          "authority": "existing_source_checkers",
+          "static_lint": "existing_bounded_pure_predicate_probes",
+          "meaning": "Syntax, available static checks and authoring warnings; not runtime correctness or intent adequacy."
+        }
+      }
+    },
+    "native_valid2": {
+      "source": "let x = 2.\nshow x.",
+      "language": "native",
+      "report": {
+        "version": 1,
+        "language": "native",
+        "source_sha256": "684b81b8bbad7e5c2177c86fbba7ef12990367b97558226e52cd8845543a8cf3",
+        "source_length_utf16": 18,
+        "offset_encoding": "utf-16",
+        "available": true,
+        "ok": true,
+        "diagnostics": [],
+        "check": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "plan": [
+            {
+              "line": 1,
+              "kind": "let",
+              "depth": 0,
+              "label": "let x",
+              "binds": "x",
+              "class": "exact"
+            },
+            {
+              "line": 2,
+              "kind": "show",
+              "depth": 0,
+              "label": "show",
+              "reads": [
+                "x"
+              ],
+              "class": "exact"
+            }
+          ],
+          "name": "Untitled",
+          "profile": {
+            "exact": 2
+          },
+          "execution_profile": "legacy",
+          "callable_effects": {},
+          "asks": 0,
+          "predictability": 100,
+          "asks_detail": []
+        },
+        "truncated": false,
+        "limits": {
+          "source_bytes": 400000,
+          "diagnostics": 200,
+          "message_chars": 4000
+        },
+        "scope": {
+          "execution": "not_run",
+          "provider_calls": 0,
+          "effects": "not_run",
+          "authority": "existing_source_checkers",
+          "static_lint": "existing_bounded_pure_predicate_probes",
+          "meaning": "Syntax, available static checks and authoring warnings; not runtime correctness or intent adequacy."
+        }
+      }
+    },
+    "english_error": {
+      "source": "Remember greeting is \"\ud83d\ude00\".\nRemember x is 1 plus .",
+      "language": "english",
+      "report": {
+        "version": 1,
+        "language": "english",
+        "source_sha256": "710d2c226ae58a17c1e5c604c32af5791b11b6ed1fbd2dce585e73d5d573ca6f",
+        "source_length_utf16": 49,
+        "offset_encoding": "utf-16",
+        "available": true,
+        "ok": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "ENG_SYNTAX",
+            "message": "unexpected 'plus' before the period",
+            "source": "english",
+            "line": 2,
+            "col": 17,
+            "start": 43,
+            "end": 47,
+            "position_kind": "token"
+          }
+        ],
+        "check": {
+          "ok": false,
+          "errors": [
+            {
+              "line": 2,
+              "col": 17,
+              "code": "ENG_SYNTAX",
+              "message": "unexpected 'plus' before the period"
+            }
+          ],
+          "warnings": [],
+          "compiled": null,
+          "native": null
+        },
+        "truncated": false,
+        "limits": {
+          "source_bytes": 400000,
+          "diagnostics": 200,
+          "message_chars": 4000
+        },
+        "scope": {
+          "execution": "not_run",
+          "provider_calls": 0,
+          "effects": "not_run",
+          "authority": "existing_source_checkers",
+          "static_lint": "existing_bounded_pure_predicate_probes",
+          "meaning": "Syntax, available static checks and authoring warnings; not runtime correctness or intent adequacy."
+        }
+      }
+    },
+    "english_point": {
+      "source": "Remember x is @.",
+      "language": "english",
+      "report": {
+        "version": 1,
+        "language": "english",
+        "source_sha256": "9d1241a3866b7a33448c25252ce11387d7d308c2b560b5efa8ea89c463679a98",
+        "source_length_utf16": 16,
+        "offset_encoding": "utf-16",
+        "available": true,
+        "ok": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "ENG_SYNTAX",
+            "message": "unexpected character '@'",
+            "source": "english",
+            "line": 1,
+            "col": 15,
+            "start": 14,
+            "end": 14,
+            "position_kind": "point"
+          }
+        ],
+        "check": {
+          "ok": false,
+          "errors": [
+            {
+              "line": 1,
+              "col": 15,
+              "code": "ENG_SYNTAX",
+              "message": "unexpected character '@'"
+            }
+          ],
+          "warnings": [],
+          "compiled": null,
+          "native": null
+        },
+        "truncated": false,
+        "limits": {
+          "source_bytes": 400000,
+          "diagnostics": 200,
+          "message_chars": 4000
+        },
+        "scope": {
+          "execution": "not_run",
+          "provider_calls": 0,
+          "effects": "not_run",
+          "authority": "existing_source_checkers",
+          "static_lint": "existing_bounded_pure_predicate_probes",
+          "meaning": "Syntax, available static checks and authoring warnings; not runtime correctness or intent adequacy."
+        }
+      }
+    },
+    "english_valid": {
+      "source": "Remember base is 2.\nAsk for result as a whole number: \"Add one to base.\".\nUsing only base.\nAccept only if result equals base plus 1.\nShow result.",
+      "language": "english",
+      "report": {
+        "version": 1,
+        "language": "english",
+        "source_sha256": "dc6273c33f547c0dd9102bf1c90078bade31547b59f1a25cf44e8f4b5b8a5d63",
+        "source_length_utf16": 145,
+        "offset_encoding": "utf-16",
+        "available": true,
+        "ok": true,
+        "diagnostics": [],
+        "check": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "compiled": {
+            "version": "symblic-english/1",
+            "source_sha256": "dc6273c33f547c0dd9102bf1c90078bade31547b59f1a25cf44e8f4b5b8a5d63",
+            "source": "use profile=verified.\nlet base = 2.\nask result: Int \"Add one to base.\" from base with context=none, determine=false, solve=false, retries=2, budget=12000.\nensure result = (base + 1) else retry because \"Accept only if result equals base plus 1.\".\nshow result.\n",
+            "options": {
+              "profile": "verified",
+              "context": "none",
+              "determine": false,
+              "solve": false,
+              "constructor": "off",
+              "max_calls": 64
+            },
+            "inputs": {},
+            "names": {
+              "base": "base",
+              "result": "result"
+            },
+            "statements": [
+              {
+                "index": 1,
+                "line": 1,
+                "col": 1,
+                "end_line": 1,
+                "end_col": 19,
+                "kind": "remember",
+                "text": "Remember base is 2.",
+                "native_lines": [
+                  2
+                ]
+              },
+              {
+                "index": 2,
+                "line": 2,
+                "col": 1,
+                "end_line": 2,
+                "end_col": 53,
+                "kind": "ask",
+                "text": "Ask for result as a whole number: \"Add one to base.\".",
+                "native_lines": [
+                  3
+                ]
+              },
+              {
+                "index": 3,
+                "line": 3,
+                "col": 1,
+                "end_line": 3,
+                "end_col": 16,
+                "kind": "using",
+                "text": "Using only base.",
+                "native_lines": [
+                  3
+                ],
+                "ask": "result"
+              },
+              {
+                "index": 4,
+                "line": 4,
+                "col": 1,
+                "end_line": 4,
+                "end_col": 41,
+                "kind": "accept",
+                "text": "Accept only if result equals base plus 1.",
+                "native_lines": [
+                  4
+                ],
+                "ask": "result"
+              },
+              {
+                "index": 5,
+                "line": 5,
+                "col": 1,
+                "end_line": 5,
+                "end_col": 12,
+                "kind": "show",
+                "text": "Show result.",
+                "native_lines": [
+                  5
+                ]
+              }
+            ],
+            "source_map": [
+              {
+                "native_line": 1,
+                "line": null,
+                "col": null,
+                "statement": null
+              },
+              {
+                "native_line": 2,
+                "line": 1,
+                "col": 1,
+                "statement": 1
+              },
+              {
+                "native_line": 3,
+                "line": 2,
+                "col": 1,
+                "statement": 2
+              },
+              {
+                "native_line": 3,
+                "line": 3,
+                "col": 1,
+                "statement": 3
+              },
+              {
+                "native_line": 4,
+                "line": 4,
+                "col": 1,
+                "statement": 4
+              },
+              {
+                "native_line": 5,
+                "line": 5,
+                "col": 1,
+                "statement": 5
+              }
+            ]
+          },
+          "native": {
+            "ok": true,
+            "errors": [],
+            "warnings": [],
+            "plan": [
+              {
+                "line": 1,
+                "kind": "use",
+                "depth": 0,
+                "label": "use",
+                "class": "exact"
+              },
+              {
+                "line": 2,
+                "kind": "let",
+                "depth": 0,
+                "label": "let base",
+                "binds": "base",
+                "class": "exact"
+              },
+              {
+                "line": 3,
+                "kind": "ask",
+                "depth": 0,
+                "label": "ask result",
+                "binds": "result",
+                "reads": [
+                  "base"
+                ],
+                "type": "Int",
+                "class": "structured",
+                "prompt": "Add one to base.",
+                "options": {
+                  "context": "none",
+                  "determine": "False",
+                  "solve": "False",
+                  "retries": "2",
+                  "budget": "12000"
+                }
+              },
+              {
+                "line": 4,
+                "kind": "ensure",
+                "depth": 0,
+                "label": "ensure",
+                "reads": [
+                  "base",
+                  "result"
+                ],
+                "class": "exact"
+              },
+              {
+                "line": 5,
+                "kind": "show",
+                "depth": 0,
+                "label": "show",
+                "reads": [
+                  "result"
+                ],
+                "class": "exact"
+              }
+            ],
+            "name": "Untitled",
+            "profile": {
+              "exact": 4,
+              "structured": 1
+            },
+            "execution_profile": "verified",
+            "callable_effects": {},
+            "asks_detail": [
+              {
+                "line": 3,
+                "name": "result",
+                "risk": 13,
+                "score": 87,
+                "class": "structured",
+                "reasons": [
+                  "the answer is open-ended structure (number, list or record): canonical but not closed",
+                  "no range: a range lets the kernel reject impossible answers"
+                ]
+              }
+            ],
+            "asks": 1,
+            "predictability": 97
+          }
+        },
+        "truncated": false,
+        "limits": {
+          "source_bytes": 400000,
+          "diagnostics": 200,
+          "message_chars": 4000
+        },
+        "scope": {
+          "execution": "not_run",
+          "provider_calls": 0,
+          "effects": "not_run",
+          "authority": "existing_source_checkers",
+          "static_lint": "existing_bounded_pure_predicate_probes",
+          "meaning": "Syntax, available static checks and authoring warnings; not runtime correctness or intent adequacy."
+        }
+      },
+      "manual_check": {
+        "ok": true,
+        "version": "symblic-english/1",
+        "source_sha256": "dc6273c33f547c0dd9102bf1c90078bade31547b59f1a25cf44e8f4b5b8a5d63",
+        "source": "use profile=verified.\nlet base = 2.\nask result: Int \"Add one to base.\" from base with context=none, determine=false, solve=false, retries=2, budget=12000.\nensure result = (base + 1) else retry because \"Accept only if result equals base plus 1.\".\nshow result.\n",
+        "options": {
+          "profile": "verified",
+          "context": "none",
+          "determine": false,
+          "solve": false,
+          "constructor": "off",
+          "max_calls": 32,
+          "side_effects": false,
+          "progress_outputs": true
+        },
+        "inputs": {},
+        "names": {
+          "base": "base",
+          "result": "result"
+        },
+        "statements": [
+          {
+            "index": 1,
+            "line": 1,
+            "col": 1,
+            "end_line": 1,
+            "end_col": 19,
+            "kind": "remember",
+            "text": "Remember base is 2.",
+            "native_lines": [
+              2
+            ]
+          },
+          {
+            "index": 2,
+            "line": 2,
+            "col": 1,
+            "end_line": 2,
+            "end_col": 53,
+            "kind": "ask",
+            "text": "Ask for result as a whole number: \"Add one to base.\".",
+            "native_lines": [
+              3
+            ]
+          },
+          {
+            "index": 3,
+            "line": 3,
+            "col": 1,
+            "end_line": 3,
+            "end_col": 16,
+            "kind": "using",
+            "text": "Using only base.",
+            "native_lines": [
+              3
+            ],
+            "ask": "result"
+          },
+          {
+            "index": 4,
+            "line": 4,
+            "col": 1,
+            "end_line": 4,
+            "end_col": 41,
+            "kind": "accept",
+            "text": "Accept only if result equals base plus 1.",
+            "native_lines": [
+              4
+            ],
+            "ask": "result"
+          },
+          {
+            "index": 5,
+            "line": 5,
+            "col": 1,
+            "end_line": 5,
+            "end_col": 12,
+            "kind": "show",
+            "text": "Show result.",
+            "native_lines": [
+              5
+            ]
+          }
+        ],
+        "source_map": [
+          {
+            "native_line": 1,
+            "line": null,
+            "col": null,
+            "statement": null
+          },
+          {
+            "native_line": 2,
+            "line": 1,
+            "col": 1,
+            "statement": 1
+          },
+          {
+            "native_line": 3,
+            "line": 2,
+            "col": 1,
+            "statement": 2
+          },
+          {
+            "native_line": 3,
+            "line": 3,
+            "col": 1,
+            "statement": 3
+          },
+          {
+            "native_line": 4,
+            "line": 4,
+            "col": 1,
+            "statement": 4
+          },
+          {
+            "native_line": 5,
+            "line": 5,
+            "col": 1,
+            "statement": 5
+          }
+        ],
+        "check": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "plan": [
+            {
+              "line": 1,
+              "kind": "use",
+              "depth": 0,
+              "label": "use",
+              "class": "exact"
+            },
+            {
+              "line": 2,
+              "kind": "let",
+              "depth": 0,
+              "label": "let base",
+              "binds": "base",
+              "class": "exact"
+            },
+            {
+              "line": 3,
+              "kind": "ask",
+              "depth": 0,
+              "label": "ask result",
+              "binds": "result",
+              "reads": [
+                "base"
+              ],
+              "type": "Int",
+              "class": "structured",
+              "prompt": "Add one to base.",
+              "options": {
+                "context": "none",
+                "determine": "False",
+                "solve": "False",
+                "retries": "2",
+                "budget": "12000"
+              }
+            },
+            {
+              "line": 4,
+              "kind": "ensure",
+              "depth": 0,
+              "label": "ensure",
+              "reads": [
+                "base",
+                "result"
+              ],
+              "class": "exact"
+            },
+            {
+              "line": 5,
+              "kind": "show",
+              "depth": 0,
+              "label": "show",
+              "reads": [
+                "result"
+              ],
+              "class": "exact"
+            }
+          ],
+          "name": "Untitled",
+          "profile": {
+            "exact": 4,
+            "structured": 1
+          },
+          "execution_profile": "verified",
+          "callable_effects": {},
+          "asks_detail": [
+            {
+              "line": 3,
+              "name": "result",
+              "risk": 13,
+              "score": 87,
+              "class": "structured",
+              "reasons": [
+                "the answer is open-ended structure (number, list or record): canonical but not closed",
+                "no range: a range lets the kernel reject impossible answers"
+              ]
+            }
+          ],
+          "asks": 1,
+          "predictability": 97
+        },
+        "authoring": {
+          "format": "english",
+          "version": 1,
+          "compiler_version": "symblic-english/1",
+          "compiler_sha256": "62d9d10aa44d679b63f79aba58981f2503a31f1e75c21ae2df585862ec54d257",
+          "document": "Remember base is 2.\nAsk for result as a whole number: \"Add one to base.\".\nUsing only base.\nAccept only if result equals base plus 1.\nShow result.",
+          "document_sha256": "dc6273c33f547c0dd9102bf1c90078bade31547b59f1a25cf44e8f4b5b8a5d63",
+          "native_sha256": "ec0d0df02b9d98be2f49ecca71155e578af92c4beba0d2df22539986785d0ba2",
+          "source_map": [
+            {
+              "native_line": 1,
+              "line": null,
+              "col": null,
+              "statement": null
+            },
+            {
+              "native_line": 2,
+              "line": 1,
+              "col": 1,
+              "statement": 1
+            },
+            {
+              "native_line": 3,
+              "line": 2,
+              "col": 1,
+              "statement": 2
+            },
+            {
+              "native_line": 3,
+              "line": 3,
+              "col": 1,
+              "statement": 3
+            },
+            {
+              "native_line": 4,
+              "line": 4,
+              "col": 1,
+              "statement": 4
+            },
+            {
+              "native_line": 5,
+              "line": 5,
+              "col": 1,
+              "statement": 5
+            }
+          ],
+          "statements": [
+            {
+              "index": 1,
+              "line": 1,
+              "col": 1,
+              "end_line": 1,
+              "end_col": 19,
+              "kind": "remember",
+              "text": "Remember base is 2.",
+              "native_lines": [
+                2
+              ]
+            },
+            {
+              "index": 2,
+              "line": 2,
+              "col": 1,
+              "end_line": 2,
+              "end_col": 53,
+              "kind": "ask",
+              "text": "Ask for result as a whole number: \"Add one to base.\".",
+              "native_lines": [
+                3
+              ]
+            },
+            {
+              "index": 3,
+              "line": 3,
+              "col": 1,
+              "end_line": 3,
+              "end_col": 16,
+              "kind": "using",
+              "text": "Using only base.",
+              "native_lines": [
+                3
+              ],
+              "ask": "result"
+            },
+            {
+              "index": 4,
+              "line": 4,
+              "col": 1,
+              "end_line": 4,
+              "end_col": 41,
+              "kind": "accept",
+              "text": "Accept only if result equals base plus 1.",
+              "native_lines": [
+                4
+              ],
+              "ask": "result"
+            },
+            {
+              "index": 5,
+              "line": 5,
+              "col": 1,
+              "end_line": 5,
+              "end_col": 12,
+              "kind": "show",
+              "text": "Show result.",
+              "native_lines": [
+                5
+              ]
+            }
+          ],
+          "sha256": "e824804f9d44073598ad08313f6991cff125f7b4d144d1d0b2504264a7468645"
+        }
+      }
+    }
+  }
+}

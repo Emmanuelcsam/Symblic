@@ -1,0 +1,39 @@
+(* Symblic authoring contract 1: one inference command, one physical line.
+   Authority: symblic_proof_command.parse(original_session, command).
+   This combines syntax + existing-reference checks; inference validity still
+   belongs to proof_session.append and proof_steps.verify. No proof is generated.
+   Space/tab may pad/separate tokens. CR/LF/NEL/U+2028/U+2029 are forbidden raw.
+   Formula is the controlled grammar in formula.ebnf, not core expressions.
+   Keep the enclosing native response object's answer string when that is the
+   requested wire schema. This command is its value, not a new provider protocol. *)
+
+command = padding, (
+    "premise", gap, premise-name
+  | "assume", padding, "::", padding, formula
+  | "implies_intro", gap, line-id, gap, line-id
+  | "implies_elim", gap, line-id, gap, line-id
+  | "and_intro", gap, line-id, gap, line-id
+  | "and_left", gap, line-id
+  | "and_right", gap, line-id
+  | "or_left", gap, line-id, padding, "::", padding, formula
+  | "or_right", gap, line-id, padding, "::", padding, formula
+  | "or_elim", gap, line-id, gap, line-id, gap, line-id, gap, line-id, gap, line-id
+  | "false_elim", gap, line-id, padding, "::", padding, formula
+), padding ;
+premise-name = ascii-name | json-string ;
+ascii-name = ascii-letter, { ascii-letter | digit | "_" } ;
+line-id = "s", nonzero-digit, [ digit, [ digit ] ] ;
+padding = { " " | TAB } ;
+gap = ( " " | TAB ), padding ;
+ascii-letter = "A" .. "Z" | "a" .. "z" ;
+nonzero-digit = "1" .. "9" ;
+digit = "0" .. "9" ;
+TAB = ? U+0009 tab ? ;
+json-string = ? one valid JSON string naming an exact existing premise; use JSON escapes for line separators ? ;
+formula = ? one complete formula from formula.ebnf, with raw command line separators escaped inside atoms ? ;
+
+(* Bare premise names are 1..64 ASCII characters; JSON names preserve the broader
+   session API's exact names. Names are not normalized. Every reference must be
+   present in the unchanged supplied session. Host line IDs have no leading zero,
+   and cannot exceed the session's bounded line count. No new IDs, comments,
+   code fences, second command, replaced state or implicit inference is accepted. *)

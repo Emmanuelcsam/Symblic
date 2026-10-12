@@ -1,0 +1,3477 @@
+{
+  "catalog": {
+    "assurance": "Compilation and JSON shape checks execute no model. Runtime acceptance covers only the declared checks.",
+    "request_schema": {
+      "$defs": {
+        "output_schema": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "dependentRequired": {
+                "maximum": [
+                  "minimum"
+                ],
+                "minimum": [
+                  "maximum"
+                ]
+              },
+              "properties": {
+                "maximum": {
+                  "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "type": "integer"
+                },
+                "minimum": {
+                  "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "type": "integer"
+                },
+                "type": {
+                  "const": "integer"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "enum": [
+                    "string",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "items": {
+                  "$ref": "#/$defs/output_schema"
+                },
+                "maxItems": {
+                  "maximum": 128,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "minItems": {
+                  "maximum": 128,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "type": {
+                  "const": "array"
+                }
+              },
+              "required": [
+                "type",
+                "items",
+                "minItems",
+                "maxItems"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "additionalProperties": {
+                  "const": false
+                },
+                "properties": {
+                  "additionalProperties": {
+                    "$ref": "#/$defs/output_schema"
+                  },
+                  "maxProperties": 16,
+                  "minProperties": 1,
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$"
+                  },
+                  "type": "object"
+                },
+                "required": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "type": {
+                  "const": "object"
+                }
+              },
+              "required": [
+                "type",
+                "properties",
+                "required",
+                "additionalProperties"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "checks": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "expected": {},
+                      "op": {
+                        "enum": [
+                          "equals",
+                          "sum_equals"
+                        ]
+                      },
+                      "path": {
+                        "items": {
+                          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+                          "type": "string"
+                        },
+                        "maxItems": 8,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "op",
+                      "path",
+                      "expected"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 16,
+                  "type": "array"
+                },
+                "data": {},
+                "instruction": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "output_schema": {
+                  "$ref": "#/$defs/output_schema"
+                }
+              },
+              "required": [
+                "instruction",
+                "data",
+                "output_schema"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "typed_transform"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 0,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "left": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "denominator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "numerator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "numerator",
+                    "denominator"
+                  ],
+                  "type": "object"
+                },
+                "operation": {
+                  "enum": [
+                    "add",
+                    "subtract",
+                    "multiply",
+                    "divide"
+                  ]
+                },
+                "right": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "denominator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "numerator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "numerator",
+                    "denominator"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "operation",
+                "left",
+                "right"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "exact_arithmetic"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "else": {
+                "properties": {
+                  "calls": {
+                    "default": 3,
+                    "maximum": 6
+                  }
+                }
+              },
+              "if": {
+                "properties": {
+                  "params": {
+                    "properties": {
+                      "certificate_format": {
+                        "const": "incremental"
+                      }
+                    },
+                    "required": [
+                      "certificate_format"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "calls": {
+                    "default": 32,
+                    "maximum": 64
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "calls": {
+              "maximum": 64,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "step_limit"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "inference_format"
+                        ]
+                      }
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "certificate_format": {
+                        "const": "incremental"
+                      }
+                    },
+                    "required": [
+                      "certificate_format"
+                    ]
+                  }
+                }
+              ],
+              "properties": {
+                "certificate_format": {
+                  "enum": [
+                    "terms",
+                    "steps",
+                    "incremental"
+                  ]
+                },
+                "domains": {
+                  "additionalProperties": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 128,
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+                  },
+                  "type": "object"
+                },
+                "goal": {
+                  "type": "string"
+                },
+                "inference_format": {
+                  "enum": [
+                    "json",
+                    "command"
+                  ]
+                },
+                "premises": {
+                  "oneOf": [
+                    {
+                      "maxLength": 32768,
+                      "type": "string"
+                    },
+                    {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "formula": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "formula"
+                        ],
+                        "type": "object"
+                      },
+                      "maxItems": 64,
+                      "type": "array"
+                    }
+                  ]
+                },
+                "step_limit": {
+                  "maximum": 32,
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "premises",
+                "goal"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "proof"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "categories": {
+                  "additionalProperties": {
+                    "maxLength": 131072,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxProperties": 32,
+                  "minProperties": 1,
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$"
+                  },
+                  "type": "object"
+                },
+                "data": {},
+                "instruction": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "instruction",
+                "data",
+                "categories"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "enum_classification"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "instruction": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "revision": {
+                  "maximum": 9007199254740991,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "source_id": {
+                  "type": "string"
+                },
+                "text": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "instruction",
+                "text",
+                "source_id"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "witnessed_line"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "commands": {
+                  "items": {
+                    "maxLength": 131072,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 32,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "require_complete": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "session": {
+                  "description": "Caller-owned session; native prefix checks do not authenticate its author.",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "session",
+                "commands"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "proof_step"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "semantic_validation": [
+      "Output schema depth <=8; min bounds <= max bounds.",
+      "Every object property is required exactly once.",
+      "Check paths and expected values must match output types.",
+      "Finite domains and human formulas follow the existing logic compiler.",
+      "proof_step rechecks the caller-owned session and every command syntax/reference before dispatch; it never establishes premise truth, authenticates the caller or searches for a correct command.",
+      "JSON is limited to 512 KiB, depth 24 and 20000 visited values; cycles and nonfinite numbers refuse."
+    ],
+    "templates": [
+      {
+        "id": "typed_transform",
+        "template_id": "symblic.delegate/typed_transform/5"
+      },
+      {
+        "id": "exact_arithmetic",
+        "template_id": "symblic.delegate/exact_arithmetic/5"
+      },
+      {
+        "id": "proof",
+        "template_id": "symblic.delegate/proof/5"
+      },
+      {
+        "id": "enum_classification",
+        "template_id": "symblic.delegate/enum_classification/5"
+      },
+      {
+        "id": "witnessed_line",
+        "template_id": "symblic.delegate/witnessed_line/5"
+      },
+      {
+        "id": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6"
+      }
+    ],
+    "version": 6
+  },
+  "fixtures": [
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof"
+          ],
+          "conditional": true,
+          "evaluation_status": "ordinal interface is unmeasured; command-Enum experiment is a different interface",
+          "goal_closure": "not_required; inspect inference.complete",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_from_caller_owned_session_and_exact_command_menu",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "47e15cc738c77b6b82074e7a7630bc1ed3eceb252a19420a9d77daed92d17abd",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "require_complete": false,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 1
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "require_complete": false,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 1
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "e0328fd5fcaee223a71382cdfe70a5d28daf5e20779b1cfd85328065a78398eb",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 1,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "full",
+          "max_calls": 1,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "require_complete": false,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 1
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof step.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. If require_complete is true, that inference must close the goal; otherwise a valid partial step is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules with context=none, effort=low, route=escalate, retries=0, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding}.\nshow answer.\n",
+        "source_sha256": "01b30620bf4fcdbc8aa48fe738931a1813e371fd804a5a8b2c0fa99196577033",
+        "template": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6",
+        "version": 6
+      },
+      "request": {
+        "calls": 1,
+        "capsule": "full",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step"
+      }
+    },
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof"
+          ],
+          "conditional": true,
+          "evaluation_status": "ordinal interface is unmeasured; command-Enum experiment is a different interface",
+          "goal_closure": "not_required; inspect inference.complete",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_from_caller_owned_session_and_exact_command_menu",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "2d1b636147f414afb6c335144c6b1f6831da41bd30ad12fcee8ef242cd153268",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "require_complete": false,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 1
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "require_complete": false,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 1
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "e0328fd5fcaee223a71382cdfe70a5d28daf5e20779b1cfd85328065a78398eb",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 3,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "full",
+          "max_calls": 3,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "require_complete": false,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 1
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof step.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. If require_complete is true, that inference must close the goal; otherwise a valid partial step is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules with context=none, effort=low, route=escalate, retries=2, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding}.\nshow answer.\n",
+        "source_sha256": "6e48e91d9ecca73fd173e25105db47f183f703d75e9f5ad6a364c6e3b10cea88",
+        "template": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6",
+        "version": 6
+      },
+      "request": {
+        "calls": 3,
+        "capsule": "full",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step"
+      }
+    },
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof",
+            "selected step closes the exact caller goal"
+          ],
+          "conditional": true,
+          "evaluation_status": "ordinal interface is unmeasured; command-Enum experiment is a different interface",
+          "goal_closure": "required_for_acceptance",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_from_caller_owned_session_and_exact_command_menu",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "d59d47228c036eeb00b930c7a2fcd0413b95ac16b9a798189a0acd7f24361696",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "require_complete": true,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 1
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "require_complete": true,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 1
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": true,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "0989c03685997cf779cce58c6c8ba46c47beb7dd4a5fb706c9f7bc27fe9843dc",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 1,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "full",
+          "max_calls": 1,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "require_complete": true,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 1
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof step.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. If require_complete is true, that inference must close the goal; otherwise a valid partial step is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules with context=none, effort=low, route=escalate, retries=0, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding}.\nshow answer.\n",
+        "source_sha256": "01b30620bf4fcdbc8aa48fe738931a1813e371fd804a5a8b2c0fa99196577033",
+        "template": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6",
+        "version": 6
+      },
+      "request": {
+        "calls": 1,
+        "capsule": "full",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "require_complete": true,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step"
+      }
+    },
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof",
+            "selected step closes the exact caller goal"
+          ],
+          "conditional": true,
+          "evaluation_status": "ordinal interface is unmeasured; command-Enum experiment is a different interface",
+          "goal_closure": "required_for_acceptance",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_from_caller_owned_session_and_exact_command_menu",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "7eb4113ec0aa5d3a6c9aafbca252992fa162d47e11586ff13e614339e97f52a7",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "require_complete": true,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 1
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "require_complete": true,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 1
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": true,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "0989c03685997cf779cce58c6c8ba46c47beb7dd4a5fb706c9f7bc27fe9843dc",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 3,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "full",
+          "max_calls": 3,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "require_complete": true,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 1
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof step.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. If require_complete is true, that inference must close the goal; otherwise a valid partial step is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules with context=none, effort=low, route=escalate, retries=2, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding}.\nshow answer.\n",
+        "source_sha256": "6e48e91d9ecca73fd173e25105db47f183f703d75e9f5ad6a364c6e3b10cea88",
+        "template": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6",
+        "version": 6
+      },
+      "request": {
+        "calls": 3,
+        "capsule": "full",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "require_complete": true,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step"
+      }
+    },
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof"
+          ],
+          "conditional": true,
+          "evaluation_status": "ordinal interface is unmeasured; command-Enum experiment is a different interface",
+          "goal_closure": "not_required; inspect inference.complete",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_from_caller_owned_session_and_exact_command_menu",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "637fcec4780192a1f823492e635f9ab163e8b3e23f304a2dc7d718af689b1550",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "require_complete": false,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 1
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "require_complete": false,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 1
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "e0328fd5fcaee223a71382cdfe70a5d28daf5e20779b1cfd85328065a78398eb",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 1,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "compact",
+          "max_calls": 1,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "require_complete": false,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 1
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof step.\nuse capsule=compact.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. If require_complete is true, that inference must close the goal; otherwise a valid partial step is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules with context=none, effort=low, route=escalate, retries=0, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding}.\nshow answer.\n",
+        "source_sha256": "1eedc02ca7ca26803144ab1ec39795e69050d1009be9709a93e527b0725a97da",
+        "template": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6",
+        "version": 6
+      },
+      "request": {
+        "calls": 1,
+        "capsule": "compact",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step"
+      }
+    },
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof"
+          ],
+          "conditional": true,
+          "evaluation_status": "ordinal interface is unmeasured; command-Enum experiment is a different interface",
+          "goal_closure": "not_required; inspect inference.complete",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_from_caller_owned_session_and_exact_command_menu",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "e224a6de80f8f9533535eb2c686c43d0b60c87965b2f511b816e9495799fa777",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "require_complete": false,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 1
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "require_complete": false,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 1
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "e0328fd5fcaee223a71382cdfe70a5d28daf5e20779b1cfd85328065a78398eb",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 3,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "compact",
+          "max_calls": 3,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "require_complete": false,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 1
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof step.\nuse capsule=compact.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. If require_complete is true, that inference must close the goal; otherwise a valid partial step is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules with context=none, effort=low, route=escalate, retries=2, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding}.\nshow answer.\n",
+        "source_sha256": "c4ff2d2dc75609c6901b320c6fbe2c7374387d9f10454b7b0b2d7fc73bfb0562",
+        "template": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6",
+        "version": 6
+      },
+      "request": {
+        "calls": 3,
+        "capsule": "compact",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step"
+      }
+    },
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof",
+            "selected step closes the exact caller goal"
+          ],
+          "conditional": true,
+          "evaluation_status": "ordinal interface is unmeasured; command-Enum experiment is a different interface",
+          "goal_closure": "required_for_acceptance",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_from_caller_owned_session_and_exact_command_menu",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "ddfc38426edd8a086aea6e6a3022e965ec534fa821508ef32968dc191cd8451c",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "require_complete": true,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 1
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "require_complete": true,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 1
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": true,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "0989c03685997cf779cce58c6c8ba46c47beb7dd4a5fb706c9f7bc27fe9843dc",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 1,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "compact",
+          "max_calls": 1,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "require_complete": true,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 1
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof step.\nuse capsule=compact.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. If require_complete is true, that inference must close the goal; otherwise a valid partial step is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules with context=none, effort=low, route=escalate, retries=0, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding}.\nshow answer.\n",
+        "source_sha256": "1eedc02ca7ca26803144ab1ec39795e69050d1009be9709a93e527b0725a97da",
+        "template": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6",
+        "version": 6
+      },
+      "request": {
+        "calls": 1,
+        "capsule": "compact",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "require_complete": true,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step"
+      }
+    },
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof",
+            "selected step closes the exact caller goal"
+          ],
+          "conditional": true,
+          "evaluation_status": "ordinal interface is unmeasured; command-Enum experiment is a different interface",
+          "goal_closure": "required_for_acceptance",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_from_caller_owned_session_and_exact_command_menu",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "75caf147cad7c1eb79ae9b0c136a635ca3d85d16bb9306b836a177896a46fdaf",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "require_complete": true,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 1
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "require_complete": true,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 1
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": true,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "0989c03685997cf779cce58c6c8ba46c47beb7dd4a5fb706c9f7bc27fe9843dc",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 3,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "compact",
+          "max_calls": 3,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "require_complete": true,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 1
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof step.\nuse capsule=compact.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. If require_complete is true, that inference must close the goal; otherwise a valid partial step is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules with context=none, effort=low, route=escalate, retries=2, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding}.\nshow answer.\n",
+        "source_sha256": "c4ff2d2dc75609c6901b320c6fbe2c7374387d9f10454b7b0b2d7fc73bfb0562",
+        "template": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6",
+        "version": 6
+      },
+      "request": {
+        "calls": 3,
+        "capsule": "compact",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "require_complete": true,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step"
+      }
+    }
+  ]
+}

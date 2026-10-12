@@ -1,0 +1,67 @@
+STATEMENT ZERO ONE: A display canvas is defined as a two-dimensional grid composed of eight hundred columns and six hundred rows of individual picture elements.
+
+STATEMENT ZERO TWO: The columns are ordered horizontally from left to right, indexed consecutively starting at zero for the leftmost column and ending at seven hundred ninety-nine for the rightmost column.
+
+STATEMENT ZERO THREE: The rows are ordered vertically from top to bottom, indexed consecutively starting at zero for the topmost row and ending at five hundred ninety-nine for the bottommost row.
+
+STATEMENT ZERO FOUR: Every individual picture element on the canvas is uniquely identified by an ordered pair consisting of its horizontal column index and its vertical row index.
+
+STATEMENT ZERO FIVE: The total number of picture elements constituting the canvas is four hundred eighty thousand, calculated as eight hundred multiplied by six hundred.
+
+STATEMENT ZERO SIX: Every picture element possesses three independent primary color channels: a red channel, a green channel, and a blue channel.
+
+STATEMENT ZERO SEVEN: Each primary color channel is capable of holding an integer intensity level ranging from a minimum of zero up to a maximum of two hundred fifty-five.
+
+STATEMENT ZERO EIGHT: The color black is defined as the state wherein the red channel is zero, the green channel is zero, and the blue channel is zero.
+
+STATEMENT ZERO NINE: The color white is defined as the state wherein the red channel is two hundred fifty-five, the green channel is two hundred fifty-five, and the blue channel is two hundred fifty-five.
+
+STATEMENT TEN: Under the law of non-contradiction, an individual picture element at any single moment must be rendered exclusively in the black state or exclusively in the white state, and cannot exist in both states simultaneously, nor in any intermediate state.
+
+STATEMENT ELEVEN: A solid circular dot is defined by a horizontal center column index, a vertical center row index, and an invariant boundary radius of five units.
+
+STATEMENT TWELVE: For any given picture element, the horizontal difference is defined as the element column index minus the center column index.
+
+STATEMENT THIRTEEN: For any given picture element, the vertical difference is defined as the element row index minus the center row index.
+
+STATEMENT FOURTEEN: For any given picture element, the squared separation is defined as the horizontal difference multiplied by itself added to the vertical difference multiplied by itself.
+
+STATEMENT FIFTEEN: A picture element belongs to the interior of the circular dot if and only if its squared separation from the center is less than or equal to twenty-five.
+
+STATEMENT SIXTEEN: Setting the canvas to an empty background requires assigning every one of the four hundred eighty thousand picture elements to the black state.
+
+STATEMENT SEVENTEEN: Drawing the circular dot requires assigning every picture element belonging to the interior of the dot to the white state.
+
+STATEMENT EIGHTEEN: The progression of execution is partitioned into an infinite succession of discrete temporal frames, beginning at an initial frame and advancing frame by frame without omission.
+
+STATEMENT NINETEEN: For the initial frame, the horizontal center column index of the circular dot is set to zero.
+
+STATEMENT TWENTY: For the initial frame, the vertical center row index of the circular dot is set to three hundred.
+
+STATEMENT TWENTY-ONE: Across every frame of execution without exception, the vertical center row index remains fixed at three hundred, guaranteeing that vertical displacement is zero.
+
+STATEMENT TWENTY-TWO: If the horizontal center column index of the current frame is seven hundred ninety-nine, the horizontal center column index for the immediately subsequent frame is assigned zero.
+
+STATEMENT TWENTY-THREE: If the horizontal center column index of the current frame is strictly less than seven hundred ninety-nine, the horizontal center column index for the immediately subsequent frame is assigned the current horizontal center column index plus one.
+
+STATEMENT TWENTY-FOUR: Execution of the program requires initializing an active, visible graphical presentation window on the operating host system.
+
+STATEMENT TWENTY-FIVE: The viewport of the visible graphical presentation window must measure exactly eight hundred physical display pixels in horizontal width and six hundred physical display pixels in vertical height.
+
+STATEMENT TWENTY-SIX: The graphical presentation window must be registered with the host operating system display server so that its pixel buffer is presented visibly on an attached physical monitor.
+
+STATEMENT TWENTY-SEVEN: Each picture element of the canvas grid corresponds in a direct, one-to-one relationship with the physical screen pixel sharing the identical column and row coordinates within the visible window.
+
+STATEMENT TWENTY-EIGHT: Assigning a picture element to the white state requires emitting physical light from the corresponding screen pixel by driving its hardware red, green, and blue components to maximum intensity.
+
+STATEMENT TWENTY-NINE: Assigning a picture element to the black state requires emitting no physical light from the corresponding screen pixel by driving its hardware red, green, and blue components to minimum zero intensity.
+
+STATEMENT THIRTY: In each frame, updating the state consists of performing the following distinct actions in strict sequential order: first, computing the horizontal center column index for the frame; second, clearing the entire canvas to the black state; third, setting all elements satisfying the interior dot condition to the white state.
+
+STATEMENT THIRTY-ONE: Immediately following the third step of statement thirty, the memory buffer containing the canvas picture elements must be copied directly to the active visible graphical presentation window.
+
+STATEMENT THIRTY-TWO: The window presentation operation must execute a complete buffer swap or refresh call, forcing the rendered frame into visible emission on the physical display before any subsequent frame calculation commences.
+
+STATEMENT THIRTY-THREE: A hardware timer delay of one sixtieth of a second must elapse between the presentation of the current frame and the processing of the subsequent frame to constrain playback to a steady, observable speed.
+
+STATEMENT THIRTY-FOUR: Continuous cycling through statements thirty, thirty-one, thirty-two, and thirty-three forces the visible emission of an isolated white circular spot translating continuously from left to right across a black field on a physical display monitor.

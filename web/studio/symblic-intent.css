@@ -1,0 +1,38 @@
+/* Interpreter additions share Studio's theme and remain scoped to this tab. */
+.si-root { min-width: 0; max-width: 1100px; margin: 0 auto; overflow-wrap: anywhere; }
+.si-root h1 { font-size: 28px; margin: 0 0 10px; }
+.si-root h2 { font-size: 20px; margin: 0 0 12px; }
+.si-root h3 { font-size: 16px; margin: 0 0 8px; }
+.si-root p { line-height: 1.6; margin: 7px 0; }
+.si-lead { max-width: 760px; color: var(--tx2); }
+.si-section { padding: 18px 0; border-bottom: 1px solid var(--hair); min-width: 0; }
+.si-item { padding: 14px; margin: 12px 0; border: 1px solid var(--brd); border-radius: 4px; background: var(--bg1); min-width: 0; }
+.si-field { display: flex; flex-direction: column; gap: 7px; margin: 12px 0; min-width: 0; }
+.si-root textarea, .si-root select, .si-root input { font-size: 16px; }
+.si-input { width: 100%; min-width: 0; min-height: 90px; resize: vertical; line-height: 1.5; }
+.si-root select { width: 100%; min-width: 0; }
+.si-root .btn { min-height: 44px; white-space: normal; text-align: center; max-width: 100%; }
+.si-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0; }
+.si-check { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 16px; }
+.si-check input { width: 20px; height: 20px; flex: 0 0 20px; }
+.si-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+.si-source { max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg2); padding: 14px; border: 1px solid var(--hair); font: 13px/1.6 var(--mono); }
+.si-verbatim { white-space: pre-wrap; }
+.si-root summary { cursor: pointer; min-height: 36px; padding: 8px 0; }
+.si-quotes blockquote { margin: 8px 0; border-left: 2px solid var(--brd); padding: 0 12px; }
+.si-quotes p { white-space: pre-wrap; }
+.si-error { color: var(--err); border-left: 3px solid var(--err); padding: 8px 12px; }
+.si-notice, .si-job { color: var(--tx2); padding: 10px 0; }
+.si-needed { color: var(--warn); font-size: 13px; }
+.si-sessions { display: grid; gap: 8px; margin-top: 10px; }
+.si-sessions .btn { text-align: left; overflow-wrap: anywhere; }
+.si-code { font-family: var(--mono); }
+.si-evidence h3 { margin-top: 16px; }
+.si-evidence-quote { margin: 8px 0; padding-left: 12px; border-left: 2px solid var(--brd); white-space: pre-wrap; }
+.si-compat { margin: 12px 0; min-width: 0; }
+@media (max-width: 500px) {
+  .si-section { padding: 14px 0; }
+  .si-item { padding: 12px; }
+  .si-actions > .btn { flex: 1 1 160px; }
+  .si-root h1 { font-size: 25px; }
+}

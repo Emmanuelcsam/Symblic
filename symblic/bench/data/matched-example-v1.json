@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "training-addition",
+      "family": "training-addition",
+      "split": "train",
+      "input": {
+        "question": "What is 2 plus 3?",
+        "type": "Int"
+      },
+      "rubric": {
+        "mode": "typed_json",
+        "expected": 5
+      }
+    },
+    {
+      "id": "heldout-negation",
+      "family": "heldout-negation",
+      "split": "heldout",
+      "input": {
+        "question": "Is it false that two plus two is not equal to five?",
+        "type": "Bool"
+      },
+      "rubric": {
+        "mode": "typed_json",
+        "expected": false
+      }
+    },
+    {
+      "id": "heldout-inventory",
+      "family": "heldout-inventory",
+      "split": "heldout",
+      "input": {
+        "question": "Return the counts for each named color from the inventory.",
+        "type": "Record {red: Int, blue: Int}",
+        "context": {
+          "inventory": [
+            {
+              "color": "blue",
+              "count": 9
+            },
+            {
+              "color": "red",
+              "count": 4
+            }
+          ]
+        }
+      },
+      "rubric": {
+        "mode": "typed_json",
+        "expected": {
+          "red": 4,
+          "blue": 9
+        }
+      }
+    }
+  ],
+  "arms": [
+    {
+      "id": "direct",
+      "treatment": "direct"
+    },
+    {
+      "id": "typed",
+      "treatment": "typed"
+    }
+  ],
+  "model": {
+    "primary": [
+      "fake:small"
+    ],
+    "fallback": [
+      "fake:large"
+    ],
+    "stronger_fallback": [
+      "fake:large"
+    ],
+    "settings": {
+      "temperature": 0,
+      "seed": 7,
+      "effort": "low"
+    }
+  },
+  "schedule": [
+    {
+      "model": "fake:small",
+      "role": "primary"
+    },
+    {
+      "model": "fake:small",
+      "role": "primary"
+    },
+    {
+      "model": "fake:large",
+      "role": "fallback"
+    }
+  ],
+  "feedback": "contract_only",
+  "split": "heldout",
+  "repetitions": 2,
+  "max_prompt_characters": 32000,
+  "exposures": []
+}

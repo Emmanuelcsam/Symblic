@@ -1,0 +1,78 @@
+program Stats.
+note Exact statistics and agreement measures on lists. The kernel computes with rationals, so a variance
+note or a kappa is exact; square roots and logarithms are 30-place decimals, identical on every machine.
+
+note Population variance (divides by n) and sample variance (divides by n - 1).
+function variance(xs: List of Number) -> Number = sum([(x - mean(xs)) ^ 2 for x in xs]) / len(xs).
+function sample_variance(xs: List of Number) -> Number = sum([(x - mean(xs)) ^ 2 for x in xs]) / (len(xs) - 1).
+function stdev(xs: List of Number) -> Number = sqrt(variance(xs)).
+function sample_stdev(xs: List of Number) -> Number = sqrt(sample_variance(xs)).
+function weighted_mean(xs: List of Number, ws: List of Number) -> Number = sum([p[1] * p[2] for p in zip(xs, ws)]) / sum(ws).
+function value_range(xs: List of Number) -> Number = max(xs) - min(xs).
+function zscore(x: Number, xs: List of Number) -> Number = (x - mean(xs)) / stdev(xs).
+function clamp(x: Number, lo: Number, hi: Number) -> Number = min(max(x, lo), hi).
+function lerp(a: Number, b: Number, t: Number) -> Number = a + (b - a) * t.
+function percent(part: Number, whole: Number) -> Number = 100 * part / whole.
+function normalized(xs: List of Number) -> List of Number = [x / sum(xs) for x in xs].
+
+note Agreement among answers (any values). modal_share: the share of the most common answer.
+note pairwise_identity: the share of ordered pairs of different raters that gave the same answer.
+note entropy_bits: Shannon entropy of the answers in bits (0 when everyone agrees).
+function modal_share(xs: List of Any) -> Number = max([count(xs, v) for v in unique(xs)]) / len(xs).
+function pairwise_identity(xs: List of Any) -> Number = sum([count(xs, v) * (count(xs, v) - 1) for v in unique(xs)]) / (len(xs) * (len(xs) - 1)).
+function entropy_bits(xs: List of Any) -> Number = 0 - sum([(count(xs, v) / len(xs)) * ln(count(xs, v) / len(xs)) for v in unique(xs)]) / ln(2).
+
+note Fleiss' kappa (Fleiss 1971, Psychological Bulletin 76(5):378-382) for N subjects each rated by the
+note same number n of raters into k categories. table[i][j] = how many raters put subject i in category j.
+note 1 is perfect agreement, 0 is chance level; it is undefined when every rating is one category.
+function _row_agreement(row: List of Int) -> Number = (sum([c ^ 2 for c in row]) - sum(row)) / (sum(row) * (sum(row) - 1)).
+function _category_share(table: List of List of Int, j: Int) -> Number = sum([r[j] for r in table]) / sum([sum(r) for r in table]).
+function _chance(table: List of List of Int) -> Number = sum([_category_share(table, j) ^ 2 for j in 1..len(table[1])]).
+function fleiss_kappa(table: List of List of Int) -> Number = (mean([_row_agreement(r) for r in table]) - _chance(table)) / (1 - _chance(table)).
+
+note A table for fleiss_kappa from answers: answers[i] lists subject i's answers, categories the options.
+function rating_table(answers: List of List of Any, categories: List of Any) -> List of List of Int = [[count(a, c) for c in categories] for a in answers].
+
+test "spread" do
+  assert variance([2, 4, 4, 4, 5, 5, 7, 9]) = 4.
+  assert stdev([2, 4, 4, 4, 5, 5, 7, 9]) = 2.
+  assert sample_variance([1, 2, 3, 4]) = 5/3.
+  assert weighted_mean([1, 2, 3], [3, 0, 1]) = 3/2.
+  assert clamp(12, 0, 10) = 10 and clamp(-1, 0, 10) = 0.
+  assert normalized([1, 1, 2]) = [1/4, 1/4, 1/2].
+end.
+
+test "agreement" do
+  assert modal_share(["a", "a", "b", "a"]) = 3/4.
+  assert pairwise_identity(["a", "a", "b", "a"]) = 1/2.
+  assert entropy_bits(["x", "x", "x"]) = 0.
+  assert round(entropy_bits(["x", "y"]), 20) = 1.
+end.
+
+test "Fleiss kappa: perfect agreement is 1, a uniform split is below 0" do
+  assert fleiss_kappa([[3, 0], [0, 3], [3, 0]]) = 1.
+  assert fleiss_kappa([[1, 1], [1, 1]]) < 0.
+  assert rating_table([["a", "a", "b"], ["b", "b", "b"]], ["a", "b"]) = [[2, 1], [0, 3]].
+end.
+
+note Binomial tails, exact: the probability of k or more (binomial_at_least) or of k or fewer (binomial_at_most)
+note successes in n independent trials that each succeed with probability p. They are for judging a pass
+note count: "18 of 18 passed" is weak evidence about a rate. binomial_at_least(18, 18, 85/100) is about 0.054,
+note so a true rate of 85% is not excluded at the 5% level (one-sided). k may be any whole number; n runs from 0
+note to 100000 (the limit of choose) and p from 0 to 1. A large n can exceed the kernel's limit of 4000 digits:
+note the call then fails; it never rounds.
+function binomial_at_least(k: Int, n: Int in 0..100000, p: Number in 0..1) -> Number = sum([choose(n, i) * p ^ i * (1 - p) ^ (n - i) for i in max(k, 0)..n]).
+function binomial_at_most(k: Int, n: Int in 0..100000, p: Number in 0..1) -> Number = sum([choose(n, i) * p ^ i * (1 - p) ^ (n - i) for i in 0..min(k, n)]).
+
+test "binomial tails are exact" do
+  assert binomial_at_least(2, 2, 1/2) = 1/4.
+  assert binomial_at_least(0, 5, 1/3) = 1.
+  assert binomial_at_most(0, 3, 1/2) = 1/8.
+  assert binomial_at_least(18, 18, 85/100) = (17/20) ^ 18 and round(binomial_at_least(18, 18, 85/100), 3) = 0.054.
+  assert binomial_at_least(18, 18, 85/100) > 5/100 and binomial_at_least(18, 18, 84/100) < 5/100.
+  assert binomial_at_least(4, 3, 1/2) = 0 and binomial_at_least(-2, 3, 1/2) = 1.
+  assert binomial_at_most(-1, 3, 1/2) = 0 and binomial_at_most(7, 3, 1/2) = 1.
+  assert binomial_at_least(3, 3, 1) = 1 and binomial_at_least(1, 3, 0) = 0 and binomial_at_most(0, 0, 1/2) = 1.
+  assert all k in -1..7: binomial_at_least(k, 6, 2/7) + binomial_at_most(k - 1, 6, 2/7) = 1.
+  assert binomial_at_most(2, 5, 1/3) = binomial_at_least(3, 5, 2/3) and binomial_at_most(2, 5, 1/3) = 64/81.
+end.

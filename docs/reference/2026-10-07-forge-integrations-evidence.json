@@ -1,0 +1,566 @@
+{
+  "schema": "symblic.website-release-evidence/1",
+  "date": "2026-10-07",
+  "scope": "Symblic Forge from all five iDesign documents (two other host integrations recorded in the original file were removed for publication)",
+  "private_evidence_policy": "Only test counts, source hashes and bounded synthetic-example results are copied here. Credentials, raw private histories and operator project documents remain private.",
+  "requirements": {
+    "sources": [
+      {
+        "path": "idesign1.txt",
+        "bytes": 28918,
+        "lines": 583,
+        "sha256": "ddea43bfe0ad301f29e6c52dad6f91eecf3a97ae8f3e167a66c232b006599f40",
+        "read": "complete untruncated tool output"
+      },
+      {
+        "path": "idesign2.txt",
+        "bytes": 19786,
+        "lines": 434,
+        "sha256": "e2b68357aaadd11404f2cfe45c1edc580291f6a5508a3d1ed7b1f4b355225fac",
+        "read": "complete untruncated tool output"
+      },
+      {
+        "path": "idesign3.txt",
+        "bytes": 19261,
+        "lines": 450,
+        "sha256": "b6a791f457bce1bc57b2b47accee3039462dc90c08ac1903be18232b964865d9",
+        "read": "complete untruncated tool output"
+      },
+      {
+        "path": "idesign4.txt",
+        "bytes": 17934,
+        "lines": 411,
+        "sha256": "219ba2a7bbc4c0ad75753fe29439100c706410fb1ab53c7875446e3e1e8c12e2",
+        "read": "complete untruncated tool output"
+      },
+      {
+        "path": "idesign5.txt",
+        "bytes": 10738,
+        "lines": 270,
+        "sha256": "29d5295a9478d3bf2e52104cfc96c13360992efe54bbe9933074f47f028a4620",
+        "read": "complete untruncated tool output"
+      }
+    ],
+    "units": 154,
+    "preamble_clauses": 41,
+    "closing_clauses": 22,
+    "total_nonempty_lines": 2147
+  },
+  "deployment": {
+    "pid": 3833558,
+    "routes": [
+      {
+        "path": "/symblic-forge",
+        "status": 200,
+        "bytes": 3572
+      },
+      {
+        "path": "/api/symblic-forge/health",
+        "status": 200,
+        "bytes": 2241
+      }
+    ],
+    "restarts": [
+      {
+        "before": 3641246,
+        "after": 3701005,
+        "http": 200
+      },
+      {
+        "before": 3701005,
+        "after": 3723711,
+        "http": 200
+      },
+      {
+        "before": 3723711,
+        "after": 3742534,
+        "http": 200
+      },
+      {
+        "before": 3742534,
+        "after": 3748426,
+        "http": 200
+      },
+      {
+        "before": 3748426,
+        "after": 3774617,
+        "http": 200
+      },
+      {
+        "before": 3774617,
+        "after": 3793206,
+        "http": 200
+      },
+      {
+        "before": 3793206,
+        "after": 3800972,
+        "http": 200
+      },
+      {
+        "before": 3800972,
+        "after": 3833558,
+        "http": 200
+      }
+    ]
+  },
+  "forge": {
+    "status": "implemented_and_live_verified",
+    "accepted_design_units": 154,
+    "source_sha256": {
+      "symblic-forge.html": "62b2a31d5db55a8c416f59ed4e664f955fe09bf18aaf7f63a4fe2c7a22e3e921",
+      "symblic-forge.css": "f3fe5611e7f62a3eb2bc242ba1addda9edf396c0b92e5ce904a99db55b9240f4",
+      "symblic-forge.js": "9b8afd7c7103ba2f140d2d9e6fe9ee1c71ae173d079d635a210e3806705d29b4",
+      "integration/host/symblic_forge.py": "d617bcb54ec6aa349eb8b1b4449fe91496b8fab87c9526b48371a792ee7868b3",
+      "symblic/forge/core.py": "74c37114f4352efbe127a22a08f6e8c37272258735a9bbb9bd31331ad9079e91",
+      "symblic/forge/catalog.py": "0a7432901f0be7d70979507a2184424bb5bf670bc4afc5e2d931f2a59f0c40fd",
+      "symblic/forge/models.py": "07998f12fb24613734e88b25c4a50581c46a8243ad22e910ccda8955836d73b9",
+      "symblic/forge/exports.py": "f058269cfe6e51eeea4b7b750d909cccf07c5834fd0f9073fc882a23bcacb95b",
+      "symblic/forge/store.py": "a77729b80d4d1924a35b126f2d6817a9fb4ef9c4be68053acd0265cc9304c829",
+      "symblic/forge/watch.py": "14ac3d04e66c4f64b17841ab232239756ce6956e10c179982e947b1a5da81db6",
+      "tests/forge/test_symblic_forge_core.py": "437922e11b0058acf79138162ec58e572f34c85d64f80f4b4a73e2bc88eff5e3",
+      "tests/forge/test_symblic_forge_exports.py": "5b8f19c157160e934b7fbd4d1672aa3837957f6e0c9af21dcb2528ae45903912",
+      "tests/forge/test_symblic_forge_models.py": "352f06f93d82145fd68c27d4593125f33158ab336577c0c0d919cf89b2c52349",
+      "tests/integration/test_symblic_forge_api.py": "d3682c506058dd63679663790f41368e9f9b2421d8340aed9e019750fb230e2c",
+      "tests/integration/test_symblic_forge_integration.py": "5ea749fd05035b71debf775352f81f2b7937c3f34f62b8f10bfa2d5a235bb6f2",
+      "tests/browser/symblic-forge.mjs": "110776b51c76118e415dbaf83dba8fc6242b40276cba9d910d24e0352acee7b9",
+      "tests/browser/forge_fixture.py": "0cc1494a1b5e6cca4bcd8663cfbd1f9d28d33aef5b8d2876eb74f869e957225b"
+    },
+    "compiler": {
+      "kernel": {
+        "lang": "2.5",
+        "canon": 3,
+        "geometry": 2,
+        "unicode": "15.0.0",
+        "variational": 1,
+        "transport": 1,
+        "max_digits": 4000,
+        "capsule_manifest": 5,
+        "epistemic_runtime": 1,
+        "parser": 2,
+        "ask_policy": 3,
+        "feedback": 1,
+        "constructor_bridge": 2,
+        "parser_limits": {
+          "syntax_depth": 60,
+          "ast_depth": 128
+        },
+        "epistemic": 1,
+        "epistemic_semantics": 2,
+        "module_logic": 1,
+        "profiles": 2,
+        "proof_terms": 1,
+        "proof_steps": 1,
+        "finite_logic": 1,
+        "proof_session": 1,
+        "proof_command": 1,
+        "discrete": 1,
+        "knowledge": 1,
+        "projection": 1,
+        "operators": 1,
+        "js": "8+node22.17.0+assetsda11c9ca736caedb9550bf2f7532b803de2d50c8f4ac3fadb5382be542263d40",
+        "js_declarations": "2+acorn8.8.1+node22.17.0+assetsc972fb55edc84e5ce398c24769706129058a8839225fa6cd4fcd67cd936a1a64",
+        "proof": 4,
+        "quantities": 1,
+        "grounding": 1,
+        "grounding_rules": 4,
+        "python": "3.12.3",
+        "id": "7bf8c94958d86fc7"
+      },
+      "exporter": "forge-export/1",
+      "source_hashes": {
+        "symblic/kernel/language.py": "61c0fa5f34cc63b34b905bbeb0f8ebb955844ef2a9fe8c316dbd4b82290b8de6",
+        "symblic/kernel/embed.py": "3e2902ecd005fd330fe88fe6ebb8f723a0157dabee62d89fcdf61be4e9800bf6",
+        "symblic/spec/sheets.py": "ef4031bff85c8b6e455a6deb99b2872c01a1cbcbf4b0f262af3abeda4e36b645",
+        "symblic/authoring/editor_diagnostics.py": "1a240592ab8604d9545e5873abead88b75c507a6a6441618814e763abc38c69d",
+        "symblic/forge/core.py": "74c37114f4352efbe127a22a08f6e8c37272258735a9bbb9bd31331ad9079e91",
+        "symblic/forge/catalog.py": "0a7432901f0be7d70979507a2184424bb5bf670bc4afc5e2d931f2a59f0c40fd",
+        "symblic/forge/exports.py": "f058269cfe6e51eeea4b7b750d909cccf07c5834fd0f9073fc882a23bcacb95b"
+      },
+      "disk_source_hashes": {
+        "symblic/kernel/language.py": "61c0fa5f34cc63b34b905bbeb0f8ebb955844ef2a9fe8c316dbd4b82290b8de6",
+        "symblic/kernel/embed.py": "3e2902ecd005fd330fe88fe6ebb8f723a0157dabee62d89fcdf61be4e9800bf6",
+        "symblic/spec/sheets.py": "ef4031bff85c8b6e455a6deb99b2872c01a1cbcbf4b0f262af3abeda4e36b645",
+        "symblic/authoring/editor_diagnostics.py": "1a240592ab8604d9545e5873abead88b75c507a6a6441618814e763abc38c69d",
+        "symblic/forge/core.py": "74c37114f4352efbe127a22a08f6e8c37272258735a9bbb9bd31331ad9079e91",
+        "symblic/forge/catalog.py": "0a7432901f0be7d70979507a2184424bb5bf670bc4afc5e2d931f2a59f0c40fd",
+        "symblic/forge/exports.py": "f058269cfe6e51eeea4b7b750d909cccf07c5834fd0f9073fc882a23bcacb95b"
+      },
+      "restart_required": false,
+      "changed_sources": []
+    },
+    "checks": [
+      {
+        "name": "Forge core/models/exports/API baseline",
+        "cases": 106,
+        "seconds": 141.737,
+        "status": "passed",
+        "raw_log_sha256": "20a1ad5c89c5f511f55c2caed1cb4fa76eac4082b351c3f688ca51d0b5c1e9d9",
+        "capture_id": "1aa5c1c5779f4a10b88352a6d72dae26"
+      },
+      {
+        "name": "Forge real-API browser fixture",
+        "cases": 9,
+        "seconds": 69.03,
+        "status": "passed",
+        "raw_log_sha256": "a7cf78fddf4d23f0040804d90575e996bd63511c8d7aba46c6dfbe72d62b5510",
+        "capture_id": "2ad5dab2326e4fe398bdafa177d479b9"
+      },
+      {
+        "name": "Forge registration and actual online SQLite WAL backup",
+        "cases": 3,
+        "seconds": 2.657,
+        "status": "passed",
+        "raw_log_sha256": "7a19e6440c99a232136be942eada564dbe38ad4da2981b8025dbe44c6400b47f",
+        "capture_id": "f5b34517d7be4c4198126e9fce4c6943"
+      },
+      {
+        "name": "Final export provenance suite",
+        "cases": 16,
+        "new_regressions_since_baseline": 4,
+        "seconds": 5.689,
+        "status": "passed"
+      },
+      {
+        "name": "Final exports and API after ordinary-answer/export-context fix",
+        "status": "passed",
+        "cases": 44,
+        "seconds": 16.725,
+        "capture_id": "8bc0dc334a0c425aab16f60ea812eb8b",
+        "raw_log_sha256": "bf0f8f239b04da3a59891a977854b57ba9166e4e8cffc7f904f1033eec0ba987",
+        "temporary_store_location": "private tmpfs; real SQLite transactions and browser/Python API fixture"
+      },
+      {
+        "name": "Final ten browser cases after ordinary-answer/export-context fix",
+        "status": "passed",
+        "cases": 10,
+        "seconds": 55.906,
+        "capture_id": "2e4b841c1c4842eb840b2d1c1fb10697",
+        "raw_log_sha256": "3d6f36bd390a0d005a70d30b86c209f8dfda67b830a3b688141b06d3c14369dd",
+        "temporary_store_location": "private tmpfs; real SQLite transactions and browser/Python API fixture"
+      },
+      {
+        "name": "Final core suite after ordinary-answer quantity parsing",
+        "status": "passed",
+        "cases": 55,
+        "subtests": 39,
+        "seconds": 40.8,
+        "new_cases": 6
+      },
+      {
+        "name": "Final combined core/models/exports/API/registration/WAL suite",
+        "status": "passed",
+        "cases": 121,
+        "seconds": 33.662,
+        "capture_id": "ea4e05d1488642cfa172edf35fa20f5a",
+        "raw_log_sha256": "b4ddc350ae89821db9f7eb3636b58130277883dc0291b52f57f6242819dad675"
+      },
+      {
+        "name": "Seven actual browser downloads, hash checks and frozen handoff",
+        "status": "passed",
+        "cases": 1,
+        "seconds": 37.843,
+        "capture_id": "effec6afcbd742259b8cfc9d924a415e",
+        "raw_log_sha256": "5629550b8cf5e3bce7181e4cb58c9175084e92916424d2af55f9b2afac540a5f"
+      },
+      {
+        "name": "Final accepted unit path and symbol preservation export suite",
+        "status": "passed",
+        "cases": 19,
+        "seconds": 7.793,
+        "new_regressions": 1,
+        "scope": "Actual pure native parser/static checker; quotes/newlines/braces/shell-shaped values remain literal data; zero model or project execution."
+      },
+      {
+        "name": "API/integration after final export contract repair",
+        "status": "passed",
+        "cases": 29,
+        "seconds": 13.08,
+        "capture_id": "a2c383a224de41b98e8b63b0972971a2",
+        "raw_log_sha256": "9fef79d65ce2fd722baf0619336027834b72061b048d747f816d7c7dd9a8fddf"
+      },
+      {
+        "name": "Seven actual downloads and frozen handoff after final export contract repair",
+        "status": "passed",
+        "cases": 1,
+        "seconds": 13.456,
+        "capture_id": "18dbba13bc654e81a8dfaa7b2b044499",
+        "raw_log_sha256": "68490a22f70a43c1240b0ddbfdba64a33971728b98a7beffdcd20b85423df935"
+      }
+    ],
+    "unique_python_unit_cases_covered": 119,
+    "integration_cases": 3,
+    "browser_cases": 10,
+    "scale_fixture": {
+      "accepted_records": 400,
+      "create_load_ms": 1749,
+      "render_ms": 267,
+      "search_ms": 81,
+      "scope": "isolated desktop Chromium fixture; not a fleet-wide performance guarantee"
+    },
+    "live_model": {
+      "date": "2026-10-07",
+      "status": "completed",
+      "model": "ollama:qwen3:4b-instruct@node-f",
+      "node": "node-f",
+      "model_digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+      "provider_duration_ms": 36520,
+      "usage": {
+        "duration_ms": 32548,
+        "eval_ms": 11112,
+        "input_tokens": 808,
+        "load_ms": 4974,
+        "output_tokens": 120,
+        "prompt_ms": 16380
+      },
+      "questions": 1,
+      "proposed_statements": 1,
+      "automatic_acceptance": false,
+      "host_service_inactive": true,
+      "host_main_pid": 0,
+      "context_sha256": "1123ff1ef30959832569a3af87f3f3eb5c0d1f26e691217c8a2e7ad4b1263743"
+    },
+    "live_demo": {
+      "project_id": "forge-2a7a137bc30140dea1253e0f0a64465f",
+      "revision": 16,
+      "accepted": 29,
+      "conflicts": 0,
+      "structural_ready": true,
+      "units": 3,
+      "frozen_handoff": {
+        "source_revision": 15,
+        "fingerprint": "85908ad0f6c1044da8e84285e317e108e6335d38d1335b7dc3fe22059b78cd1f",
+        "execution_started": false,
+        "artifacts": [
+          {
+            "kind": "manifest",
+            "sha256": "72bf9af907ecc8f98fb225efc9de85c3f532cedc23d7178158e9dbd68f0fa96b",
+            "source_revision": 15,
+            "retrieved_bytes": 2190694
+          },
+          {
+            "kind": "symblic",
+            "sha256": "d1c369c2b1860f71a53a70a228e149508557ae40c69eed0af887ea814e0ccd45",
+            "source_revision": 15,
+            "retrieved_bytes": 57600
+          },
+          {
+            "kind": "tasks",
+            "sha256": "64eb5964e622bd7eed584306376a8e2c3aab961f0f2e4cfcdac4c5fa461a6d37",
+            "source_revision": 15,
+            "retrieved_bytes": 66922
+          },
+          {
+            "kind": "sheet",
+            "sha256": "f05618acef64cd6f9eba71c355c76d1be19cc8d61aa39bfaf574e19b1f1a1b96",
+            "source_revision": 15,
+            "retrieved_bytes": 125879
+          },
+          {
+            "kind": "construction",
+            "sha256": "d5c7532330add8427d36c4f44702f47bb1d40d996aec8e10e29bb2b197d1c647",
+            "source_revision": 15,
+            "retrieved_bytes": 54882
+          }
+        ]
+      },
+      "compiler_kernel_id": "7bf8c94958d86fc7",
+      "compiler_source_hashes": {
+        "symblic/kernel/language.py": "61c0fa5f34cc63b34b905bbeb0f8ebb955844ef2a9fe8c316dbd4b82290b8de6",
+        "symblic/authoring/editor_diagnostics.py": "1a240592ab8604d9545e5873abead88b75c507a6a6441618814e763abc38c69d",
+        "symblic/kernel/embed.py": "3e2902ecd005fd330fe88fe6ebb8f723a0157dabee62d89fcdf61be4e9800bf6",
+        "symblic/forge/catalog.py": "0a7432901f0be7d70979507a2184424bb5bf670bc4afc5e2d931f2a59f0c40fd",
+        "symblic/forge/core.py": "74c37114f4352efbe127a22a08f6e8c37272258735a9bbb9bd31331ad9079e91",
+        "symblic/forge/exports.py": "f058269cfe6e51eeea4b7b750d909cccf07c5834fd0f9073fc882a23bcacb95b",
+        "symblic/spec/sheets.py": "ef4031bff85c8b6e455a6deb99b2872c01a1cbcbf4b0f262af3abeda4e36b645"
+      },
+      "real_native_compiler_pass": true,
+      "all_retained_artifact_hashes_verified": true,
+      "prior_handoff_preserved": true,
+      "prior_handoff_count": 2,
+      "exact_unit_paths_and_symbols_preserved": true,
+      "path": "snake/src/state.js",
+      "reload_preserved_handoff": true,
+      "scope": "Live operator API transitions on the retained labelled Snake demonstration; explicit edit then acceptance, actual compiler, frozen artifacts and read-back hash verification. No project or model execution."
+    },
+    "screenshots": "Desktop and 390px phone dark/reduced-motion screenshots inspected; retained privately.",
+    "project_execution_started": false,
+    "ordinary_answer_behavior": "Explicit pixel quantities retain exact wording and provenance; accepted 800 by600pixel answers derive480000px². Accepted fact context remains in prompt/native/task/construction exports.",
+    "live_ordinary_answers": {
+      "project_id": "forge-ca0a9d62d2b84507b6cbd7a8c2394f70",
+      "revision": 11,
+      "accepted_count": 3,
+      "original_answers_preserved": true,
+      "derived_area": {
+        "text": "Viewport area",
+        "value": 480000,
+        "unit": "px²",
+        "provenance": "SYSTEM_DERIVED",
+        "authoritative": false
+      },
+      "accepted_prompt_sha256": "94017dfa6f17695e6f02e993dc9ec725f78bdef8650c2bec17f442842ffb248f",
+      "native_source_sha256": "2b2383ca1dca50d1a8f1d98b703e399f47985b03d673bc55c48376e494ddd594",
+      "native_check_passed": true,
+      "compiler_source_hashes": {
+        "symblic/kernel/language.py": "61c0fa5f34cc63b34b905bbeb0f8ebb955844ef2a9fe8c316dbd4b82290b8de6",
+        "symblic/authoring/editor_diagnostics.py": "1a240592ab8604d9545e5873abead88b75c507a6a6441618814e763abc38c69d",
+        "symblic/kernel/embed.py": "3e2902ecd005fd330fe88fe6ebb8f723a0157dabee62d89fcdf61be4e9800bf6",
+        "symblic/forge/catalog.py": "0a7432901f0be7d70979507a2184424bb5bf670bc4afc5e2d931f2a59f0c40fd",
+        "symblic/forge/core.py": "74c37114f4352efbe127a22a08f6e8c37272258735a9bbb9bd31331ad9079e91",
+        "symblic/forge/exports.py": "f058269cfe6e51eeea4b7b750d909cccf07c5834fd0f9073fc882a23bcacb95b",
+        "symblic/spec/sheets.py": "ef4031bff85c8b6e455a6deb99b2872c01a1cbcbf4b0f262af3abeda4e36b645"
+      },
+      "reload_preserved_exact_prompt_and_revision": true,
+      "structural_readiness": false,
+      "scope": "Real website ordinary questions and separate explicit statement acceptance; no preseeded demonstration, no model, no project execution.",
+      "revalidated_after_final_export_fix": true
+    },
+    "previous_live_demo": {
+      "revision": 11,
+      "accepted": 29,
+      "conflicts": 0,
+      "structural_ready": true,
+      "units": 3,
+      "frozen_handoff": {
+        "source_revision": 9,
+        "fingerprint": "7c937768bff59998bae1286dd9330ea1e513eb1f0ad52697adddd2a03ff68fe7",
+        "execution_started": false,
+        "artifacts": [
+          {
+            "kind": "manifest",
+            "sha256": "7c16226a73e3760cd4cda4a2580500e2aced34fb6ef3c4f215f429496e0cf912",
+            "source_revision": 9,
+            "download_bytes": 1171690
+          },
+          {
+            "kind": "symblic",
+            "sha256": "fb4dcdeb936cc44bb42267c002e422b865ca9d3f779a98a9ba47fe5e4577861e",
+            "source_revision": 9,
+            "download_bytes": 57343
+          },
+          {
+            "kind": "tasks",
+            "sha256": "6472c93ee71618c4632cc8bbb633827488cb1658c5a6b44a40f613973365d7ba",
+            "source_revision": 9,
+            "download_bytes": 66869
+          },
+          {
+            "kind": "sheet",
+            "sha256": "8ec169d1ea3707f512e23385777b5dde61f8f240b710f2659887e2dd3d2ddb25",
+            "source_revision": 9,
+            "download_bytes": 125826
+          },
+          {
+            "kind": "construction",
+            "sha256": "e6e47c53326931a239a30fea590cf45121c4e65a4ebb955e8e0bf8b5a4676498",
+            "source_revision": 9,
+            "download_bytes": 54546
+          }
+        ]
+      },
+      "compiler_kernel_id": "7bf8c94958d86fc7",
+      "all_artifact_download_hashes_verified": true,
+      "real_native_compiler_pass": true,
+      "journeys": [
+        "explicit labelled Snake demonstration",
+        "deliberate 640-versus-800 pixel contradiction accepted and resolved through Keep first",
+        "native source generated through UI",
+        "native source checked through UI",
+        "frozen five-artifact handoff through UI",
+        "three construction units include exact Finish this step terminator and explicit checks",
+        "snapshot and page reload preserve retained project revision"
+      ],
+      "compiler_source_hashes": {
+        "symblic/kernel/language.py": "61c0fa5f34cc63b34b905bbeb0f8ebb955844ef2a9fe8c316dbd4b82290b8de6",
+        "symblic/authoring/editor_diagnostics.py": "1a240592ab8604d9545e5873abead88b75c507a6a6441618814e763abc38c69d",
+        "symblic/kernel/embed.py": "3e2902ecd005fd330fe88fe6ebb8f723a0157dabee62d89fcdf61be4e9800bf6",
+        "symblic/forge/catalog.py": "0a7432901f0be7d70979507a2184424bb5bf670bc4afc5e2d931f2a59f0c40fd",
+        "symblic/forge/core.py": "74c37114f4352efbe127a22a08f6e8c37272258735a9bbb9bd31331ad9079e91",
+        "symblic/forge/exports.py": "d8c99a54b56920b25706df575e266c29cbf968d5c8559c0eff6d9fbba037557e",
+        "symblic/spec/sheets.py": "ef4031bff85c8b6e455a6deb99b2872c01a1cbcbf4b0f262af3abeda4e36b645"
+      },
+      "prior_handoff_preserved": true
+    },
+    "final_export_contract": {
+      "fields": [
+        "paths",
+        "defines",
+        "requires"
+      ],
+      "surfaces": [
+        "tasks",
+        "sheet",
+        "construction",
+        "symblic"
+      ],
+      "preserves_exact_literal_data": true,
+      "live_accepted_path": "snake/src/state.js",
+      "live_unit_symbols_preserved": true,
+      "project_execution_started": false
+    }
+  },
+  "broader_checkout_checks": {
+    "whole_checkout_green": false,
+    "devcheck": {
+      "status": "failed",
+      "blocking": 253,
+      "warnings": 15,
+      "dirty_paths_at_run": 3830,
+      "capture_id": "5a1d9f59baa24e65bdd589dd10793e39",
+      "scope": "Broad dirty shared checkout, not isolated to this task. New integration findings were corrected and focused checks passed."
+    },
+    "cross_subsystem_regression": {
+      "cases": 112,
+      "failures_or_errors": 3,
+      "capture_id": "090da4384ccb437fa99e9e5b01e3f4ae",
+      "remaining_unrelated_findings": [
+        "Existing host fixture skipped_names KeyError"
+      ],
+      "new_watch_covers_names_corrected": true
+    },
+    "scope_note": "Focused task checks pass. This release does not claim all unrelated work in the shared checkout passes.",
+    "focused_registration_private_routes_and_forge_backup": {
+      "status": "passed",
+      "cases": 60,
+      "seconds": 71.175,
+      "capture_id": "9b4831719d2d43c3b706968d8271701f",
+      "raw_log_sha256": "4ec3c1865b10c5cbf01772958667f7797e782c6c24d33fe1690bb45440959e7b"
+    },
+    "interrupted_disk_bound_verification": {
+      "captures": [
+        "12f4760b5064458b84ff7c3c41c1cd6b",
+        "33349003cd3b49fdb55f14611672b500",
+        "27b8726ebeb4400ea70b54b0b196656f"
+      ],
+      "result": "Stopped only owned tests during75–83percent I/Owait; one browser request timed out waiting for its SQLite-backed fixture. Superseded by passing same-source tests with private tmpfs stores. No live data or unrelated process changed."
+    }
+  },
+  "final_cached_compute_audit": {
+    "observedAt": 1791384014.9518228,
+    "scope": "Cached loopback GETs and inert local store/file reads only; no native dispatch or fresh remote probe.",
+    "routes": [
+      {
+        "path": "/symblic-forge/",
+        "status": 200,
+        "bytes": 3572
+      },
+      {
+        "path": "/symblic-terminal",
+        "status": 200,
+        "bytes": 5153
+      }
+    ]
+  },
+  "final_release_verification": {
+    "observed_at": 1791384766.5167747,
+    "dashboard_pid": 3833558,
+    "source_hashes_verified": 40,
+    "design_units": 154,
+    "named_test_references_resolved": 73,
+    "local_document_links_verified": 25,
+    "compiler_source_pins_current": true,
+    "scoped_diff_check": "passed",
+    "original_book_prefix_preserved": true,
+    "scope": "Final local source/document checks and cached operator API/store reads; no native dispatch."
+  },
+  "publication_note": "Edited for publication on 2026-10-11: sections about two non-Symblic integrations of the original host (a CAD model and a self-hosted compute runtime) and one unrelated finding were removed. Everything else is unchanged."
+}

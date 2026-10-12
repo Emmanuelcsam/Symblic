@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+"""symblic-workcard: check, compile and run bounded workcards (symblic.authoring.workcards).
+
+    tools/symblic-workcard --help
+
+The command runs symblic.authoring.workcards inside symblic/kernel/process_limits.py, which first sets an
+address-space and CPU-time ceiling for the whole command (the same limits as tools/symblic). See
+docs/reference/WORKCARDS.md for the workcard format. Standard library only.
+"""
+import os
+from pathlib import Path
+import sys
+
+root = Path(__file__).resolve().parents[1]           # the repository: this file is tools/symblic-workcard
+helper = root / 'symblic' / 'kernel' / 'process_limits.py'
+if helper.is_file():
+    os.execv(sys.executable, [sys.executable, '-I', str(helper), 'cli', '--module', 'symblic.authoring.workcards',
+                              *sys.argv[1:]])
+sys.path.insert(0, str(root))
+from symblic.authoring.workcards import main  # noqa: E402
+raise SystemExit(main())

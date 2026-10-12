@@ -1,0 +1,238 @@
+{
+  "behavior": [
+    "The model sees all exact command-menu references with complete free-assumption sets and required definitions.",
+    "The full original prefix is validated before dispatch and remains authoritative for selected-inference checks and parent adoption.",
+    "No command is inferred, filtered, ranked or selected during projection; the caller owns the ordered menu and exact obligation.",
+    "The existing CLI/API catalog accepts one exact template selector and rejects malformed or repeated selectors.",
+    "Malformed places, word counts and list/set length bounds yield positioned syntax refusals; valid integer conversions are unchanged."
+  ],
+  "canonical_version": 3,
+  "catalog_version": 8,
+  "compatibility": {
+    "checker": "Native proof calculus and inference checker unchanged.",
+    "older_compiled_contract_fixtures": 31,
+    "older_template_versions": "5,6,7 unchanged",
+    "source_pins": "Compiler and parser source identities changed; saved records remain intact and incompatible continuation refuses."
+  },
+  "date_utc": "2026-10-05T13:38:05.889599+00:00",
+  "deployment": {
+    "dependency_guards": 284,
+    "effective_dependencies": 59,
+    "effective_files": 249,
+    "payload_files": 24,
+    "plan_sha256": "4f5abf7e239945bbe314faf6616a3ca87866de65b7ce42a4adc7b6275ceafba9",
+    "rollback": "Exact-postimage guarded private bundle; reverse later layers first."
+  },
+  "evidence_sha256": {
+    "catalog_candidate": "ab398b9d904e32e1780df82f9860d0ed1d679e8731e4a438a1fc0c079cf4f2db",
+    "default_budget": "0b2c8dca09948d2d1f241f87487ae18fe10579c7cce3a305e27d4efd8a4a8f5f",
+    "discovery_sizes": "182199578708342b4a30addc0cc8afbd945710ff3c11dd47b3abc05838a37a95",
+    "independent_parser": "367ad8d0350c76543de8fee613620b423e67bc2d5d0c5dc6c627c7bef67c59eb",
+    "independent_projection": "7b92d70df6b4bd60c3941b7009da63c6ff17ab9be9c5a87dbf1e64f5208b8248",
+    "installation_manifest": "e7a88966708be8ef7f7b8bf7403ab5c5a133f1bec3c1f44ad6b37363b2644b12",
+    "live": "0798ec24257fe9036ce27246066d1caed074e176f433bd2e4943c411410d4641",
+    "parser_candidate": "80589589392d0136f6361fd5dd98dde5710a40d71055080e4485f4ad7a71bba8",
+    "projection_candidate": "3138911468375ae98f4e978223e118d13b59872f2b93533953336d030399099c",
+    "request_sizes": "5db3ce67517ce89604ffa5d56230ad906c7e8fbc7f90e80ce17dd50bf9b9ddde",
+    "root_review": "c27161c5526dcee575b03ba219a3e78656ce9f05bd8dcb2c6768e1ee17fb74de"
+  },
+  "kernel_id": "2c517c7a2f94395e",
+  "limits": [
+    "The projection supports a fixed caller menu, not unrestricted proof construction or autonomous decomposition.",
+    "Caller premises, obligation adequacy and menu completeness remain assumptions.",
+    "Different valid commands can satisfy one obligation; no cross-model byte-identical proof claim is made.",
+    "Full checking, full result storage and parent rechecking costs remain. No real-model benefit is established by these synthetic checks."
+  ],
+  "parser_revision": 2,
+  "serialization_measurements": {
+    "default_budget": {
+      "characters": 24000,
+      "checked_output_lines": 201,
+      "focused_accepted_with_fake_selection_both_layouts": true,
+      "full_history_refused_before_dispatch_both_layouts": true,
+      "prefix_lines": 200
+    },
+    "discovery": {
+      "rows": [
+        {
+          "api_utf8_bytes": 12945,
+          "cli_utf8_bytes": 13916,
+          "template": "ALL"
+        },
+        {
+          "api_utf8_bytes": 3411,
+          "cli_utf8_bytes": 3655,
+          "template": "typed_transform"
+        },
+        {
+          "api_utf8_bytes": 2505,
+          "cli_utf8_bytes": 2699,
+          "template": "proof"
+        },
+        {
+          "api_utf8_bytes": 2374,
+          "cli_utf8_bytes": 2514,
+          "template": "exact_arithmetic"
+        },
+        {
+          "api_utf8_bytes": 1509,
+          "cli_utf8_bytes": 1623,
+          "template": "enum_classification"
+        },
+        {
+          "api_utf8_bytes": 1471,
+          "cli_utf8_bytes": 1583,
+          "template": "witnessed_line"
+        },
+        {
+          "api_utf8_bytes": 1801,
+          "cli_utf8_bytes": 1915,
+          "template": "proof_step"
+        },
+        {
+          "api_utf8_bytes": 2653,
+          "cli_utf8_bytes": 2802,
+          "template": "proof_step_obligation"
+        },
+        {
+          "api_utf8_bytes": 2947,
+          "cli_utf8_bytes": 3097,
+          "template": "proof_step_focus"
+        }
+      ],
+      "scope": "CLI includes its newline; API uses exact DashboardHandler.send_json serialization; no headers/compression/network",
+      "units": "UTF-8 response-body bytes"
+    },
+    "not_measured": [
+      "provider tokenization",
+      "total project cost",
+      "model accuracy",
+      "latency improvement",
+      "authoring cost"
+    ],
+    "synthetic_requests": {
+      "rows": [
+        {
+          "capsule": "full",
+          "characters": 13177,
+          "prefix_lines": 64,
+          "template": "proof_step_obligation"
+        },
+        {
+          "capsule": "full",
+          "characters": 7699,
+          "prefix_lines": 64,
+          "template": "proof_step_focus"
+        },
+        {
+          "capsule": "compact",
+          "characters": 11979,
+          "prefix_lines": 64,
+          "template": "proof_step_obligation"
+        },
+        {
+          "capsule": "compact",
+          "characters": 6501,
+          "prefix_lines": 64,
+          "template": "proof_step_focus"
+        },
+        {
+          "capsule": "full",
+          "characters": 26474,
+          "prefix_lines": 200,
+          "template": "proof_step_obligation"
+        },
+        {
+          "capsule": "full",
+          "characters": 7706,
+          "prefix_lines": 200,
+          "template": "proof_step_focus"
+        },
+        {
+          "capsule": "compact",
+          "characters": 25276,
+          "prefix_lines": 200,
+          "template": "proof_step_obligation"
+        },
+        {
+          "capsule": "compact",
+          "characters": 6508,
+          "prefix_lines": 200,
+          "template": "proof_step_focus"
+        }
+      ],
+      "scope": "Exact synthetic request surfaces from native preview and a fake applicator. System+prompt+compact sorted JSON schema characters and UTF-8 bytes; not provider tokens, measured network traffic, latency, or quality evidence. Both templates have identical caller session/menu/obligation and budgets; the compiler interface and visible frontier differ. Full checker and output work remain."
+    }
+  },
+  "status": "installed_and_live_verified",
+  "template_id": "symblic.delegate/proof_step_focus/8",
+  "validation": {
+    "devcheck": {
+      "blocking": 0,
+      "existing_reviewed_ui_warnings": 1
+    },
+    "harness_corrections": [
+      "The initial default-budget measurement report used a stale private source path; all behavior assertions passed, then report generation was corrected and repeated.",
+      "The initial live harness expected frontier to be Any/JSON; native context uses Record notation with {:} for empty records. The corrected check compares exact system, prompt and schema against frozen default-budget requests. Production code did not change."
+    ],
+    "import_markers": 43,
+    "independent_parser": {
+      "api_refusals_without_stores_or_calls": 15,
+      "malformed_positions": 48,
+      "methods": 7,
+      "valid_baseline_pairs": 126
+    },
+    "independent_projection": {
+      "artifact_hash_checks": 109,
+      "methods": 10,
+      "older_contracts": 31
+    },
+    "live": {
+      "compact_context_characters": 6508,
+      "full_context_characters": 7706,
+      "http_statuses": {
+        "blank_selector": 400,
+        "catalog": 200,
+        "compile_compact": 200,
+        "compile_full": 200,
+        "count_check": 200,
+        "count_preview": 200,
+        "duplicate_selector": 400,
+        "focused_catalog": 200,
+        "full_prefix_compile_compact": 200,
+        "full_prefix_compile_full": 200,
+        "full_prefix_default_budget_compact": 200,
+        "full_prefix_default_budget_full": 200,
+        "meta": 200,
+        "preview_compact": 200,
+        "preview_full": 200,
+        "prior_contract": 200
+      },
+      "native_arithmetic": {
+        "calls": 0,
+        "canonical": {
+          "#q": "1/2"
+        }
+      },
+      "production_runs_created": 0,
+      "real_model_calls": 0,
+      "restarted": true
+    },
+    "root_methods": {
+      "corrected_catalog_count": {
+        "passed": 1,
+        "seconds": 0.237
+      },
+      "focused_passed": 29,
+      "focused_seconds": 13.472,
+      "regression_initial": {
+        "methods": 238,
+        "passed": 237,
+        "seconds": 75.127,
+        "stale_catalog_count_assertions": 1
+      },
+      "unique": 267
+    }
+  },
+  "version": 1
+}

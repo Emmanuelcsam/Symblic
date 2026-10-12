@@ -1,0 +1,226 @@
+{
+  "date": "2026-10-06",
+  "scope": "Exact thirty-four English moving-dot statements; one Qwen-built implementation, recovered after a recorded failure",
+  "authoring": {
+    "source": "examples/english/moving-dot.english.txt",
+    "source_sha256": "85c15e63daf3704f2e9f4c5246ff9db04f103f5699c5ae8f42d61bcb23d15cb6",
+    "statements": 34,
+    "author_code_or_digits": false,
+    "compiler_version": "symblic-english-pixels/1",
+    "compiler_sha256": "a867c0836cb6575049eebadf52324333e9c4812337b768e01cc65324bb7be665",
+    "native_sha256": "43a79af8643e845d645a3a3097f150673c65e1e6fa22dc4dbafbfb77fb0f913e",
+    "all_original_clauses_retained": true,
+    "grammar": "Supported labelled English templates with consistent spelled-out quantities; unknown clauses refuse"
+  },
+  "baseline": {
+    "run_id": "00a38681ff59",
+    "status": "failed",
+    "model_calls": 11,
+    "accepted_functions": 7,
+    "failure": "whitePixels shadowed the bounds helper on three attempts",
+    "separate_rejection": "Earlier separation declaration parsing exceeded its limits; identical source passed a retry",
+    "outputs": 0,
+    "preserved": true
+  },
+  "recovery": {
+    "change": "Reserve dependency names and name the local bounds result searchBox; original English unchanged",
+    "retained_functions": 7,
+    "locally_rechecked_before_reuse": true,
+    "new_model_tasks": 2,
+    "new_model_calls": 2,
+    "new_rejections": 0,
+    "runtime_seconds": 450.29,
+    "input_limit_issue": "First API retry refused before creating a run; trusted parser moved into pinned native source, preserving existing limits"
+  },
+  "actual_run": {
+    "id": "46f1c6f5d275",
+    "url": "(original host; not public)",
+    "status": "done",
+    "provider": "ollama:qwen3:4b-instruct@node-f",
+    "observed_validated_model_manifest_sha256": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "accepted_functions": 9,
+    "implementation_sha256": "c1b73219b24e1dae3d94a5179fb163595b2ff7de34b30bcc00fd9cd18912d7a1",
+    "implementation_bytes": 1352,
+    "host_supplied_candidate_or_fallback": false,
+    "playback_model_calls": 0
+  },
+  "construction_checks": {
+    "native_assert_ensure_gates_passed": 46,
+    "included_exact_client_vm_gates": 10,
+    "runtime_assets": {
+      "parser": {
+        "sha256": "cb3b2d439857d6e4514d23a1219f6354c23498f5fa81fdf2691a5a9e53de43c0",
+        "sri": "sha256-yzstQ5hX1uRRTSOhIZ9jVMI0mPX6gf3yaRpanlPeQ8A="
+      },
+      "vm": {
+        "sha256": "aff8958b8d46f35309b4346858e032ca7aa677fb80b37ac5579c3f8ee26ac1b8",
+        "sri": "sha256-r/iVi41G81MJtDRoWOAyynqmd/uAs3rFV5w/juJqwbg="
+      },
+      "presenter": {
+        "sha256": "06c80765457f9e55a6728c003f50509ebe6205ffde752ee84fcdc443808c60c3",
+        "sri": "sha256-BsgHZUV/nlWmcowAP1BQnr5iBf/edS7oT83EQ4CMYMM="
+      }
+    },
+    "trusted_parser": "Pinned native constant, excluded from model context",
+    "host_input": "Pinned VM and test harness, excluded from model context",
+    "model_context": "Selected original English clauses, generated interface, finite examples and explicit accepted dependencies"
+  },
+  "independent_native_validation": {
+    "status": "passed",
+    "passed": 2451,
+    "planned": 2451,
+    "full_raster_pixels_checked": 384000000,
+    "oracle_sha256": "efba69b6a56bf0d92cecb73461f07cec77479314b7d1220d318e252328396d7a",
+    "verifier_sha256": "e3882e471be34bde40a56939ee39ce64edbca0817ec1ec16454559781b622714",
+    "cases_sha256": "42e8ee155cd2a56fa5d576e78053a76404ba22ac1573eab255ce3bd3236f78c7",
+    "frozen_before_candidate": true,
+    "provider_calls": 0,
+    "model_feedback": false,
+    "scope": "Some exhaustive domain points overlap construction examples; the verifier and oracle were private and frozen before candidate availability"
+  },
+  "independent_vm_validation": {
+    "status": "passed",
+    "counts": {
+      "initial_center": {
+        "checked": 1,
+        "failed": 0
+      },
+      "every_next_transition": {
+        "checked": 800,
+        "failed": 0
+      },
+      "sequential_centers": {
+        "checked": 2401,
+        "failed": 0
+      },
+      "signed_delta_horizontal": {
+        "checked": 2842,
+        "failed": 0
+      },
+      "signed_delta_vertical": {
+        "checked": 2842,
+        "failed": 0
+      },
+      "square_horizontal": {
+        "checked": 2842,
+        "failed": 0
+      },
+      "square_vertical": {
+        "checked": 2842,
+        "failed": 0
+      },
+      "squared_separation": {
+        "checked": 2842,
+        "failed": 0
+      },
+      "inclusive_mathematical_circle": {
+        "checked": 2842,
+        "failed": 0
+      },
+      "every_clipped_bounds": {
+        "checked": 800,
+        "failed": 0
+      },
+      "every_sparse_white_set": {
+        "checked": 800,
+        "failed": 0
+      },
+      "clear_same_buffer": {
+        "checked": 800,
+        "failed": 0
+      },
+      "clear_every_element": {
+        "checked": 800,
+        "failed": 0
+      },
+      "draw_same_buffer": {
+        "checked": 800,
+        "failed": 0
+      },
+      "every_full_binary_raster": {
+        "checked": 800,
+        "failed": 0
+      },
+      "draw_retains_off_disk_markers": {
+        "checked": 7,
+        "failed": 0
+      }
+    },
+    "vm_sha256": "aff8958b8d46f35309b4346858e032ca7aa677fb80b37ac5579c3f8ee26ac1b8",
+    "parser_sha256": "cb3b2d439857d6e4514d23a1219f6354c23498f5fa81fdf2691a5a9e53de43c0",
+    "verifier_sha256": "0637e3be6a3b3f49fbbfff4c4c3f91ed752f644477e6f8462e8811a099c6fc2b",
+    "provider_calls": 0,
+    "model_feedback": false
+  },
+  "live_browser": {
+    "actual_saved_source": true,
+    "desktop_device_pixel_box": [
+      800,
+      600
+    ],
+    "natural_frames_observed": 1375,
+    "positions_sequential": true,
+    "wrap": {
+      "frame_800_x": 799,
+      "frame_801_x": 0
+    },
+    "edge_pixel_mismatches": 0,
+    "minimum_observed_delay_ms": 17.200000047683716,
+    "minimum_copy_interval_ms": 37.200000047683716,
+    "pause_resume_and_close_passed": true,
+    "model_calls_before": 2,
+    "model_calls_after": 2,
+    "narrow_viewport": [
+      320,
+      844
+    ],
+    "narrow_mode": "preview",
+    "narrow_pixel_mismatches": 0,
+    "browser_errors": []
+  },
+  "inline_preview": {
+    "source_sha256": "c1b73219b24e1dae3d94a5179fb163595b2ff7de34b30bcc00fd9cd18912d7a1",
+    "fragment_sha256": "f716f0beea3ddbcdcce02b341639c1a7a88fa28a0f1f8ca6603edc0004dc1b1a",
+    "same_parser_vm_presenter_bytes": true,
+    "initial_actual_frame": true,
+    "play_pause_resume_and_narrow_dark_passed": true,
+    "pixel_mismatches": 0,
+    "browser_errors": [],
+    "scope": "Scaled preview; bundled bytes checked at build time; not external-script SRI or physical-display evidence"
+  },
+  "regression_checks": {
+    "compiler_and_recovery_tests": 21,
+    "entry_and_conformance_tests": 14,
+    "source_circuit_tests": 37,
+    "vm_and_controller_checks": "passed",
+    "existing_matrix_and_scalar_journeys": "passed on desktop and phone",
+    "ruff": "all changed Python passed"
+  },
+  "review": {
+    "claude_cloud": "Source-only review completed; corrected conformance, buffer-preservation, interpreter-scope, display lifecycle and asset identity findings"
+  },
+  "resource_release": {
+    "timed_high_power_deadline": "2026-10-06T18:10:02Z",
+    "restoration_confirmed_at": "2026-10-06T18:10:31Z",
+    "restored_nodes": 8,
+    "automatic_lease_restoration": true,
+    "final_checked_at": "2026-10-06T18:16:33Z",
+    "node_f_loaded_models": 0,
+    "fleet_active_fleet_runner": 0,
+    "verifier_units_collected": true,
+    "owned_browser_sessions_closed": true
+  },
+  "limits": [
+    "Supported English grammar, not arbitrary-English correctness or a benchmark of every small model",
+    "Finite artifact checks; future executions still depend on the unchanged runtime and available device resources",
+    "Playback pauses when hidden or closed; it resumes logical positions without skipping",
+    "Minimum elapsed software wait after a browser rendering opportunity, not exactly sixty frames per second",
+    "Browser canvas mapping does not prove physical monitor pixels, actual emitted light, OS window viewport size, completed scanout or a hardware timer",
+    "All original physical requirements remain visible and unverified; they were not discarded"
+  ],
+  "primary_references": [
+    "https://html.spec.whatwg.org/multipage/webappapis.html#rendering-opportunity",
+    "https://displayhdr.org/performance-criteria/"
+  ],
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

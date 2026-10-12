@@ -1,0 +1,544 @@
+{
+ "version": 1,
+ "date": "2026-10-07",
+ "provider": "Qwen3:4b-instruct only through Symblic, served by Ollama on a CPU-only machine",
+ "functional_code_origin": "Model replies only; no hand repair",
+ "author_contribution": "Objectives, finite validators, independent parser, orchestration and presentation",
+ "units": {
+  "plan_card": {
+   "file": "plan_card.js",
+   "code_sha256": "1124cedc0b0101130b365ababaf05c050815e6c7def4413f2f2c7fb62799af62",
+   "native_report_sha256": "33e8d0a18d2211c3d0cf91685c273f8062d061ced1aa2033071a6cc338e875e7",
+   "native_source_sha256": "ce02bb30504d3bd1e7ed64ca8b783d8c8c8649bbaac05d1fa364e91856f7a6ce",
+   "fingerprint": "5cf9b132ebc2fe2b",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls_in_accepted_unit_run": 3
+  },
+  "pricing_style": {
+   "file": "pricing_style.js",
+   "code_sha256": "0917b6aaf576aae95ad0dd4aac44a848f5b0427bb3d00299ce0cdd39849fa4c0",
+   "native_report_sha256": "f911208a7484d53d01849bca3edad3c834cae7f00e3688d8c9e8831d187c646f",
+   "native_source_sha256": "b3993f5b69dd1f173f8645f336453bc1a476cf6acfa42ff5ee1b230bedce68aa",
+   "fingerprint": "789fe170252e72f7",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls_in_accepted_unit_run": 2
+  },
+  "pricing": {
+   "file": "pricing.js",
+   "code_sha256": "455d4291c3ed98c8dbcd3881950ac0815c72a0d5219445bb48545e5230a2d726",
+   "native_report_sha256": "2ff566c40354cc2d6ec0aacf663163cddeb9071b774ca9a3e55ff3bb8a8bf8b8",
+   "native_source_sha256": "0738d52260695bbfd47c1a71b3d8f2f33568e7396b0b57f67e3c218f491066b5",
+   "fingerprint": "1bca2c5465d21bf2",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls_in_accepted_unit_run": 2
+  }
+ },
+ "attempts": [
+  {
+   "stage": "whole-page-v3",
+   "unit": "pricing",
+   "attempt": 1,
+   "accepted": false,
+   "unit_final_status": "failed",
+   "receipt_sha256": "a577ad0c2518a71bf2a2d05eb8872af16ebc2b348ea93e25c6143e7cfca82f83",
+   "reply_sha256": "2b82f87b51c8dba99e2c4d1232c0003b0884c8cb54d69b2706e108a6bc4dde97",
+   "usage": {
+    "input_tokens": 523,
+    "output_tokens": 423,
+    "duration_ms": 35745,
+    "load_ms": 2062,
+    "prompt_ms": 5504,
+    "eval_ms": 28158
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "whole-page-v3",
+   "unit": "pricing",
+   "attempt": 2,
+   "accepted": false,
+   "unit_final_status": "failed",
+   "receipt_sha256": "06e0fa749110311dd076b51d9c62c36ae3162c23382e4cac3632b41fc42fa51b",
+   "reply_sha256": "5318cf9e178cdc23ce341a856824d8fdd0a94d3366416ed8fc0011c011ca59c0",
+   "usage": {
+    "input_tokens": 690,
+    "output_tokens": 673,
+    "duration_ms": 56232,
+    "load_ms": 2065,
+    "prompt_ms": 7253,
+    "eval_ms": 46892
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "whole-page-v3",
+   "unit": "pricing",
+   "attempt": 3,
+   "accepted": false,
+   "unit_final_status": "failed",
+   "receipt_sha256": "f83a06461ce387ae7b88e50c56d887888a0ebec86ed62e19cc960e4bae736019",
+   "reply_sha256": "26ac33f052de5082e906990888b6aa059e7246dcba3cdb36a9ed7fa5d5c99491",
+   "usage": {
+    "input_tokens": 749,
+    "output_tokens": 498,
+    "duration_ms": 44555,
+    "load_ms": 2058,
+    "prompt_ms": 7897,
+    "eval_ms": 34578
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "components-v4",
+   "unit": "plan_card",
+   "attempt": 1,
+   "accepted": false,
+   "unit_final_status": "done",
+   "receipt_sha256": "9e0d4a4093d5f568be8fca2449cc7a6a1e2c018808cb092e6bb931d8bef8acd4",
+   "reply_sha256": "8a08ef93440c798fa646e823145085e467083c0c60a1917e54b4854ca2f5711b",
+   "usage": {
+    "input_tokens": 339,
+    "output_tokens": 41,
+    "duration_ms": 9134,
+    "load_ms": 3093,
+    "prompt_ms": 3492,
+    "eval_ms": 2527
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "components-v4",
+   "unit": "plan_card",
+   "attempt": 2,
+   "accepted": false,
+   "unit_final_status": "done",
+   "receipt_sha256": "eb7d41a495ebf0db40b0a5c763664e9ac2b5028d915f00fd2b8462ebd4d4d97f",
+   "reply_sha256": "bdd4f93715f7b0ae36b707d39e7a2c524758e529e2ff68f49d54f912c20bf38a",
+   "usage": {
+    "input_tokens": 448,
+    "output_tokens": 89,
+    "duration_ms": 12286,
+    "load_ms": 2068,
+    "prompt_ms": 4578,
+    "eval_ms": 5622
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "components-v4",
+   "unit": "plan_card",
+   "attempt": 3,
+   "accepted": true,
+   "unit_final_status": "done",
+   "receipt_sha256": "707a81cdf113cff40b8c829b320032646063867836f670d7e9d1f17cc5397e5e",
+   "reply_sha256": "5504ae336c486c9263a4ab5d6285032960f87c58855a545577423ba8d3f99d62",
+   "usage": {
+    "input_tokens": 647,
+    "output_tokens": 276,
+    "duration_ms": 27578,
+    "load_ms": 2061,
+    "prompt_ms": 6834,
+    "eval_ms": 18661
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "components-v4",
+   "unit": "pricing_style",
+   "attempt": 1,
+   "accepted": false,
+   "unit_final_status": "done",
+   "receipt_sha256": "cd851746a323c0b9443c305546bb9a66fcf552b43a0de0dbd0bd8fd0a6e9c969",
+   "reply_sha256": "45141567223d4c7f27eb022ebb2e2e0c7c396520ce7f98925140454f85d9b3a8",
+   "usage": {
+    "input_tokens": 442,
+    "output_tokens": 186,
+    "duration_ms": 18759,
+    "load_ms": 2065,
+    "prompt_ms": 4587,
+    "eval_ms": 12090
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "components-v4",
+   "unit": "pricing_style",
+   "attempt": 2,
+   "accepted": true,
+   "unit_final_status": "done",
+   "receipt_sha256": "4afc8ca2c5dc5bf0f89014b02f06517aab3feb165f959bbac2db1555e1c1eac0",
+   "reply_sha256": "9636762817727f1686e1510c214fe01de17a7d14fe403f69d03897cfead93de7",
+   "usage": {
+    "input_tokens": 626,
+    "output_tokens": 222,
+    "duration_ms": 23490,
+    "load_ms": 2066,
+    "prompt_ms": 6500,
+    "eval_ms": 14904
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "components-v4",
+   "unit": "pricing",
+   "attempt": 1,
+   "accepted": false,
+   "unit_final_status": "failed",
+   "receipt_sha256": "e500255d9f5bf0925d0e27284b4cec277e0358146e48b99fb55e6e822eb63958",
+   "reply_sha256": "d95d5d7384689fd6601556d5954be5bdc2ffbf5a4486570dfb435e643091aebf",
+   "usage": {
+    "input_tokens": 1253,
+    "output_tokens": 603,
+    "duration_ms": 61495,
+    "load_ms": 2062,
+    "prompt_ms": 13753,
+    "eval_ms": 45656
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "components-v4",
+   "unit": "pricing",
+   "attempt": 2,
+   "accepted": false,
+   "unit_final_status": "failed",
+   "receipt_sha256": "2f1b8db18fea8d4e0cf00c301e235949ca6026e48e20ad2f11ce53a9ab0994a8",
+   "reply_sha256": "0822a484e1648e37be521339468aeea9fb642f19394600af65a5583cf0d9ee56",
+   "usage": {
+    "input_tokens": 1380,
+    "output_tokens": 350,
+    "duration_ms": 43731,
+    "load_ms": 2062,
+    "prompt_ms": 15321,
+    "eval_ms": 26321
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "components-v4",
+   "unit": "pricing",
+   "attempt": 3,
+   "accepted": false,
+   "unit_final_status": "failed",
+   "receipt_sha256": "63fa2f59ca2324a74d37ef9d3d5222311081e94612083d260de3d17fb762214e",
+   "reply_sha256": "0822a484e1648e37be521339468aeea9fb642f19394600af65a5583cf0d9ee56",
+   "usage": {
+    "input_tokens": 1435,
+    "output_tokens": 350,
+    "duration_ms": 44601,
+    "load_ms": 2061,
+    "prompt_ms": 16050,
+    "eval_ms": 26458
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "assembler-v5",
+   "unit": "pricing",
+   "attempt": 1,
+   "accepted": false,
+   "unit_final_status": "failed",
+   "receipt_sha256": "c97a115be313b529d2e8fc1acab16256b0efa2750dfe844c6644e4c06e1355a1",
+   "reply_sha256": "530671d712e45345a7f6d962380dc8fa198b9c0fe62ff7de7492f319f596aa97",
+   "usage": {
+    "input_tokens": 1232,
+    "output_tokens": 126,
+    "duration_ms": 24859,
+    "load_ms": 2060,
+    "prompt_ms": 13525,
+    "eval_ms": 9250
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "assembler-v5",
+   "unit": "pricing",
+   "attempt": 2,
+   "accepted": false,
+   "unit_final_status": "failed",
+   "receipt_sha256": "a2ae061eda7b5b5e63a4f131de577c2e39034baa5d5750d172e3fc241aeb68e7",
+   "reply_sha256": "4c77702a527cf26b00f4a4e49e18cb11b55ff0ba9d4b4683bd70b0e3d5167643",
+   "usage": {
+    "input_tokens": 1422,
+    "output_tokens": 202,
+    "duration_ms": 33073,
+    "load_ms": 2061,
+    "prompt_ms": 15959,
+    "eval_ms": 15028
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "assembler-v5",
+   "unit": "pricing",
+   "attempt": 3,
+   "accepted": false,
+   "unit_final_status": "failed",
+   "receipt_sha256": "1ff013ebdf1b4d0b05c1d920f5e13f188c51c632e5d6201f32861002387e721e",
+   "reply_sha256": "4189360886166c4d6462974d35f495724b555cee854b4f55332ad92fd96206f6",
+   "usage": {
+    "input_tokens": 1476,
+    "output_tokens": 209,
+    "duration_ms": 34685,
+    "load_ms": 2065,
+    "prompt_ms": 16818,
+    "eval_ms": 15773
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "named-context-v6",
+   "unit": "pricing",
+   "attempt": 1,
+   "accepted": false,
+   "unit_final_status": "done",
+   "receipt_sha256": "adbdfba1b335658b633eb9596d35c4c6ac44870b0ea6593d4cc9d5f862ba6925",
+   "reply_sha256": "ae1abd1e1ed791219e956c3b85a9cb7dc07fbb6ada001ad1d992788875147470",
+   "usage": {
+    "input_tokens": 1225,
+    "output_tokens": 145,
+    "duration_ms": 27725,
+    "load_ms": 3335,
+    "prompt_ms": 13821,
+    "eval_ms": 10547
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "named-context-v6",
+   "unit": "pricing",
+   "attempt": 2,
+   "accepted": true,
+   "unit_final_status": "done",
+   "receipt_sha256": "690473b135ab8788092032ba6c5d4a80dde24ca339ce7b2d636c023238fc9e27",
+   "reply_sha256": "3a1025a9e0ade10ae225da66c2395a3415797e790e3bfc01549afa2938b5ae71",
+   "usage": {
+    "input_tokens": 1385,
+    "output_tokens": 146,
+    "duration_ms": 28229,
+    "load_ms": 2059,
+    "prompt_ms": 15401,
+    "eval_ms": 10743
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  }
+ ],
+ "call_count": 16,
+ "model_identity_limit": "Ollama manifest observations are not attestation of loaded weights",
+ "independent_verification": {
+  "passed": true,
+  "cards": 3,
+  "prices": [
+   "$0",
+   "$12",
+   "$30"
+  ],
+  "html_sha256": "9d982374153f25d42c05e3f1e3276a5fdda5bbd11f1e9a0e45fd2f7e3d5b0282",
+  "scope": "Synthetic HTML structure/data only; responsive visual/focus/contrast checks still required.",
+  "negative_mutations_rejected": 5,
+  "browser_check": "passed; see separate browser receipt"
+ },
+ "browser_verification": {
+  "sha256": "9d982374153f25d42c05e3f1e3276a5fdda5bbd11f1e9a0e45fd2f7e3d5b0282",
+  "rows": [
+   {
+    "mobile": false,
+    "viewport": {
+     "width": 1280,
+     "height": 800
+    },
+    "boxes": [
+     {
+      "x": 16,
+      "y": 95.875,
+      "width": 405.328125,
+      "height": 193.8125
+     },
+     {
+      "x": 437.328125,
+      "y": 95.875,
+      "width": 405.328125,
+      "height": 193.8125
+     },
+     {
+      "x": 858.65625,
+      "y": 95.875,
+      "width": 405.34375,
+      "height": 193.8125
+     }
+    ],
+    "violations": [],
+    "blocked": [],
+    "errors": [],
+    "screenshot": "pricing-desktop.png",
+    "keyboardButtons": 3,
+    "minimumButtonHeight": 44,
+    "scope": "Static presentation, focus and clickability; Select buttons have no purchase/navigation action."
+   },
+   {
+    "mobile": true,
+    "viewport": {
+     "width": 390,
+     "height": 844
+    },
+    "boxes": [
+     {
+      "x": 16,
+      "y": 95.875,
+      "width": 358,
+      "height": 193.8125
+     },
+     {
+      "x": 16,
+      "y": 305.6875,
+      "width": 358,
+      "height": 193.8125
+     },
+     {
+      "x": 16,
+      "y": 515.5,
+      "width": 358,
+      "height": 193.8125
+     }
+    ],
+    "violations": [],
+    "blocked": [],
+    "errors": [],
+    "screenshot": "pricing-phone.png",
+    "keyboardButtons": 3,
+    "minimumButtonHeight": 44,
+    "scope": "Static presentation, focus and clickability; Select buttons have no purchase/navigation action."
+   }
+  ]
+ },
+ "artifact_sha256": {
+  "plan_card.js": "1124cedc0b0101130b365ababaf05c050815e6c7def4413f2f2c7fb62799af62",
+  "pricing-desktop.png": "cfdf1c0d482dfb133dd65415f4eef4739cfaac6eb13e1ac47766bd46c9a6fca9",
+  "pricing.html": "9d982374153f25d42c05e3f1e3276a5fdda5bbd11f1e9a0e45fd2f7e3d5b0282",
+  "pricing-phone.png": "9cd62b4cc2ef80a88e8f625a5ebe86bb3ac9400f9c67555a84e0f1e19ab3063e",
+  "pricing.js": "455d4291c3ed98c8dbcd3881950ac0815c72a0d5219445bb48545e5230a2d726",
+  "validate_pricing.py": "b3c963a568876fdcd6ed6c4810367dfc2f1939b1f06101d4946ae56a1bfcb43e",
+  "validate-style.js": "4b419a7a498c05b714e54a4b1bbc4b20a5273215eacb61a16ccb99a9992d0741",
+  "validate-pricing.js": "3de4c4341d10dcc5cf89334bf9f02c6fc3076c34f4712c1f6204a923cbafe735",
+  "pricing_style.js": "0917b6aaf576aae95ad0dd4aac44a848f5b0427bb3d00299ce0cdd39849fa4c0",
+  "verify.py": "f4bb378987012089601de59bfe6eaadb05b801ca3ea51030545c164642c9f10a",
+  "README.md": "ad722329ee4f0212ef44fb6c4c2261bfed68907fae114112f133f3c0e2faa7a4",
+  "browser-verification.json": "5e8282b19446e47b546a9de3c2937b59d27707279861e2e4851e11cd8a915af3"
+ },
+ "catalogue_source_sha256": "d27c6af87dfced6bdfa23166d4fffd67c96b2bed05f56140d58d88ad245ffc99",
+ "fresh_playback": [
+  {
+   "file": "45-small-model-pricing.sym",
+   "source_sha256": "d27c6af87dfced6bdfa23166d4fffd67c96b2bed05f56140d58d88ad245ffc99",
+   "status": "done",
+   "calls": 0,
+   "asks": 0,
+   "kernel_id": "a98acbe306cbc06e",
+   "fingerprint": "03c5f7d338d18701"
+  }
+ ],
+ "manual_context_lesson": {
+  "change": "Code binding labels changed from prior_plan_card/prior_pricing_style to real exported names renderPlan/pricingCSS",
+  "helpers_unchanged": true,
+  "objective_unchanged_between_v5_and_v6": true,
+  "prior_failures_retained": true,
+  "classification": "Manual authoring/harness pitfall; existing spec-sheet compiler already interpolates direct dependency source and names real exports; no core parser defect or edit"
+ },
+ "published_edits": "2026-10-11, for publication: README.md was edited (the original host's names and private paths removed, commands pointed at this repository) and its hash above updated; node names were replaced by \"node-a\". Every other artifact is byte-identical to the original bundle."
+}

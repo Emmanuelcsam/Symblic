@@ -1,0 +1,136 @@
+program Small model exact math checked playback.
+use profile=verified, context=none, determine=false, solve=false.
+note Rechecks exact model-written rational functions against finite synthetic systems. No model calls.
+let normalizeFraction = """function normalizeFraction(n, d) {{
+    if (d === 0) throw new Error();
+    const gcd = (a, b) => b === 0 ? Math.abs(a) : gcd(b, a % b);
+    const g = gcd(Math.abs(n), Math.abs(d));
+    const num = n / g;
+    const den = d / g;
+    if (den < 0) {{
+        return [-num, -den];
+    }}
+    return [num, den];
+}}""".
+let determinant = """function determinant(A) {{
+    const n = A.length;
+    if (n === 1) return A[0][0];
+    if (n === 2) return A[0][0] * A[1][1] - A[0][1] * A[1][0];
+    if (n === 3) {{
+        const a = A[0][0], b = A[0][1], c = A[0][2];
+        const d = A[1][0], e = A[1][1], f = A[1][2];
+        const g = A[2][0], h = A[2][1], i = A[2][2];
+        return a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
+    }}
+    return 0;
+}}""".
+let matrixRank = """function matrixRank(A) {{
+    const rows = A.length;
+    const cols = A[0].length;
+
+    // Rank 0: all zero matrix
+    for (let i = 0; i < rows; i++) {{
+        for (let j = 0; j < cols; j++) {{
+            if (A[i][j] !== 0) break;
+        }}
+        if (A[i].some(x => x !== 0)) break;
+        if (i === rows - 1) return 0;
+    }}
+
+    // Case: 1 row
+    if (rows === 1) {{
+        for (let j = 0; j < cols; j++) {{
+            if (A[0][j] !== 0) return 1;
+        }}
+        return 0;
+    }}
+
+    // Case: 2 rows
+    if (rows === 2) {{
+        for (let c1 = 0; c1 < cols; c1++) {{
+            for (let c2 = c1 + 1; c2 < cols; c2++) {{
+                if (A[0][c1] * A[1][c2] !== A[0][c2] * A[1][c1]) {{
+                    return 2;
+                }}
+            }}
+        }}
+        return 1;
+    }}
+
+    // Case: 3 rows
+    if (rows === 3) {{
+        // Check all 3x3 minors (all triplets of columns)
+        for (let c1 = 0; c1 < cols; c1++) {{
+            for (let c2 = c1 + 1; c2 < cols; c2++) {{
+                for (let c3 = c2 + 1; c3 < cols; c3++) {{
+                    // Extract 3x3 submatrix
+                    const sub = [
+                        [A[0][c1], A[0][c2], A[0][c3]],
+                        [A[1][c1], A[1][c2], A[1][c3]],
+                        [A[2][c1], A[2][c2], A[2][c3]]
+                    ];
+                    if (determinant(sub) !== 0) {{
+                        return 3;
+                    }}
+                }}
+            }}
+        }}
+        // Check all 2x2 minors (pairs of rows and columns)
+        for (let r1 = 0; r1 < rows; r1++) {{
+            for (let r2 = r1 + 1; r2 < rows; r2++) {{
+                for (let c1 = 0; c1 < cols; c1++) {{
+                    for (let c2 = c1 + 1; c2 < cols; c2++) {{
+                        if (A[r1][c1] * A[r2][c2] !== A[r1][c2] * A[r2][c1]) {{
+                            return 2;
+                        }}
+                    }}
+                }}
+            }}
+        }}
+        // All entries zero or no 2x2 or 3x3 nonzero
+        for (let r = 0; r < rows; r++) {{
+            for (let c = 0; c < cols; c++) {{
+                if (A[r][c] !== 0) return 1;
+            }}
+        }}
+        return 0;
+    }}
+
+    // Should not reach here given constraints
+    return 0;
+}}""".
+let solveLinear = """function solveLinear(A, b) {{
+    const n = A.length;
+    const det = determinant(A);
+    
+    if (det !== 0) {{
+        // Use Cramer's rule: replace column j with b, compute det, normalize
+        const solution = [];
+        for (let j = 0; j < n; j++) {{
+            // Create new matrix with column j replaced by b
+            const Aj = [...A.map(row => [...row])];
+            for (let i = 0; i < n; i++) {{
+                Aj[i][j] = b[i];
+            }}
+            const detAj = determinant(Aj);
+            solution.push(normalizeFraction(detAj, det));
+        }}
+        return {{ kind: "unique", solution }};
+    }}
+    
+    // Determinant is zero: check rank of A and augmented matrix
+    const rankA = matrixRank(A);
+    const augmented = A.map(row => [...row, 0]).map((row, i) => [...row, b[i]]);
+    const rankAugmented = matrixRank(augmented);
+    
+    if (rankAugmented > rankA) {{
+        return {{ kind: "inconsistent" }};
+    }} else {{
+        return {{ kind: "singular" }};
+    }}
+}}""".
+let pieces = [normalizeFraction, determinant, matrixRank, solveLinear].
+let checks = js_test(pieces, [["""normalizeFraction(6,8)""", """[3,4]"""], ["""normalizeFraction(-6,8)""", """[-3,4]"""], ["""normalizeFraction(6,-8)""", """[-3,4]"""], ["""normalizeFraction(-6,-8)""", """[3,4]"""], ["""normalizeFraction(0,-8)""", """[0,1]"""], ["""normalizeFraction(17,13)""", """[17,13]"""], ["""(()=>{{try{{normalizeFraction(1,0);return false;}}catch(e){{return true;}}}})()""", """true"""], ["""determinant([[0]])""", """0"""], ["""determinant([[7]])""", """7"""], ["""determinant([[-3]])""", """-3"""], ["""determinant([[1,2],[3,4]])""", """-2"""], ["""determinant([[0,2],[3,4]])""", """-6"""], ["""determinant([[1,2],[2,4]])""", """0"""], ["""determinant([[1,0,0],[0,1,0],[0,0,1]])""", """1"""], ["""determinant([[2,1,-1],[-3,-1,2],[-2,1,2]])""", """-1"""], ["""determinant([[0,0,2],[0,3,0],[4,0,0]])""", """-24"""], ["""determinant([[1,2,3],[2,4,6],[0,1,1]])""", """0"""], ["""determinant([[-2,3,1],[4,-1,2],[0,5,3]])""", """10"""], ["""determinant(Object.freeze([Object.freeze([0,2]),Object.freeze([3,4])]))""", """-6"""], ["""matrixRank([[0]])""", """0"""], ["""matrixRank([[7]])""", """1"""], ["""matrixRank([[0,0,0,0]])""", """0"""], ["""matrixRank([[0,3,0,0]])""", """1"""], ["""matrixRank([[0],[2],[0]])""", """1"""], ["""matrixRank([[0,0],[0,0]])""", """0"""], ["""matrixRank([[1,2,3],[2,4,6]])""", """1"""], ["""matrixRank([[0,1,0],[0,0,2]])""", """2"""], ["""matrixRank([[1,2,3,4],[2,4,6,9]])""", """2"""], ["""matrixRank([[1,0,0,0],[0,1,0,0],[0,0,1,0]])""", """3"""], ["""matrixRank([[0,1,0,0],[0,0,1,0],[0,0,0,1]])""", """3"""], ["""matrixRank([[1,2,3,4],[2,4,6,8],[0,1,1,2]])""", """2"""], ["""matrixRank([[1,2,3,4],[2,4,6,9],[0,1,1,2]])""", """3"""], ["""matrixRank([[0,0,0,0],[0,0,0,0],[0,0,0,0]])""", """0"""], ["""matrixRank([[1,2,0],[3,6,0],[2,4,0]])""", """1"""], ["""matrixRank(Object.freeze([Object.freeze([0,1,0,0]),Object.freeze([0,0,1,0]),Object.freeze([0,0,0,1])]))""", """3"""], ["""solveLinear([[2]],[1])""", """{{"kind":"unique","solution":[[1,2]]}}"""], ["""solveLinear([[0, 2], [3, 4]],[4, 14])""", """{{"kind":"unique","solution":[[2,1],[2,1]]}}"""], ["""solveLinear([[2, 1], [1, -1]],[1, 2])""", """{{"kind":"unique","solution":[[1,1],[-1,1]]}}"""], ["""solveLinear([[3, 2], [1, -2]],[1, 0])""", """{{"kind":"unique","solution":[[1,4],[1,8]]}}"""], ["""solveLinear([[2, 1, -1], [-3, -1, 2], [-2, 1, 2]],[8, -11, -3])""", """{{"kind":"unique","solution":[[2,1],[3,1],[-1,1]]}}"""], ["""solveLinear([[1, 2], [2, 4]],[3, 6])""", """{{"kind":"singular"}}"""], ["""solveLinear([[1, 2], [2, 4]],[3, 7])""", """{{"kind":"inconsistent"}}"""], ["""solveLinear([[0]],[0])""", """{{"kind":"singular"}}"""], ["""solveLinear([[0]],[1])""", """{{"kind":"inconsistent"}}"""], ["""solveLinear([[0, 0, 2], [0, 3, 0], [4, 0, 0]],[-3, 2, 7])""", """{{"kind":"unique","solution":[[7,4],[2,3],[-3,2]]}}"""], ["""solveLinear([[1, 2, 3], [2, 4, 6], [0, 1, 1]],[4, 8, 2])""", """{{"kind":"singular"}}"""], ["""solveLinear([[1, 2, 3], [2, 4, 6], [0, 1, 1]],[4, 9, 2])""", """{{"kind":"inconsistent"}}"""], ["""solveLinear([[1, 1, -1], [2, 3, 1], [1, -2, 4]],[0, -1, -11])""", """{{"kind":"unique","solution":[[-3,1],[2,1],[-1,1]]}}"""], ["""solveLinear([[2, 1, -1], [2, 4, 1], [1, -2, 5]],[-1, 3, -11])""", """{{"kind":"unique","solution":[[-2,1],[2,1],[-1,1]]}}"""], ["""solveLinear([[3, 1, -1], [2, 5, 1], [1, -2, 6]],[0, 7, -11])""", """{{"kind":"unique","solution":[[-1,1],[2,1],[-1,1]]}}"""], ["""solveLinear([[4, 1, -1], [2, 6, 1], [1, -2, 7]],[3, 11, -11])""", """{{"kind":"unique","solution":[[0,1],[2,1],[-1,1]]}}"""], ["""solveLinear([[5, 1, -1], [2, 7, 1], [1, -2, 8]],[8, 15, -11])""", """{{"kind":"unique","solution":[[1,1],[2,1],[-1,1]]}}"""], ["""solveLinear([[6, 1, -1], [2, 8, 1], [1, -2, 9]],[15, 19, -11])""", """{{"kind":"unique","solution":[[2,1],[2,1],[-1,1]]}}"""], ["""solveLinear([[7, 1, -1], [2, 9, 1], [1, -2, 10]],[24, 23, -11])""", """{{"kind":"unique","solution":[[3,1],[2,1],[-1,1]]}}"""], ["""solveLinear(Object.freeze([Object.freeze([2,1]),Object.freeze([1,-1])]),Object.freeze([1,2]))""", """{{"kind":"unique","solution":[[1,1],[-1,1]]}}"""]]).
+assert checks.passed because checks.report.
+show checks as "Finite exact rational checks".
+show js_run(pieces, """JSON.stringify([{{"matrix":[[2]],"rhs":[1]}},{{"matrix":[[0,2],[3,4]],"rhs":[4,14]}},{{"matrix":[[2,1],[1,-1]],"rhs":[1,2]}},{{"matrix":[[3,2],[1,-2]],"rhs":[1,0]}},{{"matrix":[[2,1,-1],[-3,-1,2],[-2,1,2]],"rhs":[8,-11,-3]}},{{"matrix":[[1,2],[2,4]],"rhs":[3,6]}},{{"matrix":[[1,2],[2,4]],"rhs":[3,7]}},{{"matrix":[[0]],"rhs":[0]}},{{"matrix":[[0]],"rhs":[1]}},{{"matrix":[[0,0,2],[0,3,0],[4,0,0]],"rhs":[-3,2,7]}},{{"matrix":[[1,2,3],[2,4,6],[0,1,1]],"rhs":[4,8,2]}},{{"matrix":[[1,2,3],[2,4,6],[0,1,1]],"rhs":[4,9,2]}},{{"matrix":[[1,1,-1],[2,3,1],[1,-2,4]],"rhs":[0,-1,-11]}},{{"matrix":[[2,1,-1],[2,4,1],[1,-2,5]],"rhs":[-1,3,-11]}},{{"matrix":[[3,1,-1],[2,5,1],[1,-2,6]],"rhs":[0,7,-11]}},{{"matrix":[[4,1,-1],[2,6,1],[1,-2,7]],"rhs":[3,11,-11]}},{{"matrix":[[5,1,-1],[2,7,1],[1,-2,8]],"rhs":[8,15,-11]}},{{"matrix":[[6,1,-1],[2,8,1],[1,-2,9]],"rhs":[15,19,-11]}},{{"matrix":[[7,1,-1],[2,9,1],[1,-2,10]],"rhs":[24,23,-11]}}].map(c=>solveLinear(c.matrix,c.rhs)))""") as "Exact solutions JSON".

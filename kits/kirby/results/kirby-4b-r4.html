@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kirby</title>
+<style>
+html, body { margin: 0; background: #222; color: #eee; font-family: sans-serif; }
+#wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px; }
+canvas { display: block; max-width: 100%; background: #87ceeb; }
+p { margin: 0; font-size: 14px; text-align: center; }
+</style>
+</head>
+<body>
+<div id="wrap">
+<canvas id="game" width="640" height="384"></canvas>
+<p>Arrows or A/D walk. Space, W, Z or Up jumps; in the air it floats and flaps. X inhales (hold it; while floating it exhales). S or Down swallows, C spits a star. R starts again.</p>
+</div>
+<script>
+const LEVEL = [
+  '................................................................',
+  '................................................................',
+  '.............................................*..................',
+  '..........................................B.....................',
+  '.........................***....................................',
+  '........................=====...................................',
+  '................................................................',
+  '...............**..................W............................',
+  '..............====...............######.....B...................',
+  '....***..#..W.....W........^^....######.............W...**...D..',
+  '####################....#######################..###############',
+  '####################....#######################..###############'
+];
+
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function tileAt(g, r, c) {
+    if (c < 0 || c > 63) return '#';
+    if (r < 0) return '#';
+    if (r > 11) return '.';
+    return g.tiles[r][c];
+}
+
+function solidAt(g, r, c) {
+    return tileAt(g, r, c) === '#';
+}
+
+function standAt(g, r, c) {
+    const tile = tileAt(g, r, c);
+    return tile === '#' || tile === '=';
+}
+
+const span = (a, size) => {
+    const startTile = Math.floor(a / 32);
+    const endTile = Math.ceil((a + size) / 32) - 1;
+    return [startTile, endTile];
+};
+
+const solidRow = (g, r, x, w) => {
+  const [c0, c1] = span(x, w);
+  for (let c = c0; c <= c1; c++) {
+    if (solidAt(g, r, c)) return true;
+  }
+  return false;
+};
+
+const standRow = (g, r, x, w) => {
+  const [c0, c1] = span(x, w);
+  for (let c = c0; c <= c1; c++) {
+    if (standAt(g, r, c)) return true;
+  }
+  return false;
+};
+
+const solidCol = (g, c, y, h) => {
+  const [r0, r1] = span(y, h);
+  for (let r = r0; r <= r1; r++) {
+    if (solidAt(g, r, c)) return true;
+  }
+  return false;
+};
+
+function makeEnemy(kind, r, c, rng) {
+    const dir = rng() < 0.5 ? -1 : 1;
+    const t = Math.floor(rng() * 64);
+    return { kind, x: c * 32 + 4, y: r * 32 + 8, dir, t, baseY: r * 32 + 8, alive: true };
+}
+
+function parseLevel(rows, rng) {
+    const tiles = [];
+    const enemies = [];
+    for (let r = 0; r < rows.length; r++) {
+        const row = [];
+        for (let c = 0; c < rows[r].length; c++) {
+            const ch = rows[r][c];
+            if (ch === 'W' || ch === 'B') {
+                enemies.push(makeEnemy(ch, r, c, rng));
+                row.push('.');
+            } else {
+                row.push(ch);
+            }
+        }
+        tiles.push(row);
+    }
+    return { tiles, enemies };
+}
+
+function newGame(seed) {
+  const level = parseLevel(LEVEL, mulberry32(seed));
+  return {
+    tiles: level.tiles,
+    kirby: { x: 40, y: 296, vx: 0, vy: 0, face: 1, ground: true, floating: false, floatT: 0, inhaling: false,
+      full: null, ability: 'none', hp: 6, hurtT: 0 },
+    enemies: level.enemies,
+    shot: null,
+    keys: { left: false, right: false, inhale: false },
+    score: 0, cam: 0, acc: 0, frame: 0, over: false, won: false,
+  };
+}
+
+const cameraX = (x) => Math.min(1408, Math.max(0, Math.floor(x + 12 - 320)));
+
+function walk(g) {
+  const left = g.keys.left && !g.keys.right && !g.kirby.inhaling;
+  const right = g.keys.right && !g.keys.left && !g.kirby.inhaling;
+  
+  if (left) {
+    g.kirby.vx = Math.max(-2, g.kirby.vx - 0.125);
+    g.kirby.face = -1;
+  } else if (right) {
+    g.kirby.vx = Math.min(2, g.kirby.vx + 0.125);
+    g.kirby.face = 1;
+  } else {
+    if (g.kirby.vx > 0) {
+      g.kirby.vx = Math.max(0, g.kirby.vx - 0.25);
+    } else if (g.kirby.vx < 0) {
+      g.kirby.vx = Math.min(0, g.kirby.vx + 0.25);
+    }
+  }
+}
+
+function fall(g) {
+  const k = g.kirby;
+  
+  if (k.floating) {
+    k.floatT += 1;
+    if (k.floatT >= 360) {
+      k.floating = false;
+    }
+  }
+  
+  if (k.floating) {
+    k.vy = Math.min(1, k.vy + 0.0625);
+  } else {
+    k.vy = Math.min(6, k.vy + 0.25);
+  }
+  
+  // Gravity applies on the ground; moveY puts him back on it.
+  // fall never changes k.y.
+}
+
+function moveX(g) {
+  const k = g.kirby;
+  k.x = k.x + k.vx;
+  
+  if (k.vx > 0) {
+    const c = Math.ceil((k.x + 24) / 32) - 1;
+    if (solidCol(g, c, k.y, 24)) {
+      k.x = c * 32 - 24;
+      k.vx = 0;
+    }
+  } else if (k.vx < 0) {
+    const c = Math.floor(k.x / 32);
+    if (solidCol(g, c, k.y, 24)) {
+      k.x = c * 32 + 32;
+      k.vx = 0;
+    }
+  }
+}
+
+function moveY(g) {
+  const k = g.kirby;
+  const before = k.y + 24;
+  k.y = k.y + k.vy;
+  k.ground = false;
+
+  if (k.vy > 0) {
+    const r = Math.ceil((k.y + 24) / 32) - 1;
+    if (solidRow(g, r, k.x, 24) || (before <= r * 32 && standRow(g, r, k.x, 24))) {
+      k.y = r * 32 - 24;
+      k.vy = 0;
+      k.ground = true;
+      k.floating = false;
+      k.floatT = 0;
+    }
+  } else if (k.vy < 0) {
+    const r = Math.floor(k.y / 32);
+    if (solidRow(g, r, k.x, 24)) {
+      k.y = r * 32 + 32;
+      k.vy = 0;
+    }
+  }
+}
+
+function jump(g) {
+  const k = g.kirby;
+  if (k.ground) {
+    if (k.ability === 'wing') {
+      k.vy = -8.5;
+    } else {
+      k.vy = -6;
+    }
+    k.ground = false;
+    return 'jump';
+  } else if (k.full === null && k.floatT < 360) {
+    k.floating = true;
+    k.vy = -2;
+    return 'flap';
+  } else {
+    return 'none';
+  }
+}
+
+function hurt(g) {
+  const k = g.kirby;
+  if (k.hurtT > 0) {
+    return false;
+  }
+  k.hp = k.hp - 1;
+  k.hurtT = 90;
+  k.vx = -2 * k.face;
+  k.vy = -3;
+  k.floating = false;
+  if (k.hp <= 0) {
+    k.hp = 0;
+    g.over = true;
+  }
+  return true;
+}
+
+function boxesTouch(ax, ay, aw, bx, by, bw) {
+    return ax < bx + bw && bx < ax + aw && ay < by + bw && by < ay + aw;
+}
+
+function inFront(k, e) {
+  const dx = (e.x - k.x) * k.face;
+  return dx > 0 && dx <= 64 && Math.abs(e.y - k.y) < 32;
+}
+
+function pull(g) {
+  const k = g.kirby;
+  for (let e of g.enemies) {
+    if (!e.alive || !inFront(k, e)) continue;
+    e.x = e.x - 2 * k.face;
+    if ((e.x - k.x) * k.face <= 24) {
+      e.alive = false;
+      k.full = e.kind;
+      k.inhaling = false;
+      g.score += 200;
+      return;
+    }
+  }
+}
+
+function waddleStep(g, e) {
+    const nx = e.x + 0.5 * e.dir;
+    const c = e.dir > 0 ? Math.ceil((nx + 24) / 32) - 1 : Math.floor(nx / 32);
+    const r = Math.floor(e.y / 32);
+    if (solidAt(g, r, c) || !standAt(g, r + 1, c)) {
+        e.dir = -e.dir;
+        return;
+    }
+    e.x = nx;
+}
+
+function brontoStep(e) {
+    e.t = e.t + 1;
+    e.x = e.x + e.dir;
+    if (e.t % 128 === 0) {
+        e.dir = -e.dir;
+    }
+    e.y = e.baseY + Math.round(24 * Math.sin(e.t / 16));
+}
+
+function moveEnemies(g) {
+  for (let e of g.enemies) {
+    if (!e.alive) continue;
+    if (e.kind === 'W') {
+      waddleStep(g, e);
+    } else {
+      brontoStep(e);
+    }
+  }
+}
+
+function swallow(g) {
+  if (g.kirby.full === null) {
+    return false;
+  }
+  const fullKind = g.kirby.full;
+  if (fullKind === 'W') {
+    g.kirby.ability = 'none';
+  } else if (fullKind === 'B') {
+    g.kirby.ability = 'wing';
+  }
+  g.kirby.full = null;
+  return true;
+}
+
+function spit(g) {
+  if (g.kirby.full === null) {
+    return false;
+  }
+  const face = g.kirby.face;
+  g.shot = {
+    x: face > 0 ? g.kirby.x + 24 : g.kirby.x - 16,
+    y: g.kirby.y + 4,
+    dir: face
+  };
+  g.kirby.full = null;
+  return true;
+}
+
+function shotStep(g) {
+  const s = g.shot;
+  if (s === null) return;
+  s.x = s.x + 6 * s.dir;
+  for (const e of g.enemies) {
+    if (e.alive && boxesTouch(s.x, s.y, 16, e.x, e.y, 24)) {
+      e.alive = false;
+      g.score += 200;
+      g.shot = null;
+      return;
+    }
+  }
+  if (solidAt(g, Math.floor((s.y + 8) / 32), Math.floor((s.x + 8) / 32))) {
+    g.shot = null;
+  }
+}
+
+function touchEnemies(g) {
+  for (let e of g.enemies) {
+    if (e.alive && g.kirby.hurtT === 0 && boxesTouch(g.kirby.x, g.kirby.y, 24, e.x, e.y, 24)) {
+      e.alive = false;
+      hurt(g);
+    }
+  }
+}
+
+function touchTiles(g) {
+  const k = g.kirby;
+  const [r0, r1] = span(k.y, 24);
+  const [c0, c1] = span(k.x, 24);
+  
+  for (let r = r0; r <= r1; r++) {
+    for (let c = c0; c <= c1; c++) {
+      const t = tileAt(g, r, c);
+      if (t === '*') {
+        g.tiles[r][c] = '.';
+        g.score += 100;
+      } else if (t === '^') {
+        hurt(g);
+      } else if (t === 'D') {
+        g.won = true;
+      }
+    }
+  }
+}
+
+function step(g) {
+  if (g.over || g.won) return;
+  g.frame += 1;
+  if (g.kirby.hurtT > 0) g.kirby.hurtT -= 1;
+  g.kirby.inhaling = g.keys.inhale && !g.kirby.floating && g.kirby.full === null;
+  walk(g);
+  fall(g);
+  moveX(g);
+  moveY(g);
+  if (g.kirby.y > 384) {
+    g.kirby.hp = 0;
+    g.over = true;
+    return;
+  }
+  moveEnemies(g);
+  if (g.kirby.inhaling) pull(g);
+  shotStep(g);
+  touchEnemies(g);
+  touchTiles(g);
+  g.cam = cameraX(g.kirby.x);
+}
+
+function tick(g, ms) {
+  g.acc += ms * 60;
+  while (g.acc >= 1000) {
+    g.acc -= 1000;
+    step(g);
+  }
+  const steps = Math.floor(g.acc / 1000) * 60;
+  g.frame += steps;
+}
+
+function input(g, action, pressed) {
+  if (g.over || g.won) return;
+  if (action === 'left' || action === 'right') {
+    g.keys[action] = pressed;
+  } else if (action === 'inhale') {
+    if (pressed && g.kirby.floating) {
+      g.kirby.floating = false;
+    } else {
+      g.keys.inhale = pressed;
+    }
+  } else if (action === 'jump' || action === 'swallow' || action === 'spit') {
+    if (pressed) {
+      if (action === 'jump') jump(g);
+      else if (action === 'swallow') swallow(g);
+      else if (action === 'spit') spit(g);
+    }
+  }
+}
+
+function snapshot(g) {
+  const result = {};
+  result.frame = g.frame;
+  result.score = g.score;
+  result.cam = g.cam;
+  result.over = g.over;
+  result.won = g.won;
+  result.stars = 0;
+  for (let row = 0; row < 12; row++) {
+    for (let col = 0; col < 64; col++) {
+      if (g.tiles[row][col] === '*') {
+        result.stars++;
+      }
+    }
+  }
+  result.kirby = {
+    x: g.kirby.x,
+    y: g.kirby.y,
+    vx: g.kirby.vx,
+    vy: g.kirby.vy,
+    face: g.kirby.face,
+    ground: g.kirby.ground,
+    floating: g.kirby.floating,
+    floatT: g.kirby.floatT,
+    inhaling: g.kirby.inhaling,
+    full: g.kirby.full,
+    ability: g.kirby.ability,
+    hp: g.kirby.hp,
+    hurtT: g.kirby.hurtT
+  };
+  result.enemies = [];
+  for (let enemy of g.enemies) {
+    result.enemies.push({
+      kind: enemy.kind,
+      x: enemy.x,
+      y: enemy.y,
+      dir: enemy.dir,
+      t: enemy.t,
+      alive: enemy.alive
+    });
+  }
+  result.shot = g.shot === null ? null : {
+    x: g.shot.x,
+    y: g.shot.y,
+    dir: g.shot.dir
+  };
+  return result;
+}
+
+const keyAction = (e) => {
+  if (e.ctrlKey || e.altKey || e.metaKey) {
+    return null;
+  }
+  
+  switch (e.key) {
+    case 'ArrowLeft':
+    case 'a':
+    case 'A':
+      return 'left';
+    case 'ArrowRight':
+    case 'd':
+    case 'D':
+      return 'right';
+    case 'ArrowUp':
+    case ' ':
+    case 'w':
+    case 'W':
+    case 'z':
+    case 'Z':
+      return 'jump';
+    case 'x':
+    case 'X':
+      return 'inhale';
+    case 'ArrowDown':
+    case 's':
+    case 'S':
+      return 'swallow';
+    case 'c':
+    case 'C':
+      return 'spit';
+    case 'r':
+    case 'R':
+      return 'restart';
+    default:
+      return null;
+  }
+};
+
+function handleKey(game, e, pressed) {
+    const act = keyAction(e);
+    if (act === null) {
+        return false;
+    }
+    e.preventDefault();
+    if (e.repeat) {
+        return false;
+    }
+    if (act === 'restart') {
+        return pressed;
+    }
+    input(game, act, pressed);
+    return false;
+}
+
+function circle(ctx, x, y, r, color) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+function diamond(ctx, x, y, r, color) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x, y - r);
+    ctx.lineTo(x + r, y);
+    ctx.lineTo(x, y + r);
+    ctx.lineTo(x - r, y);
+    ctx.closePath();
+    ctx.fill();
+}
+
+const drawTile = (ctx, ch, x, y) => {
+  if (ch === '#') {
+    ctx.fillStyle = '#8b5a2b';
+    ctx.fillRect(x, y, 32, 32);
+    ctx.fillStyle = '#5c9e32';
+    ctx.fillRect(x, y, 32, 8);
+  } else if (ch === '=') {
+    ctx.fillStyle = '#c68642';
+    ctx.fillRect(x, y, 32, 8);
+  } else if (ch === '^') {
+    ctx.fillStyle = '#9aa0a6';
+    ctx.beginPath();
+    ctx.moveTo(x, y + 32);
+    ctx.lineTo(x + 16, y + 8);
+    ctx.lineTo(x + 32, y + 32);
+    ctx.closePath();
+    ctx.fill();
+  } else if (ch === '*') {
+    diamond(ctx, x + 16, y + 16, 10, '#ffd700');
+  } else if (ch === 'D') {
+    ctx.fillStyle = '#6b3e1f';
+    ctx.fillRect(x + 6, y, 20, 32);
+    ctx.fillStyle = '#ffd700';
+    ctx.fillRect(x + 20, y + 16, 3, 3);
+  }
+};
+
+function drawTiles(ctx, g) {
+  const c0 = Math.floor(g.cam / 32);
+  for (let r = 0; r < 12; r++) {
+    for (let c = c0; c <= c0 + 20; c++) {
+      if (c < 64) {
+        drawTile(ctx, g.tiles[r][c], c * 32 - g.cam, r * 32);
+      }
+    }
+  }
+}
+
+function drawKirby(ctx, g) {
+  const k = g.kirby;
+  if (k.hurtT > 0 && Math.floor(k.hurtT / 4) % 2 === 1) {
+    return;
+  }
+  const x = k.x + 12 - g.cam;
+  const y = k.y + 12;
+  let r;
+  if (k.floating) {
+    r = 15;
+  } else if (k.full !== null) {
+    r = 14;
+  } else {
+    r = 12;
+  }
+  circle(ctx, x - 6, y + r - 2, 5, '#d81e3a');
+  circle(ctx, x + 6, y + r - 2, 5, '#d81e3a');
+  circle(ctx, x, y, r, '#ff9ebd');
+  ctx.fillStyle = '#000';
+  ctx.fillRect(x + 2 * k.face - 1, y - 7, 2, 6);
+  ctx.fillRect(x + 6 * k.face - 1, y - 7, 2, 6);
+  if (k.inhaling) {
+    circle(ctx, x + 7 * k.face, y + 3, 5, '#000');
+  } else {
+    ctx.fillRect(x + 4 * k.face - 2, y + 3, 4, 2);
+  }
+}
+
+function drawEnemy(ctx, e, cam) {
+  if (!e.alive) return;
+  const x = e.x + 12 - cam;
+  const y = e.y + 12;
+  if (e.kind === 'W') {
+    circle(ctx, x - 6, y + 10, 4, '#8b4513');
+    circle(ctx, x + 6, y + 10, 4, '#8b4513');
+    circle(ctx, x, y, 12, '#f4a460');
+    circle(ctx, x + 3 * e.dir, y + 1, 7, '#ffe4c4');
+  } else {
+    circle(ctx, x - 9, y - 9, 6, '#ffffff');
+    circle(ctx, x + 9, y - 9, 6, '#ffffff');
+    circle(ctx, x, y, 11, '#e75480');
+  }
+  ctx.fillStyle = '#000';
+  ctx.fillRect(x + 4 * e.dir - 1, y - 4, 2, 5);
+}
+
+function drawHud(ctx, g) {
+  for (let i = 0; i < 6; i++) {
+    ctx.fillStyle = i < g.kirby.hp ? '#ff69b4' : '#555';
+    ctx.fillRect(10 + i * 18, 10, 14, 14);
+  }
+  ctx.fillStyle = '#000';
+  ctx.font = '16px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('SCORE ' + g.score, 130, 23);
+  ctx.fillText('ABILITY ' + g.kirby.ability, 300, 23);
+  if (g.over || g.won) {
+    ctx.font = 'bold 32px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(g.over ? 'GAME OVER' : 'LEVEL COMPLETE', 320, 192);
+    ctx.textAlign = 'left';
+  }
+}
+
+function draw(ctx, g) {
+    ctx.fillStyle = '#87ceeb';
+    ctx.fillRect(0, 0, 640, 384);
+    drawTiles(ctx, g);
+    for (const e of g.enemies) {
+        drawEnemy(ctx, e, g.cam);
+    }
+    if (g.shot !== null) {
+        diamond(ctx, g.shot.x + 8 - g.cam, g.shot.y + 8, 9, '#ffd700');
+    }
+    drawKirby(ctx, g);
+    drawHud(ctx, g);
+}
+
+function startGame() {
+  const ctx = document.getElementById('game').getContext('2d');
+  let game = newGame(Date.now());
+  let testMode = false;
+  const paint = () => draw(ctx, game);
+  
+  window.kirby = {
+    reset: (seed) => { game = newGame(seed); testMode = true; paint(); },
+    input: (action, pressed) => { input(game, action, pressed); paint(); },
+    tick: (ms) => { tick(game, ms); paint(); },
+    state: () => snapshot(game)
+  };
+  
+  document.addEventListener('keydown', (e) => {
+    if (handleKey(game, e, true)) {
+      game = newGame(Date.now());
+      paint();
+    }
+  });
+  
+  document.addEventListener('keyup', (e) => {
+    if (handleKey(game, e, false)) {
+      game = newGame(Date.now());
+      paint();
+    }
+  });
+  
+  let last = null;
+  const frame = (t) => {
+    if (last === null) last = t;
+    const ms = Math.min(100, Math.max(0, t - last));
+    last = t;
+    if (!testMode && ms > 0) tick(game, ms);
+    paint();
+    requestAnimationFrame(frame);
+  };
+  
+  paint();
+  requestAnimationFrame(frame);
+}
+startGame();
+</script>
+</body>
+</html>

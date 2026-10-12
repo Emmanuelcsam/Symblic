@@ -1,0 +1,623 @@
+{
+  "composition": {
+    "composition": {
+      "definitions": {
+        "Pair": {
+          "inputs": {
+            "request": {
+              "targets": [
+                {
+                  "input": "x",
+                  "node": "Draft"
+                }
+              ]
+            }
+          },
+          "nodes": [
+            {
+              "allowed": {
+                "local_only": true,
+                "models": [
+                  "qwen3:4b-instruct"
+                ],
+                "nodes": [
+                  "node-i"
+                ],
+                "providers": [
+                  "ollama"
+                ],
+                "routes": [
+                  "Local"
+                ]
+              },
+              "assumptions": [
+                "This is a deterministic arithmetic fixture, not an empirical measurement."
+              ],
+              "call_limit": 1,
+              "checks": [
+                "answer = x + 1"
+              ],
+              "contract": "Return the value constrained by the explicit integer predicate.",
+              "effect_risk": "none",
+              "id": "Draft",
+              "inputs": {},
+              "join": "require_all",
+              "max_calls": 4,
+              "max_iterations": 32,
+              "output_binding": "answer",
+              "output_schema": {
+                "type": "integer"
+              },
+              "retries": 0,
+              "source": "given x: Int.\nlet answer = x + 1.\n"
+            },
+            {
+              "allowed": {
+                "local_only": true,
+                "models": [
+                  "qwen3:4b-instruct"
+                ],
+                "nodes": [
+                  "node-i"
+                ],
+                "providers": [
+                  "ollama"
+                ],
+                "routes": [
+                  "Local"
+                ]
+              },
+              "assumptions": [
+                "This is a deterministic arithmetic fixture, not an empirical measurement."
+              ],
+              "call_limit": 1,
+              "checks": [
+                "answer = v * 2"
+              ],
+              "contract": "Return the value constrained by the explicit integer predicate.",
+              "effect_risk": "none",
+              "id": "Check",
+              "inputs": {
+                "v": {
+                  "node": "Draft"
+                }
+              },
+              "join": "require_all",
+              "max_calls": 4,
+              "max_iterations": 32,
+              "output_binding": "answer",
+              "output_schema": {
+                "type": "integer"
+              },
+              "retries": 0,
+              "source": "given v: Int.\nlet answer = v * 2."
+            }
+          ],
+          "outputs": {
+            "answer": {
+              "node": "Check"
+            }
+          }
+        }
+      },
+      "id": "RepeatedPair",
+      "instances": [
+        {
+          "definition": "Pair",
+          "id": "First",
+          "inputs": {
+            "request": {
+              "literal": {
+                "assumptions": [],
+                "evidence": [],
+                "independence": "not_established",
+                "outcome": "supported",
+                "provenance": [],
+                "value": 3,
+                "value_id": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+                "version": 1
+              }
+            }
+          },
+          "sha256": "ffb4f0ece7bae7c9445429f8e99f19203b1fefd262516b392a52f895c1e65986"
+        },
+        {
+          "definition": "Pair",
+          "id": "Second",
+          "inputs": {
+            "request": {
+              "instance": "First",
+              "port": "answer"
+            }
+          },
+          "sha256": "ffb4f0ece7bae7c9445429f8e99f19203b1fefd262516b392a52f895c1e65986"
+        }
+      ],
+      "iterations": 1,
+      "max_calls": 8,
+      "nodes": [],
+      "version": 1
+    },
+    "policy": {
+      "order": [
+        "Local"
+      ],
+      "routes": [
+        {
+          "id": "Local",
+          "local": true,
+          "model": "qwen3:4b-instruct",
+          "node": "node-i",
+          "provider": "ollama"
+        }
+      ],
+      "version": 1
+    }
+  },
+  "expanded": {
+    "check": {
+      "capacity": {
+        "event_limit": 10000,
+        "ledger_bytes": 8000000,
+        "note": "Ledger bytes depend on outputs. A run stops before dispatch, recording capacity, when another completion could not be recorded.",
+        "worst_case_attempts": 4,
+        "worst_case_events": 9
+      },
+      "graph_hash": "eaf3a39b4c58f6d7cd9fd77c9390274ca671f41944b10b0a82e3dc65720442f9",
+      "iterations": 1,
+      "max_calls": 8,
+      "nodes": 4,
+      "ok": true,
+      "policy_hash": "27aac1f00d84a65c6c1bc38107726ff7847033563e9604a16cea1889b82aa000",
+      "ready": [
+        {
+          "attempt": 1,
+          "call_limit": 1,
+          "effect_risk": "none",
+          "inputs": {
+            "x": {
+              "result": {
+                "assumptions": [],
+                "evidence": [],
+                "independence": "not_established",
+                "outcome": "supported",
+                "provenance": [],
+                "value": 3,
+                "value_id": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+                "version": 1
+              },
+              "status": "succeeded"
+            }
+          },
+          "iteration": 0,
+          "node": "SG_191402f576eceb0a60e0e6d2cab195cc28c95000e6e91229",
+          "route": {
+            "id": "Local",
+            "local": true,
+            "model": "qwen3:4b-instruct",
+            "node": "node-i",
+            "provider": "ollama"
+          }
+        }
+      ],
+      "scope": "Completion means the declared node checks passed; premises and model proposals remain conditional."
+    },
+    "draft": {
+      "graph": {
+        "id": "RepeatedPair",
+        "iterations": 1,
+        "max_calls": 8,
+        "nodes": [
+          {
+            "allowed": {
+              "local_only": true,
+              "models": [
+                "qwen3:4b-instruct"
+              ],
+              "nodes": [
+                "node-i"
+              ],
+              "providers": [
+                "ollama"
+              ],
+              "routes": [
+                "Local"
+              ]
+            },
+            "assumptions": [
+              "This is a deterministic arithmetic fixture, not an empirical measurement."
+            ],
+            "call_limit": 1,
+            "checks": [
+              "answer = x + 1"
+            ],
+            "contract": "Return the value constrained by the explicit integer predicate.",
+            "effect_risk": "none",
+            "id": "SG_191402f576eceb0a60e0e6d2cab195cc28c95000e6e91229",
+            "inputs": {
+              "x": {
+                "literal": {
+                  "assumptions": [],
+                  "evidence": [],
+                  "independence": "not_established",
+                  "outcome": "supported",
+                  "provenance": [],
+                  "value": 3,
+                  "value_id": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+                  "version": 1
+                }
+              }
+            },
+            "join": "require_all",
+            "max_calls": 4,
+            "max_iterations": 32,
+            "output_binding": "answer",
+            "output_schema": {
+              "type": "integer"
+            },
+            "retries": 0,
+            "source": "given x: Int.\nlet answer = x + 1.\n"
+          },
+          {
+            "allowed": {
+              "local_only": true,
+              "models": [
+                "qwen3:4b-instruct"
+              ],
+              "nodes": [
+                "node-i"
+              ],
+              "providers": [
+                "ollama"
+              ],
+              "routes": [
+                "Local"
+              ]
+            },
+            "assumptions": [
+              "This is a deterministic arithmetic fixture, not an empirical measurement."
+            ],
+            "call_limit": 1,
+            "checks": [
+              "answer = v * 2"
+            ],
+            "contract": "Return the value constrained by the explicit integer predicate.",
+            "effect_risk": "none",
+            "id": "SG_375a93312966d4e568e771e0ddb4f6e87e5375ea96a8b0f6",
+            "inputs": {
+              "v": {
+                "node": "SG_191402f576eceb0a60e0e6d2cab195cc28c95000e6e91229"
+              }
+            },
+            "join": "require_all",
+            "max_calls": 4,
+            "max_iterations": 32,
+            "output_binding": "answer",
+            "output_schema": {
+              "type": "integer"
+            },
+            "retries": 0,
+            "source": "given v: Int.\nlet answer = v * 2."
+          },
+          {
+            "allowed": {
+              "local_only": true,
+              "models": [
+                "qwen3:4b-instruct"
+              ],
+              "nodes": [
+                "node-i"
+              ],
+              "providers": [
+                "ollama"
+              ],
+              "routes": [
+                "Local"
+              ]
+            },
+            "assumptions": [
+              "This is a deterministic arithmetic fixture, not an empirical measurement."
+            ],
+            "call_limit": 1,
+            "checks": [
+              "answer = x + 1"
+            ],
+            "contract": "Return the value constrained by the explicit integer predicate.",
+            "effect_risk": "none",
+            "id": "SG_54a33fa871a774be9a1e820585193591036ac23ed68f7c86",
+            "inputs": {
+              "x": {
+                "node": "SG_375a93312966d4e568e771e0ddb4f6e87e5375ea96a8b0f6"
+              }
+            },
+            "join": "require_all",
+            "max_calls": 4,
+            "max_iterations": 32,
+            "output_binding": "answer",
+            "output_schema": {
+              "type": "integer"
+            },
+            "retries": 0,
+            "source": "given x: Int.\nlet answer = x + 1.\n"
+          },
+          {
+            "allowed": {
+              "local_only": true,
+              "models": [
+                "qwen3:4b-instruct"
+              ],
+              "nodes": [
+                "node-i"
+              ],
+              "providers": [
+                "ollama"
+              ],
+              "routes": [
+                "Local"
+              ]
+            },
+            "assumptions": [
+              "This is a deterministic arithmetic fixture, not an empirical measurement."
+            ],
+            "call_limit": 1,
+            "checks": [
+              "answer = v * 2"
+            ],
+            "contract": "Return the value constrained by the explicit integer predicate.",
+            "effect_risk": "none",
+            "id": "SG_dbce39bfc56255e7bcba019854c87e8cb069b4eef1f4e337",
+            "inputs": {
+              "v": {
+                "node": "SG_54a33fa871a774be9a1e820585193591036ac23ed68f7c86"
+              }
+            },
+            "join": "require_all",
+            "max_calls": 4,
+            "max_iterations": 32,
+            "output_binding": "answer",
+            "output_schema": {
+              "type": "integer"
+            },
+            "retries": 0,
+            "source": "given v: Int.\nlet answer = v * 2."
+          }
+        ]
+      },
+      "policy": {
+        "order": [
+          "Local"
+        ],
+        "routes": [
+          {
+            "id": "Local",
+            "local": true,
+            "model": "qwen3:4b-instruct",
+            "node": "node-i",
+            "provider": "ollama"
+          }
+        ],
+        "version": 1
+      }
+    },
+    "manifest": {
+      "composition_sha256": "831b0ee0297ea14970c6459cec45514ce76b82a0b864e8c559f0756ab5d67678",
+      "definition_sha256": {
+        "Pair": "ffb4f0ece7bae7c9445429f8e99f19203b1fefd262516b392a52f895c1e65986"
+      },
+      "expander_sha256": "f98901cdca3b89f0fdf23429084df8bc4d42de7cca088aa03031cd912c056e6c",
+      "graph_hash": "eaf3a39b4c58f6d7cd9fd77c9390274ca671f41944b10b0a82e3dc65720442f9",
+      "nodes": {
+        "SG_191402f576eceb0a60e0e6d2cab195cc28c95000e6e91229": {
+          "definition": "Pair",
+          "definition_sha256": "ffb4f0ece7bae7c9445429f8e99f19203b1fefd262516b392a52f895c1e65986",
+          "instance": "First",
+          "node": "Draft",
+          "scope": "instance",
+          "source_sha256": "1c017770479a42ce038d6a09fa8cda49fe65c59e44bf92121e443f045c8372e5"
+        },
+        "SG_375a93312966d4e568e771e0ddb4f6e87e5375ea96a8b0f6": {
+          "definition": "Pair",
+          "definition_sha256": "ffb4f0ece7bae7c9445429f8e99f19203b1fefd262516b392a52f895c1e65986",
+          "instance": "First",
+          "node": "Check",
+          "scope": "instance",
+          "source_sha256": "c00254133bdccdcaa5416e9bec7b9ef98cb68417b94d85486efb01dd49a6cf3f"
+        },
+        "SG_54a33fa871a774be9a1e820585193591036ac23ed68f7c86": {
+          "definition": "Pair",
+          "definition_sha256": "ffb4f0ece7bae7c9445429f8e99f19203b1fefd262516b392a52f895c1e65986",
+          "instance": "Second",
+          "node": "Draft",
+          "scope": "instance",
+          "source_sha256": "1c017770479a42ce038d6a09fa8cda49fe65c59e44bf92121e443f045c8372e5"
+        },
+        "SG_dbce39bfc56255e7bcba019854c87e8cb069b4eef1f4e337": {
+          "definition": "Pair",
+          "definition_sha256": "ffb4f0ece7bae7c9445429f8e99f19203b1fefd262516b392a52f895c1e65986",
+          "instance": "Second",
+          "node": "Check",
+          "scope": "instance",
+          "source_sha256": "c00254133bdccdcaa5416e9bec7b9ef98cb68417b94d85486efb01dd49a6cf3f"
+        }
+      },
+      "policy_hash": "27aac1f00d84a65c6c1bc38107726ff7847033563e9604a16cea1889b82aa000",
+      "ports": {
+        "First": {
+          "inputs": {
+            "request": {
+              "binding": {
+                "literal": {
+                  "assumptions": [],
+                  "evidence": [],
+                  "independence": "not_established",
+                  "outcome": "supported",
+                  "provenance": [],
+                  "value": 3,
+                  "value_id": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+                  "version": 1
+                }
+              },
+              "contract": {
+                "join": "require_all",
+                "native_type": {
+                  "k": "int"
+                }
+              },
+              "targets": [
+                {
+                  "input": "x",
+                  "node": "SG_191402f576eceb0a60e0e6d2cab195cc28c95000e6e91229"
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "answer": {
+              "node": "SG_375a93312966d4e568e771e0ddb4f6e87e5375ea96a8b0f6",
+              "output_binding": "answer",
+              "output_schema": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "Second": {
+          "inputs": {
+            "request": {
+              "binding": {
+                "node": "SG_375a93312966d4e568e771e0ddb4f6e87e5375ea96a8b0f6"
+              },
+              "contract": {
+                "join": "require_all",
+                "native_type": {
+                  "k": "int"
+                }
+              },
+              "targets": [
+                {
+                  "input": "x",
+                  "node": "SG_54a33fa871a774be9a1e820585193591036ac23ed68f7c86"
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "answer": {
+              "node": "SG_dbce39bfc56255e7bcba019854c87e8cb069b4eef1f4e337",
+              "output_binding": "answer",
+              "output_schema": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "scope": "authoring_expansion_not_execution_authority",
+      "sha256": "74a3e57d0588e8d3d76a964936b8a8c2c438cbd4ef7a435755e34ebdbb1ad1f7",
+      "version": 1
+    },
+    "ok": true,
+    "scope": "authoring_only; web execution admission checked; explicitly check and run the flat draft",
+    "version": 1
+  },
+  "flat_example": {
+    "graph": {
+      "id": "DoubleExample",
+      "nodes": [
+        {
+          "output_binding": "answer",
+          "output_schema": {
+            "type": "integer"
+          },
+          "allowed": {
+            "routes": [
+              "Local"
+            ],
+            "providers": [
+              "ollama"
+            ],
+            "models": [
+              "qwen3:4b-instruct"
+            ],
+            "nodes": [
+              "node-i"
+            ],
+            "local_only": true
+          },
+          "join": "require_all",
+          "effect_risk": "none",
+          "retries": 0,
+          "call_limit": 1,
+          "max_calls": 1,
+          "max_iterations": 1,
+          "id": "Measure",
+          "inputs": {},
+          "source": "use profile=verified.\nlet answer = 6.\nshow answer.",
+          "contract": "The declared input is six units.",
+          "checks": [
+            "answer = 6"
+          ],
+          "assumptions": [
+            "Six is an owner-supplied example value, not an observed measurement."
+          ]
+        },
+        {
+          "output_binding": "answer",
+          "output_schema": {
+            "type": "integer"
+          },
+          "allowed": {
+            "routes": [
+              "Local"
+            ],
+            "providers": [
+              "ollama"
+            ],
+            "models": [
+              "qwen3:4b-instruct"
+            ],
+            "nodes": [
+              "node-i"
+            ],
+            "local_only": true
+          },
+          "join": "require_all",
+          "effect_risk": "none",
+          "retries": 0,
+          "call_limit": 1,
+          "max_calls": 1,
+          "max_iterations": 1,
+          "id": "Double",
+          "inputs": {
+            "x": {
+              "node": "Measure"
+            }
+          },
+          "source": "use profile=verified.\ngiven x: Int.\nlet answer = x * 2.\nshow answer.",
+          "contract": "Double the input under exact integer arithmetic.",
+          "checks": [
+            "answer = x * 2"
+          ]
+        }
+      ],
+      "iterations": 1,
+      "max_calls": 2
+    },
+    "policy": {
+      "version": 1,
+      "routes": [
+        {
+          "id": "Local",
+          "provider": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "node-i",
+          "local": true
+        }
+      ],
+      "order": [
+        "Local"
+      ]
+    },
+    "description": "Two checked nodes pass an exact value along an edge. This example makes zero model calls. Replace node source with explicit asks to use the exact registered route, and review its call cap."
+  }
+}

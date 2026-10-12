@@ -1,0 +1,53 @@
+---
+effort: high
+---
+# Scaling a recipe
+
+This paper turns a recipe written in kitchen language into exact metric quantities for any number of
+servings. A reader extracts the quantities as written; everything after that (unit conversion and
+scaling) is arithmetic that the kernel does exactly, so any group of agents that reads the recipe the
+same way produces the same shopping list, to the gram.
+
+## Definitions
+
+- **cup**: the US legal cup, exactly 240 millilitres
+- **tablespoon**: exactly 15 millilitres; abbreviated tbsp
+- **teaspoon**: exactly 5 millilitres; abbreviated tsp
+- **serving**: one portion as the recipe counts them
+
+## The recipe
+
+The recipe is given as text. Its first line says how many servings it makes.
+
+```symblic
+import units.
+given recipe: Text = """Pancakes (makes 4 servings)
+1.5 cups milk
+2 tablespoons melted butter
+1 teaspoon baking powder
+200 g flour"""
+given servings: Int in 1..100 = 6.
+define Line as Record {item: Text, amount: Number, unit: one of {cup, tablespoon, teaspoon, g, ml}}.
+```
+
+## Reading the quantities
+
+Each ingredient line is read exactly as written: the amount is the number on the line, the unit is the
+word after it, and the item is the rest of the line. Nothing is converted or rounded at this step.
+
+```symblic
+ask base: Int in 1..100 "How many servings does the recipe say it makes?" from recipe
+ask lines: List of Line "List every ingredient line of the recipe as item, amount and unit." from recipe
+ensure len(lines) = 4 else retry because "the recipe has 4 ingredient lines".
+```
+
+## Scaling
+
+A volume in cups, tablespoons or teaspoons becomes millilitres by the definitions above; grams and
+millilitres stay as they are. Every amount is multiplied by servings / base.
+
+```symblic
+let ml_per = {cup: 240, tablespoon: 15, teaspoon: 5, ml: 1, g: 1}.
+let scaled = [{item: l.item, amount: l.amount * ml_per[l.unit] * servings / base, unit: if l.unit = "g" then "g" else "ml"} for l in lines].
+show scaled.
+```

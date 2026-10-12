@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+"""symblic-context: a bounded, read-only pack of a few named source files for one fresh agent task.
+
+    tools/symblic-context pack --root DIR --file a.py [--file b.py ...] [--query NAME]
+    tools/symblic-context doctor        which optional navigation packages are installed
+
+The work is done by symblic.kernel.context_packs (read its docstring for the limits: at most 24 named files,
+no directory scan, no links followed, private-looking paths refused). When the optional tools are installed
+(`python3 tools/scripts/install_symblic_tools.py`, into SYMBLIC_TOOLS_HOME, default
+~/.local/share/symblic-tools), this runs under their virtual environment so excerpts come from grep-ast;
+otherwise it runs with the current interpreter and plain line context. Standard library only.
+"""
+import os
+from pathlib import Path
+import sys
+
+root = Path(__file__).resolve().parents[1]           # the repository: this file is tools/symblic-context
+tools_home = Path(os.environ.get('SYMBLIC_TOOLS_HOME', str(Path.home() / '.local/share/symblic-tools')))
+python = tools_home / 'venv/bin/python'
+if python.is_file():
+    env = dict(os.environ)
+    env['PYTHONPATH'] = os.pathsep.join([str(root)] + ([env['PYTHONPATH']] if env.get('PYTHONPATH') else []))
+    os.execve(str(python), [str(python), '-m', 'symblic.kernel.context_packs', *sys.argv[1:]], env)
+sys.path.insert(0, str(root))
+from symblic.kernel.context_packs import main  # noqa: E402
+raise SystemExit(main())

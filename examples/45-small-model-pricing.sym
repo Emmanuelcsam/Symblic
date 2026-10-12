@@ -1,0 +1,90 @@
+program Small model pricing checked playback.
+use profile=verified, context=none, determine=false, solve=false.
+note Rechecks exact model-written card, CSS and page assembly functions. No model calls.
+let renderPlan = """function renderPlan(name, price) {{
+  return `<section class="card"><h2>${{name.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;")}}</h2><p>${{price.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;")}}</p><button type="button">Select</button></section>`;
+}}""".
+let pricingCSS = """function pricingCSS() {{
+  return "* {{ box-sizing: border-box; }} body {{ margin: 0; background: #111; color: #f5f5f5; font-family: sans-serif; font-size: 16px; }} main {{ padding: 16px; }} .grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; }} .card {{ background: #222; padding: 24px; }} button {{ min-height: 44px; font-size: 16px; color: #111; background: #eee; }} button:focus-visible {{ outline: 3px solid #7dd3fc; outline-offset: 3px; }}";
+}}""".
+let renderPricing = """function renderPricing() {{
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing Plans</title>
+  <style>${{pricingCSS()}}</style>
+</head>
+<body>
+  <main>
+    <h1>Pricing Plans</h1>
+    <div class="grid">
+      ${{renderPlan("Basic","$0")}}
+      ${{renderPlan("Studio","$12")}}
+      ${{renderPlan("Team","$30")}}
+    </div>
+  </main>
+</body>
+</html>`;
+}}""".
+let page_checker = """// Trusted finite checks only; the model writes the complete page.
+function auditPricing(html) {{
+  function need(ok, why) {{ if (!ok) throw new Error('Pricing: '+why); }}
+  need(typeof html==='string'&&html.length<24000,'bounded HTML string');
+  need(/^\\s*<!doctype html>/i.test(html),'HTML doctype');
+  need(/<html\\b[^>]*\\blang\\s*=\\s*["']en["']/i.test(html),'lang=en');
+  need(/<meta\\b[^>]*\\bcharset\\s*=\\s*["']utf-8["']/i.test(html),'real UTF-8 meta');
+  need(/<meta\\b[^>]*\\bname\\s*=\\s*["']viewport["'][^>]*width=device-width/i.test(html),'responsive viewport');
+  need(!/<(?:script|iframe|object|embed|img|link|form)\\b|\\bon[a-z]+\\s*=|\\b(?:src|href|action)\\s*=|@import|url\\s*\\(/i.test(html),'no executable markup or external resources');
+  const count = name => (html.match(new RegExp('<'+name+'\\\\b','gi'))||[]).length;
+  need(count('main')===1&&count('h1')===1&&count('h2')===3&&count('button')===3&&count('style')===1,'one main/h1/style and three plan headings/buttons');
+  const plain = html.replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style\\s*>/gi,'').replace(/<title\\b[^>]*>[\\s\\S]*?<\\/title\\s*>/gi,'').replace(/<[^>]*>/g,' ').replace(/\\s+/g,' ').trim();
+  need(plain==='Pricing Plans Basic $0 Select Studio $12 Select Team $30 Select','exact plan names/prices/buttons; no invented benefits');
+  const css=(/<style\\b[^>]*>([\\s\\S]*?)<\\/style\\s*>/i.exec(html)||[])[1]||'';
+  need(/display\\s*:\\s*grid/i.test(css)&&/repeat\\s*\\(\\s*auto-fit\\s*,\\s*minmax\\s*\\(\\s*min\\s*\\(\\s*240px\\s*,\\s*100%\\s*\\)\\s*,\\s*1fr\\s*\\)\\s*\\)/i.test(css),'auto-fit grid with min(240px,100%)');
+  need(/box-sizing\\s*:\\s*border-box/i.test(css),'border-box sizing');
+  need(/:focus(?:-visible)?\\b[^{{}}]*[{{][^}}]*outline\\s*:\\s*(?:[2-9]|[1-9][0-9]+)px\\s+solid/i.test(css),'visible >=2px solid focus outline');
+  return true;
+}}
+""".
+let style_checker = """// Author-owned finite CSS contract checker, never used as generated CSS.
+function auditPricingStyle(css) {{
+  function need(ok,why) {{ if(!ok)throw new Error('Pricing CSS: '+why); }}
+  need(typeof css==='string'&&css.length<6000,'bounded CSS string');
+  const required={{
+    '*':{{'box-sizing':'border-box'}},
+    'body':{{'margin':'0','background':'#111','color':'#f5f5f5','font-family':'sans-serif','font-size':'16px'}},
+    'main':{{'padding':'16px'}},
+    '.grid':{{'display':'grid','grid-template-columns':'repeat(auto-fit,minmax(min(240px,100%),1fr))','gap':'16px'}},
+    '.card':{{'background':'#222','padding':'24px'}},
+    'button':{{'min-height':'44px','font-size':'16px','color':'#111','background':'#eee'}},
+    'button:focus-visible':{{'outline':'3px solid #7dd3fc','outline-offset':'3px'}}
+  }};
+  const rules=new Map(), regex=/([^{{}}]+)[{{]([^{{}}]*)[}}]/g;
+  let match, last=0;
+  while((match=regex.exec(css))) {{
+    need(css.slice(last,match.index).trim()==='','complete flat CSS rules');last=regex.lastIndex;
+    const selector=match[1].trim();
+    need(Object.hasOwn(required,selector)&&!rules.has(selector),'one allowed selector per rule: '+selector);
+    const properties={{}};
+    for(const declaration of match[2].split(';')) {{
+      if(!declaration.trim())continue;
+      const colon=declaration.indexOf(':');need(colon>0,'property:value required: '+declaration);
+      const name=declaration.slice(0,colon).trim(), value=declaration.slice(colon+1).trim();
+      need(Object.hasOwn(required[selector],name)&&!Object.hasOwn(properties,name),'allowed unique property for '+selector+': '+name);
+      need(value.replace(/\\s+/g,'')===required[selector][name].replace(/\\s+/g,''),selector+' '+name+' must be '+required[selector][name]);
+      properties[name]=value;
+    }}
+    need(Object.keys(properties).length===Object.keys(required[selector]).length,'missing required property for '+selector);
+    rules.set(selector,properties);
+  }}
+  need(css.slice(last).trim()===''&&rules.size===Object.keys(required).length,'all seven required rules and no extra CSS');
+  return true;
+}}
+""".
+let pieces = [page_checker, style_checker, renderPlan, pricingCSS, renderPricing].
+let checks = js_test(pieces, [["""renderPlan("Basic","$0")""", """\"<section class=\\\"card\\\"><h2>Basic</h2><p>$0</p><button type=\\\"button\\\">Select</button></section>\""""], ["""renderPlan("Studio","$12")""", """\"<section class=\\\"card\\\"><h2>Studio</h2><p>$12</p><button type=\\\"button\\\">Select</button></section>\""""], ["""renderPlan("Team","$30")""", """\"<section class=\\\"card\\\"><h2>Team</h2><p>$30</p><button type=\\\"button\\\">Select</button></section>\""""], ["""renderPlan("A&B <C>","$0")""", """\"<section class=\\\"card\\\"><h2>A&amp;B &lt;C&gt;</h2><p>$0</p><button type=\\\"button\\\">Select</button></section>\""""], ["""renderPlan("\\"Quoted\\"","O'Reilly")""", """\"<section class=\\\"card\\\"><h2>&quot;Quoted&quot;</h2><p>O&#39;Reilly</p><button type=\\\"button\\\">Select</button></section>\""""], ["""auditPricingStyle(pricingCSS())""", """true"""], ["""auditPricing(renderPricing())""", """true"""]]).
+assert checks.passed because checks.report.
+show checks as "Finite pricing page checks".
+show js_run(pieces, "renderPricing()") as "Synthetic pricing HTML".

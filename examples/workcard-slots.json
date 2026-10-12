@@ -1,0 +1,7 @@
+{
+  "instruction": "Fill the visible expression hole to compute the square of x.",
+  "template": "given x: Int.\nlet answer = ([[expression]]).\nassert answer = x*x.\nshow answer.\n",
+  "slots": [
+    {"name": "expression", "kind": "expression", "instruction": "Choose the expression for squaring x.", "choices": ["x+x", "x*x"]}
+  ]
+}

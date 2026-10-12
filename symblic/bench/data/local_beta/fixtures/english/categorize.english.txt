@@ -1,0 +1,6 @@
+Remember message is "The package arrived crushed and two plates were broken. I would like a refund.".
+Remember 'internal note' is "Customer since 2019; do not show this to the classifier.".
+
+Ask for category as one of "praise", "complaint", "question": "Classify the customer message into exactly one category.".
+Using only message.
+Show category.

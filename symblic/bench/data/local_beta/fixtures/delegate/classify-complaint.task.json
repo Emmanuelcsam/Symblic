@@ -1,0 +1,13 @@
+{
+  "template": "enum_classification",
+  "calls": 3,
+  "params": {
+    "instruction": "Classify the customer message into exactly one category.",
+    "data": "The package arrived crushed and two plates were broken. I would like a refund.",
+    "categories": {
+      "praise": "the customer is pleased or thanks us",
+      "complaint": "the customer reports a problem or asks for a refund",
+      "question": "the customer asks for information"
+    }
+  }
+}

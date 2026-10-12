@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""symblic-distill: build, split, plan, prepare and compare Symblic distillation jobs.
+
+    tools/symblic-distill --help            every command (hash, build, split, plan-train, compare, ...)
+
+A thin entry point for symblic.distill.cli (`python3 -m symblic.distill.cli` does the same). It reads only the
+files named on the command line, writes only new files, and never trains, generates, downloads or dispatches
+anything: `launch` and `launch-infer` print the worker command for you to run. See symblic/distill/README.md
+and docs/reference/DISTILLATION.md. Standard library only.
+"""
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # the repository: this file is tools/symblic-distill
+from symblic.distill.cli import main  # noqa: E402
+
+if __name__ == '__main__':
+    sys.exit(main())

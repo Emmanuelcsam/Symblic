@@ -1,0 +1,173 @@
+{
+  "checker_identity": {
+    "kind": "explicit-test-checker",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "checker_identity_scope": "caller_supplied_content_pin_not_execution_attestation",
+  "checks": [
+    {
+      "assurance": "caller_bound_finite_example",
+      "call": "identity(...[12])",
+      "declaration_id": "twelve",
+      "expected": "12",
+      "id": "twelve/0",
+      "origin": "caller_supplied",
+      "requirements": [
+        "identity"
+      ],
+      "visibility": "public"
+    }
+  ],
+  "counts": {
+    "generated_public": 1,
+    "hidden": 0,
+    "original_public": 1,
+    "proposals": 0
+  },
+  "declaration": {
+    "checks": [
+      {
+        "arguments_json": "[12]",
+        "expected_json": "12",
+        "function": {
+          "name": "identity",
+          "signature": "identity(value)"
+        },
+        "id": "twelve",
+        "kind": "case",
+        "origin": "caller_supplied",
+        "requirements": [
+          {
+            "id": "identity",
+            "span": {
+              "end": 58,
+              "quote": "identity(value) returns the supplied JSON value unchanged.",
+              "revision": 1,
+              "source_id": "requirement/identity",
+              "source_sha256": "0c34deccf1815539af9acdada89d6fc02ed5b345cc589bc4996c412397cbcf9d",
+              "start": 0
+            },
+            "text": "identity(value) returns the supplied JSON value unchanged."
+          }
+        ],
+        "visibility": "public"
+      }
+    ],
+    "evaluation": {
+      "family": "finite-json-identity",
+      "id": "literal-context",
+      "split": "dev"
+    },
+    "seed": 3,
+    "version": 1
+  },
+  "freeze_scope": "immutable_data_only_caller_must_pin_before_any_candidate_dispatch",
+  "implementation": {
+    "sources": {
+      "symblic_grounding.py": "9988bd0b0fa2f65ca0ea2a2f4a01034e7a6d5b352ece5f93c3b9cbd13b309562",
+      "symblic_mica_checkpack.py": "9edf9f96e4a171d0e16931e21a827982eb484e37780d74592d72a3252bd54620",
+      "symblic_mica_contracts.py": "2a42113c70740feae481e3ed8ec0949f0adb7e3edc1e20cb4194479223d1680f"
+    },
+    "version": 1
+  },
+  "independence": "not_established",
+  "oracle_exposure_scope": "explicit_public_hidden_partition_only",
+  "order_scope": "seeded_order_only_all_declared_cases_retained",
+  "original_request": {
+    "allowed_outputs": [
+      "result.js"
+    ],
+    "artifact_format": "javascript_script",
+    "assumptions": [],
+    "budget": {
+      "context_chars": 24000,
+      "max_calls": 1,
+      "max_candidates": 4,
+      "max_depth": 4,
+      "max_units": 64,
+      "max_workers": 3,
+      "retries": 2,
+      "wall_seconds": 1800
+    },
+    "exports": [
+      {
+        "name": "identity",
+        "signature": "identity(value)"
+      }
+    ],
+    "language": "javascript",
+    "objective": "Return each supplied JSON value unchanged.",
+    "requirements": [
+      {
+        "acceptance": "TESTED",
+        "id": "identity",
+        "text": "identity(value) returns the supplied JSON value unchanged."
+      }
+    ],
+    "tests": [
+      {
+        "call": "identity(0)",
+        "expected": "0",
+        "requirement_ids": [
+          "identity"
+        ]
+      }
+    ],
+    "version": 1
+  },
+  "original_request_sha256": "c5b6857a147a42483634a1d551c6f928edb8dc455567d7e0687e9ce623c0ea98",
+  "public_request": {
+    "allowed_outputs": [
+      "result.js"
+    ],
+    "artifact_format": "javascript_script",
+    "assumptions": [],
+    "budget": {
+      "context_chars": 24000,
+      "max_calls": 1,
+      "max_candidates": 4,
+      "max_depth": 4,
+      "max_units": 64,
+      "max_workers": 3,
+      "retries": 2,
+      "wall_seconds": 1800
+    },
+    "exports": [
+      {
+        "name": "identity",
+        "signature": "identity(value)"
+      }
+    ],
+    "language": "javascript",
+    "objective": "Return each supplied JSON value unchanged.",
+    "requirements": [
+      {
+        "acceptance": "TESTED",
+        "id": "identity",
+        "text": "identity(value) returns the supplied JSON value unchanged."
+      }
+    ],
+    "tests": [
+      {
+        "call": "identity(0)",
+        "expected": "0",
+        "requirement_ids": [
+          "identity"
+        ]
+      },
+      {
+        "call": "identity(...[12])",
+        "expected": "12",
+        "requirement_ids": [
+          "identity"
+        ]
+      }
+    ],
+    "version": 1
+  },
+  "public_request_sha256": "7dcbd761e2c9dc22bcffa3df1163040b18062902f4b108742292665b561d2001",
+  "scope": "finite_caller_bound_checks_semantic_completeness_unassessed",
+  "semantic_completeness": "unassessed",
+  "sha256": "e76282f7fa7d72daf3ad34646dffe2f3ba7195312e6a42a9e32e9edf63e6202a",
+  "version": 1
+}

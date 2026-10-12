@@ -1,0 +1,101 @@
+{
+  "schema": "symblic.docs.cases.v1",
+  "cases": [
+    {
+      "id": "exact-tip",
+      "fence_id": "NATURAL-LANGUAGE-BRIDGE.md#fence-1",
+      "content_sha256": "abe9d999f85505f166203f7df0e52b133680b2e42c33c45c4415e70fc44f2932",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "identity-proof-bridge",
+      "fence_id": "NATURAL-LANGUAGE-BRIDGE.md#fence-2",
+      "content_sha256": "3f93f46122dcb30a9213a7897d35f956d61b589ea48f13cbb79084aa1ce50844",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "finite-quadratic",
+      "fence_id": "VARIATIONAL.md#fence-2",
+      "content_sha256": "5d53a76c067d88f12c730a249b6c391a9261f5ea765d63ed50df9c8e67982375",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "affine-projection",
+      "fence_id": "PROJECTION.md#fence-1",
+      "content_sha256": "d2d13436b5ebcd664e22a81ca6688622f9b7970b0949f200a5e9d11cc7a7110b",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "explicit-quantities",
+      "fence_id": "QUANTITIES.md#fence-1",
+      "content_sha256": "7dd97d224318aef6c86e1db6603b3720b29912f74ea85ca032dee207d092103e",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "proof-certificate",
+      "fence_id": "PROOF-TERMS.md#fence-2",
+      "content_sha256": "dfe3d1e7d17704d3302562b927f26cb6a9978d46c9287d1ed97c8e4ef3ca2f51",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "finite-logic",
+      "fence_id": "FINITE-LOGIC.md#fence-3",
+      "content_sha256": "580339a5113cebc8f0ad766777f2da3487f4a06ab690dcac0dfbea2c484a4961",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "ising",
+      "fence_id": "DISCRETE.md#fence-1",
+      "content_sha256": "a35c0fdb7a1dadf33f86f2de4ff26d3dfde70b0221310d35e5d498f741c900aa",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "weak-contract-caveat",
+      "fence_id": "CRITIQUE-AND-LIMITATIONS.md#fence-1",
+      "content_sha256": "448a07bf086333bbe5e5b42f8f5fecb8deb5b1c03c22330eb121ab025c3ac169",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "order-and-ising",
+      "fence_id": "QUANTUM-FOUNDATIONS-OF-SYMBLIC.md#fence-7",
+      "content_sha256": "c06a8c5c799328e3f99430cfec6dc536fd14be392489f7caef512b9258705561",
+      "action": "execute",
+      "expected_status": "done",
+      "expected_error_kind": null
+    },
+    {
+      "id": "rejected-scheduler",
+      "fence_id": "HPC-FOUNDATIONS.md#fence-2",
+      "content_sha256": "c2c2d2f4b9ed9671516c6aa8251f3a87d87d062b2036ac971a05ccf86ab3b12a",
+      "action": "check",
+      "expected_status": "check_refused",
+      "expected_error_kind": "syntax"
+    },
+    {
+      "id": "rejected-scheduler-compendium",
+      "fence_id": "SYMBLIC-BREAKTHROUGH-COMPENDIUM.md#fence-12",
+      "content_sha256": "992bc116f3141e22c44586e6cf2461aa8a3b5ed96ba96f70c859dc0fd429c4fb",
+      "action": "check",
+      "expected_status": "check_refused",
+      "expected_error_kind": "syntax"
+    }
+  ]
+}

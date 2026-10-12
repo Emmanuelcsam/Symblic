@@ -1,0 +1,257 @@
+{
+  "assignment": {
+    "attempt_timeout_seconds": 180,
+    "cache": false,
+    "controller_seconds": 3300,
+    "fresh_context_each_statement": true,
+    "maximum_attempts_per_slot": 2,
+    "models": [
+      "llama3.2:1b",
+      "granite3.3:2b"
+    ],
+    "order": "focus first on first model; card first on second; fixed before launch",
+    "project_seconds": 1560,
+    "projects": 4,
+    "seed": 7,
+    "slots": 16,
+    "state": "Each arm advances only its own adopted prefix; all twelve unreached slots remain in denominators.",
+    "statement_seconds": 390
+  },
+  "audit": {
+    "scope": "The separate artifact audit validates the originally unverified scorer inputs; fresh terminal audit validates owned lifecycle. No model calls during review.",
+    "scorer_labels_preserved": {
+      "data_kind": "unverified_event_records",
+      "status": "draft_offline_audit"
+    }
+  },
+  "date_utc": "2026-10-05T16:06:20.988313+00:00",
+  "economics": {
+    "authoring_cost": null,
+    "cost_per_completed_project": null,
+    "input_reduction_observed_fraction": 0.48669921291222473,
+    "input_tokens_card": 5152,
+    "input_tokens_focus": 10037,
+    "output_tokens_each_condition": 28,
+    "scope": "Provider-reported input/output counters observed on all eight calls. Schema-token breakdown unavailable. Arm totals include repairs with different feedback; these totals are descriptive, not an isolated causal effect or a general saving.",
+    "tokens": {
+      "input_tokens": {
+        "complete_total": 15189,
+        "missing_calls": 0,
+        "observed_calls": 8,
+        "observed_sum": 15189
+      },
+      "output_tokens": {
+        "complete_total": 56,
+        "missing_calls": 0,
+        "observed_calls": 8,
+        "observed_sum": 56
+      },
+      "schema_tokens": {
+        "complete_total": null,
+        "missing_calls": 8,
+        "observed_calls": 0,
+        "observed_sum": 0
+      }
+    }
+  },
+  "evidence_sha256": {
+    "admission": "85f849264058a349a094803732843276119d2d53b5e3071f3ff11c8dbeead9a4",
+    "artifact_audit": "29ea557c3d85e2cbacb0fe6c1f0f08cae0951a983a0ff30af3e54f9f110b4b05",
+    "candidate": "c5516a7b6359136741cfd703e757671aab8f257287337b08e68479adfd357264",
+    "controller": "93f2f7844bac53e56d52e9c34f12bf2ab7ca82cdcc16337970aab6eab7ce8c91",
+    "freeze": "eb9ce935bfdb66e2f6fd6490c8a73bddae549250703b2c611c9fa26074011d2b",
+    "independent_review": "f58c9880c7f8dc54d679b0937e158c095c74a707ff9bdc8d52a9c52c89fc6979",
+    "power_restoration": "62ceffbe90b0ad840834ea22ec620ee967600f60705ea5a881d510a1c1d3d9bd",
+    "preregistration": "ca5d9185df2d7b4ca2790ba549f5d77939e2fed955504c564318e8fb9511d83f",
+    "score": "2e84cefd11b0c651dde106b86b983802e2898e94cf69d29f57e04fdbfc79a8c5",
+    "terminal_review": "7f34f745a0dedffa8bed6154e24aa788db22e16662684c0cfd9bf25712b6b443"
+  },
+  "experiment": "Paired focus/8 versus target-first card/9 with exact proof obligations",
+  "identity": {
+    "matching_before_after_manifest_observations": 8,
+    "scope": "Server-manifest observations, not loaded-weight attestation."
+  },
+  "interpretation": [
+    "Both templates delivered the strict ordinal wire on every call; neither completed an intermediate obligation or the original goal.",
+    "Card produced two formula-matching selections with the wrong free-assumption scope. Correct formula text alone is insufficient.",
+    "All eight candidate selections were rejected without changing either authoritative parent prefix.",
+    "Target-first cards reduced observed input tokens in this small task; authoring cost and cost per completed project are not established.",
+    "One four-stage task, two models and one seeded trajectory per arm do not establish general quality improvement, cross-model output equality, or an isolated ordering effect."
+  ],
+  "operations": {
+    "active_provider_rows": 0,
+    "assigned_nodes_loaded_models": 0,
+    "controller": "collected/not-found, inactive/dead; no matching cgroup",
+    "fresh_exact_remote_unit_inactive": 8,
+    "is_active_return_code": 3,
+    "owned_power_lease_restored_nodes": 8,
+    "reservations_preserved": true
+  },
+  "requests": {
+    "basis": "Eight exact remote generation bodies bound to registered plans, frozen requests and actual replies.",
+    "effective_generation_options": {
+      "num_ctx": 16384,
+      "num_predict": 16384,
+      "num_thread": 2,
+      "seed": 7,
+      "temperature": 0
+    },
+    "master_settings_are_not_effective_settings": true,
+    "shared_initial_pairs": [
+      {
+        "actual_generation_different_fields": [
+          "prompt"
+        ],
+        "attempt": 1,
+        "pair": "implication-small1",
+        "repair_equality": "not required for different observed answers",
+        "shared_actual_prefix": true,
+        "stage": 1
+      },
+      {
+        "actual_generation_different_fields": [
+          "prompt"
+        ],
+        "attempt": 1,
+        "pair": "implication-small2",
+        "repair_equality": "not required for different observed answers",
+        "shared_actual_prefix": true,
+        "stage": 1
+      }
+    ]
+  },
+  "results": {
+    "calls": 8,
+    "completed_projects": 0,
+    "conditions": {
+      "card": {
+        "adopted": 0,
+        "all_obligations_completed": 0,
+        "assigned_projects": 2,
+        "assigned_slots": 8,
+        "attempt_endpoints": {
+          "all_recorded_attempts_including_unreached_or_invalid_records": 4,
+          "exact_raw_wire_selections": 4,
+          "formula_matches": 2,
+          "independently_scored_attempts": 4,
+          "obligation_satisfied": 0,
+          "original_goal_complete": 0,
+          "scope_matches": 1,
+          "valid": 3
+        },
+        "costs": {
+          "completed_projects": 0,
+          "owned_attempt_records": 4,
+          "tokens": {
+            "input_tokens": {
+              "complete_total": 5152,
+              "missing_calls": 0,
+              "observed_calls": 4,
+              "observed_sum": 5152,
+              "per_completed_project": null
+            },
+            "output_tokens": {
+              "complete_total": 28,
+              "missing_calls": 0,
+              "observed_calls": 4,
+              "observed_sum": 28,
+              "per_completed_project": null
+            },
+            "schema_tokens": {
+              "complete_total": null,
+              "missing_calls": 4,
+              "observed_calls": 0,
+              "observed_sum": 0,
+              "per_completed_project": null
+            }
+          }
+        },
+        "false_accepted_milestone": 0,
+        "formula_matches": 0,
+        "milestones_per_assigned_slot": 0.0,
+        "milestones_per_reached_slot": 0.0,
+        "obligation_satisfied": 0,
+        "original_goal_complete": 0,
+        "reached": 2,
+        "scope_matches": 0,
+        "strict_delivered_milestone": 0,
+        "strict_sequence_completed": 0,
+        "structurally_admitted": 2,
+        "successful_repair": 0,
+        "valid_step": 0
+      },
+      "focus": {
+        "adopted": 0,
+        "all_obligations_completed": 0,
+        "assigned_projects": 2,
+        "assigned_slots": 8,
+        "attempt_endpoints": {
+          "all_recorded_attempts_including_unreached_or_invalid_records": 4,
+          "exact_raw_wire_selections": 4,
+          "formula_matches": 0,
+          "independently_scored_attempts": 4,
+          "obligation_satisfied": 0,
+          "original_goal_complete": 0,
+          "scope_matches": 3,
+          "valid": 3
+        },
+        "costs": {
+          "completed_projects": 0,
+          "owned_attempt_records": 4,
+          "tokens": {
+            "input_tokens": {
+              "complete_total": 10037,
+              "missing_calls": 0,
+              "observed_calls": 4,
+              "observed_sum": 10037,
+              "per_completed_project": null
+            },
+            "output_tokens": {
+              "complete_total": 28,
+              "missing_calls": 0,
+              "observed_calls": 4,
+              "observed_sum": 28,
+              "per_completed_project": null
+            },
+            "schema_tokens": {
+              "complete_total": null,
+              "missing_calls": 4,
+              "observed_calls": 0,
+              "observed_sum": 0,
+              "per_completed_project": null
+            }
+          }
+        },
+        "false_accepted_milestone": 0,
+        "formula_matches": 0,
+        "milestones_per_assigned_slot": 0.0,
+        "milestones_per_reached_slot": 0.0,
+        "obligation_satisfied": 0,
+        "original_goal_complete": 0,
+        "reached": 2,
+        "scope_matches": 0,
+        "strict_delivered_milestone": 0,
+        "strict_sequence_completed": 0,
+        "structurally_admitted": 2,
+        "successful_repair": 0,
+        "valid_step": 0
+      }
+    },
+    "delivered_strict_replies": 8,
+    "false_accepted_milestones": 0,
+    "generation_timeouts": 0,
+    "reached_slots": 4,
+    "satisfied_milestones": 0,
+    "unreached_slots": 12
+  },
+  "runtime": {
+    "compiler_sha256": "247839ecbd5da8324fa7f0fdd2a9c789f79d47a1130f76f2c5f9ab1be1197ec0",
+    "kernel": "1e87549328ddcdb6",
+    "templates": [
+      "symblic.delegate/proof_step_focus/8",
+      "symblic.delegate/proof_step_card/9"
+    ]
+  },
+  "status": "completed_independently_scored_and_externally_audited",
+  "version": 1
+}

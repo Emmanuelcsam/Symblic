@@ -1,0 +1,929 @@
+{
+  "source_sha256": "cd8dbffd378006b6ef40b344ba5382b8770608c49ef9ad08cdfbe730bdb8cd31",
+  "source_scope": "Frozen /8 compiler before catalog-focus merge",
+  "catalog": {
+    "assurance": "Compilation and JSON shape checks execute no model. Runtime acceptance covers only the declared checks.",
+    "request_schema": {
+      "$defs": {
+        "output_schema": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "dependentRequired": {
+                "maximum": [
+                  "minimum"
+                ],
+                "minimum": [
+                  "maximum"
+                ]
+              },
+              "properties": {
+                "maximum": {
+                  "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "type": "integer"
+                },
+                "minimum": {
+                  "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "type": "integer"
+                },
+                "type": {
+                  "const": "integer"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "enum": [
+                    "string",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "items": {
+                  "$ref": "#/$defs/output_schema"
+                },
+                "maxItems": {
+                  "maximum": 128,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "minItems": {
+                  "maximum": 128,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "type": {
+                  "const": "array"
+                }
+              },
+              "required": [
+                "type",
+                "items",
+                "minItems",
+                "maxItems"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "additionalProperties": {
+                  "const": false
+                },
+                "properties": {
+                  "additionalProperties": {
+                    "$ref": "#/$defs/output_schema"
+                  },
+                  "maxProperties": 16,
+                  "minProperties": 1,
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$"
+                  },
+                  "type": "object"
+                },
+                "required": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "type": {
+                  "const": "object"
+                }
+              },
+              "required": [
+                "type",
+                "properties",
+                "required",
+                "additionalProperties"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "checks": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "expected": {},
+                      "op": {
+                        "enum": [
+                          "equals",
+                          "sum_equals"
+                        ]
+                      },
+                      "path": {
+                        "items": {
+                          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+                          "type": "string"
+                        },
+                        "maxItems": 8,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "op",
+                      "path",
+                      "expected"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 16,
+                  "type": "array"
+                },
+                "data": {},
+                "instruction": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "output_schema": {
+                  "$ref": "#/$defs/output_schema"
+                }
+              },
+              "required": [
+                "instruction",
+                "data",
+                "output_schema"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "typed_transform"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 0,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "left": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "denominator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "numerator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "numerator",
+                    "denominator"
+                  ],
+                  "type": "object"
+                },
+                "operation": {
+                  "enum": [
+                    "add",
+                    "subtract",
+                    "multiply",
+                    "divide"
+                  ]
+                },
+                "right": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "denominator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "numerator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "numerator",
+                    "denominator"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "operation",
+                "left",
+                "right"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "exact_arithmetic"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "else": {
+                "properties": {
+                  "calls": {
+                    "default": 3,
+                    "maximum": 6
+                  }
+                }
+              },
+              "if": {
+                "properties": {
+                  "params": {
+                    "properties": {
+                      "certificate_format": {
+                        "const": "incremental"
+                      }
+                    },
+                    "required": [
+                      "certificate_format"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "calls": {
+                    "default": 32,
+                    "maximum": 64
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "calls": {
+              "maximum": 64,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "step_limit"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "inference_format"
+                        ]
+                      }
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "certificate_format": {
+                        "const": "incremental"
+                      }
+                    },
+                    "required": [
+                      "certificate_format"
+                    ]
+                  }
+                }
+              ],
+              "properties": {
+                "certificate_format": {
+                  "enum": [
+                    "terms",
+                    "steps",
+                    "incremental"
+                  ]
+                },
+                "domains": {
+                  "additionalProperties": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 128,
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+                  },
+                  "type": "object"
+                },
+                "goal": {
+                  "type": "string"
+                },
+                "inference_format": {
+                  "enum": [
+                    "json",
+                    "command"
+                  ]
+                },
+                "premises": {
+                  "oneOf": [
+                    {
+                      "maxLength": 32768,
+                      "type": "string"
+                    },
+                    {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "formula": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "formula"
+                        ],
+                        "type": "object"
+                      },
+                      "maxItems": 64,
+                      "type": "array"
+                    }
+                  ]
+                },
+                "step_limit": {
+                  "maximum": 32,
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "premises",
+                "goal"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "proof"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "categories": {
+                  "additionalProperties": {
+                    "maxLength": 131072,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxProperties": 32,
+                  "minProperties": 1,
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$"
+                  },
+                  "type": "object"
+                },
+                "data": {},
+                "instruction": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "instruction",
+                "data",
+                "categories"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "enum_classification"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "instruction": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "revision": {
+                  "maximum": 9007199254740991,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "source_id": {
+                  "type": "string"
+                },
+                "text": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "instruction",
+                "text",
+                "source_id"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "witnessed_line"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "commands": {
+                  "items": {
+                    "maxLength": 131072,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 32,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "require_complete": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "session": {
+                  "description": "Caller-owned session; native prefix checks do not authenticate its author.",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "session",
+                "commands"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "proof_step"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "commands": {
+                  "items": {
+                    "maxLength": 131072,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 32,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "obligation": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "formula": {
+                      "description": "Existing controlled propositional formula syntax; parsed into the exact required AST.",
+                      "maxLength": 131072,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "open_assumptions": {
+                      "default": [],
+                      "description": "Exact required free-assumption set: existing assume IDs or the next line ID.",
+                      "items": {
+                        "pattern": "^s[1-9][0-9]*$",
+                        "type": "string"
+                      },
+                      "maxItems": 512,
+                      "type": "array",
+                      "uniqueItems": true
+                    }
+                  },
+                  "required": [
+                    "formula"
+                  ],
+                  "type": "object"
+                },
+                "require_complete": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "session": {
+                  "description": "Caller-owned session; native prefix checks do not authenticate its author.",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "session",
+                "commands",
+                "obligation"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "proof_step_obligation"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "commands": {
+                  "items": {
+                    "maxLength": 131072,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 32,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "obligation": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "formula": {
+                      "description": "Existing controlled propositional formula syntax; parsed into the exact required AST.",
+                      "maxLength": 131072,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "open_assumptions": {
+                      "default": [],
+                      "description": "Exact required free-assumption set: existing assume IDs or the next line ID.",
+                      "items": {
+                        "pattern": "^s[1-9][0-9]*$",
+                        "type": "string"
+                      },
+                      "maxItems": 512,
+                      "type": "array",
+                      "uniqueItems": true
+                    }
+                  },
+                  "required": [
+                    "formula"
+                  ],
+                  "type": "object"
+                },
+                "require_complete": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "session": {
+                  "description": "Caller-owned session; native prefix checks do not authenticate its author.",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "session",
+                "commands",
+                "obligation"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "proof_step_focus"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "semantic_validation": [
+      "Output schema depth <=8; min bounds <= max bounds.",
+      "Every object property is required exactly once.",
+      "Check paths and expected values must match output types.",
+      "Finite domains and human formulas follow the existing logic compiler.",
+      "proof_step rechecks the caller-owned session and every command syntax/reference before dispatch; it never establishes premise truth, authenticates the caller or searches for a correct command.",
+      "proof_step_obligation also requires the exact parsed intermediate formula and free-assumption set; duplicate, unknown and non-assumption IDs refuse; assumption IDs canonicalize in session line order. require_complete additionally requires the obligation to equal the original goal with no free assumptions.",
+      "proof_step_focus requires the same obligation and shows exact menu references plus complete free scope. The full original prefix remains checker authority; projection omits no menu option and establishes no model-quality gain.",
+      "JSON is limited to 512 KiB, depth 24 and 20000 visited values; cycles and nonfinite numbers refuse."
+    ],
+    "templates": [
+      {
+        "id": "typed_transform",
+        "template_id": "symblic.delegate/typed_transform/5"
+      },
+      {
+        "id": "exact_arithmetic",
+        "template_id": "symblic.delegate/exact_arithmetic/5"
+      },
+      {
+        "id": "proof",
+        "template_id": "symblic.delegate/proof/5"
+      },
+      {
+        "id": "enum_classification",
+        "template_id": "symblic.delegate/enum_classification/5"
+      },
+      {
+        "id": "witnessed_line",
+        "template_id": "symblic.delegate/witnessed_line/5"
+      },
+      {
+        "id": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6"
+      },
+      {
+        "id": "proof_step_obligation",
+        "template_id": "symblic.delegate/proof_step_obligation/7"
+      },
+      {
+        "id": "proof_step_focus",
+        "template_id": "symblic.delegate/proof_step_focus/8"
+      }
+    ],
+    "version": 8
+  }
+}

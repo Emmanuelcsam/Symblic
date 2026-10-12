@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f1eb"><title>Supervisor · Symblic</title>
+<link rel="stylesheet" href="guides.css"></head><body>
+<a class="guide-skip" href="#guide">Skip to guide</a>
+<header class="guide-header"><a href="../symblic.html#write">← Symblic</a><span>Guides</span><a href="../symblic.html#supervisor">Open Supervisor</a></header>
+<div class="guide-layout"><details class="guide-menu" open><summary>Browse guides</summary><nav aria-label="Symblic guides"><a href="index.html">Start here</a>
+<a href="editor.html">Underlines and instruction circuits</a>
+<a href="steps.html">Build one step at a time</a>
+<a href="steps-evidence.html">Small-model results</a>
+<a href="workcards.html">Workcards</a>
+<a href="supervisor.html" aria-current="page">Supervisor</a>
+<a href="distillation.html">Training a small model</a>
+<a href="portable.html">Portable execution</a>
+<a href="vorticity.html">Field construction</a></nav></details>
+<main id="guide" class="guide-prose"><h1>Durable Symblic workflows</h1>
+<p>The <strong>Supervisor</strong> tab in <code>/symblic.html</code> runs an operator-defined workflow of exact
+native Symblic programs. It adds durable orchestration around the host executor; it does
+not change the language meaning of <code>every</code> (a quantifier) or invent executable
+parser keywords. The host executor and the fleet runner remain the execution, admission, approval
+and effect-journal boundaries.</p>
+<p>Start with <strong>Load example</strong>, <strong>Save workflow</strong>, then <strong>Run once</strong>. Saving checks
+and freezes the programs without executing them. The example starts two exact
+calculations independently, joins their successful native results, checks a
+bounded operator-state condition and increments a persistent counter. Open each
+native run to see its actual result and evidence. <strong>Refresh</strong> reads saved state;
+<strong>Advance once</strong> reconciles known child runs and performs ready transitions.
+Browser reconnects never create another firing.</p>
+<h2>Workflow format</h2>
+<pre tabindex="0" aria-label="Code example"><code>{
+  &quot;version&quot;: 1,
+  &quot;name&quot;: &quot;Two calculations, then join&quot;,
+  &quot;max_parallel&quot;: 2,
+  &quot;state&quot;: {&quot;completed&quot;: 0, &quot;ready&quot;: true},
+  &quot;steps&quot;: [
+    {&quot;id&quot;: &quot;left&quot;, &quot;kind&quot;: &quot;run&quot;, &quot;source&quot;: &quot;let x = 2 + 3.\nassert x = 5.\nshow x.\n&quot;, &quot;deadline_s&quot;: 120},
+    {&quot;id&quot;: &quot;right&quot;, &quot;kind&quot;: &quot;run&quot;, &quot;source&quot;: &quot;let x = 7 * 6.\nassert x = 42.\nshow x.\n&quot;, &quot;deadline_s&quot;: 120},
+    {&quot;id&quot;: &quot;joined&quot;, &quot;kind&quot;: &quot;join&quot;, &quot;after&quot;: [&quot;left&quot;, &quot;right&quot;]},
+    {&quot;id&quot;: &quot;ready&quot;, &quot;kind&quot;: &quot;wait&quot;, &quot;after&quot;: [&quot;joined&quot;], &quot;until&quot;: {&quot;state&quot;: &quot;ready&quot;, &quot;equals&quot;: true}, &quot;within_s&quot;: 300},
+    {&quot;id&quot;: &quot;count&quot;, &quot;kind&quot;: &quot;set&quot;, &quot;after&quot;: [&quot;ready&quot;], &quot;changes&quot;: {&quot;completed&quot;: {&quot;increment&quot;: 1}}}
+  ]
+}</code></pre>
+<p>A definition is immutable after saving. Create a new workflow to change its
+programs, input values, dependencies or permission ceilings. State and schedule
+edits use the saved revision; stale tabs cannot overwrite newer operator changes.</p>
+<div class="guide-table" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>run</code></td>
+<td>Starts its exact checked native <code>source</code>, <code>inputs</code> and <code>options</code> in the host executor. <code>deadline_s</code> defaults to 3600.</td>
+</tr>
+<tr>
+<td><code>join</code></td>
+<td>Completes when every <code>after</code> dependency succeeded.</td>
+</tr>
+<tr>
+<td><code>delay</code></td>
+<td>Waits at least <code>seconds</code>, then completes on a later tick.</td>
+</tr>
+<tr>
+<td><code>wait</code></td>
+<td>Tests <code>until</code> on each tick, completing if true or failing locally after <code>within_s</code>.</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td>Atomically updates durable operator state using <code>{&quot;set&quot;: JSON}</code> or <code>{&quot;increment&quot;: number}</code>.</td>
+</tr>
+</tbody></table>
+</div><p>All steps can have <code>after: [step IDs]</code> and an immediate <code>when</code> precondition.
+Conditions are either <code>{&quot;state&quot;:&quot;name&quot;,&quot;equals&quot;:JSON}</code> (exact JSON comparison)
+or <code>{&quot;step&quot;:&quot;id&quot;,&quot;status&quot;:&quot;done&quot;}</code>; status may be <code>done</code>, <code>failed</code> or <code>running</code>.
+A false <code>when</code> skips the step. A <code>wait</code> rechecks its condition until its bound.
+Use explicit <code>after</code> dependencies when a precondition needs another step to
+finish. The graph has no dependency cycles. Independent run steps can execute
+concurrently; <code>max_parallel</code> is 1–4. A join is actual observation of successful
+child completion, not just successful submission.</p>
+<p>The supervisor checks operator state and mechanical native status. Predicates over
+tool observations, model answers or physical conditions belong inside the native
+Symblic program, before its actions, using its existing assertions and effect
+flow checks. The supervisor does not reinterpret a native result string as a
+Boolean, trusted state or a new program input. A native program&#39;s <code>done</code> status
+establishes its own encoded checks, not the truth of every real-world premise.</p>
+<h2>Failure and compensation</h2>
+<p>Give a handler step <code>&quot;on_failure&quot;:&quot;step-id&quot;</code> to run it only after that step&#39;s
+<strong>definite</strong> failure. A handler can be another native program, including an
+operator-authored compensating action. Its own submission and effects get separate
+receipts. A dependency failure skips ordinary downstream steps. Successful
+compensation does not turn the original failed workflow into a success.</p>
+<pre tabindex="0" aria-label="Code example"><code>{
+  &quot;version&quot;: 1,
+  &quot;name&quot;: &quot;Record an exact failure&quot;,
+  &quot;steps&quot;: [
+    {&quot;id&quot;:&quot;check&quot;,&quot;kind&quot;:&quot;run&quot;,&quot;source&quot;:&quot;assert 2 + 2 = 5.\n&quot;},
+    {&quot;id&quot;:&quot;record&quot;,&quot;kind&quot;:&quot;set&quot;,&quot;on_failure&quot;:&quot;check&quot;,&quot;changes&quot;:{&quot;failed&quot;:{&quot;set&quot;:true}}}
+  ]
+}</code></pre>
+<p>A deadline marks a native step <strong>overdue</strong>. It does not kill the child, declare an
+external action failed or start compensation. A stopped worker, unreadable
+native record or unresolved native effect is <strong>unknown</strong>. Open the native run,
+resolve its own uncertain effects, then refresh/advance the workflow. A failed
+native run may have completed earlier effects; compensation must account for
+those recorded results. The supervisor never automatically resends the original
+operation.</p>
+<p>Before each submission the journal records its exact identity and execution
+pins. If a process dies after this intent but before the native handle is saved,
+the step remains unknown. Raw native status and both ordinary/delegation journals
+are inspected without repairing or truncating damaged bytes; unreadable, partial
+or unfamiliar records cannot authorize compensation. <strong>Reconcile</strong> accepts only a native run matching its
+unique prompt marker, source, exact inputs and pins (and explicit applicator), with no broader effective permission ceilings.
+A different run cannot be attached to clear uncertainty. If no native handle can
+be established, the workflow remains unresolved; inspect the host executor before making
+an independent new workflow. There is no “assume it did not happen” retry.</p>
+<p><strong>Pause workflow</strong> prevents further supervisor transitions and disables its
+reconciliation pulse. Already running native children keep their own execution
+and recovery rules. <strong>Resume workflow</strong> restores the bounded reconciliation
+clock. Disable scheduled firings separately if no further recorded triggers are
+wanted; a firing while paused is recorded as skipped.</p>
+<h2>Real scheduling and event firings</h2>
+<p>Schedules are native the fleet runner cron triggers, using its configured timezone (an IANA name such as
+Europe/Paris), misfire handling, host gate and trigger fire ledger. The
+Supervisor&#39;s advanced schedule form accepts five fields, for example:</p>
+<ul>
+<li><code>0 9 * * *</code>: daily at 09:00.</li>
+<li><code>*/5 * * * *</code>: every five minutes.</li>
+<li><code>0 9 * * 1-5</code>: weekday mornings.</li>
+</ul>
+<p>the fleet runner starts declared <code>executor.supervise</code> with the workflow ID. Only the
+scheduler-minted trigger/mission/step context can claim a firing. Duplicate
+delivery of that identity returns the same recorded firing. If an earlier firing
+is unfinished, the new one is recorded as skipped rather than overlapping it.</p>
+<p>A separate the fleet runner minute pulse, <code>executor.supervisor_tick</code>, reconciles child
+runs and bounded waits. Its identity is saved and its trigger installed <strong>before</strong>
+any native child is submitted. The pulse disables after completion, pause or an
+unresolved/overdue outcome that needs operator attention. Unknown native status with
+a known handle is polled only within the original bound. There is no supervisor
+worker daemon or independent clock. Minute pulses can run late under scheduler
+load or downtime; <code>seconds</code> and deadlines are wall-clock timestamps evaluated at a
+tick, not promises of subsecond dispatch. System clock adjustments can move the
+observed boundary; this is not a monotonic physical timing guarantee. The operator deleting or disabling a pulse
+is respected until an explicit resume.</p>
+<p>Existing the fleet runner event triggers can be attached in the advanced schedule form.
+First configure the actual the fleet runner event watcher/producer and its trigger with an
+action shaped as:</p>
+<pre tabindex="0" aria-label="Code example"><code>{
+  &quot;type&quot;: &quot;mission.start&quot;,
+  &quot;kind&quot;: &quot;single&quot;,
+  &quot;spec&quot;: {
+    &quot;tool&quot;: &quot;executor.supervise&quot;,
+    &quot;args&quot;: {&quot;workflow&quot;: &quot;w_REPLACE_WITH_SAVED_ID&quot;}
+  },
+  &quot;policy&quot;: {&quot;release&quot;:&quot;local&quot;,&quot;tools&quot;:&quot;none&quot;,&quot;external_send&quot;:false}
+}</code></pre>
+<p>Attach its existing <code>t_...</code> ID. The supervisor pins its kind, match specification
+and action; changing that trigger requires another attachment. File, webhook,
+calendar or email kinds are not claims that a watcher is installed or receiving
+real events: the fleet runner must actually record and dispatch a matching occurrence.
+The supervisor creates no event poller. Event payload is never copied into
+<code>given</code>, native source, inputs or persistent operator state. Only trigger, mission
+and step identifiers are retained as firing metadata.</p>
+<h2>Inputs, policies and resources</h2>
+<p>Each native run retains the original source and supplied inputs plus execution
+pins for kernel modules, imported libraries and used capability contracts. Any
+clock inputs supplied automatically by the host executor are frozen <strong>when saving the
+workflow</strong> and shown in its frozen receipt. Use an explicit native observation
+inside the program when a later firing needs current external time or state.
+Editing a saved program elsewhere does not change this workflow.</p>
+<p>A run step&#39;s optional <code>options</code> accepts <code>by</code> (exact applicator), <code>model_policy</code>,
+<code>mode</code>, <code>side_effects</code> and a lower-only <code>max_effects</code> limit. Current settings are captured as permission ceilings;
+current operator settings may lower them again at dispatch. A missing <code>by</code> uses the
+existing routing policy; a supplied choice is forwarded exactly. Confidential
+work must use <code>model_policy: {&quot;allow_cloud&quot;:false}</code> and local applicators. Model
+calls and effects keep the host executor&#39;s per-run budgets and admission paths.</p>
+<p>Limits: 32 steps; 4 concurrent native children; 64 persistent state keys; 7 days
+per wait/deadline; 100 recorded firings per saved workflow; 8 attached event
+triggers; a 4 MB saved record. The most recent 1500 journal transitions are kept
+with monotonic sequence numbers; firing identities and native handles remain in
+the bounded job list. At capacity, create a new workflow explicitly. Persistent
+state is operator-defined JSON and mechanical counters, not a mailbox for untrusted
+model output.</p>
+<h2>CLI and API</h2>
+<p>The CLI talks to the same operator-only loopback API; it does not import and execute
+a workflow in the caller&#39;s process:</p>
+<pre tabindex="0" aria-label="Code example"><code>.venv/bin/python integration/host/symblic_supervisor_api.py create --file workflow.json --request-id save-demo-1
+.venv/bin/python integration/host/symblic_supervisor_api.py start --id w_REPLACE --request-id run-demo-1
+.venv/bin/python integration/host/symblic_supervisor_api.py view --id w_REPLACE
+.venv/bin/python integration/host/symblic_supervisor_api.py tick --id w_REPLACE</code></pre>
+<p>Reuse the <strong>same request ID after a lost reply</strong>. A new identity asks for another
+firing. <code>--file</code> supplies the request JSON for state, pause, schedule, bind and
+reconcile; include the shown revision for edits. Routes live under
+<code>/api/automation/symblic/supervisor/</code>: GET <code>list</code>, <code>view</code>; POST <code>create</code>, <code>start</code>,
+<code>tick</code>, <code>state</code>, <code>pause</code>, <code>schedule</code>, <code>bind</code>, <code>reconcile</code>, <code>simulate</code>. The API uses
+both the operator check and the host&#39;s identity check. Private records are under the existing
+private <code>automation_data/symblic/supervisors/</code> tree.</p>
+<p><strong>Simulate control flow</strong> never executes a native program, tool, model, wait or
+clock. It uses explicit synthetic <code>outcomes</code> keyed by native step ID (<code>done</code>,
+<code>failed</code>, <code>unknown</code>); unspecified native outcomes stay unknown. Its wait total is
+a serial control-flow illustration, not a measured parallel execution time.
+Simulation is labelled separately and is not an execution receipt.</p>
+<p>Python/API/tool declaration installation is restart-gated. The Dashboard and
+the fleet runner worker must both see the two new the host executor declarations. Missing APIs
+remain visible errors; opening the page performs no model launch or schedule
+installation.</p>
+<footer><a href="index.html">Start here</a> · <a href="../symblic.html#supervisor">Open Supervisor</a><p>Commands and examples run only when you choose to execute them.</p></footer></main></div>
+</body></html>

@@ -1,0 +1,67 @@
+program Question order.
+note Two yes/no questions, A and B, asked in both orders. A record of counts {yy, yn, ny, nn} counts the
+note subjects by their two answers: the first letter is the answer to A, the second the answer to B (y yes,
+note n no), whichever question was asked first. Where a function takes two records, ab holds the counts when
+note A was asked first and ba the counts when B was asked first. Every share is exact. A count below 0 is
+note refused, and a share of an empty tally is refused.
+
+note A tally of one order: how many subjects gave each pair of answers.
+define Counts as Record {yy: Int, yn: Int, ny: Int, nn: Int}.
+
+note The number of subjects in a tally.
+function total(c: Counts) -> Int = if min([c.yy, c.yn, c.ny, c.nn]) < 0 then fail("a count is below 0") else c.yy + c.yn + c.ny + c.nn.
+function _subjects(c: Counts) -> Int = if total(c) = 0 then fail("the tally is empty (total 0): a share needs a subject") else total(c).
+
+note The share of subjects who answered yes to A, and the share who answered yes to B.
+function share_a_yes(c: Counts) -> Number = (c.yy + c.yn) / _subjects(c).
+function share_b_yes(c: Counts) -> Number = (c.yy + c.ny) / _subjects(c).
+note The share of subjects whose two answers differ: (yn + ny) / total.
+function share_different(c: Counts) -> Number = (c.yn + c.ny) / _subjects(c).
+
+note Order effects: a share of yes when A was asked first minus the same share when B was asked first. A
+note positive order_effect_a means A gets more yes answers when it is asked first; a positive order_effect_b
+note means B gets more yes answers when it is asked second. Unequal conditional shares (yes to B among those
+note who said yes to A, against yes to A among those who said yes to B) are ordinary probability, not an
+note order effect: an order effect compares the same share across the two orders.
+function order_effect_a(ab: Counts, ba: Counts) -> Number = share_a_yes(ab) - share_a_yes(ba).
+function order_effect_b(ab: Counts, ba: Counts) -> Number = share_b_yes(ab) - share_b_yes(ba).
+
+note The QQ gap: the share of different answers when A was asked first minus that share when B was asked
+note first. The QQ equality (Wang and Busemeyer 2013, Topics in Cognitive Science 5(4)) is a prediction of the
+note projector model of question order, in which a yes answer projects one state onto a subspace and a no
+note onto its complement: qq_gap = 0, even when the order effects are not zero. A gap far from 0 on enough
+note samples speaks against that model. A gap near 0 does not show that the model is right: other accounts
+note can give it too, and a small sample can give it by chance.
+function qq_gap(ab: Counts, ba: Counts) -> Number = share_different(ab) - share_different(ba).
+
+test "shares of one tally" do
+  assert total({yy: 3, yn: 1, ny: 2, nn: 4}) = 10.
+  assert share_a_yes({yy: 3, yn: 1, ny: 2, nn: 4}) = 2/5.
+  assert share_b_yes({yy: 3, yn: 1, ny: 2, nn: 4}) = 1/2.
+  assert share_different({yy: 3, yn: 1, ny: 2, nn: 4}) = 3/10.
+  assert share_a_yes({yy: 0, yn: 0, ny: 0, nn: 7}) = 0 and share_different({yy: 0, yn: 5, ny: 0, nn: 0}) = 1.
+end.
+
+test "order effects and the QQ gap" do
+  let ab = {yy: 3, yn: 1, ny: 2, nn: 4}.
+  let ba = {yy: 2, yn: 3, ny: 1, nn: 4}.
+  assert order_effect_a(ab, ba) = -1/10.
+  assert order_effect_b(ab, ba) = 1/5.
+  assert qq_gap(ab, ba) = -1/10.
+  assert qq_gap(ba, ab) = 1/10 and order_effect_a(ba, ab) = 1/10.
+end.
+
+note State (3/5, 4/5); A projects onto (1, 0) and B onto (1, 1). The counts are 100 times that model's exact
+note probabilities of each pair of answers in each order.
+test "a projector model: order effects and no QQ gap" do
+  let ab = {yy: 18, yn: 18, ny: 32, nn: 32}.
+  let ba = {yy: 49, yn: 1, ny: 49, nn: 1}.
+  assert order_effect_a(ab, ba) = -7/50 and order_effect_b(ab, ba) = -12/25.
+  assert qq_gap(ab, ba) = 0.
+end.
+
+test "the same tally in both orders has no order effect, whatever the conditional shares" do
+  let c = {yy: 2, yn: 6, ny: 0, nn: 2}.
+  assert c.yy / (c.yy + c.yn) = 1/4 and c.yy / (c.yy + c.ny) = 1.
+  assert order_effect_a(c, c) = 0 and order_effect_b(c, c) = 0 and qq_gap(c, c) = 0.
+end.

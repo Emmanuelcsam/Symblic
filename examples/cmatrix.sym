@@ -1,0 +1,15 @@
+program Matrix rain.
+use profile=verified, determine=false, solve=false.
+note Symblic computes every character, position and trail shade. A player supplies the clock.
+let width = 32.
+let height = 24.
+let alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUV".
+let columns = 0..15.
+let drops = [{x: 2 * (d // 8), column: d // 8 + 1, shade: d mod 8, glyph: d * 13 mod 32} for d in 0..127].
+for tick in 0..31 do
+  let heads = [(tick * (1 + column mod 2) + column * 7) mod 32 for column in columns].
+  let rain = [{x: drop.x, y: heads[drop.column] - drop.shade, char: alphabet[(tick + drop.glyph) mod 32 + 1], shade: drop.shade} for drop in drops].
+  let cells = [cell for cell in rain if cell.y >= 0 and cell.y < height].
+  assert all cell in cells: 0 <= cell.x < width and 0 <= cell.y < height.
+  show {kind: "character-grid", width: width, height: height, tick: tick, cells: cells}.
+end.

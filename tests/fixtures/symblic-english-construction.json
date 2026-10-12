@@ -1,0 +1,2037 @@
+{
+  "source": "Build a character animation called Matrix rain.\nUse the standard character canvas and a complete repeating sequence.\nShow green characters on a black background with the brightest leading characters and progressively darker trails.\n\nAsk the model to make letters.\nChoose the uppercase English letter at the requested position and repeat the alphabet after its end.\nUse no earlier steps.\nCheck the beginning, the end and repeated journeys through the alphabet.\nFinish this step.\n\nAsk the model to make movement.\nMove a row by the requested distance and wrap between the bottom and the top in either direction.\nUse no earlier steps.\nCheck every canvas row with forward, backward and stationary movement.\nFinish this step.\n\nAsk the model to make leading positions.\nStart the leftmost column at the top.\nStart each following column below the previous column by the trail length and wrap below the bottom to the top.\nMove the leftmost column downward at normal speed.\nAlternate each following column between double speed and normal speed.\nUse only movement.\nCheck the initial positions, both speeds and repeated journeys through the canvas.\nFinish this step.\n\nAsk the model to make trailing positions.\nPlace each later trail character immediately above the previous character and wrap above the top to the bottom.\nUse only movement.\nCheck every trail position at the top, middle and bottom of the canvas.\nFinish this step.\n\nAsk the model to make shades.\nGive the leading character the brightest shade and make each later trail character progressively darker until the darkest shade.\nUse no earlier steps.\nCheck the leading shade, every trail shade and saturation at the darkest shade.\nFinish this step.\n\nAsk the model to make frames.\nFill each separate vertical column with its leading character and trailing characters.\nChoose each character from its column position plus the elapsed frame position plus its distance behind the leader.\nRestart the frame position at the beginning whenever the complete canvas cycle finishes.\nUse the restarted frame position for both character selection and movement so that every repetition begins identically.\nUse only letters and leading positions and trailing positions and shades.\nCheck every character position, letter and shade against the earlier accepted steps.\nFinish this step.\n\nAsk the model to make animation.\nCreate successive frames from the initial canvas until every stream returns to its starting position.\nUse only frames.\nCheck the complete sequence, its ordering and its return to the initial frame.\nFinish this step.\n\nDisplay the accepted animation and repeat it in the character player.\n",
+  "compiled": {
+    "statements": [
+      {
+        "index": 1,
+        "line": 1,
+        "col": 1,
+        "end_line": 1,
+        "end_col": 47,
+        "kind": "build",
+        "text": "Build a character animation called Matrix rain.",
+        "native_lines": [
+          1,
+          2
+        ]
+      },
+      {
+        "index": 2,
+        "line": 2,
+        "col": 1,
+        "end_line": 2,
+        "end_col": 68,
+        "kind": "canvas",
+        "text": "Use the standard character canvas and a complete repeating sequence.",
+        "native_lines": [
+          2,
+          33
+        ]
+      },
+      {
+        "index": 3,
+        "line": 3,
+        "col": 1,
+        "end_line": 3,
+        "end_col": 114,
+        "kind": "presentation",
+        "text": "Show green characters on a black background with the brightest leading characters and progressively darker trails.",
+        "native_lines": [
+          2,
+          35
+        ]
+      },
+      {
+        "index": 4,
+        "line": 5,
+        "col": 1,
+        "end_line": 5,
+        "end_col": 30,
+        "kind": "ask",
+        "text": "Ask the model to make letters.",
+        "native_lines": [
+          3
+        ],
+        "ask": "built_step_1"
+      },
+      {
+        "index": 5,
+        "line": 6,
+        "col": 1,
+        "end_line": 6,
+        "end_col": 100,
+        "kind": "rule",
+        "text": "Choose the uppercase English letter at the requested position and repeat the alphabet after its end.",
+        "native_lines": [
+          3,
+          4,
+          5
+        ],
+        "ask": "built_step_1"
+      },
+      {
+        "index": 6,
+        "line": 7,
+        "col": 1,
+        "end_line": 7,
+        "end_col": 21,
+        "kind": "using",
+        "text": "Use no earlier steps.",
+        "native_lines": [
+          3
+        ],
+        "ask": "built_step_1"
+      },
+      {
+        "index": 7,
+        "line": 8,
+        "col": 1,
+        "end_line": 8,
+        "end_col": 72,
+        "kind": "accept",
+        "text": "Check the beginning, the end and repeated journeys through the alphabet.",
+        "native_lines": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "ask": "built_step_1"
+      },
+      {
+        "index": 8,
+        "line": 9,
+        "col": 1,
+        "end_line": 9,
+        "end_col": 17,
+        "kind": "finish",
+        "text": "Finish this step.",
+        "native_lines": [
+          3,
+          6
+        ],
+        "ask": "built_step_1"
+      },
+      {
+        "index": 9,
+        "line": 11,
+        "col": 1,
+        "end_line": 11,
+        "end_col": 31,
+        "kind": "ask",
+        "text": "Ask the model to make movement.",
+        "native_lines": [
+          7
+        ],
+        "ask": "built_step_2"
+      },
+      {
+        "index": 10,
+        "line": 12,
+        "col": 1,
+        "end_line": 12,
+        "end_col": 97,
+        "kind": "rule",
+        "text": "Move a row by the requested distance and wrap between the bottom and the top in either direction.",
+        "native_lines": [
+          7,
+          8,
+          9
+        ],
+        "ask": "built_step_2"
+      },
+      {
+        "index": 11,
+        "line": 13,
+        "col": 1,
+        "end_line": 13,
+        "end_col": 21,
+        "kind": "using",
+        "text": "Use no earlier steps.",
+        "native_lines": [
+          7
+        ],
+        "ask": "built_step_2"
+      },
+      {
+        "index": 12,
+        "line": 14,
+        "col": 1,
+        "end_line": 14,
+        "end_col": 70,
+        "kind": "accept",
+        "text": "Check every canvas row with forward, backward and stationary movement.",
+        "native_lines": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "ask": "built_step_2"
+      },
+      {
+        "index": 13,
+        "line": 15,
+        "col": 1,
+        "end_line": 15,
+        "end_col": 17,
+        "kind": "finish",
+        "text": "Finish this step.",
+        "native_lines": [
+          7,
+          10
+        ],
+        "ask": "built_step_2"
+      },
+      {
+        "index": 14,
+        "line": 17,
+        "col": 1,
+        "end_line": 17,
+        "end_col": 40,
+        "kind": "ask",
+        "text": "Ask the model to make leading positions.",
+        "native_lines": [
+          11
+        ],
+        "ask": "built_step_3"
+      },
+      {
+        "index": 15,
+        "line": 18,
+        "col": 1,
+        "end_line": 18,
+        "end_col": 37,
+        "kind": "rule",
+        "text": "Start the leftmost column at the top.",
+        "native_lines": [
+          11,
+          12,
+          13
+        ],
+        "ask": "built_step_3"
+      },
+      {
+        "index": 16,
+        "line": 19,
+        "col": 1,
+        "end_line": 19,
+        "end_col": 111,
+        "kind": "rule",
+        "text": "Start each following column below the previous column by the trail length and wrap below the bottom to the top.",
+        "native_lines": [
+          11,
+          12,
+          13
+        ],
+        "ask": "built_step_3"
+      },
+      {
+        "index": 17,
+        "line": 20,
+        "col": 1,
+        "end_line": 20,
+        "end_col": 50,
+        "kind": "rule",
+        "text": "Move the leftmost column downward at normal speed.",
+        "native_lines": [
+          11,
+          12,
+          13
+        ],
+        "ask": "built_step_3"
+      },
+      {
+        "index": 18,
+        "line": 21,
+        "col": 1,
+        "end_line": 21,
+        "end_col": 70,
+        "kind": "rule",
+        "text": "Alternate each following column between double speed and normal speed.",
+        "native_lines": [
+          11,
+          12,
+          13
+        ],
+        "ask": "built_step_3"
+      },
+      {
+        "index": 19,
+        "line": 22,
+        "col": 1,
+        "end_line": 22,
+        "end_col": 18,
+        "kind": "using",
+        "text": "Use only movement.",
+        "native_lines": [
+          11
+        ],
+        "ask": "built_step_3"
+      },
+      {
+        "index": 20,
+        "line": 23,
+        "col": 1,
+        "end_line": 23,
+        "end_col": 82,
+        "kind": "accept",
+        "text": "Check the initial positions, both speeds and repeated journeys through the canvas.",
+        "native_lines": [
+          11,
+          12,
+          13,
+          14
+        ],
+        "ask": "built_step_3"
+      },
+      {
+        "index": 21,
+        "line": 24,
+        "col": 1,
+        "end_line": 24,
+        "end_col": 17,
+        "kind": "finish",
+        "text": "Finish this step.",
+        "native_lines": [
+          11,
+          14
+        ],
+        "ask": "built_step_3"
+      },
+      {
+        "index": 22,
+        "line": 26,
+        "col": 1,
+        "end_line": 26,
+        "end_col": 41,
+        "kind": "ask",
+        "text": "Ask the model to make trailing positions.",
+        "native_lines": [
+          15
+        ],
+        "ask": "built_step_4"
+      },
+      {
+        "index": 23,
+        "line": 27,
+        "col": 1,
+        "end_line": 27,
+        "end_col": 111,
+        "kind": "rule",
+        "text": "Place each later trail character immediately above the previous character and wrap above the top to the bottom.",
+        "native_lines": [
+          15,
+          16,
+          17
+        ],
+        "ask": "built_step_4"
+      },
+      {
+        "index": 24,
+        "line": 28,
+        "col": 1,
+        "end_line": 28,
+        "end_col": 18,
+        "kind": "using",
+        "text": "Use only movement.",
+        "native_lines": [
+          15
+        ],
+        "ask": "built_step_4"
+      },
+      {
+        "index": 25,
+        "line": 29,
+        "col": 1,
+        "end_line": 29,
+        "end_col": 71,
+        "kind": "accept",
+        "text": "Check every trail position at the top, middle and bottom of the canvas.",
+        "native_lines": [
+          15,
+          16,
+          17,
+          18
+        ],
+        "ask": "built_step_4"
+      },
+      {
+        "index": 26,
+        "line": 30,
+        "col": 1,
+        "end_line": 30,
+        "end_col": 17,
+        "kind": "finish",
+        "text": "Finish this step.",
+        "native_lines": [
+          15,
+          18
+        ],
+        "ask": "built_step_4"
+      },
+      {
+        "index": 27,
+        "line": 32,
+        "col": 1,
+        "end_line": 32,
+        "end_col": 29,
+        "kind": "ask",
+        "text": "Ask the model to make shades.",
+        "native_lines": [
+          19
+        ],
+        "ask": "built_step_5"
+      },
+      {
+        "index": 28,
+        "line": 33,
+        "col": 1,
+        "end_line": 33,
+        "end_col": 128,
+        "kind": "rule",
+        "text": "Give the leading character the brightest shade and make each later trail character progressively darker until the darkest shade.",
+        "native_lines": [
+          19,
+          20,
+          21
+        ],
+        "ask": "built_step_5"
+      },
+      {
+        "index": 29,
+        "line": 34,
+        "col": 1,
+        "end_line": 34,
+        "end_col": 21,
+        "kind": "using",
+        "text": "Use no earlier steps.",
+        "native_lines": [
+          19
+        ],
+        "ask": "built_step_5"
+      },
+      {
+        "index": 30,
+        "line": 35,
+        "col": 1,
+        "end_line": 35,
+        "end_col": 79,
+        "kind": "accept",
+        "text": "Check the leading shade, every trail shade and saturation at the darkest shade.",
+        "native_lines": [
+          19,
+          20,
+          21,
+          22
+        ],
+        "ask": "built_step_5"
+      },
+      {
+        "index": 31,
+        "line": 36,
+        "col": 1,
+        "end_line": 36,
+        "end_col": 17,
+        "kind": "finish",
+        "text": "Finish this step.",
+        "native_lines": [
+          19,
+          22
+        ],
+        "ask": "built_step_5"
+      },
+      {
+        "index": 32,
+        "line": 38,
+        "col": 1,
+        "end_line": 38,
+        "end_col": 29,
+        "kind": "ask",
+        "text": "Ask the model to make frames.",
+        "native_lines": [
+          23
+        ],
+        "ask": "built_step_6"
+      },
+      {
+        "index": 33,
+        "line": 39,
+        "col": 1,
+        "end_line": 39,
+        "end_col": 86,
+        "kind": "rule",
+        "text": "Fill each separate vertical column with its leading character and trailing characters.",
+        "native_lines": [
+          23,
+          24,
+          25
+        ],
+        "ask": "built_step_6"
+      },
+      {
+        "index": 34,
+        "line": 40,
+        "col": 1,
+        "end_line": 40,
+        "end_col": 115,
+        "kind": "rule",
+        "text": "Choose each character from its column position plus the elapsed frame position plus its distance behind the leader.",
+        "native_lines": [
+          23,
+          24,
+          25
+        ],
+        "ask": "built_step_6"
+      },
+      {
+        "index": 35,
+        "line": 41,
+        "col": 1,
+        "end_line": 41,
+        "end_col": 88,
+        "kind": "rule",
+        "text": "Restart the frame position at the beginning whenever the complete canvas cycle finishes.",
+        "native_lines": [
+          23,
+          24,
+          25
+        ],
+        "ask": "built_step_6"
+      },
+      {
+        "index": 36,
+        "line": 42,
+        "col": 1,
+        "end_line": 42,
+        "end_col": 119,
+        "kind": "rule",
+        "text": "Use the restarted frame position for both character selection and movement so that every repetition begins identically.",
+        "native_lines": [
+          23,
+          24,
+          25
+        ],
+        "ask": "built_step_6"
+      },
+      {
+        "index": 37,
+        "line": 43,
+        "col": 1,
+        "end_line": 43,
+        "end_col": 73,
+        "kind": "using",
+        "text": "Use only letters and leading positions and trailing positions and shades.",
+        "native_lines": [
+          23
+        ],
+        "ask": "built_step_6"
+      },
+      {
+        "index": 38,
+        "line": 44,
+        "col": 1,
+        "end_line": 44,
+        "end_col": 84,
+        "kind": "accept",
+        "text": "Check every character position, letter and shade against the earlier accepted steps.",
+        "native_lines": [
+          23,
+          24,
+          25,
+          26
+        ],
+        "ask": "built_step_6"
+      },
+      {
+        "index": 39,
+        "line": 45,
+        "col": 1,
+        "end_line": 45,
+        "end_col": 17,
+        "kind": "finish",
+        "text": "Finish this step.",
+        "native_lines": [
+          23,
+          26
+        ],
+        "ask": "built_step_6"
+      },
+      {
+        "index": 40,
+        "line": 47,
+        "col": 1,
+        "end_line": 47,
+        "end_col": 32,
+        "kind": "ask",
+        "text": "Ask the model to make animation.",
+        "native_lines": [
+          27
+        ],
+        "ask": "built_step_7"
+      },
+      {
+        "index": 41,
+        "line": 48,
+        "col": 1,
+        "end_line": 48,
+        "end_col": 101,
+        "kind": "rule",
+        "text": "Create successive frames from the initial canvas until every stream returns to its starting position.",
+        "native_lines": [
+          27,
+          28,
+          29
+        ],
+        "ask": "built_step_7"
+      },
+      {
+        "index": 42,
+        "line": 49,
+        "col": 1,
+        "end_line": 49,
+        "end_col": 16,
+        "kind": "using",
+        "text": "Use only frames.",
+        "native_lines": [
+          27
+        ],
+        "ask": "built_step_7"
+      },
+      {
+        "index": 43,
+        "line": 50,
+        "col": 1,
+        "end_line": 50,
+        "end_col": 78,
+        "kind": "accept",
+        "text": "Check the complete sequence, its ordering and its return to the initial frame.",
+        "native_lines": [
+          27,
+          28,
+          29,
+          30
+        ],
+        "ask": "built_step_7"
+      },
+      {
+        "index": 44,
+        "line": 51,
+        "col": 1,
+        "end_line": 51,
+        "end_col": 17,
+        "kind": "finish",
+        "text": "Finish this step.",
+        "native_lines": [
+          27,
+          30
+        ],
+        "ask": "built_step_7"
+      },
+      {
+        "index": 45,
+        "line": 53,
+        "col": 1,
+        "end_line": 53,
+        "end_col": 69,
+        "kind": "display",
+        "text": "Display the accepted animation and repeat it in the character player.",
+        "native_lines": [
+          31,
+          32,
+          33,
+          34,
+          35,
+          36
+        ]
+      }
+    ],
+    "source_map": [
+      {
+        "native_line": 1,
+        "line": 1,
+        "col": 1,
+        "statement": 1
+      },
+      {
+        "native_line": 2,
+        "line": 1,
+        "col": 1,
+        "statement": 1
+      },
+      {
+        "native_line": 2,
+        "line": 2,
+        "col": 1,
+        "statement": 2
+      },
+      {
+        "native_line": 2,
+        "line": 3,
+        "col": 1,
+        "statement": 3
+      },
+      {
+        "native_line": 3,
+        "line": 5,
+        "col": 1,
+        "statement": 4
+      },
+      {
+        "native_line": 3,
+        "line": 6,
+        "col": 1,
+        "statement": 5
+      },
+      {
+        "native_line": 3,
+        "line": 7,
+        "col": 1,
+        "statement": 6
+      },
+      {
+        "native_line": 3,
+        "line": 8,
+        "col": 1,
+        "statement": 7
+      },
+      {
+        "native_line": 3,
+        "line": 9,
+        "col": 1,
+        "statement": 8
+      },
+      {
+        "native_line": 4,
+        "line": 6,
+        "col": 1,
+        "statement": 5
+      },
+      {
+        "native_line": 4,
+        "line": 8,
+        "col": 1,
+        "statement": 7
+      },
+      {
+        "native_line": 5,
+        "line": 6,
+        "col": 1,
+        "statement": 5
+      },
+      {
+        "native_line": 5,
+        "line": 8,
+        "col": 1,
+        "statement": 7
+      },
+      {
+        "native_line": 6,
+        "line": 8,
+        "col": 1,
+        "statement": 7
+      },
+      {
+        "native_line": 6,
+        "line": 9,
+        "col": 1,
+        "statement": 8
+      },
+      {
+        "native_line": 7,
+        "line": 11,
+        "col": 1,
+        "statement": 9
+      },
+      {
+        "native_line": 7,
+        "line": 12,
+        "col": 1,
+        "statement": 10
+      },
+      {
+        "native_line": 7,
+        "line": 13,
+        "col": 1,
+        "statement": 11
+      },
+      {
+        "native_line": 7,
+        "line": 14,
+        "col": 1,
+        "statement": 12
+      },
+      {
+        "native_line": 7,
+        "line": 15,
+        "col": 1,
+        "statement": 13
+      },
+      {
+        "native_line": 8,
+        "line": 12,
+        "col": 1,
+        "statement": 10
+      },
+      {
+        "native_line": 8,
+        "line": 14,
+        "col": 1,
+        "statement": 12
+      },
+      {
+        "native_line": 9,
+        "line": 12,
+        "col": 1,
+        "statement": 10
+      },
+      {
+        "native_line": 9,
+        "line": 14,
+        "col": 1,
+        "statement": 12
+      },
+      {
+        "native_line": 10,
+        "line": 14,
+        "col": 1,
+        "statement": 12
+      },
+      {
+        "native_line": 10,
+        "line": 15,
+        "col": 1,
+        "statement": 13
+      },
+      {
+        "native_line": 11,
+        "line": 17,
+        "col": 1,
+        "statement": 14
+      },
+      {
+        "native_line": 11,
+        "line": 18,
+        "col": 1,
+        "statement": 15
+      },
+      {
+        "native_line": 11,
+        "line": 19,
+        "col": 1,
+        "statement": 16
+      },
+      {
+        "native_line": 11,
+        "line": 20,
+        "col": 1,
+        "statement": 17
+      },
+      {
+        "native_line": 11,
+        "line": 21,
+        "col": 1,
+        "statement": 18
+      },
+      {
+        "native_line": 11,
+        "line": 22,
+        "col": 1,
+        "statement": 19
+      },
+      {
+        "native_line": 11,
+        "line": 23,
+        "col": 1,
+        "statement": 20
+      },
+      {
+        "native_line": 11,
+        "line": 24,
+        "col": 1,
+        "statement": 21
+      },
+      {
+        "native_line": 12,
+        "line": 18,
+        "col": 1,
+        "statement": 15
+      },
+      {
+        "native_line": 12,
+        "line": 19,
+        "col": 1,
+        "statement": 16
+      },
+      {
+        "native_line": 12,
+        "line": 20,
+        "col": 1,
+        "statement": 17
+      },
+      {
+        "native_line": 12,
+        "line": 21,
+        "col": 1,
+        "statement": 18
+      },
+      {
+        "native_line": 12,
+        "line": 23,
+        "col": 1,
+        "statement": 20
+      },
+      {
+        "native_line": 13,
+        "line": 18,
+        "col": 1,
+        "statement": 15
+      },
+      {
+        "native_line": 13,
+        "line": 19,
+        "col": 1,
+        "statement": 16
+      },
+      {
+        "native_line": 13,
+        "line": 20,
+        "col": 1,
+        "statement": 17
+      },
+      {
+        "native_line": 13,
+        "line": 21,
+        "col": 1,
+        "statement": 18
+      },
+      {
+        "native_line": 13,
+        "line": 23,
+        "col": 1,
+        "statement": 20
+      },
+      {
+        "native_line": 14,
+        "line": 23,
+        "col": 1,
+        "statement": 20
+      },
+      {
+        "native_line": 14,
+        "line": 24,
+        "col": 1,
+        "statement": 21
+      },
+      {
+        "native_line": 15,
+        "line": 26,
+        "col": 1,
+        "statement": 22
+      },
+      {
+        "native_line": 15,
+        "line": 27,
+        "col": 1,
+        "statement": 23
+      },
+      {
+        "native_line": 15,
+        "line": 28,
+        "col": 1,
+        "statement": 24
+      },
+      {
+        "native_line": 15,
+        "line": 29,
+        "col": 1,
+        "statement": 25
+      },
+      {
+        "native_line": 15,
+        "line": 30,
+        "col": 1,
+        "statement": 26
+      },
+      {
+        "native_line": 16,
+        "line": 27,
+        "col": 1,
+        "statement": 23
+      },
+      {
+        "native_line": 16,
+        "line": 29,
+        "col": 1,
+        "statement": 25
+      },
+      {
+        "native_line": 17,
+        "line": 27,
+        "col": 1,
+        "statement": 23
+      },
+      {
+        "native_line": 17,
+        "line": 29,
+        "col": 1,
+        "statement": 25
+      },
+      {
+        "native_line": 18,
+        "line": 29,
+        "col": 1,
+        "statement": 25
+      },
+      {
+        "native_line": 18,
+        "line": 30,
+        "col": 1,
+        "statement": 26
+      },
+      {
+        "native_line": 19,
+        "line": 32,
+        "col": 1,
+        "statement": 27
+      },
+      {
+        "native_line": 19,
+        "line": 33,
+        "col": 1,
+        "statement": 28
+      },
+      {
+        "native_line": 19,
+        "line": 34,
+        "col": 1,
+        "statement": 29
+      },
+      {
+        "native_line": 19,
+        "line": 35,
+        "col": 1,
+        "statement": 30
+      },
+      {
+        "native_line": 19,
+        "line": 36,
+        "col": 1,
+        "statement": 31
+      },
+      {
+        "native_line": 20,
+        "line": 33,
+        "col": 1,
+        "statement": 28
+      },
+      {
+        "native_line": 20,
+        "line": 35,
+        "col": 1,
+        "statement": 30
+      },
+      {
+        "native_line": 21,
+        "line": 33,
+        "col": 1,
+        "statement": 28
+      },
+      {
+        "native_line": 21,
+        "line": 35,
+        "col": 1,
+        "statement": 30
+      },
+      {
+        "native_line": 22,
+        "line": 35,
+        "col": 1,
+        "statement": 30
+      },
+      {
+        "native_line": 22,
+        "line": 36,
+        "col": 1,
+        "statement": 31
+      },
+      {
+        "native_line": 23,
+        "line": 38,
+        "col": 1,
+        "statement": 32
+      },
+      {
+        "native_line": 23,
+        "line": 39,
+        "col": 1,
+        "statement": 33
+      },
+      {
+        "native_line": 23,
+        "line": 40,
+        "col": 1,
+        "statement": 34
+      },
+      {
+        "native_line": 23,
+        "line": 41,
+        "col": 1,
+        "statement": 35
+      },
+      {
+        "native_line": 23,
+        "line": 42,
+        "col": 1,
+        "statement": 36
+      },
+      {
+        "native_line": 23,
+        "line": 43,
+        "col": 1,
+        "statement": 37
+      },
+      {
+        "native_line": 23,
+        "line": 44,
+        "col": 1,
+        "statement": 38
+      },
+      {
+        "native_line": 23,
+        "line": 45,
+        "col": 1,
+        "statement": 39
+      },
+      {
+        "native_line": 24,
+        "line": 39,
+        "col": 1,
+        "statement": 33
+      },
+      {
+        "native_line": 24,
+        "line": 40,
+        "col": 1,
+        "statement": 34
+      },
+      {
+        "native_line": 24,
+        "line": 41,
+        "col": 1,
+        "statement": 35
+      },
+      {
+        "native_line": 24,
+        "line": 42,
+        "col": 1,
+        "statement": 36
+      },
+      {
+        "native_line": 24,
+        "line": 44,
+        "col": 1,
+        "statement": 38
+      },
+      {
+        "native_line": 25,
+        "line": 39,
+        "col": 1,
+        "statement": 33
+      },
+      {
+        "native_line": 25,
+        "line": 40,
+        "col": 1,
+        "statement": 34
+      },
+      {
+        "native_line": 25,
+        "line": 41,
+        "col": 1,
+        "statement": 35
+      },
+      {
+        "native_line": 25,
+        "line": 42,
+        "col": 1,
+        "statement": 36
+      },
+      {
+        "native_line": 25,
+        "line": 44,
+        "col": 1,
+        "statement": 38
+      },
+      {
+        "native_line": 26,
+        "line": 44,
+        "col": 1,
+        "statement": 38
+      },
+      {
+        "native_line": 26,
+        "line": 45,
+        "col": 1,
+        "statement": 39
+      },
+      {
+        "native_line": 27,
+        "line": 47,
+        "col": 1,
+        "statement": 40
+      },
+      {
+        "native_line": 27,
+        "line": 48,
+        "col": 1,
+        "statement": 41
+      },
+      {
+        "native_line": 27,
+        "line": 49,
+        "col": 1,
+        "statement": 42
+      },
+      {
+        "native_line": 27,
+        "line": 50,
+        "col": 1,
+        "statement": 43
+      },
+      {
+        "native_line": 27,
+        "line": 51,
+        "col": 1,
+        "statement": 44
+      },
+      {
+        "native_line": 28,
+        "line": 48,
+        "col": 1,
+        "statement": 41
+      },
+      {
+        "native_line": 28,
+        "line": 50,
+        "col": 1,
+        "statement": 43
+      },
+      {
+        "native_line": 29,
+        "line": 48,
+        "col": 1,
+        "statement": 41
+      },
+      {
+        "native_line": 29,
+        "line": 50,
+        "col": 1,
+        "statement": 43
+      },
+      {
+        "native_line": 30,
+        "line": 50,
+        "col": 1,
+        "statement": 43
+      },
+      {
+        "native_line": 30,
+        "line": 51,
+        "col": 1,
+        "statement": 44
+      },
+      {
+        "native_line": 31,
+        "line": 53,
+        "col": 1,
+        "statement": 45
+      },
+      {
+        "native_line": 32,
+        "line": 53,
+        "col": 1,
+        "statement": 45
+      },
+      {
+        "native_line": 33,
+        "line": 2,
+        "col": 1,
+        "statement": 2
+      },
+      {
+        "native_line": 33,
+        "line": 53,
+        "col": 1,
+        "statement": 45
+      },
+      {
+        "native_line": 34,
+        "line": 53,
+        "col": 1,
+        "statement": 45
+      },
+      {
+        "native_line": 35,
+        "line": 3,
+        "col": 1,
+        "statement": 3
+      },
+      {
+        "native_line": 35,
+        "line": 53,
+        "col": 1,
+        "statement": 45
+      },
+      {
+        "native_line": 36,
+        "line": 53,
+        "col": 1,
+        "statement": 45
+      }
+    ],
+    "names": {
+      "letters": "built_step_1",
+      "movement": "built_step_2",
+      "leading positions": "built_step_3",
+      "trailing positions": "built_step_4",
+      "shades": "built_step_5",
+      "frames": "built_step_6",
+      "animation": "built_step_7"
+    },
+    "construction": {
+      "version": "symblic-english-build/1",
+      "schema_version": 1,
+      "title": "Matrix rain",
+      "canvas": {
+        "width": 32,
+        "height": 24,
+        "trail": 8,
+        "frames": 24,
+        "origin": "top",
+        "background": "black",
+        "foreground": "green",
+        "shade_min": 0,
+        "shade_max": 7,
+        "repeat": true
+      },
+      "defaults": {
+        "width": 32,
+        "height": 24,
+        "trail": 8,
+        "frames": 24,
+        "origin": "top",
+        "background": "black",
+        "foreground": "green",
+        "shade_min": 0,
+        "shade_max": 7,
+        "repeat": true
+      },
+      "units": [
+        {
+          "name": "letters",
+          "contract": "letters",
+          "function": "build_step_1",
+          "binding": "built_step_1",
+          "id": "built_step_1",
+          "line": 5,
+          "uses": [],
+          "check_lines": [
+            8
+          ],
+          "selected_steps": [],
+          "selected_bindings": [],
+          "runtime_dependency_bindings": [],
+          "statement_ids": [
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "ask_line": 3,
+          "check_line": 4,
+          "assembly_line": 5,
+          "gate_line": 6,
+          "visible_examples": 4,
+          "additional_construction_checks": 1
+        },
+        {
+          "name": "movement",
+          "contract": "movement",
+          "function": "build_step_2",
+          "binding": "built_step_2",
+          "id": "built_step_2",
+          "line": 11,
+          "uses": [],
+          "check_lines": [
+            14
+          ],
+          "selected_steps": [],
+          "selected_bindings": [],
+          "runtime_dependency_bindings": [],
+          "statement_ids": [
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "ask_line": 7,
+          "check_line": 8,
+          "assembly_line": 9,
+          "gate_line": 10,
+          "visible_examples": 4,
+          "additional_construction_checks": 7
+        },
+        {
+          "name": "leading positions",
+          "contract": "heads",
+          "function": "build_step_3",
+          "binding": "built_step_3",
+          "id": "built_step_3",
+          "line": 17,
+          "uses": [
+            "movement"
+          ],
+          "check_lines": [
+            23
+          ],
+          "selected_steps": [
+            "movement"
+          ],
+          "selected_bindings": [
+            "built_step_2"
+          ],
+          "runtime_dependency_bindings": [
+            "built_step_2"
+          ],
+          "statement_ids": [
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ],
+          "ask_line": 11,
+          "check_line": 12,
+          "assembly_line": 13,
+          "gate_line": 14,
+          "visible_examples": 4,
+          "additional_construction_checks": 5
+        },
+        {
+          "name": "trailing positions",
+          "contract": "trails",
+          "function": "build_step_4",
+          "binding": "built_step_4",
+          "id": "built_step_4",
+          "line": 26,
+          "uses": [
+            "movement"
+          ],
+          "check_lines": [
+            29
+          ],
+          "selected_steps": [
+            "movement"
+          ],
+          "selected_bindings": [
+            "built_step_2"
+          ],
+          "runtime_dependency_bindings": [
+            "built_step_2"
+          ],
+          "statement_ids": [
+            22,
+            23,
+            24,
+            25,
+            26
+          ],
+          "ask_line": 15,
+          "check_line": 16,
+          "assembly_line": 17,
+          "gate_line": 18,
+          "visible_examples": 4,
+          "additional_construction_checks": 3
+        },
+        {
+          "name": "shades",
+          "contract": "shades",
+          "function": "build_step_5",
+          "binding": "built_step_5",
+          "id": "built_step_5",
+          "line": 32,
+          "uses": [],
+          "check_lines": [
+            35
+          ],
+          "selected_steps": [],
+          "selected_bindings": [],
+          "runtime_dependency_bindings": [],
+          "statement_ids": [
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          "ask_line": 19,
+          "check_line": 20,
+          "assembly_line": 21,
+          "gate_line": 22,
+          "visible_examples": 4,
+          "additional_construction_checks": 1
+        },
+        {
+          "name": "frames",
+          "contract": "frames",
+          "function": "build_step_6",
+          "binding": "built_step_6",
+          "id": "built_step_6",
+          "line": 38,
+          "uses": [
+            "letters",
+            "leading positions",
+            "trailing positions",
+            "shades"
+          ],
+          "check_lines": [
+            44
+          ],
+          "selected_steps": [
+            "letters",
+            "leading positions",
+            "trailing positions",
+            "shades"
+          ],
+          "selected_bindings": [
+            "built_step_1",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5"
+          ],
+          "runtime_dependency_bindings": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5"
+          ],
+          "statement_ids": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+          ],
+          "ask_line": 23,
+          "check_line": 24,
+          "assembly_line": 25,
+          "gate_line": 26,
+          "visible_examples": 3,
+          "additional_construction_checks": 2
+        },
+        {
+          "name": "animation",
+          "contract": "film",
+          "function": "build_step_7",
+          "binding": "built_step_7",
+          "id": "built_step_7",
+          "line": 47,
+          "uses": [
+            "frames"
+          ],
+          "check_lines": [
+            50
+          ],
+          "selected_steps": [
+            "frames"
+          ],
+          "selected_bindings": [
+            "built_step_6"
+          ],
+          "runtime_dependency_bindings": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5",
+            "built_step_6"
+          ],
+          "statement_ids": [
+            40,
+            41,
+            42,
+            43,
+            44
+          ],
+          "ask_line": 27,
+          "check_line": 28,
+          "assembly_line": 29,
+          "gate_line": 30,
+          "visible_examples": 3,
+          "additional_construction_checks": 1
+        }
+      ],
+      "unmapped_statements": [],
+      "output": {
+        "statement": 45,
+        "selected_bindings": [
+          "built_step_1",
+          "built_step_2",
+          "built_step_3",
+          "built_step_4",
+          "built_step_5",
+          "built_step_6",
+          "built_step_7"
+        ],
+        "sequence_binding": "constructed_frames",
+        "implementation_binding": "constructed_code"
+      },
+      "answer_origin": "model_code_required",
+      "candidate_bodies": "not_supplied",
+      "check_scope": "finite_examples_and_bounded_construction_checks",
+      "held_out_evaluation": "not_performed_by_compiler",
+      "player_role": "renders_saved_data_and_supplies_playback_clock"
+    },
+    "source_sha256": "234be9012cd6d77b74792057e3efdbf6e016247aea3a016d4babf102e09c1321",
+    "check": {
+      "ok": true,
+      "plan": [
+        {
+          "line": 1,
+          "kind": "use",
+          "depth": 0,
+          "label": "use",
+          "class": "exact"
+        },
+        {
+          "line": 2,
+          "kind": "note",
+          "depth": 0,
+          "label": "note"
+        },
+        {
+          "line": 3,
+          "kind": "ask",
+          "depth": 0,
+          "label": "ask built_step_1",
+          "binds": "built_step_1",
+          "type": "Code js",
+          "class": "open"
+        },
+        {
+          "line": 4,
+          "kind": "let",
+          "depth": 0,
+          "label": "let checked_built_step_1",
+          "binds": "checked_built_step_1",
+          "reads": [
+            "built_step_1"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 5,
+          "kind": "let",
+          "depth": 0,
+          "label": "let assembly_built_step_1",
+          "binds": "assembly_built_step_1",
+          "reads": [
+            "built_step_1"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 6,
+          "kind": "ensure",
+          "depth": 0,
+          "label": "ensure",
+          "reads": [
+            "assembly_built_step_1",
+            "checked_built_step_1"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 7,
+          "kind": "ask",
+          "depth": 0,
+          "label": "ask built_step_2",
+          "binds": "built_step_2",
+          "type": "Code js",
+          "class": "open"
+        },
+        {
+          "line": 8,
+          "kind": "let",
+          "depth": 0,
+          "label": "let checked_built_step_2",
+          "binds": "checked_built_step_2",
+          "reads": [
+            "built_step_2"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 9,
+          "kind": "let",
+          "depth": 0,
+          "label": "let assembly_built_step_2",
+          "binds": "assembly_built_step_2",
+          "reads": [
+            "built_step_1",
+            "built_step_2"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 10,
+          "kind": "ensure",
+          "depth": 0,
+          "label": "ensure",
+          "reads": [
+            "assembly_built_step_2",
+            "checked_built_step_2"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 11,
+          "kind": "ask",
+          "depth": 0,
+          "label": "ask built_step_3",
+          "binds": "built_step_3",
+          "reads": [
+            "built_step_2"
+          ],
+          "type": "Code js",
+          "class": "open"
+        },
+        {
+          "line": 12,
+          "kind": "let",
+          "depth": 0,
+          "label": "let checked_built_step_3",
+          "binds": "checked_built_step_3",
+          "reads": [
+            "built_step_2",
+            "built_step_3"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 13,
+          "kind": "let",
+          "depth": 0,
+          "label": "let assembly_built_step_3",
+          "binds": "assembly_built_step_3",
+          "reads": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 14,
+          "kind": "ensure",
+          "depth": 0,
+          "label": "ensure",
+          "reads": [
+            "assembly_built_step_3",
+            "checked_built_step_3"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 15,
+          "kind": "ask",
+          "depth": 0,
+          "label": "ask built_step_4",
+          "binds": "built_step_4",
+          "reads": [
+            "built_step_2"
+          ],
+          "type": "Code js",
+          "class": "open"
+        },
+        {
+          "line": 16,
+          "kind": "let",
+          "depth": 0,
+          "label": "let checked_built_step_4",
+          "binds": "checked_built_step_4",
+          "reads": [
+            "built_step_2",
+            "built_step_4"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 17,
+          "kind": "let",
+          "depth": 0,
+          "label": "let assembly_built_step_4",
+          "binds": "assembly_built_step_4",
+          "reads": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 18,
+          "kind": "ensure",
+          "depth": 0,
+          "label": "ensure",
+          "reads": [
+            "assembly_built_step_4",
+            "checked_built_step_4"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 19,
+          "kind": "ask",
+          "depth": 0,
+          "label": "ask built_step_5",
+          "binds": "built_step_5",
+          "type": "Code js",
+          "class": "open"
+        },
+        {
+          "line": 20,
+          "kind": "let",
+          "depth": 0,
+          "label": "let checked_built_step_5",
+          "binds": "checked_built_step_5",
+          "reads": [
+            "built_step_5"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 21,
+          "kind": "let",
+          "depth": 0,
+          "label": "let assembly_built_step_5",
+          "binds": "assembly_built_step_5",
+          "reads": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 22,
+          "kind": "ensure",
+          "depth": 0,
+          "label": "ensure",
+          "reads": [
+            "assembly_built_step_5",
+            "checked_built_step_5"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 23,
+          "kind": "ask",
+          "depth": 0,
+          "label": "ask built_step_6",
+          "binds": "built_step_6",
+          "reads": [
+            "built_step_1",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5"
+          ],
+          "type": "Code js",
+          "class": "open"
+        },
+        {
+          "line": 24,
+          "kind": "let",
+          "depth": 0,
+          "label": "let checked_built_step_6",
+          "binds": "checked_built_step_6",
+          "reads": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5",
+            "built_step_6"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 25,
+          "kind": "let",
+          "depth": 0,
+          "label": "let assembly_built_step_6",
+          "binds": "assembly_built_step_6",
+          "reads": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5",
+            "built_step_6"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 26,
+          "kind": "ensure",
+          "depth": 0,
+          "label": "ensure",
+          "reads": [
+            "assembly_built_step_6",
+            "checked_built_step_6"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 27,
+          "kind": "ask",
+          "depth": 0,
+          "label": "ask built_step_7",
+          "binds": "built_step_7",
+          "reads": [
+            "built_step_6"
+          ],
+          "type": "Code js",
+          "class": "open"
+        },
+        {
+          "line": 28,
+          "kind": "let",
+          "depth": 0,
+          "label": "let checked_built_step_7",
+          "binds": "checked_built_step_7",
+          "reads": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5",
+            "built_step_6",
+            "built_step_7"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 29,
+          "kind": "let",
+          "depth": 0,
+          "label": "let assembly_built_step_7",
+          "binds": "assembly_built_step_7",
+          "reads": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5",
+            "built_step_6",
+            "built_step_7"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 30,
+          "kind": "ensure",
+          "depth": 0,
+          "label": "ensure",
+          "reads": [
+            "assembly_built_step_7",
+            "checked_built_step_7"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 31,
+          "kind": "let",
+          "depth": 0,
+          "label": "let constructed_code",
+          "binds": "constructed_code",
+          "reads": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5",
+            "built_step_6",
+            "built_step_7"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 32,
+          "kind": "show",
+          "depth": 0,
+          "label": "show",
+          "reads": [
+            "constructed_code"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 33,
+          "kind": "let",
+          "depth": 0,
+          "label": "let constructed_frames",
+          "binds": "constructed_frames",
+          "reads": [
+            "built_step_1",
+            "built_step_2",
+            "built_step_3",
+            "built_step_4",
+            "built_step_5",
+            "built_step_6",
+            "built_step_7"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 34,
+          "kind": "for",
+          "depth": 0,
+          "label": "for",
+          "reads": [
+            "constructed_frames"
+          ],
+          "class": "exact"
+        },
+        {
+          "line": 35,
+          "kind": "show",
+          "depth": 1,
+          "label": "show",
+          "reads": [
+            "constructed_frame"
+          ],
+          "class": "exact"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "compiler_sha256": "92308141cb06529c844e09d88614947e8348d7890b80298dceb495b11b0c8d6b",
+    "lane_sha256": "aa65ba3946daec25264e92689b0c097ed04649bbd7cd8d55b8f6461982a204a1",
+    "generation": "compile_source and native source check; no execution or providers"
+  }
+}

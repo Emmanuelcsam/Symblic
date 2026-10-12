@@ -1,0 +1,61 @@
+program Dates.
+note Exact calendar arithmetic in the proleptic Gregorian calendar, computed by the kernel, so no reader has
+note to know leap-year rules or count days. Day numbers count from 1970-01-01 (day 0, a Thursday), with
+note Howard Hinnant's days_from_civil / civil_from_days algorithms (integer arithmetic only).
+note Importing this module also gives every ask that mentions these words their exact meaning.
+
+term "leap year" means "a year divisible by 4, except years divisible by 100 that are not divisible by 400 (Gregorian rule): 366 days".
+term "common year" means "a year that is not a leap year: 365 days".
+
+define Date as Record {year: Int, month: Int in 1..12, day: Int in 1..31}.
+
+note Is y a Gregorian leap year?
+function is_leap(y: Int) -> Bool = (y mod 4 = 0 and y mod 100 != 0) or y mod 400 = 0.
+function days_in_year(y: Int) -> Int = if is_leap(y) then 366 else 365.
+function days_in_month(y: Int, m: Int in 1..12) -> Int = if m = 2 then (if is_leap(y) then 29 else 28) else [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m].
+note A date record, and whether it names a real day.
+function date(y: Int, m: Int in 1..12, d: Int in 1..31) -> Date = {year: y, month: m, day: d}.
+function is_valid(x: Date) -> Bool = x.day <= days_in_month(x.year, x.month).
+note Day of the year, 1 for 1 January.
+function day_of_year(x: Date) -> Int = sum([days_in_month(x.year, k) for k in 1..12 if k < x.month]) + x.day.
+
+function _era_year(x: Date) -> Int = if x.month <= 2 then x.year - 1 else x.year.
+function _doy(x: Date) -> Int = (153 * (if x.month > 2 then x.month - 3 else x.month + 9) + 2) // 5 + x.day - 1.
+function _doe(x: Date) -> Int = (_era_year(x) - (_era_year(x) // 400) * 400) * 365 + (_era_year(x) - (_era_year(x) // 400) * 400) // 4 - (_era_year(x) - (_era_year(x) // 400) * 400) // 100 + _doy(x).
+note Days since 1970-01-01 (negative before it).
+function day_number(x: Date) -> Int = (_era_year(x) // 400) * 146097 + _doe(x) - 719468.
+note Days from a to b (negative when b is earlier).
+function days_between(a: Date, b: Date) -> Int = day_number(b) - day_number(a).
+note The weekday of a date.
+function weekday(x: Date) -> one of {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday} = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][(day_number(x) + 3) mod 7 + 1].
+
+function _z(n: Int) -> Int = n + 719468.
+function _era(n: Int) -> Int = _z(n) // 146097.
+function _doe_of(n: Int) -> Int = _z(n) - _era(n) * 146097.
+function _yoe(n: Int) -> Int = (_doe_of(n) - _doe_of(n) // 1460 + _doe_of(n) // 36524 - _doe_of(n) // 146096) // 365.
+function _doy_of(n: Int) -> Int = _doe_of(n) - (365 * _yoe(n) + _yoe(n) // 4 - _yoe(n) // 100).
+function _mp(n: Int) -> Int = (5 * _doy_of(n) + 2) // 153.
+function _month(n: Int) -> Int = if _mp(n) < 10 then _mp(n) + 3 else _mp(n) - 9.
+note The date of a day number (the inverse of day_number), and a date plus some days.
+function from_day_number(n: Int) -> Date = {year: _yoe(n) + _era(n) * 400 + (if _month(n) <= 2 then 1 else 0), month: _month(n), day: _doy_of(n) - (153 * _mp(n) + 2) // 5 + 1}.
+function add_days(x: Date, n: Int) -> Date = from_day_number(day_number(x) + n).
+
+test "leap years" do
+  assert is_leap(2024) and is_leap(2000) and not is_leap(1900) and not is_leap(2026).
+  assert days_in_year(2026) = 365 and days_in_month(2024, 2) = 29.
+end.
+
+test "day numbers and weekdays" do
+  assert day_number(date(1970, 1, 1)) = 0.
+  assert weekday(date(1970, 1, 1)) = "Thursday".
+  assert day_number(date(2000, 3, 1)) = 11017.
+  assert days_between(date(2026, 1, 1), date(2027, 1, 1)) = 365.
+  assert weekday(date(2026, 10, 2)) = "Friday".
+end.
+
+test "round trips" do
+  assert all n in [-719468, -1, 0, 59, 11016, 20000, 2932896]: day_number(from_day_number(n)) = n.
+  assert add_days(date(2024, 2, 28), 1) = date(2024, 2, 29).
+  assert add_days(date(2026, 12, 31), 1) = date(2027, 1, 1).
+  assert day_of_year(date(2024, 12, 31)) = 366.
+end.

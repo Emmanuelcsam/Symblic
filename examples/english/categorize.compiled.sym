@@ -1,0 +1,5 @@
+use profile=verified.
+let message = "The package arrived crushed and two plates were broken. I would like a refund.".
+let internal_note = "Customer since 2019; do not show this to the classifier.".
+ask category: one of {"praise", "complaint", "question"} "Classify the customer message into exactly one category." from message with context=none, determine=false, solve=false, retries=2, budget=12000.
+show category.

@@ -1,0 +1,1604 @@
+{
+  "version": 1,
+  "provenance": {
+    "kind": "synthetic",
+    "authoring": "Agent-authored finite scenarios and owner-preference labels, with explicit arithmetic, filtering and ordering rules; not labels supplied by actual owners or inferred by an evaluator model.",
+    "limits": "Heldout denotes scenario families reserved from benchmark prompt and harness tuning, not unknown pretraining content. Identical-public ambiguous twins encode two possible owner preferences. Gold is authored synthetic intent, not independently observed world truth. Field-ID clarification is graded; free-form question quality is not. This version covers one unresolved field per ambiguous case."
+  },
+  "cases": [
+    {
+      "id": "bottle_label-a",
+      "family": "bottle_label",
+      "domain": "units",
+      "split": "dev",
+      "public_group": "bottle_label-ambiguous",
+      "request": "Prepare the volume label for this bottle: the quantity is 2. Include the stated quantity, its unit, and its volume in milliliters.",
+      "context": "The label template supports mL and L. One liter equals 1000 milliliters. No unit has been entered for this bottle. Do not infer bottle size from its contents or appearance.",
+      "fields": [
+        {
+          "name": "quantity",
+          "description": "The numeric quantity stated by the owner.",
+          "type": "integer"
+        },
+        {
+          "name": "unit",
+          "description": "The unit of the stated quantity.",
+          "type": "text",
+          "choices": [
+            "mL",
+            "L"
+          ]
+        },
+        {
+          "name": "volume_ml",
+          "description": "The same volume expressed as an integer number of milliliters.",
+          "type": "integer"
+        }
+      ],
+      "gold": {
+        "values": {
+          "quantity": 2,
+          "unit": "mL",
+          "volume_ml": 2
+        },
+        "clarify_fields": [
+          "unit"
+        ],
+        "owner_answers": {
+          "unit": "mL"
+        }
+      }
+    },
+    {
+      "id": "bottle_label-b",
+      "family": "bottle_label",
+      "domain": "units",
+      "split": "dev",
+      "public_group": "bottle_label-ambiguous",
+      "request": "Prepare the volume label for this bottle: the quantity is 2. Include the stated quantity, its unit, and its volume in milliliters.",
+      "context": "The label template supports mL and L. One liter equals 1000 milliliters. No unit has been entered for this bottle. Do not infer bottle size from its contents or appearance.",
+      "fields": [
+        {
+          "name": "quantity",
+          "description": "The numeric quantity stated by the owner.",
+          "type": "integer"
+        },
+        {
+          "name": "unit",
+          "description": "The unit of the stated quantity.",
+          "type": "text",
+          "choices": [
+            "mL",
+            "L"
+          ]
+        },
+        {
+          "name": "volume_ml",
+          "description": "The same volume expressed as an integer number of milliliters.",
+          "type": "integer"
+        }
+      ],
+      "gold": {
+        "values": {
+          "quantity": 2,
+          "unit": "L",
+          "volume_ml": 2000
+        },
+        "clarify_fields": [
+          "unit"
+        ],
+        "owner_answers": {
+          "unit": "L"
+        }
+      }
+    },
+    {
+      "id": "bottle_label-clear",
+      "family": "bottle_label",
+      "domain": "units",
+      "split": "dev",
+      "public_group": "bottle_label-clear",
+      "request": "Prepare the label for a bottle containing 2 L. Include the stated quantity, its unit, and its volume in milliliters.",
+      "context": "The label template supports mL and L. One liter equals 1000 milliliters. No unit has been entered for this bottle. Do not infer bottle size from its contents or appearance.",
+      "fields": [
+        {
+          "name": "quantity",
+          "description": "The numeric quantity stated by the owner.",
+          "type": "integer"
+        },
+        {
+          "name": "unit",
+          "description": "The unit of the stated quantity.",
+          "type": "text",
+          "choices": [
+            "mL",
+            "L"
+          ]
+        },
+        {
+          "name": "volume_ml",
+          "description": "The same volume expressed as an integer number of milliliters.",
+          "type": "integer"
+        }
+      ],
+      "gold": {
+        "values": {
+          "quantity": 2,
+          "unit": "L",
+          "volume_ml": 2000
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "checkout_discount-a",
+      "family": "checkout_discount",
+      "domain": "scope",
+      "split": "dev",
+      "public_group": "checkout_discount-ambiguous",
+      "request": "Prepare the amount payable for this purchase using my 10 percent discount.",
+      "context": "The invoice has one desk costing 100 credits and one lamp costing 50 credits. The discount can apply either to the desk alone or to the whole invoice; the account record does not specify its scope. There are no taxes, fees, or other discounts.",
+      "fields": [
+        {
+          "name": "payable_credits",
+          "description": "The integer amount left to pay, in credits.",
+          "type": "integer"
+        },
+        {
+          "name": "discount_scope",
+          "description": "The part of the purchase receiving the discount.",
+          "type": "text",
+          "choices": [
+            "desk_only",
+            "whole_invoice"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "discount_scope": "desk_only",
+          "payable_credits": 140
+        },
+        "clarify_fields": [
+          "discount_scope"
+        ],
+        "owner_answers": {
+          "discount_scope": "desk_only"
+        }
+      }
+    },
+    {
+      "id": "checkout_discount-b",
+      "family": "checkout_discount",
+      "domain": "scope",
+      "split": "dev",
+      "public_group": "checkout_discount-ambiguous",
+      "request": "Prepare the amount payable for this purchase using my 10 percent discount.",
+      "context": "The invoice has one desk costing 100 credits and one lamp costing 50 credits. The discount can apply either to the desk alone or to the whole invoice; the account record does not specify its scope. There are no taxes, fees, or other discounts.",
+      "fields": [
+        {
+          "name": "payable_credits",
+          "description": "The integer amount left to pay, in credits.",
+          "type": "integer"
+        },
+        {
+          "name": "discount_scope",
+          "description": "The part of the purchase receiving the discount.",
+          "type": "text",
+          "choices": [
+            "desk_only",
+            "whole_invoice"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "discount_scope": "whole_invoice",
+          "payable_credits": 135
+        },
+        "clarify_fields": [
+          "discount_scope"
+        ],
+        "owner_answers": {
+          "discount_scope": "whole_invoice"
+        }
+      }
+    },
+    {
+      "id": "checkout_discount-clear",
+      "family": "checkout_discount",
+      "domain": "scope",
+      "split": "dev",
+      "public_group": "checkout_discount-clear",
+      "request": "Apply my 10 percent discount to the desk alone, leaving the lamp at full price. Prepare the amount payable.",
+      "context": "The invoice has one desk costing 100 credits and one lamp costing 50 credits. The discount can apply either to the desk alone or to the whole invoice; the account record does not specify its scope. There are no taxes, fees, or other discounts.",
+      "fields": [
+        {
+          "name": "payable_credits",
+          "description": "The integer amount left to pay, in credits.",
+          "type": "integer"
+        },
+        {
+          "name": "discount_scope",
+          "description": "The part of the purchase receiving the discount.",
+          "type": "text",
+          "choices": [
+            "desk_only",
+            "whole_invoice"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "discount_scope": "desk_only",
+          "payable_credits": 140
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "contact_draft-a",
+      "family": "contact_draft",
+      "domain": "referents",
+      "split": "dev",
+      "public_group": "contact_draft-ambiguous",
+      "request": "Prepare an email draft addressed to Alex. Return only the draft routing fields; do not send anything.",
+      "context": "Synthetic contacts: A17 is Alex from the ceramics class; A42 is Alex from the chess club. Both have email addresses on file. This request contains no earlier conversation identifying which Alex is meant.",
+      "fields": [
+        {
+          "name": "recipient_id",
+          "description": "The chosen synthetic contact identifier.",
+          "type": "text",
+          "choices": [
+            "A17",
+            "A42"
+          ]
+        },
+        {
+          "name": "channel",
+          "description": "The requested communication channel.",
+          "type": "text",
+          "choices": [
+            "email"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "recipient_id": "A17",
+          "channel": "email"
+        },
+        "clarify_fields": [
+          "recipient_id"
+        ],
+        "owner_answers": {
+          "recipient_id": "A17"
+        }
+      }
+    },
+    {
+      "id": "contact_draft-b",
+      "family": "contact_draft",
+      "domain": "referents",
+      "split": "dev",
+      "public_group": "contact_draft-ambiguous",
+      "request": "Prepare an email draft addressed to Alex. Return only the draft routing fields; do not send anything.",
+      "context": "Synthetic contacts: A17 is Alex from the ceramics class; A42 is Alex from the chess club. Both have email addresses on file. This request contains no earlier conversation identifying which Alex is meant.",
+      "fields": [
+        {
+          "name": "recipient_id",
+          "description": "The chosen synthetic contact identifier.",
+          "type": "text",
+          "choices": [
+            "A17",
+            "A42"
+          ]
+        },
+        {
+          "name": "channel",
+          "description": "The requested communication channel.",
+          "type": "text",
+          "choices": [
+            "email"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "recipient_id": "A42",
+          "channel": "email"
+        },
+        "clarify_fields": [
+          "recipient_id"
+        ],
+        "owner_answers": {
+          "recipient_id": "A42"
+        }
+      }
+    },
+    {
+      "id": "contact_draft-clear",
+      "family": "contact_draft",
+      "domain": "referents",
+      "split": "dev",
+      "public_group": "contact_draft-clear",
+      "request": "Prepare an email draft for Alex from the chess club. Return only its routing fields; do not send anything.",
+      "context": "Synthetic contacts: A17 is Alex from the ceramics class; A42 is Alex from the chess club. Both have email addresses on file. This request contains no earlier conversation identifying which Alex is meant.",
+      "fields": [
+        {
+          "name": "recipient_id",
+          "description": "The chosen synthetic contact identifier.",
+          "type": "text",
+          "choices": [
+            "A17",
+            "A42"
+          ]
+        },
+        {
+          "name": "channel",
+          "description": "The requested communication channel.",
+          "type": "text",
+          "choices": [
+            "email"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "recipient_id": "A42",
+          "channel": "email"
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "reminder_clock-a",
+      "family": "reminder_clock",
+      "domain": "time",
+      "split": "dev",
+      "public_group": "reminder_clock-ambiguous",
+      "request": "Prepare a reminder for 9 on February 15, 2027. Give its date and 24-hour clock time; do not schedule it.",
+      "context": "The reminder uses UTC and zero minutes past the hour. The imported note says only \"9\" and has no AM or PM marker. There is no default morning/evening preference.",
+      "fields": [
+        {
+          "name": "date",
+          "description": "The reminder date in YYYY-MM-DD form.",
+          "type": "text"
+        },
+        {
+          "name": "minute",
+          "description": "The minute past the hour.",
+          "type": "integer"
+        },
+        {
+          "name": "hour_24",
+          "description": "The intended hour in the 24-hour clock.",
+          "type": "integer",
+          "choices": [
+            9,
+            21
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "date": "2027-02-15",
+          "hour_24": 9,
+          "minute": 0
+        },
+        "clarify_fields": [
+          "hour_24"
+        ],
+        "owner_answers": {
+          "hour_24": 9
+        }
+      }
+    },
+    {
+      "id": "reminder_clock-b",
+      "family": "reminder_clock",
+      "domain": "time",
+      "split": "dev",
+      "public_group": "reminder_clock-ambiguous",
+      "request": "Prepare a reminder for 9 on February 15, 2027. Give its date and 24-hour clock time; do not schedule it.",
+      "context": "The reminder uses UTC and zero minutes past the hour. The imported note says only \"9\" and has no AM or PM marker. There is no default morning/evening preference.",
+      "fields": [
+        {
+          "name": "date",
+          "description": "The reminder date in YYYY-MM-DD form.",
+          "type": "text"
+        },
+        {
+          "name": "minute",
+          "description": "The minute past the hour.",
+          "type": "integer"
+        },
+        {
+          "name": "hour_24",
+          "description": "The intended hour in the 24-hour clock.",
+          "type": "integer",
+          "choices": [
+            9,
+            21
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "date": "2027-02-15",
+          "hour_24": 21,
+          "minute": 0
+        },
+        "clarify_fields": [
+          "hour_24"
+        ],
+        "owner_answers": {
+          "hour_24": 21
+        }
+      }
+    },
+    {
+      "id": "reminder_clock-clear",
+      "family": "reminder_clock",
+      "domain": "time",
+      "split": "dev",
+      "public_group": "reminder_clock-clear",
+      "request": "Prepare a reminder for 9 PM on February 15, 2027. Give its date and 24-hour clock time; do not schedule it.",
+      "context": "The reminder uses UTC and zero minutes past the hour. The imported note says only \"9\" and has no AM or PM marker. There is no default morning/evening preference.",
+      "fields": [
+        {
+          "name": "date",
+          "description": "The reminder date in YYYY-MM-DD form.",
+          "type": "text"
+        },
+        {
+          "name": "minute",
+          "description": "The minute past the hour.",
+          "type": "integer"
+        },
+        {
+          "name": "hour_24",
+          "description": "The intended hour in the 24-hour clock.",
+          "type": "integer",
+          "choices": [
+            9,
+            21
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "date": "2027-02-15",
+          "hour_24": 21,
+          "minute": 0
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "tile_orientation-a",
+      "family": "tile_orientation",
+      "domain": "order",
+      "split": "dev",
+      "public_group": "tile_orientation-ambiguous",
+      "request": "Arrange the tiles in the sequence amber, blue, green. Return their physical order from left to right.",
+      "context": "This board can be read left_to_right or right_to_left. The supplied sequence follows the board reading direction, but that direction has not been selected. Each named tile appears exactly once.",
+      "fields": [
+        {
+          "name": "reading_direction",
+          "description": "The board direction in which the supplied sequence is read.",
+          "type": "text",
+          "choices": [
+            "left_to_right",
+            "right_to_left"
+          ]
+        },
+        {
+          "name": "physical_left_to_right",
+          "description": "Tile names listed from the physical left edge to the physical right edge.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "reading_direction": "left_to_right",
+          "physical_left_to_right": [
+            "amber",
+            "blue",
+            "green"
+          ]
+        },
+        "clarify_fields": [
+          "reading_direction"
+        ],
+        "owner_answers": {
+          "reading_direction": "left_to_right"
+        }
+      }
+    },
+    {
+      "id": "tile_orientation-b",
+      "family": "tile_orientation",
+      "domain": "order",
+      "split": "dev",
+      "public_group": "tile_orientation-ambiguous",
+      "request": "Arrange the tiles in the sequence amber, blue, green. Return their physical order from left to right.",
+      "context": "This board can be read left_to_right or right_to_left. The supplied sequence follows the board reading direction, but that direction has not been selected. Each named tile appears exactly once.",
+      "fields": [
+        {
+          "name": "reading_direction",
+          "description": "The board direction in which the supplied sequence is read.",
+          "type": "text",
+          "choices": [
+            "left_to_right",
+            "right_to_left"
+          ]
+        },
+        {
+          "name": "physical_left_to_right",
+          "description": "Tile names listed from the physical left edge to the physical right edge.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "reading_direction": "right_to_left",
+          "physical_left_to_right": [
+            "green",
+            "blue",
+            "amber"
+          ]
+        },
+        "clarify_fields": [
+          "reading_direction"
+        ],
+        "owner_answers": {
+          "reading_direction": "right_to_left"
+        }
+      }
+    },
+    {
+      "id": "tile_orientation-clear",
+      "family": "tile_orientation",
+      "domain": "order",
+      "split": "dev",
+      "public_group": "tile_orientation-clear",
+      "request": "The board is read right_to_left. Arrange the sequence amber, blue, green in that reading direction, and return the physical left-to-right order.",
+      "context": "This board can be read left_to_right or right_to_left. The supplied sequence follows the board reading direction, but that direction has not been selected. Each named tile appears exactly once.",
+      "fields": [
+        {
+          "name": "reading_direction",
+          "description": "The board direction in which the supplied sequence is read.",
+          "type": "text",
+          "choices": [
+            "left_to_right",
+            "right_to_left"
+          ]
+        },
+        {
+          "name": "physical_left_to_right",
+          "description": "Tile names listed from the physical left edge to the physical right edge.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "reading_direction": "right_to_left",
+          "physical_left_to_right": [
+            "green",
+            "blue",
+            "amber"
+          ]
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "team_eligibility-a",
+      "family": "team_eligibility",
+      "domain": "quantifier",
+      "split": "dev",
+      "public_group": "team_eligibility-ambiguous",
+      "request": "List the teams eligible under the member quiz-pass rule.",
+      "context": "The policy may require at least one member to pass (some) or every member to pass (all); the current policy value is missing. Team Iris: pass, pass. Team Lime: fail, fail. Team Rosa: pass, fail. Every team has two members. Return team names alphabetically.",
+      "fields": [
+        {
+          "name": "eligible_teams",
+          "description": "Eligible team names in alphabetical order.",
+          "type": "text_list"
+        },
+        {
+          "name": "member_rule",
+          "description": "Whether some or all members must pass.",
+          "type": "text",
+          "choices": [
+            "some",
+            "all"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "member_rule": "some",
+          "eligible_teams": [
+            "Iris",
+            "Rosa"
+          ]
+        },
+        "clarify_fields": [
+          "member_rule"
+        ],
+        "owner_answers": {
+          "member_rule": "some"
+        }
+      }
+    },
+    {
+      "id": "team_eligibility-b",
+      "family": "team_eligibility",
+      "domain": "quantifier",
+      "split": "dev",
+      "public_group": "team_eligibility-ambiguous",
+      "request": "List the teams eligible under the member quiz-pass rule.",
+      "context": "The policy may require at least one member to pass (some) or every member to pass (all); the current policy value is missing. Team Iris: pass, pass. Team Lime: fail, fail. Team Rosa: pass, fail. Every team has two members. Return team names alphabetically.",
+      "fields": [
+        {
+          "name": "eligible_teams",
+          "description": "Eligible team names in alphabetical order.",
+          "type": "text_list"
+        },
+        {
+          "name": "member_rule",
+          "description": "Whether some or all members must pass.",
+          "type": "text",
+          "choices": [
+            "some",
+            "all"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "member_rule": "all",
+          "eligible_teams": [
+            "Iris"
+          ]
+        },
+        "clarify_fields": [
+          "member_rule"
+        ],
+        "owner_answers": {
+          "member_rule": "all"
+        }
+      }
+    },
+    {
+      "id": "team_eligibility-clear",
+      "family": "team_eligibility",
+      "domain": "quantifier",
+      "split": "dev",
+      "public_group": "team_eligibility-clear",
+      "request": "Use the rule that every member must pass the quiz. List the eligible teams.",
+      "context": "The policy may require at least one member to pass (some) or every member to pass (all); the current policy value is missing. Team Iris: pass, pass. Team Lime: fail, fail. Team Rosa: pass, fail. Every team has two members. Return team names alphabetically.",
+      "fields": [
+        {
+          "name": "eligible_teams",
+          "description": "Eligible team names in alphabetical order.",
+          "type": "text_list"
+        },
+        {
+          "name": "member_rule",
+          "description": "Whether some or all members must pass.",
+          "type": "text",
+          "choices": [
+            "some",
+            "all"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "member_rule": "all",
+          "eligible_teams": [
+            "Iris"
+          ]
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "billing_tie-a",
+      "family": "billing_tie",
+      "domain": "rounding",
+      "split": "dev",
+      "public_group": "billing_tie-ambiguous",
+      "request": "Round the charge of 2.5 credits to the nearest whole credit using my billing profile.",
+      "context": "The profile tie rule is missing. The supported rules are half_even (choose the even integer at a tie) and half_away (choose the integer farther from zero at a tie). Both otherwise round to the nearest integer. No other adjustment is applied.",
+      "fields": [
+        {
+          "name": "tie_rule",
+          "description": "The rounding tie rule used by this billing profile.",
+          "type": "text",
+          "choices": [
+            "half_even",
+            "half_away"
+          ]
+        },
+        {
+          "name": "rounded_credits",
+          "description": "The resulting whole-credit charge.",
+          "type": "integer"
+        }
+      ],
+      "gold": {
+        "values": {
+          "tie_rule": "half_even",
+          "rounded_credits": 2
+        },
+        "clarify_fields": [
+          "tie_rule"
+        ],
+        "owner_answers": {
+          "tie_rule": "half_even"
+        }
+      }
+    },
+    {
+      "id": "billing_tie-b",
+      "family": "billing_tie",
+      "domain": "rounding",
+      "split": "dev",
+      "public_group": "billing_tie-ambiguous",
+      "request": "Round the charge of 2.5 credits to the nearest whole credit using my billing profile.",
+      "context": "The profile tie rule is missing. The supported rules are half_even (choose the even integer at a tie) and half_away (choose the integer farther from zero at a tie). Both otherwise round to the nearest integer. No other adjustment is applied.",
+      "fields": [
+        {
+          "name": "tie_rule",
+          "description": "The rounding tie rule used by this billing profile.",
+          "type": "text",
+          "choices": [
+            "half_even",
+            "half_away"
+          ]
+        },
+        {
+          "name": "rounded_credits",
+          "description": "The resulting whole-credit charge.",
+          "type": "integer"
+        }
+      ],
+      "gold": {
+        "values": {
+          "tie_rule": "half_away",
+          "rounded_credits": 3
+        },
+        "clarify_fields": [
+          "tie_rule"
+        ],
+        "owner_answers": {
+          "tie_rule": "half_away"
+        }
+      }
+    },
+    {
+      "id": "billing_tie-clear",
+      "family": "billing_tie",
+      "domain": "rounding",
+      "split": "dev",
+      "public_group": "billing_tie-clear",
+      "request": "Round 2.5 credits to the nearest whole credit using half_even: choose the even integer at a tie.",
+      "context": "The profile tie rule is missing. The supported rules are half_even (choose the even integer at a tie) and half_away (choose the integer farther from zero at a tie). Both otherwise round to the nearest integer. No other adjustment is applied.",
+      "fields": [
+        {
+          "name": "tie_rule",
+          "description": "The rounding tie rule used by this billing profile.",
+          "type": "text",
+          "choices": [
+            "half_even",
+            "half_away"
+          ]
+        },
+        {
+          "name": "rounded_credits",
+          "description": "The resulting whole-credit charge.",
+          "type": "integer"
+        }
+      ],
+      "gold": {
+        "values": {
+          "tie_rule": "half_even",
+          "rounded_credits": 2
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "temperature_alert-a",
+      "family": "temperature_alert",
+      "domain": "units",
+      "split": "heldout",
+      "public_group": "temperature_alert-ambiguous",
+      "request": "The display reads 20. Prepare its scale label and whether this reading meets the cold-alert rule.",
+      "context": "The display can use C or F; its scale indicator is missing. In this synthetic alert rule, cold_alert is true at or below 0 on scale C, or at or below 32 on scale F. These are the complete rules; this is not an assessment of a real device or substance.",
+      "fields": [
+        {
+          "name": "reading",
+          "description": "The numeric reading shown on the display.",
+          "type": "integer"
+        },
+        {
+          "name": "scale",
+          "description": "The scale of the displayed reading.",
+          "type": "text",
+          "choices": [
+            "C",
+            "F"
+          ]
+        },
+        {
+          "name": "cold_alert",
+          "description": "Whether the supplied scale-specific threshold is met.",
+          "type": "boolean"
+        }
+      ],
+      "gold": {
+        "values": {
+          "scale": "C",
+          "reading": 20,
+          "cold_alert": false
+        },
+        "clarify_fields": [
+          "scale"
+        ],
+        "owner_answers": {
+          "scale": "C"
+        }
+      }
+    },
+    {
+      "id": "temperature_alert-b",
+      "family": "temperature_alert",
+      "domain": "units",
+      "split": "heldout",
+      "public_group": "temperature_alert-ambiguous",
+      "request": "The display reads 20. Prepare its scale label and whether this reading meets the cold-alert rule.",
+      "context": "The display can use C or F; its scale indicator is missing. In this synthetic alert rule, cold_alert is true at or below 0 on scale C, or at or below 32 on scale F. These are the complete rules; this is not an assessment of a real device or substance.",
+      "fields": [
+        {
+          "name": "reading",
+          "description": "The numeric reading shown on the display.",
+          "type": "integer"
+        },
+        {
+          "name": "scale",
+          "description": "The scale of the displayed reading.",
+          "type": "text",
+          "choices": [
+            "C",
+            "F"
+          ]
+        },
+        {
+          "name": "cold_alert",
+          "description": "Whether the supplied scale-specific threshold is met.",
+          "type": "boolean"
+        }
+      ],
+      "gold": {
+        "values": {
+          "scale": "F",
+          "reading": 20,
+          "cold_alert": true
+        },
+        "clarify_fields": [
+          "scale"
+        ],
+        "owner_answers": {
+          "scale": "F"
+        }
+      }
+    },
+    {
+      "id": "temperature_alert-clear",
+      "family": "temperature_alert",
+      "domain": "units",
+      "split": "heldout",
+      "public_group": "temperature_alert-clear",
+      "request": "The display reads 20 on scale F. Prepare its scale label and whether this reading meets the supplied cold-alert rule.",
+      "context": "The display can use C or F; its scale indicator is missing. In this synthetic alert rule, cold_alert is true at or below 0 on scale C, or at or below 32 on scale F. These are the complete rules; this is not an assessment of a real device or substance.",
+      "fields": [
+        {
+          "name": "reading",
+          "description": "The numeric reading shown on the display.",
+          "type": "integer"
+        },
+        {
+          "name": "scale",
+          "description": "The scale of the displayed reading.",
+          "type": "text",
+          "choices": [
+            "C",
+            "F"
+          ]
+        },
+        {
+          "name": "cold_alert",
+          "description": "Whether the supplied scale-specific threshold is met.",
+          "type": "boolean"
+        }
+      ],
+      "gold": {
+        "values": {
+          "scale": "F",
+          "reading": 20,
+          "cold_alert": true
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "nested_export-a",
+      "family": "nested_export",
+      "domain": "scope",
+      "split": "heldout",
+      "public_group": "nested_export-ambiguous",
+      "request": "Prepare the list of CSV files inside /reports for export; do not access or export any real files.",
+      "context": "Synthetic file list: /reports/q1.csv; /reports/q2.csv; /reports/archive/q0.csv; /reports/readme.txt; /notes/extra.csv. The export can inspect only the named directory or also its subdirectories. No depth setting is supplied. Return full matching paths in ascending lexical order.",
+      "fields": [
+        {
+          "name": "recursive",
+          "description": "Whether subdirectories of /reports are included.",
+          "type": "boolean"
+        },
+        {
+          "name": "paths",
+          "description": "The selected CSV paths in ascending lexical order.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "recursive": false,
+          "paths": [
+            "/reports/q1.csv",
+            "/reports/q2.csv"
+          ]
+        },
+        "clarify_fields": [
+          "recursive"
+        ],
+        "owner_answers": {
+          "recursive": false
+        }
+      }
+    },
+    {
+      "id": "nested_export-b",
+      "family": "nested_export",
+      "domain": "scope",
+      "split": "heldout",
+      "public_group": "nested_export-ambiguous",
+      "request": "Prepare the list of CSV files inside /reports for export; do not access or export any real files.",
+      "context": "Synthetic file list: /reports/q1.csv; /reports/q2.csv; /reports/archive/q0.csv; /reports/readme.txt; /notes/extra.csv. The export can inspect only the named directory or also its subdirectories. No depth setting is supplied. Return full matching paths in ascending lexical order.",
+      "fields": [
+        {
+          "name": "recursive",
+          "description": "Whether subdirectories of /reports are included.",
+          "type": "boolean"
+        },
+        {
+          "name": "paths",
+          "description": "The selected CSV paths in ascending lexical order.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "recursive": true,
+          "paths": [
+            "/reports/archive/q0.csv",
+            "/reports/q1.csv",
+            "/reports/q2.csv"
+          ]
+        },
+        "clarify_fields": [
+          "recursive"
+        ],
+        "owner_answers": {
+          "recursive": true
+        }
+      }
+    },
+    {
+      "id": "nested_export-clear",
+      "family": "nested_export",
+      "domain": "scope",
+      "split": "heldout",
+      "public_group": "nested_export-clear",
+      "request": "Prepare the CSV export list from /reports, including all its subdirectories. Use only the synthetic file list; do not access real files.",
+      "context": "Synthetic file list: /reports/q1.csv; /reports/q2.csv; /reports/archive/q0.csv; /reports/readme.txt; /notes/extra.csv. The export can inspect only the named directory or also its subdirectories. No depth setting is supplied. Return full matching paths in ascending lexical order.",
+      "fields": [
+        {
+          "name": "recursive",
+          "description": "Whether subdirectories of /reports are included.",
+          "type": "boolean"
+        },
+        {
+          "name": "paths",
+          "description": "The selected CSV paths in ascending lexical order.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "recursive": true,
+          "paths": [
+            "/reports/archive/q0.csv",
+            "/reports/q1.csv",
+            "/reports/q2.csv"
+          ]
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "folder_pronoun-a",
+      "family": "folder_pronoun",
+      "domain": "referents",
+      "split": "heldout",
+      "public_group": "folder_pronoun-ambiguous",
+      "request": "Mara gave Jo her blue folder. Record the folder owner and its color.",
+      "context": "Mara and Jo each own a blue folder. Both people use she/her pronouns. There is no other sentence or ownership information resolving whose folder was transferred. This is a synthetic annotation exercise, not a claim about real people.",
+      "fields": [
+        {
+          "name": "color",
+          "description": "The folder color explicitly stated in the sentence.",
+          "type": "text",
+          "choices": [
+            "blue"
+          ]
+        },
+        {
+          "name": "owner",
+          "description": "The person whose folder is meant by \"her blue folder\".",
+          "type": "text",
+          "choices": [
+            "Mara",
+            "Jo"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "owner": "Mara",
+          "color": "blue"
+        },
+        "clarify_fields": [
+          "owner"
+        ],
+        "owner_answers": {
+          "owner": "Mara"
+        }
+      }
+    },
+    {
+      "id": "folder_pronoun-b",
+      "family": "folder_pronoun",
+      "domain": "referents",
+      "split": "heldout",
+      "public_group": "folder_pronoun-ambiguous",
+      "request": "Mara gave Jo her blue folder. Record the folder owner and its color.",
+      "context": "Mara and Jo each own a blue folder. Both people use she/her pronouns. There is no other sentence or ownership information resolving whose folder was transferred. This is a synthetic annotation exercise, not a claim about real people.",
+      "fields": [
+        {
+          "name": "color",
+          "description": "The folder color explicitly stated in the sentence.",
+          "type": "text",
+          "choices": [
+            "blue"
+          ]
+        },
+        {
+          "name": "owner",
+          "description": "The person whose folder is meant by \"her blue folder\".",
+          "type": "text",
+          "choices": [
+            "Mara",
+            "Jo"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "owner": "Jo",
+          "color": "blue"
+        },
+        "clarify_fields": [
+          "owner"
+        ],
+        "owner_answers": {
+          "owner": "Jo"
+        }
+      }
+    },
+    {
+      "id": "folder_pronoun-clear",
+      "family": "folder_pronoun",
+      "domain": "referents",
+      "split": "heldout",
+      "public_group": "folder_pronoun-clear",
+      "request": "Mara gave Jo the blue folder owned by Mara. Record the folder owner and its color.",
+      "context": "Mara and Jo each own a blue folder. Both people use she/her pronouns. There is no other sentence or ownership information resolving whose folder was transferred. This is a synthetic annotation exercise, not a claim about real people.",
+      "fields": [
+        {
+          "name": "color",
+          "description": "The folder color explicitly stated in the sentence.",
+          "type": "text",
+          "choices": [
+            "blue"
+          ]
+        },
+        {
+          "name": "owner",
+          "description": "The person whose folder is meant by \"her blue folder\".",
+          "type": "text",
+          "choices": [
+            "Mara",
+            "Jo"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "owner": "Mara",
+          "color": "blue"
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "batch_day_boundary-a",
+      "family": "batch_day_boundary",
+      "domain": "time",
+      "split": "heldout",
+      "public_group": "batch_day_boundary-ambiguous",
+      "request": "Prepare the batch with a cutoff of June 11, 2027, using the configured day-boundary rule.",
+      "context": "All timestamps are UTC. Synthetic records: R1 at 2027-06-10T23:59; R2 at 2027-06-11T00:00; R3 at 2027-06-11T18:00; R4 at 2027-06-12T00:00. The missing day-boundary setting is either exclude_day (include times strictly before June 11 starts) or include_day (include times strictly before June 12 starts). Return IDs in timestamp order.",
+      "fields": [
+        {
+          "name": "boundary_rule",
+          "description": "Whether records on the stated cutoff date are excluded or included.",
+          "type": "text",
+          "choices": [
+            "exclude_day",
+            "include_day"
+          ]
+        },
+        {
+          "name": "record_ids",
+          "description": "Included record IDs in timestamp order.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "boundary_rule": "exclude_day",
+          "record_ids": [
+            "R1"
+          ]
+        },
+        "clarify_fields": [
+          "boundary_rule"
+        ],
+        "owner_answers": {
+          "boundary_rule": "exclude_day"
+        }
+      }
+    },
+    {
+      "id": "batch_day_boundary-b",
+      "family": "batch_day_boundary",
+      "domain": "time",
+      "split": "heldout",
+      "public_group": "batch_day_boundary-ambiguous",
+      "request": "Prepare the batch with a cutoff of June 11, 2027, using the configured day-boundary rule.",
+      "context": "All timestamps are UTC. Synthetic records: R1 at 2027-06-10T23:59; R2 at 2027-06-11T00:00; R3 at 2027-06-11T18:00; R4 at 2027-06-12T00:00. The missing day-boundary setting is either exclude_day (include times strictly before June 11 starts) or include_day (include times strictly before June 12 starts). Return IDs in timestamp order.",
+      "fields": [
+        {
+          "name": "boundary_rule",
+          "description": "Whether records on the stated cutoff date are excluded or included.",
+          "type": "text",
+          "choices": [
+            "exclude_day",
+            "include_day"
+          ]
+        },
+        {
+          "name": "record_ids",
+          "description": "Included record IDs in timestamp order.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "boundary_rule": "include_day",
+          "record_ids": [
+            "R1",
+            "R2",
+            "R3"
+          ]
+        },
+        "clarify_fields": [
+          "boundary_rule"
+        ],
+        "owner_answers": {
+          "boundary_rule": "include_day"
+        }
+      }
+    },
+    {
+      "id": "batch_day_boundary-clear",
+      "family": "batch_day_boundary",
+      "domain": "time",
+      "split": "heldout",
+      "public_group": "batch_day_boundary-clear",
+      "request": "Prepare the batch through the end of June 11, 2027: include that whole day, and exclude June 12 and later.",
+      "context": "All timestamps are UTC. Synthetic records: R1 at 2027-06-10T23:59; R2 at 2027-06-11T00:00; R3 at 2027-06-11T18:00; R4 at 2027-06-12T00:00. The missing day-boundary setting is either exclude_day (include times strictly before June 11 starts) or include_day (include times strictly before June 12 starts). Return IDs in timestamp order.",
+      "fields": [
+        {
+          "name": "boundary_rule",
+          "description": "Whether records on the stated cutoff date are excluded or included.",
+          "type": "text",
+          "choices": [
+            "exclude_day",
+            "include_day"
+          ]
+        },
+        {
+          "name": "record_ids",
+          "description": "Included record IDs in timestamp order.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "boundary_rule": "include_day",
+          "record_ids": [
+            "R1",
+            "R2",
+            "R3"
+          ]
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "ticket_score_sort-a",
+      "family": "ticket_score_sort",
+      "domain": "order",
+      "split": "heldout",
+      "public_group": "ticket_score_sort-ambiguous",
+      "request": "Sort these work tickets by urgency score for the report.",
+      "context": "Synthetic scores: T1=40, T2=75, T3=20. The report supports highest-score-first and lowest-score-first; no report preference is supplied. Scores are distinct, and no secondary sort key is used.",
+      "fields": [
+        {
+          "name": "ticket_ids",
+          "description": "Ticket IDs in the selected numeric score order.",
+          "type": "text_list"
+        },
+        {
+          "name": "highest_first",
+          "description": "Whether the highest numeric score is listed first.",
+          "type": "boolean"
+        }
+      ],
+      "gold": {
+        "values": {
+          "highest_first": true,
+          "ticket_ids": [
+            "T2",
+            "T1",
+            "T3"
+          ]
+        },
+        "clarify_fields": [
+          "highest_first"
+        ],
+        "owner_answers": {
+          "highest_first": true
+        }
+      }
+    },
+    {
+      "id": "ticket_score_sort-b",
+      "family": "ticket_score_sort",
+      "domain": "order",
+      "split": "heldout",
+      "public_group": "ticket_score_sort-ambiguous",
+      "request": "Sort these work tickets by urgency score for the report.",
+      "context": "Synthetic scores: T1=40, T2=75, T3=20. The report supports highest-score-first and lowest-score-first; no report preference is supplied. Scores are distinct, and no secondary sort key is used.",
+      "fields": [
+        {
+          "name": "ticket_ids",
+          "description": "Ticket IDs in the selected numeric score order.",
+          "type": "text_list"
+        },
+        {
+          "name": "highest_first",
+          "description": "Whether the highest numeric score is listed first.",
+          "type": "boolean"
+        }
+      ],
+      "gold": {
+        "values": {
+          "highest_first": false,
+          "ticket_ids": [
+            "T3",
+            "T1",
+            "T2"
+          ]
+        },
+        "clarify_fields": [
+          "highest_first"
+        ],
+        "owner_answers": {
+          "highest_first": false
+        }
+      }
+    },
+    {
+      "id": "ticket_score_sort-clear",
+      "family": "ticket_score_sort",
+      "domain": "order",
+      "split": "heldout",
+      "public_group": "ticket_score_sort-clear",
+      "request": "Sort the work tickets from the lowest urgency score to the highest.",
+      "context": "Synthetic scores: T1=40, T2=75, T3=20. The report supports highest-score-first and lowest-score-first; no report preference is supplied. Scores are distinct, and no secondary sort key is used.",
+      "fields": [
+        {
+          "name": "ticket_ids",
+          "description": "Ticket IDs in the selected numeric score order.",
+          "type": "text_list"
+        },
+        {
+          "name": "highest_first",
+          "description": "Whether the highest numeric score is listed first.",
+          "type": "boolean"
+        }
+      ],
+      "gold": {
+        "values": {
+          "highest_first": false,
+          "ticket_ids": [
+            "T3",
+            "T1",
+            "T2"
+          ]
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "tag_filter-a",
+      "family": "tag_filter",
+      "domain": "quantifier",
+      "split": "heldout",
+      "public_group": "tag_filter-ambiguous",
+      "request": "Use the tags urgent and remote to filter the task cards.",
+      "context": "Synthetic cards: C1 has urgent only; C2 has remote only; C3 has both urgent and remote; C4 has neither. The filter supports matching all listed tags or at least one listed tag. The saved filter setting is absent. Return matching IDs in ascending lexical order.",
+      "fields": [
+        {
+          "name": "match_all",
+          "description": "True requires both listed tags; false requires at least one.",
+          "type": "boolean"
+        },
+        {
+          "name": "card_ids",
+          "description": "Matching card IDs in ascending lexical order.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "match_all": true,
+          "card_ids": [
+            "C3"
+          ]
+        },
+        "clarify_fields": [
+          "match_all"
+        ],
+        "owner_answers": {
+          "match_all": true
+        }
+      }
+    },
+    {
+      "id": "tag_filter-b",
+      "family": "tag_filter",
+      "domain": "quantifier",
+      "split": "heldout",
+      "public_group": "tag_filter-ambiguous",
+      "request": "Use the tags urgent and remote to filter the task cards.",
+      "context": "Synthetic cards: C1 has urgent only; C2 has remote only; C3 has both urgent and remote; C4 has neither. The filter supports matching all listed tags or at least one listed tag. The saved filter setting is absent. Return matching IDs in ascending lexical order.",
+      "fields": [
+        {
+          "name": "match_all",
+          "description": "True requires both listed tags; false requires at least one.",
+          "type": "boolean"
+        },
+        {
+          "name": "card_ids",
+          "description": "Matching card IDs in ascending lexical order.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "match_all": false,
+          "card_ids": [
+            "C1",
+            "C2",
+            "C3"
+          ]
+        },
+        "clarify_fields": [
+          "match_all"
+        ],
+        "owner_answers": {
+          "match_all": false
+        }
+      }
+    },
+    {
+      "id": "tag_filter-clear",
+      "family": "tag_filter",
+      "domain": "quantifier",
+      "split": "heldout",
+      "public_group": "tag_filter-clear",
+      "request": "Filter the task cards to those carrying both urgent and remote. A card carrying only one of these tags must be excluded.",
+      "context": "Synthetic cards: C1 has urgent only; C2 has remote only; C3 has both urgent and remote; C4 has neither. The filter supports matching all listed tags or at least one listed tag. The saved filter setting is absent. Return matching IDs in ascending lexical order.",
+      "fields": [
+        {
+          "name": "match_all",
+          "description": "True requires both listed tags; false requires at least one.",
+          "type": "boolean"
+        },
+        {
+          "name": "card_ids",
+          "description": "Matching card IDs in ascending lexical order.",
+          "type": "text_list"
+        }
+      ],
+      "gold": {
+        "values": {
+          "match_all": true,
+          "card_ids": [
+            "C3"
+          ]
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    },
+    {
+      "id": "grid_snap-a",
+      "family": "grid_snap",
+      "domain": "rounding",
+      "split": "heldout",
+      "public_group": "grid_snap-ambiguous",
+      "request": "Quantize the reading 7 onto the reporting grid using the selected directional rule.",
+      "context": "The grid contains 0, 5, 10, 15, and so on. Supported rules are down (greatest grid value no larger than the reading) and up (smallest grid value no smaller than the reading). This system does not use nearest rounding. The directional rule is not recorded.",
+      "fields": [
+        {
+          "name": "reported_value",
+          "description": "The grid value produced by the rule.",
+          "type": "integer"
+        },
+        {
+          "name": "direction",
+          "description": "The selected downward or upward grid rule.",
+          "type": "text",
+          "choices": [
+            "down",
+            "up"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "direction": "down",
+          "reported_value": 5
+        },
+        "clarify_fields": [
+          "direction"
+        ],
+        "owner_answers": {
+          "direction": "down"
+        }
+      }
+    },
+    {
+      "id": "grid_snap-b",
+      "family": "grid_snap",
+      "domain": "rounding",
+      "split": "heldout",
+      "public_group": "grid_snap-ambiguous",
+      "request": "Quantize the reading 7 onto the reporting grid using the selected directional rule.",
+      "context": "The grid contains 0, 5, 10, 15, and so on. Supported rules are down (greatest grid value no larger than the reading) and up (smallest grid value no smaller than the reading). This system does not use nearest rounding. The directional rule is not recorded.",
+      "fields": [
+        {
+          "name": "reported_value",
+          "description": "The grid value produced by the rule.",
+          "type": "integer"
+        },
+        {
+          "name": "direction",
+          "description": "The selected downward or upward grid rule.",
+          "type": "text",
+          "choices": [
+            "down",
+            "up"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "direction": "up",
+          "reported_value": 10
+        },
+        "clarify_fields": [
+          "direction"
+        ],
+        "owner_answers": {
+          "direction": "up"
+        }
+      }
+    },
+    {
+      "id": "grid_snap-clear",
+      "family": "grid_snap",
+      "domain": "rounding",
+      "split": "heldout",
+      "public_group": "grid_snap-clear",
+      "request": "Quantize the reading 7 upward to the smallest reporting-grid value that is no smaller than 7.",
+      "context": "The grid contains 0, 5, 10, 15, and so on. Supported rules are down (greatest grid value no larger than the reading) and up (smallest grid value no smaller than the reading). This system does not use nearest rounding. The directional rule is not recorded.",
+      "fields": [
+        {
+          "name": "reported_value",
+          "description": "The grid value produced by the rule.",
+          "type": "integer"
+        },
+        {
+          "name": "direction",
+          "description": "The selected downward or upward grid rule.",
+          "type": "text",
+          "choices": [
+            "down",
+            "up"
+          ]
+        }
+      ],
+      "gold": {
+        "values": {
+          "direction": "up",
+          "reported_value": 10
+        },
+        "clarify_fields": [],
+        "owner_answers": {}
+      }
+    }
+  ]
+}

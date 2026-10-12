@@ -1,0 +1,110 @@
+{
+  "allowed_outputs": [
+    "result.js"
+  ],
+  "assumptions": [],
+  "budget": {
+    "context_chars": 40000,
+    "max_calls": 24,
+    "max_candidates": 4,
+    "max_depth": 4,
+    "max_units": 20,
+    "max_workers": 2,
+    "retries": 1,
+    "wall_seconds": 1800
+  },
+  "exports": [
+    {
+      "name": "parseJSON",
+      "signature": "parseJSON(text)"
+    }
+  ],
+  "language": "javascript",
+  "objective": "Implement parseJSON(text), a strict bounded JSON parser with explicit duplicate-key and numeric-range policy. Return plain JavaScript source defining parseJSON.",
+  "requirements": [
+    {
+      "acceptance": "TESTED",
+      "id": "grammar",
+      "text": "parseJSON(text) accepts exactly one JSON value with optional JSON whitespace (space, tab, LF, CR); rejects malformed syntax, trailing input, comments, unquoted keys, trailing commas, leading zeroes, NaN/Infinity and non-string inputs by throwing an Error."
+    },
+    {
+      "acceptance": "TESTED",
+      "id": "strings",
+      "text": "Decode all JSON string escapes and four-hex-digit Unicode escapes using JavaScript UTF-16 semantics (including surrogate pairs and individual escaped surrogate code units); reject raw control characters and malformed escapes."
+    },
+    {
+      "acceptance": "TESTED",
+      "id": "collections",
+      "text": "Parse arrays and objects recursively; reject duplicate object keys after escape decoding; preserve keys including __proto__ and constructor as own enumerable data properties."
+    },
+    {
+      "acceptance": "TESTED",
+      "id": "numbers",
+      "text": "Parse JSON number grammar using IEEE-754 semantics; reject non-finite parsed results or absolute value greater than 9007199254740991. Negative zero is permitted."
+    },
+    {
+      "acceptance": "TESTED",
+      "id": "bounds",
+      "text": "Accept input strings of at most 65536 UTF-16 code units and container nesting depth at most 32; count each array/object as one container level; reject larger input or depth by throwing an Error."
+    }
+  ],
+  "tests": [
+    {
+      "call": "parseJSON(\" true \\n\")",
+      "expected": "true",
+      "requirement_ids": [
+        "grammar"
+      ]
+    },
+    {
+      "call": "(()=>{try{parseJSON(\"[1,]\");return false}catch(e){return e instanceof Error}})()",
+      "expected": "true",
+      "requirement_ids": [
+        "grammar"
+      ]
+    },
+    {
+      "call": "parseJSON(\"\\\"a\\\\n\\\\u0041\\\"\")",
+      "expected": "\"a\\nA\"",
+      "requirement_ids": [
+        "strings"
+      ]
+    },
+    {
+      "call": "parseJSON(\"{\\\"a\\\":[1,null,false]}\")",
+      "expected": "{\"a\":[1,null,false]}",
+      "requirement_ids": [
+        "collections"
+      ]
+    },
+    {
+      "call": "(()=>{try{parseJSON(\"{\\\"x\\\":1,\\\"x\\\":2}\");return false}catch(e){return e instanceof Error}})()",
+      "expected": "true",
+      "requirement_ids": [
+        "collections"
+      ]
+    },
+    {
+      "call": "parseJSON(\"-1.25e2\")",
+      "expected": "-125",
+      "requirement_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "call": "(()=>{try{parseJSON(\"1e309\");return false}catch(e){return e instanceof Error}})()",
+      "expected": "true",
+      "requirement_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "call": "(()=>{try{parseJSON(\"[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]\");return false}catch(e){return e instanceof Error}})()",
+      "expected": "true",
+      "requirement_ids": [
+        "bounds"
+      ]
+    }
+  ],
+  "version": 1
+}

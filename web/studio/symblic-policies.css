@@ -1,0 +1,12 @@
+.sy-policies { max-width: 960px; margin: 0 auto; overflow-wrap: anywhere; }
+.sy-policies textarea { width: 100%; box-sizing: border-box; min-width: 0; margin: 12px 0; padding: 12px; border: 1px solid var(--brd); border-radius: 6px; background: var(--bg1); color: var(--tx1); font-family: var(--mono); font-size: 16px; line-height: 1.5; resize: vertical; }
+.sy-policies button { min-height: 44px; white-space: normal; overflow-wrap: anywhere; }
+.sy-policies details { margin: 12px 0; }
+.sy-policies summary { padding: 12px 0; cursor: pointer; }
+.sy-policies pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 28rem; overflow: auto; padding: 12px; border: 1px solid var(--brd); }
+.sy-policy-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 10px; }
+.sy-policy-check, .sy-policy-summary { border-left: 3px solid var(--acc); padding: 8px 16px; margin: 20px 0; }
+.sy-policy-saved { display: block; width: 100%; margin: 10px 0; text-align: left; }
+.sy-policy-saved[aria-pressed=true] { border-color: var(--acc); }
+.sy-policy-error { color: var(--err); }
+@media (max-width: 600px) { .sy-policies h2 { font-size: 1.35rem; } .sy-policy-actions button { width: 100%; } }

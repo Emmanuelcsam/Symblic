@@ -1,0 +1,124 @@
+{
+  "date_utc": "2026-10-06",
+  "status": "installed_and_verified",
+  "kernel": "187999238f186a2f",
+  "model_inventory": {
+    "local_answer_models": 8,
+    "embedding_only_disabled": 1,
+    "surfaces": [
+      "Write",
+      "Logic",
+      "Interpreter"
+    ],
+    "exact_selection": "verified",
+    "after_final_restart_verified": true
+  },
+  "workcards": {
+    "native_tests": 16,
+    "live_run": "66b8aff2af40",
+    "live_calls": 2,
+    "answer": 3,
+    "scope": "positive integer whose square is nine, one builder and critic"
+  },
+  "resource_boundary": {
+    "focused_unit_checks": 158,
+    "real_cli_journeys": 5,
+    "live_test_timeout": {
+      "failed": 0,
+      "inconclusive": 1,
+      "calls": 0
+    }
+  },
+  "supervisor": {
+    "focused_tests": 24,
+    "bridge_regressions": 13,
+    "actual_clock_workflow": "w_71ea81cd56cb00386f91c964",
+    "native_run": "2046f42b16ab",
+    "output": 5,
+    "calls": 0,
+    "effects": 0,
+    "actual_cron_and_pulse": true,
+    "verification_timers_disabled": true,
+    "earlier_bridge_refusals": 2
+  },
+  "portable": {
+    "format": 2,
+    "profile": "verified pure, no providers or host effects",
+    "tests": 12,
+    "corpus_cases_per_machine": 16,
+    "machines": [
+      "the host x86 CPython3.12.3",
+      "node-arm ARM CPython3.13.5",
+      "node-i x86 CPython3.13.5"
+    ],
+    "same_user_loop": [
+      1,
+      4,
+      9,
+      16
+    ],
+    "scope": "finite conformance, not arbitrary-program equivalence"
+  },
+  "distillation": {
+    "method": "CPU SFT/LoRA",
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "optimizer_steps": 4,
+    "adapter_tensors_changed": 192,
+    "train_validation_test_items": [
+      9,
+      9,
+      3
+    ],
+    "checker": "reference agreement",
+    "baseline_passed": 0,
+    "trained_passed": 1,
+    "heldout_count": 3,
+    "general_accuracy_gain": "not_established",
+    "separate_physics_inference": "both failed",
+    "base_weights_unchanged": true,
+    "adapter_promoted": false,
+    "native_checker": {
+      "installed": true,
+      "scope": "local closed pure scalar contracts, frozen original runtime",
+      "focused_tests": 25,
+      "supported_pilot_items": 6,
+      "unique_pilot_items": 21,
+      "reused_teacher_passes": 6,
+      "counterexample_rejections": 6,
+      "prior_heldout_supported": 0,
+      "prior_heldout_count": 3,
+      "new_model_calls": 0,
+      "installed_cli_identity_and_answer_checks": true,
+      "dell_native_generation_evaluation": "not verified"
+    }
+  },
+  "claude_cloud_cli": {
+    "installed": true,
+    "actual_new_session_and_message_followup": true,
+    "tests": 23,
+    "native_interactive_attach": "account unavailable; message resume and browser work"
+  },
+  "integration": {
+    "combined_native_tests": 40,
+    "actual_browser_desktop_phone": true,
+    "page_errors": 0,
+    "high_power_nodes_restored": 8
+  },
+  "limits": [
+    "GRPO unsupported",
+    "Windows/WASM not implemented",
+    "No exactly-once external-effects or general distributed-consensus claim",
+    "Predicate coverage and heldout sample limit accuracy claims"
+  ],
+  "guides": {
+    "entry": "/automation-studio/symblic-guides/index.html",
+    "pages": 10,
+    "actual_desktop_and_phone_views": 20,
+    "actual_feature_link_journeys": 6,
+    "page_errors": 0,
+    "phone_width_px": 390,
+    "root_docs_remain_protected": true,
+    "model_calls": 0
+  },
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

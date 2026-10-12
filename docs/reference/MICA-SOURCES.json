@@ -1,0 +1,1068 @@
+{
+  "version": 1,
+  "date": "2026-10-10",
+  "status": "isolated implementation mapping; integrated and empirical validation pending",
+  "scope": "Independent method correspondences; no upstream source copied or runtime installed. Inspected commits are research provenance, not runtime dependencies.",
+  "repositories": [
+    {
+      "repository": "ezelikman/parsel",
+      "url": "https://github.com/ezelikman/parsel",
+      "commit": "bc1687cab9e8a79249f0d3e3cb4f5826dba39a95",
+      "clone_status": true,
+      "license_evidence": [],
+      "source_locations": [
+        {
+          "location": "graph.py:84:strongly_connected_components",
+          "exists": true,
+          "sha256": "e37ba8e402983e87f203c5b2f3cd4c3160b18a5958930c8092d33335a4f21ca6"
+        },
+        {
+          "location": "parsel.py:417:attempt_implementations",
+          "exists": true,
+          "sha256": "849f9eaa6f0c1996657a877f91e79a4e5942adf151c8e598e2713b7676e88c70"
+        },
+        {
+          "location": "parsel.py:490:implement_scc",
+          "exists": true,
+          "sha256": "849f9eaa6f0c1996657a877f91e79a4e5942adf151c8e598e2713b7676e88c70"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/html/2212.10561v3"
+      ],
+      "method": "Hierarchical function contracts, test-dependency SCCs, bounded candidate-combination search and backtracking.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/contracts.py:validate_plan",
+        "symblic/mica/search.py:proposal_to_plan",
+        "symblic/mica/search.py:MicaRun._build"
+      ],
+      "tests": [
+        "test_symblic_mica_contracts.py:test_rejects_dependency_and_parent_cycles",
+        "test_symblic_mica_execution.py:test_bad_planner_graph_uses_next_bounded_alternative"
+      ],
+      "adopted_method": "Hierarchical function contracts, explicit dependencies and retained checked components across bounded alternatives.",
+      "not_adopted": "No automatic SCC discovery or Parsel candidate-combination solver. Source-language mutual recursion must be one explicitly declared compound unit; task cycles are rejected.",
+      "license_note": "No local license grant found; source not copied.",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "IPRC-DIP/ANPL",
+      "url": "https://github.com/IPRC-DIP/ANPL",
+      "commit": "bfc28987f11aee5290ad51ecac8248664d653640",
+      "clone_status": true,
+      "license_evidence": [],
+      "source_locations": [
+        {
+          "location": "anpl/anpl.py:107:find_dependencies",
+          "exists": true,
+          "sha256": "10eea9edf07f85bb5b7ec40a4ad6d59a4c82338395ece26c0bdf21ad138b1969"
+        },
+        {
+          "location": "anpl/anpl.py:123:fill_fun",
+          "exists": true,
+          "sha256": "10eea9edf07f85bb5b7ec40a4ad6d59a4c82338395ece26c0bdf21ad138b1969"
+        },
+        {
+          "location": "anpl/synthesizer.py:67:fun_synthesis",
+          "exists": true,
+          "sha256": "0348194e0f4e3ca721adf8378e0b26830dd67d40f45e83cfadf5d7f8c485d5f5"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/abs/2305.18498"
+      ],
+      "method": "Explicit deterministic sketch plus natural-language implementation holes, dependency extraction, replacement and IO-constrained resynthesis.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/native.py:unit_source",
+        "symblic/mica/search.py:MicaRun._scoped_facts",
+        "symblic/mica/search.py:MicaRun._prepare_unit"
+      ],
+      "tests": [
+        "test_symblic_mica_execution.py:test_dependency_capsule_contains_declared_closure_only",
+        "test_symblic_mica_review_regressions.py:test_equal_dependency_code_with_changed_contract_has_distinct_artifact_identity"
+      ],
+      "adopted_method": "Natural-language implementation units lower into fixed native asks with explicit dependency artifacts and checked invalidation.",
+      "not_adopted": "No upstream interactive runtime, Python execution, broad-source provider prompt or copied source.",
+      "license_note": "No local license grant found; source not copied.",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "ZhangHanDong/agent-spec",
+      "url": "https://github.com/ZhangHanDong/agent-spec",
+      "commit": "2483398da89bd392186849bb865aae969667ac0a",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "cf516354bfbc2c6e55f36d7d55a08e8594f9da4ec536adbd66e6d9df7374be4a",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "src/spec_knowledge/requirement_graph.rs",
+          "exists": true,
+          "sha256": "720c47997eeff53edb9e1c170b3a8727e893d087c803d07bf7e351fea27afbf7"
+        },
+        {
+          "location": "src/spec_knowledge/requirement_plan.rs",
+          "exists": true,
+          "sha256": "3caa460740a055da13ef0c2b6514ba27ff57cdc8205c4d218a3432a2fe5252a2"
+        },
+        {
+          "location": "src/spec_knowledge/test_obligations.rs",
+          "exists": true,
+          "sha256": "b6c2456663d4bb4f110c975b781072d04175099ec6a6a2086a1852f41403688d"
+        },
+        {
+          "location": "src/spec_knowledge/traceability.rs",
+          "exists": true,
+          "sha256": "a3fa79277d4a09d659a76377746cad5bccfad78145fe5b6439a1992f493bffa3"
+        },
+        {
+          "location": "docs/intent-compiler/architecture.md",
+          "exists": true,
+          "sha256": "a8118d19e70668028cff8b0930462ed41af8049d28fba9022bd4d5a99e2f2c87"
+        }
+      ],
+      "primary_reading": [],
+      "method": "Requirement IR, deterministic DAG validation, explicit work-unit/contract/code/test traceability, execution bundles that can be replayed.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/contracts.py:normalize_request",
+        "symblic/mica/contracts.py:validate_plan",
+        "symblic/mica/project.py:MicaProject"
+      ],
+      "tests": [
+        "test_symblic_mica_contracts.py:test_sealed_plan_revalidates_every_derived_field",
+        "test_symblic_mica_project.py:test_model_cannot_change_original_objective_or_output_authority"
+      ],
+      "adopted_method": "Requirement IDs, coverage, assumptions, validated graph and explicit proposal provenance connect root authority to evidence.",
+      "not_adopted": "No adoption of its Rust runtime or claim that generated requirements fully capture human intent.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "archiki/ADaPT",
+      "url": "https://github.com/archiki/ADaPT",
+      "commit": "ecdc4ab0030b4be9be122622d8ea78f8c59c44c4",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "16c0c65d2183f00c74c2fcb9faf279215a6a1d7666c1a149d6f239adbbf94384",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "run_textcraft.py:394:plan_and_run",
+          "exists": true,
+          "sha256": "2ccf005257c73b07840a325159b9d0929a882772192c3ccb94128d35b8657528"
+        },
+        {
+          "location": "run_textcraft.py:106:parse_expression",
+          "exists": true,
+          "sha256": "2ccf005257c73b07840a325159b9d0929a882772192c3ccb94128d35b8657528"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/html/2311.05772v2"
+      ],
+      "method": "Direct executor attempt before recursive decomposition; bounded depth; child AND/OR success and salient-state propagation.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/search.py:direct_plan",
+        "symblic/mica/search.py:MicaRun.execute",
+        "symblic/mica/bench.py:MODE_FACTORS"
+      ],
+      "tests": [
+        "test_symblic_mica_execution.py:test_bad_planner_graph_uses_next_bounded_alternative",
+        "test_symblic_mica_execution.py:test_call_budget_counts_every_failed_repair_and_never_oversubscribes"
+      ],
+      "adopted_method": "decompose_on_failure begins with a whole-program attempt, then permits bounded decompositions driven by host-verified failures.",
+      "not_adopted": "No TextCraft environment/tool actions, heuristic model success authority, or claim of replicated paper performance. A dedicated actual-model comparison remains pending.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "FoundationAgents/ReCode",
+      "url": "https://github.com/FoundationAgents/ReCode",
+      "commit": "6e7223f71281d914762e78d7bbcf6446d362ecbc",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "854359449db6041320f5dfdece03a12ae2f4f7dc7d28a7ebe610fa0ce2c98c2e",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "agents/recode/agent.py:120:_handle_stub",
+          "exists": true,
+          "sha256": "be39455a6c675a6f838a26830f5804296846130f62940fc327e7b0116c7a50da"
+        },
+        {
+          "location": "agents/recode/agent.py:143:_expand",
+          "exists": true,
+          "sha256": "be39455a6c675a6f838a26830f5804296846130f62940fc327e7b0116c7a50da"
+        },
+        {
+          "location": "agents/recode/utils.py:33:CodeNode",
+          "exists": true,
+          "sha256": "e0f6cf6ccaea27ffa5eb8ac82ff6456c9f244426a9d804bf5ad1b0e0d319847b"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/html/2510.23564v1"
+      ],
+      "method": "Tree of placeholders expanded into executable children only as needed; explicit node states, bounded rewrites and scoped variables.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/refinement.py:refine_prompt",
+        "symblic/mica/refinement.py:apply_refinement",
+        "symblic/mica/search.py:MicaRun._propose",
+        "symblic/mica/native.py:unit_source"
+      ],
+      "tests": [
+        "test_symblic_mica_execution.py:test_dependency_capsule_contains_declared_closure_only",
+        "test_symblic_mica_project.py:test_no_ambient_hidden_tests_or_files_enter_specification_context",
+        "test_symblic_mica_strategies.py:test_targeted_refinement_reuses_good_unit_and_retains_native_lineage"
+      ],
+      "adopted_method": "Explicit unresolved units expand into scoped children with retained failure/dependency context.",
+      "not_adopted": "No training, shared executor or general on-demand recursive CodeNode interpreter; a failed contract can be replaced by a validated helper DAG while preserving the original wrapper and unaffected contracts.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "github/spec-kit",
+      "url": "https://github.com/github/spec-kit",
+      "commit": "0443760542e7e5269724744a2ac55c4bd386d095",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "2510b446bc1f0cf9702453075d20cd88631e20e5642658edb7325d9c1eb534f7",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "templates/spec-template.md",
+          "exists": true,
+          "sha256": "3945437fc35cd30a5b2bf7beea680337c3516826d3efa5a6b92c4a7eca1ba28e"
+        },
+        {
+          "location": "templates/plan-template.md",
+          "exists": true,
+          "sha256": "dfba43da2b2a207ff8c177a0fba03af074fd45e261696b4b64172041fad2e992"
+        },
+        {
+          "location": "templates/tasks-template.md",
+          "exists": true,
+          "sha256": "1e448e9153462e8c5b5a55231a54c756d870a82950d4dd9425a2bf5b7008a0d9"
+        },
+        {
+          "location": "spec-driven.md",
+          "exists": true,
+          "sha256": "1517eba9868e7066541ffa484009d5eb9c7d8d04bf740dbfd86e5e88c396f0c6"
+        }
+      ],
+      "primary_reading": [],
+      "method": "Specification-first staged artifacts, planning, tasks and acceptance checklists.",
+      "adoption_status": "methodology_and_documentation",
+      "implementation": [
+        "symblic/mica/project.py:root_prompt",
+        "symblic/mica/contracts.py:normalize_request",
+        "docs/reference/MICA.md"
+      ],
+      "tests": [
+        "test_symblic_mica_project.py:test_objective_build_preserves_authority_provenance_and_exact_calls",
+        "test_symblic_mica_cli.py:test_initial_plan_cannot_replace_objective_or_bypass_requirement_validation"
+      ],
+      "adopted_method": "Separate objective, explicit requirement proposal, plan, execution and retained evidence; machine-readable interfaces expose each stage.",
+      "not_adopted": "No global template/skill installation or replacement of repository instructions. Scaffolding is not runtime proof.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "FoundationAgents/AFlow",
+      "url": "https://github.com/FoundationAgents/AFlow",
+      "commit": "3f457218fc716093fe53f6df8a5d5e6379d66346",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "bce279a8f86499db0f9b1962884544108e4f81705d7c966ad59c66917b1131e5",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "scripts/optimizer.py:120:_optimize_graph",
+          "exists": true,
+          "sha256": "26cc9ac8f99177ed670c75fd6a265294c1dbaf1518e41f383eaf1d980b3968e5"
+        },
+        {
+          "location": "scripts/optimizer_utils/data_utils.py",
+          "exists": true,
+          "sha256": "7db8befbc1ffd6fd41d2889077d692c56ea8d6de367a4d1c955c715c2f66e49c"
+        },
+        {
+          "location": "scripts/optimizer_utils/experience_utils.py:91:update_experience",
+          "exists": true,
+          "sha256": "b0fc7e5a93bb92efb154f241d7eb819bdf70fd1cf7754b3d849593eafd7daf9f"
+        },
+        {
+          "location": "scripts/evaluator.py",
+          "exists": true,
+          "sha256": "5d115ac921b69f9d5055300cf52969c5e0b4474ab2f5daad13b8af988218616e"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/html/2410.10762v3"
+      ],
+      "method": "Evaluate and revise code-represented workflows; search over operator combinations; retain optimization experience and validation scores.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/search.py:MicaRun.execute",
+        "symblic/mica/search.py:MicaRun._build",
+        "symblic/mica/library.py:ComponentLibrary"
+      ],
+      "tests": [
+        "test_symblic_mica_execution.py:test_bad_planner_graph_uses_next_bounded_alternative",
+        "test_symblic_mica_library.py:test_compatible_cross_run_reuse_makes_no_provider_calls"
+      ],
+      "adopted_method": "Retain checked work while revising bounded alternative workflows using verified failures.",
+      "not_adopted": "No general workflow-operator optimizer, MCTS, indefinite rewrite loops or learned optimizer. Plans are accepted through actual checks, not model self-scores.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "SqueezeAILab/LLMCompiler",
+      "url": "https://github.com/SqueezeAILab/LLMCompiler",
+      "commit": "a00c9d35507507da70e8c637eee64efc8c1857ae",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "b5c278d9274ab2b639b2e82eb9132e41bae0c3602d65e299359dcccc29773719",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "src/llm_compiler/task_fetching_unit.py:82:TaskFetchingUnit",
+          "exists": true,
+          "sha256": "b4d11813149564d327b021006b725d21abe0a63557deb3314328852d461e094f"
+        },
+        {
+          "location": "src/llm_compiler/output_parser.py:97:_get_dependencies_from_graph",
+          "exists": true,
+          "sha256": "fb187ec2ce4aa3f8cd1b83c0576da4de382fd5154935497f401830085f50f275"
+        },
+        {
+          "location": "src/llm_compiler/planner.py:86:StreamingGraphParser",
+          "exists": true,
+          "sha256": "d597890d8a6aee9fc7576400bd443eb2090201632ac2f64dcef349057aed9e05"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/abs/2312.04511"
+      ],
+      "method": "Planner emits dependency references; task-fetching unit dispatches readiness-compatible function calls concurrently.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/contracts.py:validate_plan",
+        "symblic/mica/search.py:MicaRun._build",
+        "symblic/mica/search.py:MicaRun._native"
+      ],
+      "tests": [
+        "test_symblic_mica_execution.py:test_multiworker_single_node_serializes_provider_dispatch",
+        "test_symblic_mica_execution.py:test_later_parallel_unknown_prevents_earlier_pending_dispatch_on_resume"
+      ],
+      "adopted_method": "Validated dependency-ready layer scheduling, bounded parallelism and serialized same-node model admission.",
+      "not_adopted": "No streaming planner execution; the whole graph is admitted before dispatch. Existing durable native journals replace its example scheduler recovery.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "alexzhang13/rlm",
+      "url": "https://github.com/alexzhang13/rlm",
+      "commit": "d04208afbad29ca675ab13478c40ee8bebc84bfe",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "593a97b622a1ca63bf222ccea9da6d8d2bf8dbd4ed793f56f1f86ed926d98154",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "rlm/core/rlm.py:226:_spawn_completion_context",
+          "exists": true,
+          "sha256": "f7df6af55027159b2f428ff98c9b19beb872618ee88aa8fef62c9498fa1e0562"
+        },
+        {
+          "location": "rlm/core/rlm.py:512:_check_iteration_limits",
+          "exists": true,
+          "sha256": "f7df6af55027159b2f428ff98c9b19beb872618ee88aa8fef62c9498fa1e0562"
+        },
+        {
+          "location": "rlm/core/rlm.py:706:_subcall",
+          "exists": true,
+          "sha256": "f7df6af55027159b2f428ff98c9b19beb872618ee88aa8fef62c9498fa1e0562"
+        },
+        {
+          "location": "rlm/core/lm_handler.py",
+          "exists": true,
+          "sha256": "1eca691dce2b6f83a57a4c210917dbe4103cd7a3d3fc5aa203a07f1505515ded"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/abs/2512.24601"
+      ],
+      "method": "External context as inspectable environment state; recursive submodel calls; context lifecycle and aggregate limits.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/native.py:unit_source",
+        "symblic/mica/search.py:MicaRun._native",
+        "symblic/mica/project.py:MicaProject"
+      ],
+      "tests": [
+        "test_symblic_mica_execution.py:test_unrelated_local_evaluator_file_never_enters_provider_context",
+        "test_symblic_mica_project.py:test_root_generation_consumes_original_call_allowance"
+      ],
+      "adopted_method": "Externally retained scoped state, bounded subordinate model calls and cumulative accounting instead of an ever-growing shared prompt.",
+      "not_adopted": "No same-process arbitrary REPL or unlimited long-context recursion. Call allowances are reserved before dispatch, not checked only after a loop.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "princeton-nlp/tree-of-thought-llm",
+      "url": "https://github.com/princeton-nlp/tree-of-thought-llm",
+      "commit": "8050e67d0e3a0fddc424d7fa5801538722a4c4cc",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "cd2d341de1d3781e993e9859b1a36e8bfe12c84507c0a52f21c0220743af475b",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "src/tot/methods/bfs.py:49:solve",
+          "exists": true,
+          "sha256": "1fea761421857120e14e003c07411b5943fb5a87bf4b743691cf55f5e2d9a7b9"
+        },
+        {
+          "location": "src/tot/tasks/game24.py",
+          "exists": true,
+          "sha256": "09d01c6a6c44da339019212a3bc0006e356c96641c3c1b28807b8a3508c0b540"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/abs/2305.10601"
+      ],
+      "method": "Explicit generate/evaluate/select beam or breadth-first search over candidate partial states, with logged alternatives.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/search.py:MicaRun.execute",
+        "symblic/mica/search.py:failure_class"
+      ],
+      "tests": [
+        "test_symblic_mica_execution.py:test_bad_planner_graph_uses_next_bounded_alternative",
+        "test_symblic_mica_execution.py:test_root_acceptance_rejects_candidate_that_passes_its_own_examples"
+      ],
+      "adopted_method": "Retain alternative branches and let host checks decide whether search may proceed.",
+      "not_adopted": "Current search is a bounded sequential alternative sequence, not BFS/DFS/beam traversal of arbitrary thought trees; model-valued thought scores are not correctness evidence.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "Z3Prover/z3",
+      "url": "https://github.com/Z3Prover/z3",
+      "commit": "2d08bfcad30cabb7b2819dd2f4c47b7bbf4c377f",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "src/api/python/z3/z3.py",
+          "exists": true,
+          "sha256": "f46ad4f4d47e7990ef61779020bce41d1aee52ae60c071ffda6a299e93e9d203"
+        },
+        {
+          "location": "examples/python/example.py",
+          "exists": true,
+          "sha256": "ca3f0799600f720df1846ef9ed465b9d997e7f1e54e0de5965e454f08a993bd2"
+        },
+        {
+          "location": "LICENSE.txt",
+          "exists": true,
+          "sha256": "e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337"
+        }
+      ],
+      "primary_reading": [
+        "https://microsoft.github.io/z3guide/"
+      ],
+      "method": "SMT satisfiability, model counterexamples and implication checking over declared logical theories.",
+      "adoption_status": "existing_native_capability_not_new_dependency",
+      "implementation": [
+        "symblic/mica/contracts.py:validate_plan",
+        "symblic/mica/deterministic.py:compile_contract",
+        "symblic/mica/native.py:execute_kernel",
+        "symblic/constructor/core.py"
+      ],
+      "tests": [
+        "test_symblic_mica_contracts.py:test_false_refinement_refuses_even_tested_requirement",
+        "test_symblic_mica_deterministic.py:test_underconstrained_family_does_not_choose_a_favorite_or_call_a_model"
+      ],
+      "adopted_method": "Use the existing native verifier/constructor boundary; MICA adds exact finite predicate implication and a finite coefficient family with explicit unknown/unsupported outcomes.",
+      "not_adopted": "The cloned Z3 build was not installed. MICA affine determination uses existing finite native enumeration, not a new SMT backend. Existing optional linear solver support is not general JS verification.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "pschanely/crosshair",
+      "url": "https://github.com/pschanely/crosshair",
+      "commit": "35e504cc5b09846242e9ac67d10219b67d587a65",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "355c8cbcdaa7d691fa4521ece91591709c89bce467a6018506517bddbbaa609d",
+          "observed_family": "MIT-default; bundled Apache/PSF notices"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "crosshair/core.py",
+          "exists": true,
+          "sha256": "4d967bfe22c22e29b22f3ebc13bf41bd79c1fac52c18c3e50f56641815121a15"
+        },
+        {
+          "location": "crosshair/statespace.py",
+          "exists": true,
+          "sha256": "fec10f15596a42d4fb5d1ecb0e226b4fbcc747c27e8fa90ca58ccbdfb909bb35"
+        },
+        {
+          "location": "crosshair/diff_behavior.py",
+          "exists": true,
+          "sha256": "bb2c5f25c102f0c7dde451b478b95763ffdc7a50a596b4707fbb9ef0c379b04e"
+        },
+        {
+          "location": "doc/source/limitations.rst",
+          "exists": true,
+          "sha256": "53f8d61f30f0c41e294187d99702a21381f8a1feb8d326e7d84985ef7cb89bcf"
+        }
+      ],
+      "primary_reading": [
+        "https://crosshair.readthedocs.io/en/latest/limitations.html"
+      ],
+      "method": "Symbolic execution of typed Python with contracts, path exploration, counterexamples, behavioral differences and test generation.",
+      "adoption_status": "not_adopted_runtime",
+      "implementation": [
+        "symblic/mica/contracts.py",
+        "symblic/mica/bench.py"
+      ],
+      "tests": [
+        "test_symblic_mica_contracts.py:test_refinement_exact_exhaustion_and_counterexample",
+        "test_symblic_mica_bench.py"
+      ],
+      "adopted_method": "Research informed counterexample/unknown distinctions; existing finite checks remain independently implemented.",
+      "not_adopted": "No Python symbolic-execution runtime or Python-to-JavaScript semantic translation is integrated. A supported-language checker adapter would require a separate explicit contract and sandbox.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "HypothesisWorks/hypothesis",
+      "url": "https://github.com/HypothesisWorks/hypothesis",
+      "commit": "1484f6dd4c0a220f68e2698afed29e2a16a3f654",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "df2ca456f6cda1226620ee99f16bafb6345241040996734d3a46e3afe414c056",
+          "observed_family": "MPL-2.0"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "hypothesis/src/hypothesis/core.py",
+          "exists": true,
+          "sha256": "57d336a8629562a5adf39df01928bb7e08f6590469ebfa64d427b508c9e49f0f"
+        },
+        {
+          "location": "hypothesis/src/hypothesis/internal/conjecture/engine.py",
+          "exists": true,
+          "sha256": "52f9e103d75fbd3b8098c819ebe30dba07181c667582337640d7795bacd87d51"
+        },
+        {
+          "location": "hypothesis/src/hypothesis/internal/conjecture/shrinker.py",
+          "exists": true,
+          "sha256": "269e3aa866047cf1fa26cd65032c8178596beb3d7d4b67c11d1c51628fc1905c"
+        }
+      ],
+      "primary_reading": [
+        "https://hypothesis.readthedocs.io/en/latest/"
+      ],
+      "method": "Property-based generation, edge cases, shrinking and reproducible failing examples.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/fixtures.py:arithmetic_collections",
+        "symblic/mica/fixtures.py:strict_json",
+        "symblic/mica/bench.py:MicaBenchmark"
+      ],
+      "tests": [
+        "test_symblic_mica_bench.py"
+      ],
+      "adopted_method": "Seeded valid/invalid structured input generation with an independent reference oracle, frozen outside construction context.",
+      "not_adopted": "Hypothesis itself and its shrinker are not installed or used. These fixed development generators are not a general automatically derived property suite.",
+      "license_note": "MPL-2.0 with documented exceptions; no code copied.",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "dafny-lang/dafny",
+      "url": "https://github.com/dafny-lang/dafny",
+      "commit": "5f717bf447b19d38cad1b69b1bf9a9f102feccfb",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "NOTICES.txt",
+          "sha256": "b6ced40fade058afda6ce88055787dddb4a291c7a5baabf52653e86fe8c82e7f",
+          "observed_family": "notices/inspect"
+        },
+        {
+          "path": "LICENSE.txt",
+          "sha256": "41074082c804bcef709b8908b1ba0cab48381a2f8d33bf34635744b1fe60e2a5",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "docs/DafnyRef/Specifications.md",
+          "exists": true,
+          "sha256": "33077ffc3296073796c4a69496c39a64d9a11827ab61de6dc5a4919025be1f3d"
+        },
+        {
+          "location": "Source/DafnyCore/Verifier",
+          "exists": true
+        },
+        {
+          "location": "LICENSE.txt",
+          "exists": true,
+          "sha256": "41074082c804bcef709b8908b1ba0cab48381a2f8d33bf34635744b1fe60e2a5"
+        },
+        {
+          "location": "NOTICES.txt",
+          "exists": true,
+          "sha256": "b6ced40fade058afda6ce88055787dddb4a291c7a5baabf52653e86fe8c82e7f"
+        }
+      ],
+      "primary_reading": [
+        "https://dafny-lang.github.io/dafny/DafnyRef/DafnyRef"
+      ],
+      "method": "Pre/postconditions, framing, invariants, termination and machine-checked refinement in a verification-oriented language.",
+      "adoption_status": "not_adopted_runtime",
+      "implementation": [
+        "symblic/mica/contracts.py:validate_plan",
+        "symblic/mica/search.py:MicaRun._build"
+      ],
+      "tests": [
+        "test_symblic_mica_contracts.py:test_proven_never_comes_from_coverage_or_failed_refinement"
+      ],
+      "adopted_method": "Research informed explicit pre/postconditions and the distinction between encoded obligations and emitted-program proof.",
+      "not_adopted": "No Dafny compiler, translation or verifier is integrated. Arbitrary JavaScript PROVEN requirements block rather than receive a false proof label.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "microsoft/codet",
+      "url": "https://github.com/microsoft/codet",
+      "commit": "35f54d60b152cc31d134b788e702878ad613d9f7",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "CodeT/LICENSE",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "CodeT/src/agreement.py:122:DualAgreement",
+          "exists": true,
+          "sha256": "5c48e564cec6cb30ad3880cda742af2bbe2b35f4e2581e22014dea0922765ef5"
+        },
+        {
+          "location": "CodeT/src/execution.py",
+          "exists": true,
+          "sha256": "7743c9a58e55de4bd4ca551e91417d80610fa686c0dfae5627624957d6868170"
+        },
+        {
+          "location": "CodeT/LICENSE",
+          "exists": true,
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/abs/2207.10397"
+      ],
+      "method": "Candidate-by-generated-test execution matrix; dual execution agreement ranks candidate clusters by passing case support.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/search.py:MicaRun._unit_checks",
+        "symblic/mica/search.py:MicaRun._build",
+        "symblic/mica/bench.py:MicaBenchmark"
+      ],
+      "tests": [
+        "test_symblic_mica_execution.py:test_root_acceptance_rejects_candidate_that_passes_its_own_examples",
+        "test_symblic_mica_bench.py"
+      ],
+      "adopted_method": "Candidate generation and executable checking are separate; independent hidden acceptance is withheld from candidate selection/repair.",
+      "not_adopted": "No dual-agreement clustering or generated-test consensus score. Agreement among models/tests is not independent correctness evidence.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "huangd1999/AgentCoder",
+      "url": "https://github.com/huangd1999/AgentCoder",
+      "commit": "d8538d63675c2b805855e6deb7ddc39fefb5723d",
+      "clone_status": true,
+      "license_evidence": [],
+      "source_locations": [
+        {
+          "location": "src/programmer_humaneval.py",
+          "exists": true,
+          "sha256": "a4d5d4773f0bea887c602bdad18f992abc93d833af8c88514595077148d1866a"
+        },
+        {
+          "location": "src/test_designer_humaneval.py",
+          "exists": true,
+          "sha256": "f70658ff2a233bdbf35da9df2fa5b7285825325ac767eae6e359db1ea21c1570"
+        },
+        {
+          "location": "src/test_executor_humaneval.py",
+          "exists": true,
+          "sha256": "0fd42aee158b0fad49224d7aa7333a351a8d8a3c9c0906f2f843ff831496fb91"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/abs/2312.13010"
+      ],
+      "method": "Separate programmer, test designer and executor roles; execution failures guide code refinement.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/project.py:root_prompt",
+        "symblic/mica/native.py:unit_source",
+        "symblic/mica/bench.py:MicaBenchmark"
+      ],
+      "tests": [
+        "test_symblic_mica_project.py:test_objective_build_preserves_authority_provenance_and_exact_calls",
+        "test_symblic_mica_execution.py:test_native_repair_receives_public_counterexample_then_passes"
+      ],
+      "adopted_method": "A public test proposal precedes construction; the code checker, not a model evaluator, controls adoption and bounded feedback.",
+      "not_adopted": "No copied agent scripts, paid API dependency or independent-model test-designer guarantee. Root and unit tests can still be proposed by the same model; provenance remains explicit.",
+      "license_note": "No local license grant found; source not copied. README claims MIT; no local LICENSE found.",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "url": "https://github.com/ggml-org/llama.cpp",
+      "commit": "23b0202a189c44a54625aadcb37a946dd1d6278d",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "grammars/README.md",
+          "exists": true,
+          "sha256": "e1874c0f08abbcfe45eff0b7b0290faa58f630981bf94274e2d99751ef3b0208"
+        },
+        {
+          "location": "common/json-schema-to-grammar.cpp",
+          "exists": true,
+          "sha256": "d5a82fff5d611abd1198ff27c328b20376ffe9f110b4771d579c8bd20c70541f"
+        },
+        {
+          "location": "tests/test-json-schema-to-grammar.cpp",
+          "exists": true,
+          "sha256": "477113067a347be12830ac39395ad55c5153b40720e0966c5394f09dea3f24d0"
+        },
+        {
+          "location": "tests/test-gbnf-validator.cpp",
+          "exists": true,
+          "sha256": "21eb0bac296c0e0dd497cc438ab8f10ba9cad66488c00288321d939afbdf310f"
+        }
+      ],
+      "primary_reading": [
+        "https://github.com/ggml-org/llama.cpp/blob/master/grammars/README.md"
+      ],
+      "method": "GBNF and JSON-schema constrained token generation; explicit grammar validation and supported-schema limits.",
+      "adoption_status": "not_adopted_new_runtime_or_grammar",
+      "implementation": [
+        "symblic/mica/native.py:planner_source",
+        "symblic/mica/contracts.py:normalize_request"
+      ],
+      "tests": [
+        "test_symblic_mica_execution.py:test_bad_planner_graph_uses_next_bounded_alternative"
+      ],
+      "adopted_method": "Official grammar limitations informed fail-closed host validation of JSON and source envelopes.",
+      "not_adopted": "No cloned runtime build or GBNF/schema injection is integrated in MICA. The existing Ollama backend may use its own inference implementation; that does not demonstrate grammar-constrained MICA decoding.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "dottxt-ai/outlines",
+      "url": "https://github.com/dottxt-ai/outlines",
+      "commit": "c52af8472c6fe8a607a733ec11b709476af77a96",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "f71078ee8aaa3d5670488756f1993b9de3ae64c9546a0232ebbbdd595c5375d7",
+          "observed_family": "Apache-2.0"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "src/outlines/types",
+          "exists": true
+        },
+        {
+          "location": "src/outlines/models",
+          "exists": true
+        },
+        {
+          "location": "docs/examples/structured_generation_workflow.md",
+          "exists": true,
+          "sha256": "84d2d9d47b9e4795e6e42cb3aac9f1469462bb33fab0f4a720452d007e0c47da"
+        }
+      ],
+      "primary_reading": [
+        "https://dottxt-ai.github.io/outlines/"
+      ],
+      "method": "Typed/schema/grammar constrained generation across supported model backends.",
+      "adoption_status": "not_adopted_runtime",
+      "implementation": [
+        "symblic/mica/contracts.py",
+        "symblic/mica/project.py:_proposal"
+      ],
+      "tests": [
+        "test_symblic_mica_project.py:test_invalid_root_is_repaired_with_public_validation_failure"
+      ],
+      "adopted_method": "Structured output is validated against finite host contracts, with explicit rejection/repair.",
+      "not_adopted": "No Outlines sampler/model runtime or regex/grammar decoder is integrated. Schema conformance and semantic correctness remain separate.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "google-deepmind/funsearch",
+      "url": "https://github.com/google-deepmind/funsearch",
+      "commit": "cc53f274237d7ab05c19df939edbc1f9616a7c19",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "observed_family": "Apache-2.0"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "implementation/programs_database.py:75:ProgramsDatabase",
+          "exists": true,
+          "sha256": "b2bef312d04861f467f304f65788efe959f0493818976b052c46b4703151affc"
+        },
+        {
+          "location": "implementation/evaluator.py:115:Evaluator",
+          "exists": true,
+          "sha256": "81647818f5f12d9af535959d9042c62ffcb687385ac7d5b2ffbf01a6401542c1"
+        },
+        {
+          "location": "implementation/sampler.py:40:Sampler",
+          "exists": true,
+          "sha256": "7139b27a312065d53e7f17e5feada17b98107fdb39d71b0b47acd42f9f8a38ac"
+        }
+      ],
+      "primary_reading": [
+        "https://www.nature.com/articles/s41586-023-06924-6"
+      ],
+      "method": "Evaluator-guided program evolution; behavioral signatures, diverse islands, scored incumbents and periodic replacement.",
+      "adoption_status": "implemented_method_subset",
+      "implementation": [
+        "symblic/mica/library.py:ComponentLibrary",
+        "symblic/mica/search.py:MicaRun._prepare_unit",
+        "symblic/mica/search.py:MicaRun._build"
+      ],
+      "tests": [
+        "test_symblic_mica_library.py:test_eight_variants_bound_growth_without_evicting_existing_bytes",
+        "test_symblic_mica_library.py:test_invalid_cached_code_blocks_without_route_and_is_never_adopted"
+      ],
+      "adopted_method": "Keep bounded executable candidates and require an actual evaluator before adoption/reuse.",
+      "not_adopted": "No evolutionary islands, novelty scoring or deployment infrastructure is imported. Reference code omits important model/sandbox infrastructure; its installation would not constitute a working integration.",
+      "license_note": "Implementation Apache-2.0; paper/supporting materials have separate CC-BY terms.",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "lm-sys/routellm",
+      "url": "https://github.com/lm-sys/routellm",
+      "commit": "0b64fdafe049e596a3f5657c219329f24af24198",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+          "observed_family": "Apache-2.0"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "routellm/controller.py",
+          "exists": true,
+          "sha256": "a1dae3fffe46cb07d6dfb9daf30a1905b3a22f76ec13d1559a9ed22760483e92"
+        },
+        {
+          "location": "routellm/calibrate_threshold.py:50",
+          "exists": true,
+          "sha256": "bb0684e5437c56e1fa4eb69e1d84aa36d99ec9620962413adb45e6e99dff062d"
+        },
+        {
+          "location": "routellm/routers/routers.py",
+          "exists": true,
+          "sha256": "2393da77f9049970f57dd6d8eada3cc68e99506b2a547e7662e7d2d56b5065b8"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/abs/2406.18665"
+      ],
+      "method": "Cost-quality routing, threshold calibration on representative queries, reusable evaluation matrices.",
+      "adoption_status": "independently_implemented_routing_method",
+      "implementation": [
+        "symblic/mica/routing.py:rank_models",
+        "symblic/mica/routing.py:summarize",
+        "symblic/mica/search.py:MicaRun._observe"
+      ],
+      "tests": [
+        "test_symblic_mica_routing.py:test_digest_node_and_class_drift_do_not_borrow_success",
+        "test_symblic_mica_routing.py:test_wilson_reduces_small_sample_overconfidence",
+        "test_symblic_mica_routing.py:test_expected_total_cost_can_favor_a_faster_less_reliable_model"
+      ],
+      "adopted_method": "Empirical exact-identity/task-class routing with uncertainty and a shared observed/estimated cost dimension; frozen weights.",
+      "not_adopted": "No pretrained RouteLLM router, paid embeddings or threshold-calibration dataset is imported. Current observations need genuine task-family coverage before capability claims.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "EnvCommons/NL2RepoBench",
+      "url": "https://github.com/EnvCommons/NL2RepoBench",
+      "commit": "61d26cc0abd084ece8f5d805dcbd3f806a291f15",
+      "clone_status": true,
+      "license_evidence": [],
+      "source_locations": [
+        {
+          "location": "nl2repobench.py:46:TaskSpec",
+          "exists": true,
+          "sha256": "bb517ef4e1294b1a10fbc318e49605ef33ed2cb499e3afdfc31f8b299dffd4e5"
+        },
+        {
+          "location": "nl2repobench.py:200:submit",
+          "exists": true,
+          "sha256": "bb517ef4e1294b1a10fbc318e49605ef33ed2cb499e3afdfc31f8b299dffd4e5"
+        },
+        {
+          "location": "prepare_data.py",
+          "exists": true,
+          "sha256": "261ab5acfbafbab24388bec45fb1ef919133a6798885c8a72796dd69b8cae126"
+        },
+        {
+          "location": "tests.py",
+          "exists": true,
+          "sha256": "30614d216a1baabdb07621af899e9be3651e87f92438e4520610909c1f33b539"
+        }
+      ],
+      "primary_reading": [
+        "https://github.com/multimodal-art-projection/NL2RepoBench"
+      ],
+      "method": "Whole Python repository generation from detailed natural-language specifications; reference test grading in task containers.",
+      "adoption_status": "evaluation_methodology_subset",
+      "implementation": [
+        "symblic/mica/bench.py:MicaBenchmark",
+        "symblic/mica/fixtures.py",
+        "symblic/mica/cli.py:dispatch"
+      ],
+      "tests": [
+        "test_symblic_mica_bench.py",
+        "test_symblic_mica_cli.py"
+      ],
+      "adopted_method": "Frozen public tasks, isolated hidden whole-program grading, all-assignment denominators and retained run artifacts.",
+      "not_adopted": "Current fixtures grade pure JS programs, not full repository tasks. Reference-workspace overlay and last-command-only grading were explicitly not adopted; no dataset or harness import.",
+      "license_note": "No local license grant found; source not copied. README refers to upstream Apache terms, not a local license grant.",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    },
+    {
+      "repository": "SWE-bench/SWE-bench",
+      "url": "https://github.com/SWE-bench/SWE-bench",
+      "commit": "02e7a74ffd0b707aab73d203fe87bdc7c76afc8e",
+      "clone_status": true,
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "2bd2e08df7147f67a69b42c10efae09bd4bf119df397371036187d5dd1b02f57",
+          "observed_family": "MIT"
+        }
+      ],
+      "source_locations": [
+        {
+          "location": "swebench/harness/run_evaluation.py",
+          "exists": true,
+          "sha256": "04b5dab584fbe62ae9d1ff025edf52d714e584102d587c7e647805d1efb37d84"
+        },
+        {
+          "location": "swebench/harness/grading.py",
+          "exists": true,
+          "sha256": "a095273010175001a6779e365b3b77abb8657c7ac2e4f80b4bc360faa6f09483"
+        },
+        {
+          "location": "swebench/harness/reporting.py",
+          "exists": true,
+          "sha256": "a780f1f5a79f35e066d578d9886d7bf8f10d428051ff85f2376e25dd22faa6c5"
+        }
+      ],
+      "primary_reading": [
+        "https://arxiv.org/abs/2310.06770",
+        "https://www.swebench.com/SWE-bench/"
+      ],
+      "method": "Reproducible repository repair evaluation with immutable task definitions, test specs, container execution and regression grading.",
+      "adoption_status": "evaluation_methodology_subset",
+      "implementation": [
+        "symblic/mica/bench.py:MicaBenchmark",
+        "symblic/mica/cli.py:dispatch"
+      ],
+      "tests": [
+        "test_symblic_mica_bench.py"
+      ],
+      "adopted_method": "Separate task specification, isolated evaluation, exact artifact identity, reproducible assignments and failure-inclusive reports.",
+      "not_adopted": "No SWE-bench dataset or container harness is installed, and no SWE-bench score is claimed. Repository repair/integration remains a future artifact lane.",
+      "license_note": "",
+      "validation": "Named tests exist; coherent snapshot 175700 passed 234 isolated checks; later changes require separate checks. Actual model comparisons pending."
+    }
+  ],
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

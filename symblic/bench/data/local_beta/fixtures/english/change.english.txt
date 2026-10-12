@@ -1,0 +1,13 @@
+# Local beta fixture (2026-10-11): two fresh checked asks; the second sees only the first answer.
+# Expected: change is 14 (12 times 3 is 36; 50 minus 36 is 14). The Accept lines decide; no answer is stored here.
+Remember price is 12.
+Remember quantity is 3.
+
+Ask for total as a whole number: "Multiply the numeric CONTEXT value named price by the numeric CONTEXT value named quantity. Return the product.".
+Using only price and quantity.
+Accept only if total equals price times quantity.
+
+Ask for change as a whole number: "Subtract the numeric CONTEXT value named total from 50. Return the difference.".
+Using only total.
+Accept only if change equals 50 minus total.
+Show change.

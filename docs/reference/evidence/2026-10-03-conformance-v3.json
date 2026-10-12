@@ -1,0 +1,1181 @@
+{
+  "all_27_observable_sha256": [
+    "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9"
+  ],
+  "canon": 3,
+  "date": "2026-10-03",
+  "decimal_profiles": {
+    "default": "runtime default before import",
+    "narrow": "precision8 ROUND_DOWN Inexact trap Emax20 Emin-20 before import",
+    "wide": "precision60 ROUND_UP Inexact trap Emax999 Emin-999 before import"
+  },
+  "driver_source": "\"\"\"Whitelisted, offline Symblic corpus checks; one CPU, no model or network paths.\"\"\"\nimport argparse\nimport decimal\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport platform\nimport resource\nimport subprocess\nimport sys\nimport time\n\nROOT = Path(__file__).resolve().parent\nsys.path.insert(0, str(ROOT))\n\n\ndef sha(value):\n    return hashlib.sha256(value.encode()).hexdigest()\n\n\ndef canonical(value):\n    return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(',', ':'))\n\n\ndef child(profile):\n    if profile != 'default':\n        ctx = decimal.getcontext()\n        ctx.prec = 8 if profile == 'narrow' else 60\n        ctx.rounding = decimal.ROUND_DOWN if profile == 'narrow' else decimal.ROUND_UP\n        ctx.traps[decimal.Inexact] = True\n        ctx.Emax, ctx.Emin = (20, -20) if profile == 'narrow' else (999, -999)\n    import symblic as S\n    import symblic.kernel.run as SR\n    def evaluate(expression):\n        parser = S.Parser(S.tokenize(expression), 1)\n        node = parser.expr()\n        parser.finish()\n        return S.Kernel().eval(node)\n    expressions = [\n        '1/10 + 2/10', '2^521-1', 'round(1.005,2)', 'round(-1.005,2)',\n        'len({true,1,false,0})', '{true,1,\"x\",\"y\",{a:1},[true]}',\n        'radians(1)', '2 ^ 0.3', 'sin(1)', 'sqrt(2)', 'text(1/7)',\n        '\"a\" = \"a \"', '\"é\" = \"é\"',\n        'flower(petals=3,size=120)', 'polygon(sides=11,color=\"teal\")',\n    ]\n    values = {expr: S.canon_json(evaluate(expr)) for expr in expressions}\n    source = (ROOT / 'identity.sym').read_text()\n    report = SR.Run(source, options={'by': 'kernel', 'side_effects': False, 'max_calls': 0}).execute()\n    assert report['status'] == 'done', report.get('error')\n    typed_source = 'fact p(true),p(1),p(\"[1,2]\"),p(null).\\nrule q(X) if p(X).\\nshow query q(X).\\n'\n    typed = SR.Run(typed_source, options={'by': 'kernel', 'max_calls': 0}).execute()\n    assert typed['status'] == 'done', typed.get('error')\n    # Output bytes only: do not compare mixed runtime kernel fingerprints as one identity claim.\n    outputs = [{k: row[k] for k in ('kind', 'label', 'value', 'text', 'svg') if k in row}\n               for row in report['outputs']]\n    payload = {'values': values, 'identity_outputs': outputs,\n               'typed_outputs': [{k: row[k] for k in ('kind', 'value', 'text') if k in row}\n                                 for row in typed['outputs']]}\n    return {'profile': profile, 'hash_seed': os.environ.get('PYTHONHASHSEED'),\n            'python': platform.python_version(), 'machine': platform.machine(), 'kernel': S.kernel_id(),\n            'observable_sha256': sha(canonical(payload)),\n            'expression_sha256': {expr: sha(value) for expr, value in values.items()},\n            'svg_sha256': [sha(row['svg']) for row in outputs if 'svg' in row],\n            'run_fingerprint': report['fingerprint'], 'calls': report['calls']}\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument('--case', choices=('default', 'narrow', 'wide'))\n    args = parser.parse_args()\n    resource.setrlimit(resource.RLIMIT_AS, (768 * 1024 * 1024, 768 * 1024 * 1024))\n    resource.setrlimit(resource.RLIMIT_CPU, (90, 90))\n    if hasattr(os, 'sched_getaffinity'):\n        os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})\n    if args.case:\n        print(canonical(child(args.case)))\n        return\n    manifest = json.loads((ROOT / 'input_manifest.json').read_text())\n    files = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in manifest['files']}\n    assert files == manifest['files'], 'bundle file hash mismatch'\n    rows = []\n    for seed in ('0', '1', '7'):\n        for profile in ('default', 'narrow', 'wide'):\n            env = {**os.environ, 'PYTHONHASHSEED': seed, 'PYTHONDONTWRITEBYTECODE': '1'}\n            env.pop('PYTHONPATH', None)\n            proc = subprocess.run([sys.executable, str(Path(__file__)), '--case', profile],\n                                  cwd=ROOT, env=env, capture_output=True, text=True, timeout=90)\n            if proc.returncode:\n                rows.append({'hash_seed': seed, 'profile': profile, 'error': proc.stderr[-4000:],\n                             'returncode': proc.returncode})\n            else:\n                rows.append(json.loads(proc.stdout))\n    tests = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests',\n                            '-p', 'test_symblic_soundness.py'], cwd=ROOT,\n                           capture_output=True, text=True, timeout=90,\n                           env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'})\n    result = {'format': 1, 'time_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),\n              'node': platform.node(), 'python': platform.python_version(), 'machine': platform.machine(),\n              'files': files, 'input_manifest_sha256': sha(canonical(manifest)), 'matrix': rows,\n              'tests': {'returncode': tests.returncode, 'stdout': tests.stdout, 'stderr': tests.stderr},\n              'matrix_same_observables': len({r.get('observable_sha256') for r in rows}) == 1\n                  and all(r.get('observable_sha256') for r in rows),\n              'limits': 'Fixed corpus only. Compare runtime fingerprints only under identical kernel IDs; Unicode may differ.'}\n    (ROOT / 'receipt.json').write_text(json.dumps(result, sort_keys=True, indent=2))\n    print(canonical(result))\n    if not result['matrix_same_observables'] or tests.returncode:\n        sys.exit(1)\n\n\nif __name__ == '__main__':\n    main()\n",
+  "format": "symblic-fixed-corpus-conformance-v1",
+  "hash_seeds": [
+    "0",
+    "1",
+    "7"
+  ],
+  "identity_source": "program Kernel identity.\nnote Everything here is decided by the kernel: exact rationals, Decimal trigonometry (no platform libm), Datalog and drawings. Run it on any machine: the fingerprint must be the same.\n\nlet big = 2 ^ 521 - 1.\nassert is_prime(31) and not is_prime(91).\nlet harmonic = sum([1 / n for n in 1..60]).\nlet roots = [round(sqrt(n), 20) for n in 1..30].\nlet waves = [round(sin(radians(d)), 25) for d in 0..360 if d mod 15 = 0].\nlet growth = round(exp(1 / 3) * ln(17), 25).\nlet golden = (1 + sqrt(5)) / 2.\nassert round(golden ^ 2 - golden, 20) = 1.\nlet primes = [p for p in 2..400 if is_prime(p)].\nlet stats = {mean: mean(primes), median: median(primes), count: len(primes)}.\nfact edge(1, 2), edge(2, 3), edge(3, 5), edge(5, 8), edge(8, 13), edge(13, 1).\nrule reach(X, Y) if edge(X, Y).\nrule reach(X, Z) if edge(X, Y) and reach(Y, Z).\nlet cycle = query reach(1, N).\nassert 1 in cycle.\ndraw flower(petals=13, color=\"orange\", shape=\"fringed\", layers=3, center=\"chocolate\") as \"fringed.svg\".\ndraw rose(k=7, color=\"violet\") as \"rose.svg\".\ndraw polygon(sides=11, color=\"teal\") as \"hendecagon.svg\".\nshow [hash(big), hash(harmonic), hash(roots), hash(waves), hash(growth), hash(stats), hash(cycle)] as \"kernel fingerprints\".\n",
+  "language": "2.1",
+  "local_command": "python3 conformance_driver.py",
+  "manifest": {
+    "created_utc": "2026-10-03T12:46:02Z",
+    "files": {
+      "conformance_driver.py": "5d135faad4cb686f0d6e342f2c2f043bbe976f3a4049c17a87dc810c654a975a",
+      "identity.sym": "3541f4617611d916ec2483957489d5b2ae96b18de2d782feda6b24e208a76e0a",
+      "symblic/kernel/language.py": "dedc5dc06f064c1b8dd929525bcb64b9c7ab90b2d9666479d273f012121a4b71",
+      "symblic/kernel/effects.py": "05ff2a067ee3ee2c1f4389bc883500d114cc4bcacf01dcaaab5f45a70329e4a9",
+      "symblic/kernel/embed.py": "e904b455214a3b2f32eb077590bf41beb777507cedd99eb8aa95c57ebc4a06a9",
+      "symblic/kernel/evidence.py": "915f9a50c0e534dfb3d646b092b590766d8f4d45c4f3e9b7207b4b17e75803f3",
+      "symblic/adapters/geometry.py": "ab7b7d40ed7d85a49e4512e3f05efdbea7dcbab267fe7e513126ab4d0a4388cc",
+      "symblic/lang/abstraction.py": "5b471cf6d3468b61b3ec81fd558f428c3b3b08811830ec64262671dd3f766d38",
+      "symblic/adapters/render.py": "06c8c0aea966d95067debe1eb9684f34514473fb8c4e59f3481f782921d17dd1",
+      "symblic/kernel/run.py": "89b015d6b4b0eec2c5c73a1b864b4576b7ca1724c72bb5a1a40d485f5b2a946d",
+      "tests/kernel/test_symblic_soundness.py": "177b8358fed37be67242a65824159e9e946c9648c1e0d3cd6df299cc34a42293"
+    },
+    "format": 1
+  },
+  "nodes": [
+    {
+      "all_profiles_equal": true,
+      "captured_utc": "2026-10-03T12:46:08Z",
+      "machine": "x86_64",
+      "matrix": [
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "0",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "5c633d7aa8a5f0fb",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.12.3",
+            "unicode": "15.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "default",
+          "python": "3.12.3",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "0",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "5c633d7aa8a5f0fb",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.12.3",
+            "unicode": "15.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "narrow",
+          "python": "3.12.3",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "0",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "5c633d7aa8a5f0fb",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.12.3",
+            "unicode": "15.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "wide",
+          "python": "3.12.3",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "1",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "5c633d7aa8a5f0fb",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.12.3",
+            "unicode": "15.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "default",
+          "python": "3.12.3",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "1",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "5c633d7aa8a5f0fb",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.12.3",
+            "unicode": "15.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "narrow",
+          "python": "3.12.3",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "1",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "5c633d7aa8a5f0fb",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.12.3",
+            "unicode": "15.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "wide",
+          "python": "3.12.3",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "7",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "5c633d7aa8a5f0fb",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.12.3",
+            "unicode": "15.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "default",
+          "python": "3.12.3",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "7",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "5c633d7aa8a5f0fb",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.12.3",
+            "unicode": "15.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "narrow",
+          "python": "3.12.3",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "7",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "5c633d7aa8a5f0fb",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.12.3",
+            "unicode": "15.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "wide",
+          "python": "3.12.3",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        }
+      ],
+      "placement": "host",
+      "python": "3.12.3",
+      "raw_transport_sha256": "089143fc2dc4af3c0b64e3817ffefc7714da25283d7c8e4f2939c5a04c0d0c9b",
+      "soundness_tests": {
+        "returncode": 0,
+        "stderr": "..............................\n----------------------------------------------------------------------\nRan 30 tests in 0.966s\n\nOK\n",
+        "stdout": ""
+      }
+    },
+    {
+      "all_profiles_equal": true,
+      "captured_utc": "2026-10-03T12:51:25Z",
+      "machine": "x86_64",
+      "matrix": [
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "0",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "ce8f2802f2766e98",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.11.2",
+            "unicode": "14.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "default",
+          "python": "3.11.2",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "0",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "ce8f2802f2766e98",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.11.2",
+            "unicode": "14.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "narrow",
+          "python": "3.11.2",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "0",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "ce8f2802f2766e98",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.11.2",
+            "unicode": "14.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "wide",
+          "python": "3.11.2",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "1",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "ce8f2802f2766e98",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.11.2",
+            "unicode": "14.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "default",
+          "python": "3.11.2",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "1",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "ce8f2802f2766e98",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.11.2",
+            "unicode": "14.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "narrow",
+          "python": "3.11.2",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "1",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "ce8f2802f2766e98",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.11.2",
+            "unicode": "14.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "wide",
+          "python": "3.11.2",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "7",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "ce8f2802f2766e98",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.11.2",
+            "unicode": "14.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "default",
+          "python": "3.11.2",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "7",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "ce8f2802f2766e98",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.11.2",
+            "unicode": "14.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "narrow",
+          "python": "3.11.2",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "7",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "ce8f2802f2766e98",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.11.2",
+            "unicode": "14.0.0"
+          },
+          "machine": "x86_64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "wide",
+          "python": "3.11.2",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        }
+      ],
+      "placement": "node-a",
+      "python": "3.11.2",
+      "raw_transport_sha256": "78261e58dffce3e88ae02370c084b4f77df65e2460b5f75981ba04b2af113720",
+      "soundness_tests": {
+        "returncode": 0,
+        "stderr": "..............................\n----------------------------------------------------------------------\nRan 30 tests in 0.299s\n\nOK\n",
+        "stdout": ""
+      }
+    },
+    {
+      "all_profiles_equal": true,
+      "captured_utc": "2026-10-03T12:51:28Z",
+      "machine": "aarch64",
+      "matrix": [
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "0",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "1979c7a7eb3ad0f5",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.13.5",
+            "unicode": "15.1.0"
+          },
+          "machine": "aarch64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "default",
+          "python": "3.13.5",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "0",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "1979c7a7eb3ad0f5",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.13.5",
+            "unicode": "15.1.0"
+          },
+          "machine": "aarch64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "narrow",
+          "python": "3.13.5",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "0",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "1979c7a7eb3ad0f5",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.13.5",
+            "unicode": "15.1.0"
+          },
+          "machine": "aarch64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "wide",
+          "python": "3.13.5",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "1",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "1979c7a7eb3ad0f5",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.13.5",
+            "unicode": "15.1.0"
+          },
+          "machine": "aarch64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "default",
+          "python": "3.13.5",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "1",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "1979c7a7eb3ad0f5",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.13.5",
+            "unicode": "15.1.0"
+          },
+          "machine": "aarch64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "narrow",
+          "python": "3.13.5",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "1",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "1979c7a7eb3ad0f5",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.13.5",
+            "unicode": "15.1.0"
+          },
+          "machine": "aarch64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "wide",
+          "python": "3.13.5",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "7",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "1979c7a7eb3ad0f5",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.13.5",
+            "unicode": "15.1.0"
+          },
+          "machine": "aarch64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "default",
+          "python": "3.13.5",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "7",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "1979c7a7eb3ad0f5",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.13.5",
+            "unicode": "15.1.0"
+          },
+          "machine": "aarch64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "narrow",
+          "python": "3.13.5",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        },
+        {
+          "calls": 0,
+          "expression_sha256": {
+            "\"a\" = \"a \"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "\"é\" = \"é\"": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+            "1/10 + 2/10": "e866acf72132e66714f05e55447adc27f45f856b236cb202e0f76719687d4605",
+            "2 ^ 0.3": "50d9f96eeecb6baf2f7ffa571658fa7eb4a2a30e7e9eaa32ae2e19e1e19ff51e",
+            "2^521-1": "06514590f94c1d4595274279dfb1568077269f22e4258a5c9f928fe07e832e0e",
+            "flower(petals=3,size=120)": "b4844db911f713e8e35017975e91ae36437833ac2ea2511d4bf0ad2ac5f910f7",
+            "len({true,1,false,0})": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+            "polygon(sides=11,color=\"teal\")": "8858a7b29e65a0240569d72d26d6f204ff261310e99135b3538065b6be996a67",
+            "radians(1)": "520fdb3288d4b8498c374c897322b5ceaa72534adc9c3bac66d84e56cdce1de5",
+            "round(-1.005,2)": "9849b41c1d6ad808cb6b6415914062bd5f0a64f90e9edccf89bb89ffde39a6c3",
+            "round(1.005,2)": "eee3f2ce65ae18365b72d3e68b3063ebac2eec749ae33e7caa99efdd12eca7e8",
+            "sin(1)": "b4ae255197375f49186f46a2b7ef368a3093453c5dd8d45495631ca43c602dcd",
+            "sqrt(2)": "07def9ebe2a5559866b0e6188c928eaa301ac8c709d7922bef64e2d7d03b0b69",
+            "text(1/7)": "95d06e09097fefbdf5d3b818553fef5f495c2abf81b9fde5430980f612706771",
+            "{true,1,\"x\",\"y\",{a:1},[true]}": "b1eb38efe36838e3b1bee060d8da292b159be621448350b86d0ded2da9010aa6"
+          },
+          "hash_seed": "7",
+          "kernel": {
+            "canon": 3,
+            "geometry": 2,
+            "id": "1979c7a7eb3ad0f5",
+            "lang": "2.1",
+            "max_digits": 4000,
+            "python": "3.13.5",
+            "unicode": "15.1.0"
+          },
+          "machine": "aarch64",
+          "observable_sha256": "b7496ea6bc19a211aa3a4d610b21f1849a94b660ee5f9c21fae7406e105216b9",
+          "profile": "wide",
+          "python": "3.13.5",
+          "run_fingerprint": "fff6d4efbecb4a3a",
+          "svg_sha256": [
+            "7da63d1bac6a8f9b73ab16a3f6054379da997acf161126ad682c090e169a63b1",
+            "803dc9f465b040aa38b756352f9fdc9b74f30cdc02944c58423f0a768cd094bb",
+            "6ff2b7905cb8b0476e143d739bba32a846db5cb118c22d5fd315c6049f4ffd1e"
+          ]
+        }
+      ],
+      "placement": "node-arm",
+      "python": "3.13.5",
+      "raw_transport_sha256": "9f82ab5452b2762afd4a1cea9c52aecbb6ba1b8ec5aa735f623e59b50da31f5f",
+      "soundness_tests": {
+        "returncode": 0,
+        "stderr": "..............................\n----------------------------------------------------------------------\nRan 30 tests in 0.637s\n\nOK\n",
+        "stdout": ""
+      }
+    }
+  ],
+  "per_worker_limits": {
+    "address_space_mib": 768,
+    "affinity_cpus": 1,
+    "cpu_seconds": 90,
+    "models_called": 0,
+    "subprocess_timeout_seconds": 90
+  },
+  "registered_cluster_jobs": {
+    "copy_whitelisted_snapshot": "529a554ddb",
+    "create_private_parent": "f4381f0896",
+    "initial_dispatch_before_execution_failed_argv_size": "d09bc0b71b",
+    "run_offline_corpus": "1239915109"
+  },
+  "scope": "Identical observable corpus bytes only, not universal semantic equivalence or equality of different Unicode kernel identities.",
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

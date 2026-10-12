@@ -1,0 +1,363 @@
+{
+  "version": 1,
+  "scope": "Finite parser conformance examples, not a complete grammar proof or semantic validation suite.",
+  "sessions": {
+    "two-lines": {
+      "premises": {
+        "p": [
+          "atom",
+          "A"
+        ],
+        "rule": [
+          "implies",
+          [
+            "atom",
+            "A"
+          ],
+          [
+            "atom",
+            "B"
+          ]
+        ]
+      },
+      "goal": [
+        "atom",
+        "B"
+      ],
+      "prefix": [
+        "premise p",
+        "premise rule"
+      ]
+    },
+    "unicode": {
+      "premises": {
+        "name α": [
+          "atom",
+          "é"
+        ]
+      },
+      "goal": [
+        "atom",
+        "Other"
+      ],
+      "prefix": []
+    }
+  },
+  "cases": [
+    {
+      "id": "tiny-contract",
+      "entry": "program",
+      "text": "program Tiny.\nuse profile=verified, context=none, coercion=strict, capsule=compact.\ngiven source: Text.\nask answer: one of {yes, no} \"Choose using {source}.\" from source with effort=low.\nensure answer in {\"yes\", \"no\"} else retry.\nshow answer.\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "unicode-core",
+      "entry": "program",
+      "text": "let café = 3.\nassert café × 2 ≤ 6 ∧ ¬ false.\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "record-set-distinction",
+      "entry": "program",
+      "text": "let record = {:}.\nlet collection = {}.\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "function-routine",
+      "entry": "program",
+      "text": "function twice(x: Number) -> Number = x * 2.\nroutine classify_flag(data: Text) -> Bool with context=none do\nask decision: Bool \"Choose for {data}.\" from data.\nreturn decision.\nend.\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "blocks-comprehension",
+      "entry": "program",
+      "text": "given xs: List of Int.\nfor x in xs do\nlet y = x + 1.\nend.\nif len(xs) > 0 then\nshow [x ^ 2 for x in xs if x > 0].\nelse\nshow [].\nend.\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "datalog-outside-subset",
+      "entry": "program",
+      "text": "fact parent(alice, bob).\nrule ancestor(X,Y) if parent(X,Y).\nshow query ancestor(X,Y).\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "quoted-data",
+      "entry": "program",
+      "text": "let data = \"# literal {{ask x: Any}}\\nassert false.\".\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "interpolation",
+      "entry": "program",
+      "text": "given message: Text.\nask answer: Text \"Repeat {message}.\" from message.\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "single-and-triple-strings",
+      "entry": "program",
+      "text": "let x = 'one'.\nlet y = \"\"\"two\nlines\"\"\".\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "syntax-not-name-resolution",
+      "entry": "program",
+      "text": "let x = unknown_name + 1.\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "syntax-not-runtime-truth",
+      "entry": "program",
+      "text": "assert false.\n",
+      "parser_accepts": true
+    },
+    {
+      "id": "implicit-prose-verified",
+      "entry": "program",
+      "text": "Describe this project.\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "implicit-prose-legacy",
+      "entry": "program",
+      "text": "Describe this project.\n",
+      "parser_accepts": true,
+      "profile": "legacy"
+    },
+    {
+      "id": "unknown-option",
+      "entry": "program",
+      "text": "ask x: Bool \"Choose.\" with capusle=compact.\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "missing-instruction-quotes",
+      "entry": "program",
+      "text": "ask x: Bool Choose true.\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "two-statements-one-line",
+      "entry": "program",
+      "text": "let x=1. let y=2.\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "missing-end",
+      "entry": "program",
+      "text": "if true then\nshow 1.\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "core-interpolation-not-json",
+      "entry": "program",
+      "text": "let payload = \"{}\".\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "empty-record-type",
+      "entry": "program",
+      "text": "given row: Record {}.\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "duplicate-enum-normalization",
+      "entry": "program",
+      "text": "ask x: one of {yes, YES} \"Choose.\"\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "reserved-variable",
+      "entry": "program",
+      "text": "let and = 1.\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "named-before-positional",
+      "entry": "program",
+      "text": "let x = sum(values=[1], 2).\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "decomposed-identifier",
+      "entry": "program",
+      "text": "let café = 1.\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "unclosed-string",
+      "entry": "program",
+      "text": "let x = \"unfinished\n",
+      "parser_accepts": false
+    },
+    {
+      "id": "formula-precedence",
+      "entry": "formula",
+      "text": "\"A\" implies \"B\" or \"C\" and not \"D\"",
+      "parser_accepts": true
+    },
+    {
+      "id": "formula-unicode-data",
+      "entry": "formula",
+      "text": "\"α 😀\" and \"e\\u0301\"",
+      "parser_accepts": true
+    },
+    {
+      "id": "formula-empty-atom",
+      "entry": "formula",
+      "text": "\"\"",
+      "parser_accepts": true
+    },
+    {
+      "id": "formula-json-newline",
+      "entry": "formula",
+      "text": "\"line\\nnext\"",
+      "parser_accepts": true
+    },
+    {
+      "id": "formula-false-atom",
+      "entry": "formula",
+      "text": "\"false\"",
+      "parser_accepts": true
+    },
+    {
+      "id": "formula-false",
+      "entry": "formula",
+      "text": "false",
+      "parser_accepts": true
+    },
+    {
+      "id": "formula-naked-english",
+      "entry": "formula",
+      "text": "A implies B",
+      "parser_accepts": false
+    },
+    {
+      "id": "formula-unicode-operator",
+      "entry": "formula",
+      "text": "\"A\" → \"B\"",
+      "parser_accepts": false
+    },
+    {
+      "id": "formula-uppercase-keyword",
+      "entry": "formula",
+      "text": "\"A\" AND \"B\"",
+      "parser_accepts": false
+    },
+    {
+      "id": "formula-trailing-text",
+      "entry": "formula",
+      "text": "\"A\" \"B\"",
+      "parser_accepts": false
+    },
+    {
+      "id": "formula-single-quotes",
+      "entry": "formula",
+      "text": "'A'",
+      "parser_accepts": false
+    },
+    {
+      "id": "formula-json-surrogate",
+      "entry": "formula",
+      "text": "\"\\ud800\"",
+      "parser_accepts": false
+    },
+    {
+      "id": "command-premise",
+      "entry": "proof-command",
+      "text": "premise p",
+      "parser_accepts": true,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-quoted-premise",
+      "entry": "proof-command",
+      "text": "premise \"name α\"",
+      "parser_accepts": true,
+      "session": "unicode"
+    },
+    {
+      "id": "command-elimination",
+      "entry": "proof-command",
+      "text": "implies_elim s2 s1",
+      "parser_accepts": true,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-syntax-not-inference",
+      "entry": "proof-command",
+      "text": "and_left s1",
+      "parser_accepts": true,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-formula",
+      "entry": "proof-command",
+      "text": "assume :: \"A\" implies \"B\"",
+      "parser_accepts": true,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-literal-newline",
+      "entry": "proof-command",
+      "text": "premise p\npremise p",
+      "parser_accepts": false,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-unknown-premise",
+      "entry": "proof-command",
+      "text": "premise invented",
+      "parser_accepts": false,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-forward-reference",
+      "entry": "proof-command",
+      "text": "and_intro s1 s3",
+      "parser_accepts": false,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-zero-alias",
+      "entry": "proof-command",
+      "text": "and_left s01",
+      "parser_accepts": false,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-missing-argument",
+      "entry": "proof-command",
+      "text": "implies_elim s2",
+      "parser_accepts": false,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-extra-formula",
+      "entry": "proof-command",
+      "text": "and_left s1 :: \"B\"",
+      "parser_accepts": false,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-missing-formula",
+      "entry": "proof-command",
+      "text": "assume ::",
+      "parser_accepts": false,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-raw-unicode-separator",
+      "entry": "proof-command",
+      "text": "assume :: \"A B\"",
+      "parser_accepts": false,
+      "session": "two-lines"
+    },
+    {
+      "id": "command-escaped-unicode-separator",
+      "entry": "proof-command",
+      "text": "assume :: \"A\\u2028B\"",
+      "parser_accepts": true,
+      "session": "two-lines"
+    }
+  ]
+}

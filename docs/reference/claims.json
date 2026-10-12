@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "date": "2026-10-04",
+  "deployment": "live_rc2_with_later_staged_development",
+  "deployment_scope": "RC2 (language 2.5, canonical form 3) was installed and live-verified on 2026-10-04. Later task-card, delegation, incremental-proof and epistemic-notebook work has separate implementation, verification and release status; see REFORM-3.md.",
+  "scope": "Documentation claim register; not runtime authority, a complete literature review, or an empirical result.",
+  "claims": [
+    {
+      "id": "perfect-model-execution",
+      "status": "revised",
+      "claim_under_review": "Precise instructions alone guarantee perfect repeatable model execution.",
+      "supported_scope_or_correction": "Explicit construction, scoped checking and refusal; fresh-generation reliability requires measurement.",
+      "document": "REFORM-3.md",
+      "critique_id": "C01"
+    },
+    {
+      "id": "model-backend-formal-programming",
+      "status": "observed_pilot_no_accepted_proofs",
+      "claim_under_review": "Models can construct formal results for reusable checkers.",
+      "supported_scope_or_correction": "The older local nested-proof pilot accepted no proofs: 47 of 51 answered attempts failed before logical checking and four failed derivation checks; 22 of 39 planned trials remained unfinished or unstarted. Format-dominated failure does not establish general reasoning incapability. New flat/incremental formats have no measured acceptance improvement; injected constructors establish interface behavior, not real-model capability.",
+      "document": "REFORM-3.md",
+      "critique_id": "C02"
+    },
+    {
+      "id": "model-construction-checking-interface",
+      "status": "live_rc2_with_staged_extensions",
+      "claim_under_review": "Symblic can accept a human/model certificate through a reusable checker without the checker constructing the proof.",
+      "supported_scope_or_correction": "RC2 connects bounded intuitionistic propositional proof terms and a finite-domain frontend to caller-held premises/goals. Injected-constructor tests exercise construction, rejection and repair. Later incremental construction is staged separately. This is implementation evidence, not empirical model success or a proof of checker soundness.",
+      "document": "PROOF-TERMS.md",
+      "critique_id": "C02"
+    },
+    {
+      "id": "schema-equals-proof",
+      "status": "rejected",
+      "claim_under_review": "A schema-valid response is a formal proof.",
+      "supported_scope_or_correction": "Schema, predicate, derivation and empirical evidence have distinct receipt scopes.",
+      "document": "INTENSE-CRITIQUE-AND-LIMITATIONS.md",
+      "critique_id": "C21"
+    },
+    {
+      "id": "bkm-hallucination-rate",
+      "status": "withdrawn",
+      "claim_under_review": "Fluid BKM bounds imply a hallucination rate below 0.001%.",
+      "supported_scope_or_correction": "No specified mapping or empirical rate establishes this claim.",
+      "document": "GRAND-UNIFICATION-AND-STRING-THEORY.md",
+      "critique_id": "C19"
+    },
+    {
+      "id": "polynomial-annealing",
+      "status": "withdrawn",
+      "claim_under_review": "Annealing makes arbitrary constraint solving O(N^2).",
+      "supported_scope_or_correction": "Existing finite Ising enumeration is bounded; other solvers need independent checks and measured scaling.",
+      "document": "GRAND-UNIFICATION-AND-STRING-THEORY.md",
+      "critique_id": "C19"
+    },
+    {
+      "id": "lossless-log-context",
+      "status": "withdrawn",
+      "claim_under_review": "Arbitrary relevant context compresses losslessly to logarithmic size.",
+      "supported_scope_or_correction": "Required context is retained or explicitly refused; optional compression has task-dependent loss.",
+      "document": "THE-OVERALL-BREAKTHROUGH.md",
+      "critique_id": "C19",
+      "related_critique_ids": [
+        "C08"
+      ]
+    },
+    {
+      "id": "conformal-injection-immunity",
+      "status": "withdrawn",
+      "claim_under_review": "Conformal worldsheets make prompt injection mathematically impossible.",
+      "supported_scope_or_correction": "No such mapping or security theorem is supplied; concrete authority boundaries remain required.",
+      "document": "GRAND-UNIFICATION-AND-STRING-THEORY.md",
+      "critique_id": "C19",
+      "related_critique_ids": [
+        "C23"
+      ]
+    },
+    {
+      "id": "free-schema-equivalence",
+      "status": "withdrawn",
+      "claim_under_review": "Univalence discovers intended schema mappings and eliminates all conversion work.",
+      "supported_scope_or_correction": "Mappings and their semantic assumptions must be supplied or established.",
+      "document": "GRAND-UNIFICATION-AND-STRING-THEORY.md",
+      "critique_id": "C19"
+    },
+    {
+      "id": "agreement-objective-truth",
+      "status": "withdrawn",
+      "claim_under_review": "Independent-looking agreement is mathematically isomorphic to objective truth.",
+      "supported_scope_or_correction": "Provenance, joint errors, conditional validity and empirical assessment are separate.",
+      "document": "THE-OVERALL-BREAKTHROUGH.md",
+      "critique_id": "C14"
+    },
+    {
+      "id": "bounded-refusal-unsound",
+      "status": "corrected_critique",
+      "claim_under_review": "A checker becomes unsound when a resource bound causes refusal.",
+      "supported_scope_or_correction": "Unsound accepted judgments differ from incompleteness, unsupported inputs and resource refusal.",
+      "document": "INTENSE-CRITIQUE-AND-LIMITATIONS.md",
+      "critique_id": "C21"
+    },
+    {
+      "id": "discrete-reward-impossible",
+      "status": "corrected_critique",
+      "claim_under_review": "Discrete rewards rule out policy-gradient learning.",
+      "supported_scope_or_correction": "Expected-reward estimators are possible; inadequate rewards can still teach shortcuts.",
+      "document": "INTENSE-CRITIQUE-AND-LIMITATIONS.md",
+      "critique_id": "C22"
+    },
+    {
+      "id": "rollback-erases-effects",
+      "status": "corrected_critique",
+      "claim_under_review": "Symblic blindly replays external actions when an ask retries.",
+      "supported_scope_or_correction": "Existing retry fences and durable uncertain-outcome handling must be preserved and regression-tested.",
+      "document": "INTENSE-CRITIQUE-AND-LIMITATIONS.md",
+      "critique_id": "C23"
+    },
+    {
+      "id": "agent-graph-automatic-learning",
+      "status": "rejected",
+      "claim_under_review": "Connecting agents automatically yields a differentiable trained neural network.",
+      "supported_scope_or_correction": "State, edges, objective and update rule must be specified and separately evaluated.",
+      "document": "THE-OVERALL-BREAKTHROUGH.md",
+      "critique_id": "C24"
+    },
+    {
+      "id": "small-model-superiority",
+      "status": "unmeasured",
+      "claim_under_review": "Reform components prove broad small-model superiority.",
+      "supported_scope_or_correction": "Offline checks and exploratory pilots are not matched superiority experiments. The older proof pilot accepted no proof; a later six-cell code/numerical task-card pilot accepted no complete project. Retain all outcomes, fallback, available model identities, total budgets and human labor; neither observation establishes general incapability or superiority.",
+      "document": "REFORM-3.md",
+      "critique_id": "C17"
+    },
+    {
+      "id": "small-model-task-card-construction",
+      "status": "observed_exploratory_pilot_no_complete_projects",
+      "claim_under_review": "Fresh bounded task cards allow small local models to complete the specified code and numerical projects.",
+      "supported_scope_or_correction": "The frozen six-cell pilot across three local model tags observed zero complete accepted projects, five check failures and one deadline stop, with no pending cells or fallback. Some code units passed exposed checks; no complete artifact existed for held-out or final equality assessment. Model weight digests were unavailable. This is code/finite-energy feasibility evidence under those prompts and limits, not a proof benchmark or matched comparison.",
+      "document": "REFORM-3.md",
+      "critique_id": "C17",
+      "related_critique_ids": [
+        "C02",
+        "C03",
+        "C18"
+      ]
+    },
+    {
+      "id": "runtime-epistemic-revision",
+      "status": "partial_runtime_with_staged_notebook",
+      "claim_under_review": "The live runner supports persistent claim revision, withdrawal and explicit disagreement propagation.",
+      "supported_scope_or_correction": "RC2 runtime preserves contested votes, unavailable-parent propagation and missing/mismatched-reference detection. Its claims start at revision 1 without withdrawal and its disagreement lists are empty. A separate staged notebook now supports imported snapshots, operator revisions, withdrawals, disagreements and selected-context export, with 32 Python checks and two browser journeys passing. Notebook edits do not mutate completed runs; its live release remains separate.",
+      "document": "REFORM-3.md",
+      "critique_id": "C07",
+      "related_critique_ids": [
+        "C14",
+        "C25",
+        "C27"
+      ]
+    },
+    {
+      "id": "persistent-epistemic-notebook",
+      "status": "staged_implementation_verified",
+      "claim_under_review": "Persistent snapshots can retain claim revisions and reassess dependent support across operator edits.",
+      "supported_scope_or_correction": "The staged notebook retains imported run evidence and operator revision/withdrawal/disagreement history, clears prior checks on content revisions, refuses unavailable selected support and exports explicit value availability. 28 helper and four API tests plus desktop-light/phone-dark browser journeys passed using temporary stores and intercepted HTTP. Shared-source readings do not gain independent-acquisition or truth status. This is snapshot behavior, not automatic live-run mutation or a deployed RC2 feature.",
+      "document": "REFORM-3.md",
+      "critique_id": "C07",
+      "related_critique_ids": [
+        "C14",
+        "C25",
+        "C27"
+      ]
+    },
+    {
+      "id": "universal-epistemic-system",
+      "status": "research_objective",
+      "claim_under_review": "A common substrate can connect claims, evidence, computation and actions across domains.",
+      "supported_scope_or_correction": "This objective does not mean universal decidability, arbitrary semantic truth or proven novelty.",
+      "document": "THE-OVERALL-BREAKTHROUGH.md",
+      "critique_id": "C27"
+    }
+  ],
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

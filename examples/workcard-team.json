@@ -1,0 +1,11 @@
+{
+  "instruction": "Find a positive integer whose square is nine.",
+  "answer_type": "Int",
+  "checks": ["answer * answer = 9", "answer > 0"],
+  "builder": "ollama:llama3.2:1b",
+  "reviewers": [
+    {"role": "critic", "by": "ollama:llama3.2:1b", "instruction": "Check the proposed integer against both constraints. Reject a violated constraint with a concrete reason."}
+  ],
+  "rounds": 2,
+  "context_budget": 24000
+}

@@ -1,0 +1,11 @@
+[
+  {"op": "add", "page": {
+    "title": "Symblic Beta: Graph View",
+    "href": "/symblic-beta-graphview",
+    "group": "Build",
+    "keywords": ["symblic", "beta", "graph", "obsidian", "3d", "force", "english statements"],
+    "dir": "symblic-beta-graphview",
+    "index": "index.html",
+    "sub": "Obsidian-style 3D graph view generated from 8 strict English statements by fresh agent sessions"
+  }}
+]

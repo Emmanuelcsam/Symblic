@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Symblic</title>
+  <meta name="theme-color" content="#f4f1eb">
+  <!-- The Symblic hub of the original host. /studio.css and /studio.js were the host's shared page library;
+       standalone-shell.js stands in for it when they are absent, so the overview, lanes, demos, records and
+       atomic results render as static files (serve this folder with any static file server). The Construct
+       and Autogen sections and the Atomic "run it yourself" form call the host API; see web/README.md. -->
+  <link rel="stylesheet" href="/studio.css">
+  <style>
+    /* page-only rules: tokens only; every class prefixed sh- */
+    .sh-tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+    .sh-tool { border: 1px solid var(--brd); border-radius: 3px; padding: 12px 14px; background: var(--bg2); display: flex; flex-direction: column; gap: 6px; min-height: 44px; }
+    .sh-tool .lbl { margin-bottom: 0; }
+    .sh-tool a.sh-go { font-family: var(--mono); font-size: 14px; color: var(--acc-tx); text-decoration: none; border-bottom: 1px solid var(--hair); align-self: flex-start; padding: 6px 0; }
+    .sh-tool a.sh-go:hover, .sh-tool a.sh-go:focus-visible { border-bottom-color: var(--acc); }
+    .sh-kv { font-family: var(--mono); font-size: 12.5px; color: var(--tx2); line-height: 1.6; }
+    .sh-kv b { font-weight: 400; color: var(--tx1); }
+    .sh-code { font-family: var(--mono); font-size: 12.5px; background: var(--bg3); border: 1px solid var(--hair); border-radius: 3px; padding: 10px 12px; white-space: pre-wrap; word-break: break-word; color: var(--tx2); margin: 0; }
+    .sh-note { font-size: 13px; color: var(--tx3); line-height: 1.5; }
+    .sh-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 8px 0; }
+    ol.sh-note { padding-left: 18px; } ol.sh-note li { margin-bottom: 6px; }
+    .chips label.chip { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; min-height: 32px; }
+    textarea.field { min-height: 90px; font-family: var(--mono); font-size: 16px; }
+    table.sh-t { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    table.sh-t th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--tx3); text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--brd); }
+    table.sh-t td { padding: 8px; border-bottom: 1px solid var(--hair); vertical-align: top; color: var(--tx2); line-height: 1.45; }
+    table.sh-t td.m { font-family: var(--mono); font-size: 12.5px; color: var(--tx1); white-space: nowrap; }
+    @media (max-width: 480px) { table.sh-t td.m { white-space: normal; } }
+  </style>
+</head>
+
+<body>
+  <script src="/studio.js"></script>
+  <script src="standalone-shell.js"></script>
+  <script src="atomic/atomic.js"></script>
+  <script src="mica.js"></script>
+  <script src="autogen.js"></script>
+  <script>
+    'use strict';
+    const { $ } = Studio;
+
+    // Only what this repository contains. The original host also linked its terminal, Forge and Academy pages and
+    // its agent hub; those pages are not part of this repository.
+    const TOOLS = [
+      { name: 'Command line', href: '../../tools/README.md', sub: 'tools/symblic: check, preview, run and replay programs; english, delegate, spec, mica' },
+      { name: 'Language editor', href: '../studio/symblic.html#english', sub: 'checked English and native programs with exact checks, runs and evidence (needs a host)' },
+      { name: 'Guides', href: '../studio/symblic-guides/index.html', sub: 'start here, steps, workcards, supervisor, distillation: static pages' },
+    ];
+
+    const LANES = [
+      ['a typed answer: number, label, grid cell', 'checked English', 'tools/symblic english run FILE --dir NEW_DIR'],
+      ['an exact program you can write yourself', 'native Symblic', 'tools/symblic check|run FILE.sym --dir NEW_DIR'],
+      ['one bounded choice, extraction or proof step for a small model', 'delegate template', 'tools/symblic delegate catalog | check | run TASK.json'],
+      ['one JS/HTML file made of tested pure units', 'spec sheet', 'tools/symblic spec ... (docs/reference/SPEC-SHEETS.md)'],
+      ['a multi-file program, one self-contained statement per file', 'fresh task per line', 'tools/symblic-task start --lines FILE (needs the original host)'],
+    ];
+
+    const DEMOS = [
+      { name: 'Obsidian-style 3D graph view', href: 'demos/graphview/index.html', made: '8 strict English statements, fresh Antigravity sessions, 2026-10-08', readme: 'demos/graphview/README.md' },
+      { name: 'Kirby movement and jump (statements only; the built page is not included)', href: 'demos/kirby/prompt-executed.english.txt', made: '4 strict English statements, fresh Antigravity sessions, 2026-10-08', readme: 'records/beta-kirby-executed-v2.english.txt' },
+      { name: 'Laptop PCB explorer and maker', href: 'demos/pcb/index.html', made: 'English statements, fresh Mistral sessions, 2026-10-09', readme: 'records/other-beta-trials/beta-pcb.english.txt' },
+    ];
+
+    const RECORDS = [
+      ['beta-review-2026-10-08.md', 'the full-day user-seat review: findings T1-T9, F1-F3, E1-E7 and what was fixed'],
+      ['SYMBLIC-CRITICAL-ANALYSIS.md', 'honest post-mortem: what works, what fails, the roadmap'],
+      ['README.md', 'what every record file is and the draft vs executed statement differences'],
+      ['beta-trial-run-log.md', 'the authoritative execution log of the Kirby and Graph View trials'],
+      ['beta-graphview-executed-v2.english.txt', 'the 8 statements that built the graph view'],
+      ['beta-kirby-executed-v2.english.txt', 'the 4 statements that built Kirby'],
+    ];
+
+    function unit(label, hint) {
+      const u = document.createElement('div'); u.className = 'unit';
+      const l = document.createElement('span'); l.className = 'lbl'; l.textContent = label; u.append(l);
+      if (hint) { const p = document.createElement('p'); p.className = 'hint'; p.textContent = hint; u.append(p); }
+      return u;
+    }
+
+    function link(href, text, cls) {
+      const a = document.createElement('a'); a.href = href; a.textContent = text; if (cls) a.className = cls; return a;
+    }
+
+    function toolCards(mount, items) {
+      const grid = document.createElement('div'); grid.className = 'sh-tools';
+      for (const t of items) {
+        const c = document.createElement('div'); c.className = 'sh-tool';
+        const l = document.createElement('span'); l.className = 'lbl'; l.textContent = t.name; c.append(l);
+        const p = document.createElement('p'); p.className = 'sh-note'; p.textContent = t.sub; c.append(p);
+        c.append(link(t.href, 'open ' + t.name.toLowerCase() + ' →', 'sh-go'));
+        grid.append(c);
+      }
+      mount.append(grid);
+    }
+
+    function renderOverview(m) {
+      m.replaceChildren();
+      const u = unit('What it is', 'Symblic breaks an objective into small, checked units so that small agents and local models can build intricate things. Models propose; code decides. Every unit runs in a fresh context with only the facts it needs, and every result is checked before it counts.');
+      m.append(u);
+      const t = unit('Tools', 'What this repository ships. Each tool keeps its own page or folder.');
+      toolCards(t, TOOLS);
+      m.append(t);
+      const r = unit('Record', 'The 2026-10-08 beta test: prompts, outputs, failures and frames that play back, and three programs written entirely by fresh agent sessions.');
+      const row = document.createElement('div'); row.className = 'chips';
+      row.append(link('beta.html', 'beta gallery', 'chip'), link('#demos', 'demos', 'chip'), link('#records', 'records', 'chip'));
+      r.append(row); m.append(r);
+    }
+
+    function renderLanes(m) {
+      m.replaceChildren();
+      const u = unit('Which lane', 'Pick by the shape of the work, not by model size. Smaller units need smaller models.');
+      const wrap = document.createElement('div'); wrap.className = 'tblwrap';
+      const table = document.createElement('table'); table.className = 'sh-t';
+      const head = document.createElement('thead'); head.innerHTML = '<tr><th>work</th><th>lane</th><th>where</th></tr>'; table.append(head);
+      const body = document.createElement('tbody');
+      for (const [work, lane, where] of LANES) {
+        const tr = document.createElement('tr');
+        for (const [i, text] of [work, lane, where].entries()) { const td = document.createElement('td'); if (i === 1) td.className = 'm'; td.textContent = text; tr.append(td); }
+        body.append(tr);
+      }
+      table.append(body); wrap.append(table); u.append(wrap); m.append(u);
+      const rules = unit('Statements that work', 'What made fresh agents succeed in the beta: one statement per line, the absolute folder in every statement, one file or one concern per statement, "keeping every existing part" on edits, every interface the next line relies on named, exact counts and values, and a final statement that writes a verify file in an exact format.');
+      m.append(rules);
+    }
+
+    function renderDemos(m) {
+      m.replaceChildren();
+      const u = unit('Programs written by fresh agent sessions', 'Each demo is byte-identical to the Symblic run that produced it. They are evidence, so they keep their own look. Open them in their own page.');
+      const rows = document.createElement('div'); rows.className = 'rows';
+      for (const d of DEMOS) {
+        const r = document.createElement('div'); r.className = 'row';
+        const g = document.createElement('div'); g.className = 'grow';
+        const t = document.createElement('div'); t.className = 'ttl'; t.textContent = d.name; g.append(t);
+        const s = document.createElement('div'); s.className = 'sub'; s.textContent = d.made; g.append(s);
+        r.append(g);
+        r.append(link(d.readme, 'readme', 'btn sm ghost'));
+        r.append(link(d.href, 'open', 'btn sm acc'));
+        rows.append(r);
+      }
+      u.append(rows); m.append(u);
+      const g = unit('Beta gallery', 'The findings table, every English program, the Matrix rain and twin helix players, the OS command receipts and the task ledger.');
+      g.append(link('beta.html', 'open the gallery →', 'btn'));
+      m.append(g);
+    }
+
+    function renderRecords(m) {
+      m.replaceChildren();
+      const u = unit('Records', 'Prompts, logs, task records and analyses from the beta trials. Plain files, served as they are.');
+      const rows = document.createElement('div'); rows.className = 'rows';
+      for (const [file, what] of RECORDS) {
+        const r = document.createElement('div'); r.className = 'row';
+        const g = document.createElement('div'); g.className = 'grow';
+        const t = document.createElement('div'); t.className = 'ttl mono'; t.textContent = file; g.append(t);
+        const s = document.createElement('div'); s.className = 'sub'; s.textContent = what; g.append(s);
+        r.append(g); r.append(link('records/' + file, 'open', 'btn sm ghost'));
+        rows.append(r);
+      }
+      u.append(rows); m.append(u);
+      const all = unit('Everything', 'The full folder, including the other beta trials, screenshots and verification scripts.');
+      all.append(link('records/index.html', 'records index →', 'btn'));
+      m.append(all);
+    }
+
+    function renderAgents(m) {
+      m.replaceChildren();
+      const u = unit('For agents', 'Any command-line agent can use Symblic from a checkout of this repository. The commands below are the entry points.');
+      const code = document.createElement('pre'); code.className = 'sh-code';
+      code.textContent = [
+        'tools/symblic --help              # every Symblic command',
+        'tools/symblic lanes               # which way to hand work to models, with the statement rules',
+        'tools/symblic check FILE.sym      # diagnostics and plan; no model is called',
+        'tools/symblic-task lint LINES.txt # check statements before any agent minute is spent',
+        'tools/symblic-task start --lines LINES.txt --root /srv/symblic/projects/NAME --node node-a   # needs a host',
+        'tools/symblic-task wait TASK_ID   # poll until a line needs review or the task ends (needs a host)',
+      ].join('\n');
+      u.append(code); m.append(u);
+      const n = unit('Where things land', '');
+      const kv = document.createElement('div'); kv.className = 'sh-kv';
+      kv.innerHTML = '<b>English and native runs</b> the --dir folder you name (program, calls.jsonl, replay)<br><b>task records and workspaces</b> on the host that serves the task API';
+      n.append(kv); m.append(n);
+    }
+
+    Studio.boot({
+      title: 'Symblic',
+      pages: [
+        { id: 'overview', ix: '01', name: 'Symblic', sub: 'what it is, its tools, the record', grp: 'Symblic', render: renderOverview },
+        { id: 'lanes', ix: '02', name: 'Lanes', sub: 'which tool for which work', grp: 'Symblic', render: renderLanes },
+        { id: 'demos', ix: '03', name: 'Demos', sub: 'programs written by fresh agent sessions', grp: 'Record', render: renderDemos },
+        { id: 'records', ix: '04', name: 'Records', sub: 'prompts, logs and analyses', grp: 'Record', render: renderRecords },
+        { id: 'agents', ix: '05', name: 'For agents', sub: 'the commands any CLI uses', grp: 'Use', render: renderAgents },
+        { id: 'atomic', ix: '06', name: 'Atomic', sub: 'tiny models build intricate programs; measured', grp: 'Proof', render: (m) => window.SymblicAtomic ? window.SymblicAtomic.render(m) : (m.textContent = 'The proof section did not load.') },
+        { id: 'construct', ix: '07', name: 'Construct', sub: 'objective, requirements, checked components', grp: 'Use', render: (m) => window.SymblicMica ? window.SymblicMica.render(m) : (m.textContent = 'The construction section did not load.') },
+        { id: 'autogen', ix: '08', name: 'Autogen', sub: 'self-replicating agents: candidates, regeneration, splits, handoffs, until done', grp: 'Use', render: (m) => window.SymblicAutogen ? window.SymblicAutogen.render(m) : (m.textContent = 'The autogen section did not load.') },
+      ],
+      onPage(id) {
+        if (id !== 'atomic' && window.SymblicAtomic) window.SymblicAtomic.stop();
+        if (id !== 'construct' && window.SymblicMica) window.SymblicMica.stop();
+        if (id !== 'autogen' && window.SymblicAutogen) window.SymblicAutogen.stop();
+      },
+      footLinks: '<a class="btn sm ghost" href="../studio/symblic.html#english">Language</a><a class="btn sm ghost" href="../studio/symblic-guides/index.html">Guides</a>',
+    });
+  </script>
+</body>
+
+</html>

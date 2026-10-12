@@ -1,0 +1,37 @@
+program Two yes/no questions.
+note A measurement. For each sample the program asks question A, then question B with A's answer given (from),
+note and separately B, then A with B's answer given. It counts the pairs of answers in each order and shows the
+note order effects and the QQ gap of the order module (symblic/lang/library/order.sym).
+note It measures the applicators it is run with, under these words and settings. It says nothing about people
+note or about other prompts. It needs many samples to mean anything: with the default six, one changed answer
+note moves a share by 1/6, and a QQ gap of 0 is easily reached by chance.
+note Every ask runs at temperature 0.7, because at 0 a local model gives the same answer to the same request, and
+note with seed = the sample number, because identical requests in one run are answered once and then reused.
+note Four asks per sample: a run's default limit of 400 asks allows 100 samples. The program name and the ask
+note names reach the applicators, so they are kept neutral.
+
+import order.
+use temperature=0.7.
+
+given question_a: Text = "Is a tomato a fruit?"
+given question_b: Text = "Is a tomato a vegetable?"
+given samples: List of Int = 1..6.
+assert len(samples) > 0 and len(unique(samples)) = len(samples).
+
+for s in samples do
+  ask ab_a: Bool "{question_a}" with seed=s
+  ask ab_b: Bool "You were asked '{question_a}' and your answer is ab_a. {question_b}" from ab_a with seed=s
+  ask ba_b: Bool "{question_b}" with seed=s
+  ask ba_a: Bool "You were asked '{question_b}' and your answer is ba_b. {question_a}" from ba_b with seed=s
+end.
+
+note The counts of one order, {yy, yn, ny, nn}: the first letter is the answer to A, the second the answer to B.
+function tally(a: List of Bool, b: List of Bool) -> Counts = {yy: count(zip(a, b), [true, true]), yn: count(zip(a, b), [true, false]), ny: count(zip(a, b), [false, true]), nn: count(zip(a, b), [false, false])}.
+let ab = tally(ab_a, ab_b).
+let ba = tally(ba_a, ba_b).
+
+show ab as "counts when A was asked first".
+show ba as "counts when B was asked first".
+show order.order_effect_a(ab, ba) as "order effect on A: yes share, A first minus B first".
+show order.order_effect_b(ab, ba) as "order effect on B: yes share, A first minus B first".
+show order.qq_gap(ab, ba) as "QQ gap: share of different answers, A first minus B first".

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Background: Deep Solid Black -->
+  <rect width="512" height="512" fill="#000000" />
+
+  <!-- Symblic Categorical Commutative Logic Mark:
+       Pure orthogonal vectors representing transitive deduction and Curry-Howard proofs,
+       woven into a razor-sharp geometric 'S'. -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="26" stroke-linecap="square">
+    <!-- Top bracket pointing right and down -->
+    <path d="M 330 140 L 170 140 L 170 256 L 342 256 L 342 372 L 182 372" />
+  </g>
+
+  <!-- Formal logic assertion markers -->
+  <!-- Top terminal marker -->
+  <rect x="330" y="127" width="26" height="26" fill="#FFFFFF" />
+  
+  <!-- Bottom terminal marker / Statement Point -->
+  <circle cx="182" cy="372" r="16" fill="#FFFFFF" />
+  
+  <!-- Turnstile Entailment Notch at the core -->
+  <line x1="170" y1="230" x2="170" y2="282" stroke="#FFFFFF" stroke-width="12" />
+  <line x1="342" y1="230" x2="342" y2="282" stroke="#FFFFFF" stroke-width="12" />
+</svg>

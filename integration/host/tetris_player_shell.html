@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!--
+  Host-only (moved from kits/tetris/demo/index.html): the original host dashboard framed the model-built
+  tetris.html (kits/tetris/results/tetris-90ffd27f92ab.html, served there as ./game.html) in this page, scaled it
+  to the screen and added touch buttons. It needs the host's shared page library (/studio.js, /studio.css and
+  its page framework), which are not part of this repository, so it does not run here. Links to the host's other
+  pages were removed. To play the game,
+  open the result page itself in a browser.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Tetris</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#f4f1eb">
+  <link rel="apple-touch-icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23f4f1eb'/%3E%3Cpath d='M20 28h60v22H61v22H39V50H20z' fill='none' stroke='%231a1a1a' stroke-width='5' stroke-linejoin='round'/%3E%3Crect x='42' y='53' width='16' height='16' fill='%23ff6b35'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/studio.css">
+  <style>
+    /* tetris/game.html is the model-built file, served byte for byte: this host frames it, scales it to the
+       screen, supplies native inputs and reads status without changing game rules. The game is always dark, so its frame is dark in both themes. */
+    .pager { display: none; }
+    .tt-h { font-size: 22px; font-weight: 500; line-height: 1.25; margin: 4px 0 6px; }
+    #ttHead a, .tt-more a { color: var(--acc-tx); }
+    .tt-screen { position: relative; margin: 14px auto 0; overflow: hidden; background: #111; border: 1px solid var(--brd);
+      border-radius: 3px; touch-action: manipulation; }
+    .tt-screen iframe { position: absolute; left: 0; top: 0; width: 528px; height: 632px; border: 0; display: block;
+      transform-origin: 0 0; pointer-events: none; }
+    .tt-dead { display: none; position: absolute; inset: 0; flex-direction: column; gap: 10px; align-items: center;
+      justify-content: center; color: #eee; font-size: 13px; text-align: center; padding: 16px; }
+    .tt-dead .btn { color: #eee; border-color: #555; }
+    .tt-screen.dead .tt-dead { display: flex; }
+    .tt-screen.dead iframe { visibility: hidden; }
+    .tt-pad { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; max-width: 440px; margin: 14px auto 0;
+      touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+    .tt-pad .btn { min-height: 56px; padding: 0 4px; font-size: 20px; letter-spacing: 0; touch-action: none; }
+    .tt-pad .btn svg { width: 22px; height: 22px; vertical-align: middle; }
+    .tt-pad .btn.word { font-size: 11px; letter-spacing: .14em; }
+    .tt-pad .btn.on { border-color: var(--acc); background: var(--bg2); }
+    .tt-more { max-width: 440px; margin: 18px auto 0; display: grid; gap: 10px; }
+  </style>
+</head>
+
+<body>
+  <script src="/studio.js"></script>
+  <script>
+    'use strict';
+    const { $ } = Studio;
+    const W = 528, H = 632;                      // game.html's natural size: 16+300+16+180+16 by 16+600+16
+    let ready = false, fitT = null, stateT = null, refreshStatus = null;
+    const stopStatusTimer = () => { clearTimeout(stateT); stateT = null; };
+
+    function el(tag, cls, text) {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    }
+
+    // The game listens for keydown on its own document and reads e.key only: every input is a key event sent there,
+    // so the model-built handler is the only game logic that runs.
+    function send(key) {
+      const f = $('ttFrame');
+      if (!ready || !f) return;
+      const w = f.contentWindow, d = f.contentDocument;    // looked up each time: the frame may have reloaded
+      if (!w || !d) return;
+      d.dispatchEvent(new w.KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+      if (refreshStatus) refreshStatus();
+    }
+
+    // Physical keys while this page has focus. Window capture runs before studio.js's own keys (arrows step pages,
+    // 'm' opens the menu) and keeps Space and the arrows from scrolling. Shift is left out so typing '?' for the
+    // shortcut sheet does not hold a piece; C still holds.
+    const GAME_KEYS = new Set(['ArrowLeft', 'ArrowRight', 'ArrowDown', 'ArrowUp', ' ', 'x', 'X', 'z', 'Z', 'c', 'C',
+      'p', 'P', 'r', 'R']);
+    window.addEventListener('keydown', (e) => {
+      if (!GAME_KEYS.has(e.key) || e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return;
+      if (document.body.classList.contains('menu-open')) return;
+      const a = document.activeElement;
+      if (a && (/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) || a.isContentEditable)) return;
+      if (e.key === ' ' && a && a.closest && a.closest('button,a,summary')) return;   // Space presses a focused control
+      e.preventDefault();
+      e.stopPropagation();
+      send(e.key);
+    }, true);
+
+    function wire(btn, key, repeat) {
+      let t = null;
+      const stop = () => { clearTimeout(t); t = null; btn.classList.remove('on'); };
+      btn.addEventListener('pointerdown', (e) => {
+        if (e.button > 0) return;
+        e.preventDefault();                         // no focus steal, no text selection
+        try { btn.setPointerCapture(e.pointerId); } catch (_) { }
+        btn.classList.add('on');
+        send(key);
+        if (repeat) {
+          const again = (ms) => { t = setTimeout(() => { send(key); again(50); }, ms); };
+          again(170);
+        }
+      });
+      ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((ev) => btn.addEventListener(ev, stop));
+      btn.addEventListener('click', (e) => { if (e.detail === 0) send(key); });   // keyboard or switch access only
+      btn.addEventListener('contextmenu', (e) => e.preventDefault());
+    }
+
+    // Synchronous layout, never requestAnimationFrame (starved on a slow display device). The frame keeps its natural size and is
+    // scaled down to fit; never up, because the canvases ignore devicePixelRatio and would blur.
+    function fit() {
+      const box = $('ttScreen'), stage = $('stage'), head = $('ttHead'), pad = $('ttPad');
+      if (!box || !stage) return;
+      const coarse = matchMedia('(pointer: coarse)').matches;
+      const used = parseFloat(getComputedStyle(stage).paddingTop) + (head ? head.offsetHeight : 0) + 14
+        + (coarse && pad ? pad.offsetHeight + 14 : 0) + 8;
+      const s = Math.max(0.45, Math.min(1, box.parentElement.clientWidth / W, (window.innerHeight - used) / H));
+      box.style.width = Math.floor(W * s) + 'px';
+      box.style.height = Math.floor(H * s) + 'px';
+      $('ttFrame').style.transform = 'scale(' + s + ')';
+    }
+
+    // Use code-native shapes for symbols outside the bundled text font's coverage.
+    const PAD_ICONS = {
+      z: ['M3 10a9 9 0 1 1 3 7.7', 'M3 4v6h6'],
+      x: ['M21 10a9 9 0 1 0-3 7.7', 'M21 4v6h-6'],
+      ' ': ['M12 3v12', 'M7 10l5 5 5-5', 'M4 21h16'],
+    };
+    function padIcon(paths) {
+      const ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
+      for (const [name, value] of Object.entries({ viewBox:'0 0 24 24', fill:'none', stroke:'currentColor',
+        'stroke-width':'1.8', 'stroke-linecap':'round', 'stroke-linejoin':'round', 'aria-hidden':'true', focusable:'false' })) svg.setAttribute(name, value);
+      for (const d of paths) { const p = document.createElementNS(ns, 'path'); p.setAttribute('d', d); svg.append(p); }
+      return svg;
+    }
+    const PAD = [
+      ['↺', 'Rotate left', 'z', false], ['Hold', 'Hold piece', 'c', false, 'word'],
+      ['Pause', 'Pause or resume', 'p', false, 'word'], ['↻', 'Rotate right', 'x', false],
+      ['←', 'Move left', 'ArrowLeft', true], ['↓', 'Soft drop', 'ArrowDown', true],
+      ['→', 'Move right', 'ArrowRight', true], ['⤓', 'Hard drop', ' ', false],
+    ];
+
+    function render(stage) {
+      stopStatusTimer();
+      refreshStatus = null;
+      ready = false;
+      const unit = el('section', 'unit');
+      const head = el('div');
+      head.id = 'ttHead';
+      const line = el('p', 'hint', 'Written by local models (qwen3, phi4-mini, gemma3 on CPU-only machines) through Symblic, one '
+        + 'checked unit at a time from a strict spec sheet. ');
+      head.append(el('h1', 'tt-h', 'Tetris'), line);
+      const status = el('p', 'hint', 'Game status: loading.');
+      status.id = 'ttStatus';
+      status.setAttribute('role', 'status');
+      status.setAttribute('aria-live', 'polite');
+      status.setAttribute('aria-atomic', 'true');
+      head.append(status);
+
+      const box = el('div', 'tt-screen noswipe');
+      box.id = 'ttScreen';
+      const f = document.createElement('iframe');
+      f.id = 'ttFrame';
+      f.src = './game.html';
+      f.title = 'Tetris, the model-built game';
+      f.setAttribute('scrolling', 'no');
+      f.tabIndex = -1;
+      const dead = el('div', 'tt-dead', 'The game did not load.');
+      const open = el('a', 'btn sm', 'Open it on its own');
+      open.href = './game.html';
+      dead.append(open);
+      box.append(f, dead);
+      // Human-authored host presentation reads the accepted game API; the model artifact stays unchanged.
+      const readStatus = () => {
+        stopStatusTimer();
+        if (!f.isConnected || !status.isConnected || $('ttFrame') !== f) { refreshStatus = null; return; }
+        let text = 'Game status unavailable.';
+        if (ready) try {
+          const state = f.contentWindow.tetris.state();
+          const integer = n => Number.isSafeInteger(n) && n >= 0;
+          if (!state || !integer(state.score) || !integer(state.lines) || !integer(state.level) || state.level < 1
+              || typeof state.paused !== 'boolean' || typeof state.over !== 'boolean') throw new Error('Invalid game status');
+          text = 'Score ' + state.score + ' · Lines ' + state.lines + ' · Level ' + state.level
+            + ' · ' + (state.over ? 'Game over' : state.paused ? 'Paused' : 'Playing');
+        } catch (_) { /* keep the visible unavailable message; never infer a score */ }
+        if (status.textContent !== text) status.textContent = text;
+        if (!document.hidden) stateT = setTimeout(readStatus, 500);
+      };
+      refreshStatus = readStatus;
+      f.addEventListener('load', () => {
+        let ok = false;
+        try { ok = !!(f.contentWindow.tetris && typeof f.contentWindow.tetris.state === 'function'); } catch (_) { }
+        ready = ok;
+        box.classList.toggle('dead', !ok);
+        if (ok) {
+          // Metadata in this hosted document only; no edits to game.html or game rules.
+          const doc = f.contentDocument, wrap = doc && doc.getElementById('wrap');
+          if (wrap) { wrap.setAttribute('role', 'main'); wrap.setAttribute('aria-label', 'Tetris game board and preview'); }
+          for (const [id, label] of [['board', 'Tetris board'], ['side', 'Score and next-piece display']]) {
+            const canvas = doc && doc.getElementById(id);
+            if (canvas) { canvas.setAttribute('role', 'img'); canvas.setAttribute('aria-label', label); }
+          }
+        }
+        readStatus();
+        fit();
+      });
+      setTimeout(() => { if (!ready) box.classList.add('dead'); }, 10000);
+
+      const pad = el('div', 'tt-pad noswipe');
+      pad.id = 'ttPad';
+      PAD.forEach(([glyph, label, key, repeat, cls]) => {
+        const b = el('button', 'btn' + (cls ? ' ' + cls : ''), glyph);
+        b.type = 'button';
+        if (PAD_ICONS[key]) { b.textContent = ''; b.append(padIcon(PAD_ICONS[key])); }
+        b.setAttribute('aria-label', label);
+        b.setAttribute('aria-keyshortcuts', key === ' ' ? 'Space' : key);
+        wire(b, key, repeat);
+        pad.append(b);
+      });
+
+      const more = el('div', 'tt-more');
+      const restart = el('button', 'btn word', 'Restart · hold');
+      restart.type = 'button';
+      Studio.confirmHold(restart, () => send('r'), { ms: 700 });
+      const raw = el('a', 'hint', 'The unmodified model-built file');
+      raw.href = './game.html';
+      more.append(restart, el('p', 'hint', 'Keys: ← → move · ↓ soft drop · Space hard drop · ↑ or X / Z rotate · C hold · '
+        + 'P pause · R restart.'), raw);
+      unit.append(head, box, pad, more);
+      stage.append(unit);
+      fit();
+    }
+
+    Studio.boot({
+      title: 'Tetris',
+      pages: [{ id: 'play', ix: '01', name: 'Tetris', sub: 'written by local models from a spec sheet', grp: 'Play', render }],
+      shortcuts: [{ keys: '← →', does: 'Move' }, { keys: '↓', does: 'Soft drop' }, { keys: 'Space', does: 'Hard drop' },
+        { keys: '↑ or X · Z', does: 'Rotate right · left' }, { keys: 'C', does: 'Hold' }, { keys: 'P', does: 'Pause' },
+        { keys: 'R', does: 'Restart' }],
+      onBoot() { setTimeout(fit, 1300); },         // again once studio.js has dropped its entrance animation
+    });
+    const refit = () => { clearTimeout(fitT); fitT = setTimeout(fit, 80); };
+    window.addEventListener('resize', refit);
+    window.addEventListener('orientationchange', refit);
+    window.addEventListener('pagehide', stopStatusTimer);
+    window.addEventListener('pageshow', () => { if (refreshStatus) refreshStatus(); });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopStatusTimer(); else if (refreshStatus) refreshStatus();
+    });
+  </script>
+</body>
+
+</html>

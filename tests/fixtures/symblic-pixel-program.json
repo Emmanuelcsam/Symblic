@@ -1,0 +1,630 @@
+{
+  "test_only": true,
+  "source": "STATEMENT ZERO ONE: A display canvas is defined as a two-dimensional grid composed of eight hundred columns and six hundred rows of individual picture elements.\n\nSTATEMENT ZERO TWO: The columns are ordered horizontally from left to right, indexed consecutively starting at zero for the leftmost column and ending at seven hundred ninety-nine for the rightmost column.\n\nSTATEMENT ZERO THREE: The rows are ordered vertically from top to bottom, indexed consecutively starting at zero for the topmost row and ending at five hundred ninety-nine for the bottommost row.\n\nSTATEMENT ZERO FOUR: Every individual picture element on the canvas is uniquely identified by an ordered pair consisting of its horizontal column index and its vertical row index.\n\nSTATEMENT ZERO FIVE: The total number of picture elements constituting the canvas is four hundred eighty thousand, calculated as eight hundred multiplied by six hundred.\n\nSTATEMENT ZERO SIX: Every picture element possesses three independent primary color channels: a red channel, a green channel, and a blue channel.\n\nSTATEMENT ZERO SEVEN: Each primary color channel is capable of holding an integer intensity level ranging from a minimum of zero up to a maximum of two hundred fifty-five.\n\nSTATEMENT ZERO EIGHT: The color black is defined as the state wherein the red channel is zero, the green channel is zero, and the blue channel is zero.\n\nSTATEMENT ZERO NINE: The color white is defined as the state wherein the red channel is two hundred fifty-five, the green channel is two hundred fifty-five, and the blue channel is two hundred fifty-five.\n\nSTATEMENT TEN: Under the law of non-contradiction, an individual picture element at any single moment must be rendered exclusively in the black state or exclusively in the white state, and cannot exist in both states simultaneously, nor in any intermediate state.\n\nSTATEMENT ELEVEN: A solid circular dot is defined by a horizontal center column index, a vertical center row index, and an invariant boundary radius of five units.\n\nSTATEMENT TWELVE: For any given picture element, the horizontal difference is defined as the element column index minus the center column index.\n\nSTATEMENT THIRTEEN: For any given picture element, the vertical difference is defined as the element row index minus the center row index.\n\nSTATEMENT FOURTEEN: For any given picture element, the squared separation is defined as the horizontal difference multiplied by itself added to the vertical difference multiplied by itself.\n\nSTATEMENT FIFTEEN: A picture element belongs to the interior of the circular dot if and only if its squared separation from the center is less than or equal to twenty-five.\n\nSTATEMENT SIXTEEN: Setting the canvas to an empty background requires assigning every one of the four hundred eighty thousand picture elements to the black state.\n\nSTATEMENT SEVENTEEN: Drawing the circular dot requires assigning every picture element belonging to the interior of the dot to the white state.\n\nSTATEMENT EIGHTEEN: The progression of execution is partitioned into an infinite succession of discrete temporal frames, beginning at an initial frame and advancing frame by frame without omission.\n\nSTATEMENT NINETEEN: For the initial frame, the horizontal center column index of the circular dot is set to zero.\n\nSTATEMENT TWENTY: For the initial frame, the vertical center row index of the circular dot is set to three hundred.\n\nSTATEMENT TWENTY-ONE: Across every frame of execution without exception, the vertical center row index remains fixed at three hundred, guaranteeing that vertical displacement is zero.\n\nSTATEMENT TWENTY-TWO: If the horizontal center column index of the current frame is seven hundred ninety-nine, the horizontal center column index for the immediately subsequent frame is assigned zero.\n\nSTATEMENT TWENTY-THREE: If the horizontal center column index of the current frame is strictly less than seven hundred ninety-nine, the horizontal center column index for the immediately subsequent frame is assigned the current horizontal center column index plus one.\n\nSTATEMENT TWENTY-FOUR: Execution of the program requires initializing an active, visible graphical presentation window on the operating host system.\n\nSTATEMENT TWENTY-FIVE: The viewport of the visible graphical presentation window must measure exactly eight hundred physical display pixels in horizontal width and six hundred physical display pixels in vertical height.\n\nSTATEMENT TWENTY-SIX: The graphical presentation window must be registered with the host operating system display server so that its pixel buffer is presented visibly on an attached physical monitor.\n\nSTATEMENT TWENTY-SEVEN: Each picture element of the canvas grid corresponds in a direct, one-to-one relationship with the physical screen pixel sharing the identical column and row coordinates within the visible window.\n\nSTATEMENT TWENTY-EIGHT: Assigning a picture element to the white state requires emitting physical light from the corresponding screen pixel by driving its hardware red, green, and blue components to maximum intensity.\n\nSTATEMENT TWENTY-NINE: Assigning a picture element to the black state requires emitting no physical light from the corresponding screen pixel by driving its hardware red, green, and blue components to minimum zero intensity.\n\nSTATEMENT THIRTY: In each frame, updating the state consists of performing the following distinct actions in strict sequential order: first, computing the horizontal center column index for the frame; second, clearing the entire canvas to the black state; third, setting all elements satisfying the interior dot condition to the white state.\n\nSTATEMENT THIRTY-ONE: Immediately following the third step of statement thirty, the memory buffer containing the canvas picture elements must be copied directly to the active visible graphical presentation window.\n\nSTATEMENT THIRTY-TWO: The window presentation operation must execute a complete buffer swap or refresh call, forcing the rendered frame into visible emission on the physical display before any subsequent frame calculation commences.\n\nSTATEMENT THIRTY-THREE: A hardware timer delay of one sixtieth of a second must elapse between the presentation of the current frame and the processing of the subsequent frame to constrain playback to a steady, observable speed.\n\nSTATEMENT THIRTY-FOUR: Continuous cycling through statements thirty, thirty-one, thirty-two, and thirty-three forces the visible emission of an isolated white circular spot translating continuously from left to right across a black field on a physical display monitor.\n",
+  "presentation": {
+    "kind": "binary-pixel-program",
+    "version": 1,
+    "width": 800,
+    "height": 600,
+    "radius": 5,
+    "center_y": 300,
+    "initial_x": 0,
+    "delay_seconds": {
+      "numerator": 1,
+      "denominator": 60
+    },
+    "min_delay_ms": 16.666666666666668,
+    "implementation_label": "implementation.js",
+    "functions": [
+      "delta",
+      "square",
+      "separation",
+      "inside",
+      "nextX",
+      "bounds",
+      "whitePixels",
+      "clearPixels",
+      "drawPixels"
+    ],
+    "dependencies": {
+      "delta": [],
+      "square": [],
+      "separation": [
+        "square"
+      ],
+      "inside": [
+        "delta",
+        "separation"
+      ],
+      "nextX": [],
+      "bounds": [],
+      "whitePixels": [
+        "bounds",
+        "inside"
+      ],
+      "clearPixels": [],
+      "drawPixels": [
+        "whitePixels"
+      ]
+    },
+    "buffer": {
+      "format": "binary-row-major",
+      "off": 0,
+      "on": 1,
+      "count": 480000
+    },
+    "color": {
+      "black": [
+        0,
+        0,
+        0
+      ],
+      "white": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 255
+    },
+    "sequence": [
+      "compute_column",
+      "clear",
+      "draw",
+      "present",
+      "presentation_opportunity",
+      "delay"
+    ],
+    "future_frame_precomputation": false,
+    "clause_obligations": [
+      {
+        "statement": 1,
+        "label": "ZERO ONE",
+        "text": "STATEMENT ZERO ONE: A display canvas is defined as a two-dimensional grid composed of eight hundred columns and six hundred rows of individual picture elements.",
+        "line": 1,
+        "col": 1,
+        "end_line": 1,
+        "end_col": 160,
+        "model_units": [
+          "bounds",
+          "whitePixels"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 2,
+        "label": "ZERO TWO",
+        "text": "STATEMENT ZERO TWO: The columns are ordered horizontally from left to right, indexed consecutively starting at zero for the leftmost column and ending at seven hundred ninety-nine for the rightmost column.",
+        "line": 3,
+        "col": 1,
+        "end_line": 3,
+        "end_col": 205,
+        "model_units": [
+          "bounds",
+          "whitePixels"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 3,
+        "label": "ZERO THREE",
+        "text": "STATEMENT ZERO THREE: The rows are ordered vertically from top to bottom, indexed consecutively starting at zero for the topmost row and ending at five hundred ninety-nine for the bottommost row.",
+        "line": 5,
+        "col": 1,
+        "end_line": 5,
+        "end_col": 195,
+        "model_units": [
+          "bounds",
+          "whitePixels"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 4,
+        "label": "ZERO FOUR",
+        "text": "STATEMENT ZERO FOUR: Every individual picture element on the canvas is uniquely identified by an ordered pair consisting of its horizontal column index and its vertical row index.",
+        "line": 7,
+        "col": 1,
+        "end_line": 7,
+        "end_col": 179,
+        "model_units": [
+          "whitePixels"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 5,
+        "label": "ZERO FIVE",
+        "text": "STATEMENT ZERO FIVE: The total number of picture elements constituting the canvas is four hundred eighty thousand, calculated as eight hundred multiplied by six hundred.",
+        "line": 9,
+        "col": 1,
+        "end_line": 9,
+        "end_col": 169,
+        "model_units": [
+          "clearPixels"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 6,
+        "label": "ZERO SIX",
+        "text": "STATEMENT ZERO SIX: Every picture element possesses three independent primary color channels: a red channel, a green channel, and a blue channel.",
+        "line": 11,
+        "col": 1,
+        "end_line": 11,
+        "end_col": 145,
+        "model_units": [],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 7,
+        "label": "ZERO SEVEN",
+        "text": "STATEMENT ZERO SEVEN: Each primary color channel is capable of holding an integer intensity level ranging from a minimum of zero up to a maximum of two hundred fifty-five.",
+        "line": 13,
+        "col": 1,
+        "end_line": 13,
+        "end_col": 171,
+        "model_units": [],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 8,
+        "label": "ZERO EIGHT",
+        "text": "STATEMENT ZERO EIGHT: The color black is defined as the state wherein the red channel is zero, the green channel is zero, and the blue channel is zero.",
+        "line": 15,
+        "col": 1,
+        "end_line": 15,
+        "end_col": 151,
+        "model_units": [
+          "clearPixels"
+        ],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 9,
+        "label": "ZERO NINE",
+        "text": "STATEMENT ZERO NINE: The color white is defined as the state wherein the red channel is two hundred fifty-five, the green channel is two hundred fifty-five, and the blue channel is two hundred fifty-five.",
+        "line": 17,
+        "col": 1,
+        "end_line": 17,
+        "end_col": 204,
+        "model_units": [
+          "drawPixels"
+        ],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 10,
+        "label": "TEN",
+        "text": "STATEMENT TEN: Under the law of non-contradiction, an individual picture element at any single moment must be rendered exclusively in the black state or exclusively in the white state, and cannot exist in both states simultaneously, nor in any intermediate state.",
+        "line": 19,
+        "col": 1,
+        "end_line": 19,
+        "end_col": 263,
+        "model_units": [
+          "clearPixels",
+          "drawPixels"
+        ],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 11,
+        "label": "ELEVEN",
+        "text": "STATEMENT ELEVEN: A solid circular dot is defined by a horizontal center column index, a vertical center row index, and an invariant boundary radius of five units.",
+        "line": 21,
+        "col": 1,
+        "end_line": 21,
+        "end_col": 163,
+        "model_units": [
+          "inside",
+          "bounds",
+          "whitePixels"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 12,
+        "label": "TWELVE",
+        "text": "STATEMENT TWELVE: For any given picture element, the horizontal difference is defined as the element column index minus the center column index.",
+        "line": 23,
+        "col": 1,
+        "end_line": 23,
+        "end_col": 144,
+        "model_units": [
+          "delta",
+          "inside"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 13,
+        "label": "THIRTEEN",
+        "text": "STATEMENT THIRTEEN: For any given picture element, the vertical difference is defined as the element row index minus the center row index.",
+        "line": 25,
+        "col": 1,
+        "end_line": 25,
+        "end_col": 138,
+        "model_units": [
+          "delta",
+          "inside"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 14,
+        "label": "FOURTEEN",
+        "text": "STATEMENT FOURTEEN: For any given picture element, the squared separation is defined as the horizontal difference multiplied by itself added to the vertical difference multiplied by itself.",
+        "line": 27,
+        "col": 1,
+        "end_line": 27,
+        "end_col": 189,
+        "model_units": [
+          "square",
+          "separation",
+          "inside"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 15,
+        "label": "FIFTEEN",
+        "text": "STATEMENT FIFTEEN: A picture element belongs to the interior of the circular dot if and only if its squared separation from the center is less than or equal to twenty-five.",
+        "line": 29,
+        "col": 1,
+        "end_line": 29,
+        "end_col": 172,
+        "model_units": [
+          "inside",
+          "bounds",
+          "whitePixels",
+          "drawPixels"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 16,
+        "label": "SIXTEEN",
+        "text": "STATEMENT SIXTEEN: Setting the canvas to an empty background requires assigning every one of the four hundred eighty thousand picture elements to the black state.",
+        "line": 31,
+        "col": 1,
+        "end_line": 31,
+        "end_col": 162,
+        "model_units": [
+          "clearPixels"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 17,
+        "label": "SEVENTEEN",
+        "text": "STATEMENT SEVENTEEN: Drawing the circular dot requires assigning every picture element belonging to the interior of the dot to the white state.",
+        "line": 33,
+        "col": 1,
+        "end_line": 33,
+        "end_col": 143,
+        "model_units": [
+          "bounds",
+          "whitePixels",
+          "drawPixels"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 18,
+        "label": "EIGHTEEN",
+        "text": "STATEMENT EIGHTEEN: The progression of execution is partitioned into an infinite succession of discrete temporal frames, beginning at an initial frame and advancing frame by frame without omission.",
+        "line": 35,
+        "col": 1,
+        "end_line": 35,
+        "end_col": 197,
+        "model_units": [
+          "nextX"
+        ],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 19,
+        "label": "NINETEEN",
+        "text": "STATEMENT NINETEEN: For the initial frame, the horizontal center column index of the circular dot is set to zero.",
+        "line": 37,
+        "col": 1,
+        "end_line": 37,
+        "end_col": 113,
+        "model_units": [
+          "nextX"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 20,
+        "label": "TWENTY",
+        "text": "STATEMENT TWENTY: For the initial frame, the vertical center row index of the circular dot is set to three hundred.",
+        "line": 39,
+        "col": 1,
+        "end_line": 39,
+        "end_col": 115,
+        "model_units": [],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 21,
+        "label": "TWENTY-ONE",
+        "text": "STATEMENT TWENTY-ONE: Across every frame of execution without exception, the vertical center row index remains fixed at three hundred, guaranteeing that vertical displacement is zero.",
+        "line": 41,
+        "col": 1,
+        "end_line": 41,
+        "end_col": 183,
+        "model_units": [],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 22,
+        "label": "TWENTY-TWO",
+        "text": "STATEMENT TWENTY-TWO: If the horizontal center column index of the current frame is seven hundred ninety-nine, the horizontal center column index for the immediately subsequent frame is assigned zero.",
+        "line": 43,
+        "col": 1,
+        "end_line": 43,
+        "end_col": 200,
+        "model_units": [
+          "nextX"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 23,
+        "label": "TWENTY-THREE",
+        "text": "STATEMENT TWENTY-THREE: If the horizontal center column index of the current frame is strictly less than seven hundred ninety-nine, the horizontal center column index for the immediately subsequent frame is assigned the current horizontal center column index plus one.",
+        "line": 45,
+        "col": 1,
+        "end_line": 45,
+        "end_col": 268,
+        "model_units": [
+          "nextX"
+        ],
+        "host_required": false,
+        "category": "model_behavior",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 24,
+        "label": "TWENTY-FOUR",
+        "text": "STATEMENT TWENTY-FOUR: Execution of the program requires initializing an active, visible graphical presentation window on the operating host system.",
+        "line": 47,
+        "col": 1,
+        "end_line": 47,
+        "end_col": 148,
+        "model_units": [],
+        "host_required": true,
+        "category": "physical_host",
+        "status": "physical_unverified",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 25,
+        "label": "TWENTY-FIVE",
+        "text": "STATEMENT TWENTY-FIVE: The viewport of the visible graphical presentation window must measure exactly eight hundred physical display pixels in horizontal width and six hundred physical display pixels in vertical height.",
+        "line": 49,
+        "col": 1,
+        "end_line": 49,
+        "end_col": 219,
+        "model_units": [],
+        "host_required": true,
+        "category": "physical_host",
+        "status": "physical_unverified",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 26,
+        "label": "TWENTY-SIX",
+        "text": "STATEMENT TWENTY-SIX: The graphical presentation window must be registered with the host operating system display server so that its pixel buffer is presented visibly on an attached physical monitor.",
+        "line": 51,
+        "col": 1,
+        "end_line": 51,
+        "end_col": 199,
+        "model_units": [],
+        "host_required": true,
+        "category": "physical_host",
+        "status": "physical_unverified",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 27,
+        "label": "TWENTY-SEVEN",
+        "text": "STATEMENT TWENTY-SEVEN: Each picture element of the canvas grid corresponds in a direct, one-to-one relationship with the physical screen pixel sharing the identical column and row coordinates within the visible window.",
+        "line": 53,
+        "col": 1,
+        "end_line": 53,
+        "end_col": 219,
+        "model_units": [],
+        "host_required": true,
+        "category": "physical_host",
+        "status": "physical_unverified",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 28,
+        "label": "TWENTY-EIGHT",
+        "text": "STATEMENT TWENTY-EIGHT: Assigning a picture element to the white state requires emitting physical light from the corresponding screen pixel by driving its hardware red, green, and blue components to maximum intensity.",
+        "line": 55,
+        "col": 1,
+        "end_line": 55,
+        "end_col": 217,
+        "model_units": [],
+        "host_required": true,
+        "category": "physical_host",
+        "status": "physical_unverified",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 29,
+        "label": "TWENTY-NINE",
+        "text": "STATEMENT TWENTY-NINE: Assigning a picture element to the black state requires emitting no physical light from the corresponding screen pixel by driving its hardware red, green, and blue components to minimum zero intensity.",
+        "line": 57,
+        "col": 1,
+        "end_line": 57,
+        "end_col": 224,
+        "model_units": [],
+        "host_required": true,
+        "category": "physical_host",
+        "status": "physical_unverified",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 30,
+        "label": "THIRTY",
+        "text": "STATEMENT THIRTY: In each frame, updating the state consists of performing the following distinct actions in strict sequential order: first, computing the horizontal center column index for the frame; second, clearing the entire canvas to the black state; third, setting all elements satisfying the interior dot condition to the white state.",
+        "line": 59,
+        "col": 1,
+        "end_line": 59,
+        "end_col": 341,
+        "model_units": [
+          "clearPixels",
+          "drawPixels"
+        ],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 31,
+        "label": "THIRTY-ONE",
+        "text": "STATEMENT THIRTY-ONE: Immediately following the third step of statement thirty, the memory buffer containing the canvas picture elements must be copied directly to the active visible graphical presentation window.",
+        "line": 61,
+        "col": 1,
+        "end_line": 61,
+        "end_col": 213,
+        "model_units": [],
+        "host_required": true,
+        "category": "software_host",
+        "status": "not_run",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 32,
+        "label": "THIRTY-TWO",
+        "text": "STATEMENT THIRTY-TWO: The window presentation operation must execute a complete buffer swap or refresh call, forcing the rendered frame into visible emission on the physical display before any subsequent frame calculation commences.",
+        "line": 63,
+        "col": 1,
+        "end_line": 63,
+        "end_col": 232,
+        "model_units": [],
+        "host_required": true,
+        "category": "physical_host",
+        "status": "physical_unverified",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 33,
+        "label": "THIRTY-THREE",
+        "text": "STATEMENT THIRTY-THREE: A hardware timer delay of one sixtieth of a second must elapse between the presentation of the current frame and the processing of the subsequent frame to constrain playback to a steady, observable speed.",
+        "line": 65,
+        "col": 1,
+        "end_line": 65,
+        "end_col": 228,
+        "model_units": [],
+        "host_required": true,
+        "category": "physical_host",
+        "status": "physical_unverified",
+        "software_checks_are_not_physical_proof": true
+      },
+      {
+        "statement": 34,
+        "label": "THIRTY-FOUR",
+        "text": "STATEMENT THIRTY-FOUR: Continuous cycling through statements thirty, thirty-one, thirty-two, and thirty-three forces the visible emission of an isolated white circular spot translating continuously from left to right across a black field on a physical display monitor.",
+        "line": 67,
+        "col": 1,
+        "end_line": 67,
+        "end_col": 268,
+        "model_units": [],
+        "host_required": true,
+        "category": "physical_host",
+        "status": "physical_unverified",
+        "software_checks_are_not_physical_proof": true
+      }
+    ],
+    "physical_status": "unverified",
+    "software_checks_are_not_physical_proof": true,
+    "assets": {
+      "parser": {
+        "sha256": "cb3b2d439857d6e4514d23a1219f6354c23498f5fa81fdf2691a5a9e53de43c0",
+        "sri": "sha256-yzstQ5hX1uRRTSOhIZ9jVMI0mPX6gf3yaRpanlPeQ8A="
+      },
+      "vm": {
+        "sha256": "aff8958b8d46f35309b4346858e032ca7aa677fb80b37ac5579c3f8ee26ac1b8",
+        "sri": "sha256-r/iVi41G81MJtDRoWOAyynqmd/uAs3rFV5w/juJqwbg="
+      },
+      "presenter": {
+        "sha256": "06c80765457f9e55a6728c003f50509ebe6205ffde752ee84fcdc443808c60c3",
+        "sri": "sha256-BsgHZUV/nlWmcowAP1BQnr5iBf/edS7oT83EQ4CMYMM="
+      }
+    }
+  },
+  "implementation": "// TEST-ONLY CANDIDATE. Never supplied to a provider or a compiled source.\nfunction delta(pixel, center) { return pixel - center; }\nfunction square(value) { return value * value; }\nfunction separation(dx, dy) { return square(dx) + square(dy); }\nfunction inside(pixelX, pixelY, cx, cy) { return separation(delta(pixelX, cx), delta(pixelY, cy)) <= 25; }\nfunction nextX(previousX) { if (previousX === null) return 0; if (previousX === 799) return 0; return previousX + 1; }\nfunction bounds(cx, cy) { return {left: Math.max(0, cx - 5), right: Math.min(799, cx + 5), top: Math.max(0, cy - 5), bottom: Math.min(599, cy + 5)}; }\nfunction whitePixels(cx, cy) { const box = bounds(cx, cy); const result = []; for (let y = box.top; y <= box.bottom; y++) { for (let x = box.left; x <= box.right; x++) { if (inside(x, y, cx, cy)) result.push(y * 800 + x); } } return result; }\nfunction clearPixels(buffer) { buffer.fill(0); return buffer; }\nfunction drawPixels(buffer, cx, cy) { const indices = whitePixels(cx, cy); for (const index of indices) buffer[index] = 1; return buffer; }\n"
+}

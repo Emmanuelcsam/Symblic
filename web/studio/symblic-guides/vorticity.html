@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f1eb"><title>Field construction · Symblic</title>
+<link rel="stylesheet" href="guides.css"></head><body>
+<a class="guide-skip" href="#guide">Skip to guide</a>
+<header class="guide-header"><a href="../symblic.html#write">← Symblic</a><span>Guides</span><a href="../symblic.html#write">Open Write</a></header>
+<div class="guide-layout"><details class="guide-menu" open><summary>Browse guides</summary><nav aria-label="Symblic guides"><a href="index.html">Start here</a>
+<a href="editor.html">Underlines and instruction circuits</a>
+<a href="steps.html">Build one step at a time</a>
+<a href="steps-evidence.html">Small-model results</a>
+<a href="workcards.html">Workcards</a>
+<a href="supervisor.html">Supervisor</a>
+<a href="distillation.html">Training a small model</a>
+<a href="portable.html">Portable execution</a>
+<a href="vorticity.html" aria-current="page">Field construction</a></nav></details>
+<main id="guide" class="guide-prose"><h1>Constructing a finite energy witness</h1>
+<p>Select <strong>Discrete vorticity construction</strong> in the native Write examples, or run:</p>
+<pre tabindex="0" aria-label="Code example"><code>tools/symblic run examples/vorticity-construction.sym --by ollama:qwen3:4b-instruct --max-calls 30 --dir /tmp/vorticity-run</code></pre>
+<p>This applies the energy construction in the supplied <em>Energy method for the
+vorticity equation</em> to a declared, dimensionless finite graph. It is a small
+model-construction task with an independent exact checker. The continuum
+equation is <code>div(y grad(phi)) = Omega</code>, with positive <code>y = mn/B²</code>, prescribed
+potential on a nonempty boundary part and zero normal derivative elsewhere.
+Its weak form gives a negative source load; the energy is
+<code>integral(y |grad(phi)|² / 2 + phi Omega)</code>.</p>
+<p>The example chooses five equally spaced vertices, zero endpoint potentials,
+four unit edge weights and interior source loads <code>[0,-2,0]</code>. The reduced
+incidence matrix <code>D</code> maps three interior potentials to four edge differences.
+The finite stiffness is <code>A = transpose(D) W D</code> and <code>b = -loads</code>, so the reduced
+energy is <code>xᵀ A x / 2 - bᵀ x</code>. The sign of <code>b</code> is part of the check.</p>
+<p>Twenty fresh model tasks construct six independent coefficients of the symmetric
+stiffness matrix, five nontrivial LDL factors/pivots, and nine scalar substitution
+values that determine the three interior potentials.
+Each coefficient ask receives only its one or two selected incidence columns and
+the weights. It constructs one scalar weighted dot product. The host extracts
+columns and assembles the model&#39;s checked coefficients into the symmetric matrix;
+it does not supply a stiffness answer to the worker. Before the first factor ask,
+an independent assertion checks every assembled entry against the original
+incidence matrix and weights.</p>
+<p>Every ask uses medium effort and receives named inputs only. Coefficient identities,
+the complete matrix identity, factor identities, positive pivots, the stationary
+residual and the final quadratic witness are checked. A failed check retries its
+generating task once. The thirty-call host budget includes these corrections.
+The model constructs the answer: determination, solving and the optional
+constructor are disabled. The shared quadratic checker verifies the supplied
+factorization without computing it. Expected fixture answers below are not sent
+in coefficient requests.</p>
+<p>The rational record has an unrestricted signed integer numerator and a denominator
+in <code>1..100</code>. All rational-factor and substitution instructions explicitly say the numerator may be
+negative, zero, or positive, and only the denominator must be positive. The three
+pivot tasks still require a positive pivot through their equations and independent
+checks; off-diagonal factor entries retain their required signs. No expected
+numeric factor answer is inserted into a construction prompt.</p>
+<p>The final solve is also decomposed. Each worker constructs one value from only
+its named scalar inputs; prompts explicitly request multiplication then subtraction,
+division, or copying those selected values. The host checks the defining identity
+before the next worker can use it:</p>
+<div class="guide-table" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Exact check</th>
+<th>Selected inputs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>y1</code></td>
+<td><code>y1 = b1</code></td>
+<td><code>b1</code></td>
+</tr>
+<tr>
+<td><code>y2</code></td>
+<td><code>y2 + l21*y1 = b2</code></td>
+<td><code>b2, l21, y1</code></td>
+</tr>
+<tr>
+<td><code>y3</code></td>
+<td><code>y3 + l32*y2 = b3</code></td>
+<td><code>b3, l32, y2</code></td>
+</tr>
+<tr>
+<td><code>z1</code></td>
+<td><code>d1*z1 = y1</code></td>
+<td><code>y1, d1</code></td>
+</tr>
+<tr>
+<td><code>z2</code></td>
+<td><code>d2*z2 = y2</code></td>
+<td><code>y2, d2</code></td>
+</tr>
+<tr>
+<td><code>z3</code></td>
+<td><code>d3*z3 = y3</code></td>
+<td><code>y3, d3</code></td>
+</tr>
+<tr>
+<td><code>x3</code></td>
+<td><code>x3 = z3</code></td>
+<td><code>z3</code></td>
+</tr>
+<tr>
+<td><code>x2</code></td>
+<td><code>x2 + l32*x3 = z2</code></td>
+<td><code>z2, l32, x3</code></td>
+</tr>
+<tr>
+<td><code>x1</code></td>
+<td><code>x1 + l21*x2 = z1</code></td>
+<td><code>z1, l21, x2</code></td>
+</tr>
+</tbody></table>
+</div><p>The first six substitution answers use signed rational records. The three
+backward answers use <code>Int</code> for this declared integer-solution fixture. The host
+extracts <code>b1,b2,b3</code>, converts rational records to exact numbers and assembles the
+accepted answers into <code>solution</code>; it does not calculate substitution answers.
+The full <code>A*solution-b</code> check and quadratic witness verification remain independent
+of those local identities. Changing the problem can require a rational solution
+type and corresponding author contract.</p>
+<p>For the checked fixture, the full potential is <code>[0,1,2,1,0]</code>, its residual is zero,
+and its reduced energy is <code>-2</code>. The fake provider derives replies from the selected
+request data. Tests inject a wrong coefficient, corrupt matrix assembly, reject wrong forward,
+diagonal and backward proposals, and catch a corrupted assembled solution. A load
+change to <code>[0,-4,0]</code> has the integer solution <code>[2,4,2]</code> and rejects retained old
+backward answers through their identities. Solving/factorization
+functions raise if invoked. These tests establish the construction/checking path,
+not small-model success. Real model performance must be recorded separately.</p>
+<p>The earlier three-row version failed its first row check in admitted Qwen 4B run
+<code>315f88648e42</code>: both attempted rows were rejected, and no factor or solution was
+reached. Scalar run <code>8219c94f2275</code> then passed all six coefficients, the independent
+matrix check, and the first three factor entries. Its two <code>lower32</code> proposals
+both returned positive <code>2/3</code>; the exact identity required negative <code>2/3</code>, so the
+run stopped after eleven calls with no solution or final outputs. Both failures
+remain retained. The generic repeated-answer diagnostic does not establish an
+error in the author-held identity.</p>
+<p>The signed-numerator diagnostic <code>f00de8fbac95</code> then passed its one synthetic
+factor task in one fresh call and replayed from its lock with zero model calls.
+The subsequent complete signed-factor run <code>0731a75ff11c</code> passed all eleven
+coefficient/factor tasks, but its solution vectors <code>[1,1,1]</code> and <code>[1,0,1]</code> both
+failed the full residual check. It stopped after thirteen fresh calls with no
+final potential, energy or witness. Those requests contained the correct selected
+<code>A,b,L,D</code>; all three failed whole-program records remain retained.</p>
+<p>The nine scalar substitution tasks address that remaining construction boundary.
+The admitted substitution diagnostic <code>09d7ff1df692</code> completed nine tasks in ten
+fresh calls: its first <code>forward3</code> proposal was rejected and its correction passed.
+Its synthetic <code>A,b,L,D</code> were declared inputs, so that result establishes the
+substitution path only. Its recorded lock replay used zero model calls.</p>
+<p>The complete twenty-task construction then succeeded in admitted Qwen 3 4B run
+<code>ae4e46820f83</code> on 5 October 2026. All twenty fresh calls passed their checks on the
+first attempt, with no cached prefix or repairs, in 1348.82 seconds. The model
+constructed all coefficients, factors and scalar substitution answers from their
+selected inputs. The final potential was <code>[0,1,2,1,0]</code>, the residual <code>[0,0,0]</code>, and
+the exact minimum energy <code>-2</code>. The witness passed factorization, positive-pivot,
+stationarity, symmetry and unique-minimum checks for this finite quadratic.
+All twenty retained provider requests were audited for their exact selected
+contexts and unchanged model settings. The portable lock replay completed with
+zero model calls, twenty recorded replies, and matching fingerprint
+<code>4f8ee53abdc44057</code>. The three earlier whole-program failures remain retained;
+this is one positive fixture result, not a general accuracy estimate. The
+source and run receipt <span class="guide-local">(local repository: <code>evidence/2026-10-05-vorticity-construction.json</code>)</span> records
+its pins, canonical witness and replay result.</p>
+<p>This finite connected graph with fixed endpoints has a positive definite reduced
+operator. It does not establish continuum convergence, dimensional plasma
+calibration, a GPU implementation or general pure-Neumann solvability. Those
+extensions need their own geometry, units, compatibility conditions and validation.</p>
+<footer><a href="index.html">Start here</a> · <a href="../symblic.html#write">Open Write</a><p>Commands and examples run only when you choose to execute them.</p></footer></main></div>
+</body></html>

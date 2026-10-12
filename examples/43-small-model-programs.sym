@@ -1,0 +1,38 @@
+program Small model programs checked playback.
+use profile=verified, context=none, determine=false, solve=false.
+note Rechecks exact Qwen-written game-state and aggregation functions with no model calls.
+let snake = """function stepSnake(body, dx, dy, grow) {{
+  const head = [body[0][0] + dx, body[0][1] + dy];
+  const newBody = [head];
+  const len = body.length;
+  const copyEnd = grow ? len : len - 1;
+  for (let i = 0; i < copyEnd; i++) {{
+    newBody.push([body[i][0], body[i][1]]);
+  }}
+  return newBody;
+}}""".
+let snake_checks = js_test(snake,[["""stepSnake([[2,2],[1,2]],1,0,false)""","""[[3,2],[2,2]]"""], ["""stepSnake([[2,2],[1,2]],0,-1,true)""","""[[2,1],[2,2],[1,2]]"""], ["""stepSnake([[0,0]],-1,0,false)""","""[[-1,0]]"""], ["""(()=>{{const a=[[2,2],[1,2]],b=stepSnake(a,1,0,true);b[1][0]=99;return JSON.stringify(a)==="[[2,2],[1,2]]";}})()""","""true"""], ["""stepSnake([[3,4],[3,3],[3,2]],0,1,false)""","""[[3,5],[3,4],[3,3]]"""], ["""stepSnake([[3,4],[3,3]],-1,0,true)""","""[[2,4],[3,4],[3,3]]"""], ["""(()=>{{const a=Object.freeze([Object.freeze([4,8]),Object.freeze([4,7])]);const b=stepSnake(a,1,0,false);return JSON.stringify(b)==="[[5,8],[4,8]]";}})()""","""true"""], ["""(()=>{{for(let n=1;n<=8;n++)for(const grow of [false,true]){{const a=Array.from({{length:n}},(_,i)=>[0,-i]),before=JSON.stringify(a),b=stepSnake(a,1,0,grow);if(b.length!==n+(grow?1:0)||new Set(b).size!==b.length||b.some(c=>a.includes(c))||JSON.stringify(a)!==before)return false;}}return true;}})()""","""true"""]]).
+assert snake_checks.passed because snake_checks.report.
+show snake_checks as "snake finite checks".
+let totals = """function totals(rows) {{
+  const map = new Map();
+  for (const row of rows) {{
+    const category = row.category;
+    const cents = row.cents;
+    if (category === undefined || category === null) {{
+      category = '';
+    }}
+    map.set(category, (map.get(category) || 0) + cents);
+  }}
+  return Array.from(map.entries()).sort((a, b) => {{
+    const aCat = a[0], bCat = b[0];
+    for (let i = 0; i < Math.min(aCat.length, bCat.length); i++) {{
+      const aCode = aCat.codePointAt(i), bCode = bCat.codePointAt(i);
+      if (aCode !== bCode) return aCode - bCode;
+    }}
+    return aCat.length - bCat.length;
+  }}).map(([category, totalCents]) => [category, totalCents]);
+}}""".
+let totals_checks = js_test(totals,[["""totals([])""","""[]"""], ["""totals([{{category:"b",cents:4}},{{category:"a",cents:2}},{{category:"b",cents:-1}}])""","""[["a",2],["b",3]]"""], ["""totals([{{category:"__proto__",cents:7}},{{category:"constructor",cents:3}},{{category:"__proto__",cents:-2}}])""","""[["__proto__",5],["constructor",3]]"""], ["""totals([{{category:"a",cents:0}}])""","""[["a",0]]"""], ["""totals([{{category:"",cents:2}},{{category:"",cents:-5}},{{category:"a",cents:0}}])""","""[["",-3],["a",0]]"""], ["""totals([{{category:"𐀀",cents:2}},{{category:"",cents:1}},{{category:"a",cents:3}},{{category:"aa",cents:4}}])""","""[["a",3],["aa",4],["",1],["𐀀",2]]"""], ["""(()=>{{const a=Object.freeze([Object.freeze({{category:"x",cents:8}}),Object.freeze({{category:"x",cents:-3}})]);return JSON.stringify(totals(a))==='[["x",5]]';}})()""","""true"""]]).
+assert totals_checks.passed because totals_checks.report.
+show totals_checks as "totals finite checks".

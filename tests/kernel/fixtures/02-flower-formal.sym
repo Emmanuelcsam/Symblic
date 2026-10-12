@@ -1,0 +1,14 @@
+program Formal flower.
+note A flower written entirely as formal statements. No model is involved, so every applicator draws the same bytes.
+
+define Shape as one of {round, pointed, heart, teardrop, spatula, fringed}.
+let fib = [1, 1, 2, 3, 5, 8, 13, 21].
+let petals = fib[6].                       # the sixth Fibonacci number (Symblic indexes from 1)
+assert petals = 8.
+let shape: Shape = "pointed".
+let layers = 2.
+let rotation = 360 / petals / 2.
+let spec = {petals: petals, shape: shape, layers: layers, color: "violet", center: "gold",
+            length: 9 / 10, width: 1 / 2, rotation: rotation, leaves: 2, stem: true}.
+draw flower(spec) as "formal-flower.svg".
+show hash(flower(spec)) as "drawing fingerprint".

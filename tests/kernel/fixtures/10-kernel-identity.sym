@@ -1,0 +1,22 @@
+program Kernel identity.
+note Everything here is decided by the kernel: exact rationals, Decimal trigonometry (no platform libm), Datalog and drawings. Run it on any machine: the fingerprint must be the same.
+
+let big = 2 ^ 521 - 1.
+assert is_prime(31) and not is_prime(91).
+let harmonic = sum([1 / n for n in 1..60]).
+let roots = [round(sqrt(n), 20) for n in 1..30].
+let waves = [round(sin(radians(d)), 25) for d in 0..360 if d mod 15 = 0].
+let growth = round(exp(1 / 3) * ln(17), 25).
+let golden = (1 + sqrt(5)) / 2.
+assert round(golden ^ 2 - golden, 20) = 1.
+let primes = [p for p in 2..400 if is_prime(p)].
+let stats = {mean: mean(primes), median: median(primes), count: len(primes)}.
+fact edge(1, 2), edge(2, 3), edge(3, 5), edge(5, 8), edge(8, 13), edge(13, 1).
+rule reach(X, Y) if edge(X, Y).
+rule reach(X, Z) if edge(X, Y) and reach(Y, Z).
+let cycle = query reach(1, N).
+assert 1 in cycle.
+draw flower(petals=13, color="orange", shape="fringed", layers=3, center="chocolate") as "fringed.svg".
+draw rose(k=7, color="violet") as "rose.svg".
+draw polygon(sides=11, color="teal") as "hendecagon.svg".
+show [hash(big), hash(harmonic), hash(roots), hash(waves), hash(growth), hash(stats), hash(cycle)] as "kernel fingerprints".

@@ -1,0 +1,11 @@
+{
+  "template": "proof",
+  "calls": 6,
+  "params": {
+    "premises": "a: \"A\"\nrule: \"A\" implies \"B\"",
+    "goal": "\"B\"",
+    "certificate_format": "incremental",
+    "inference_format": "command",
+    "step_limit": 3
+  }
+}

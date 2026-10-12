@@ -1,0 +1,7 @@
+pcb-data.js: pass
+pcb-parts.js: pass
+pcb-render.js: pass
+pcb-input.js: pass
+pcb-info.js: pass
+pcb-maker.js: pass
+syntax: 6 of 6 pass

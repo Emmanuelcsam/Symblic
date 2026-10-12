@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f1eb"><title>Start here · Symblic</title>
+<link rel="stylesheet" href="guides.css"></head><body>
+<a class="guide-skip" href="#guide">Skip to guide</a>
+<header class="guide-header"><a href="../symblic.html#write">← Symblic</a><span>Guides</span><a href="../symblic.html#write">Open Write</a></header>
+<div class="guide-layout"><details class="guide-menu" open><summary>Browse guides</summary><nav aria-label="Symblic guides"><a href="index.html" aria-current="page">Start here</a>
+<a href="editor.html">Underlines and instruction circuits</a>
+<a href="steps.html">Build one step at a time</a>
+<a href="steps-evidence.html">Small-model results</a>
+<a href="workcards.html">Workcards</a>
+<a href="supervisor.html">Supervisor</a>
+<a href="distillation.html">Training a small model</a>
+<a href="portable.html">Portable execution</a>
+<a href="vorticity.html">Field construction</a></nav></details>
+<main id="guide" class="guide-prose"><h1>Start using Symblic</h1>
+<p>For the current direct-English terminal, all agent/node choices, recovery,
+command reference and consolidated history, see the
+full Symblic record — 2026-10-06 <span class="guide-local">(local repository: <code>2026-10-06-full-symblic.md</code>)</span>.
+The focused terminal guide <span class="guide-local">(local repository: <code>TERMINAL.md</code>)</span> explains everyday use.
+For selected-device ChatGPT/Gemini asks, see Browser providers <span class="guide-local">(local repository: <code>BROWSER-PROVIDERS.md</code>)</span>:
+registered placement, installed protocol, loaded daemon and account readiness are separate checks.</p>
+<p>The language page opens <strong>English</strong> with one instruction field. Expand <strong>Agents</strong>
+to configure 1–24 mixed members, exact devices, models and individual profiles.
+Choose checked statements or project-agent tasks in that same editor. The header
+keeps English, Native and Runs visible; the expandable tool list retains all other
+views. English statements <span class="guide-local">(local repository: <code>ENGLISH-STATEMENTS.md</code>)</span> explains the two execution contracts.
+Start in Forge <span class="guide-local">(local repository: <code>FORGE.md</code>)</span> when an idea still needs decisions: its creative lenses,
+configurable proposal teams and atomic-writing coach lead to reviewed construction units.</p>
+<p>Symblic lets a model propose small typed answers while an exact interpreter handles calculations, constraints, provenance and execution. This can make a lightweight model useful on a larger task when its parts have adequate checks. It does not guarantee that any model can solve an arbitrary complex problem, or that a weak specification captures everything you intended.</p>
+<h2>Start with one checkable task</h2>
+<p>Open <strong>Native</strong> (the Write view), choose an installed model under <strong>Who applies the asks</strong>, and enter:</p>
+<pre tabindex="0" aria-label="Code example"><code>ask root: Int in 1..9 &quot;Find the positive integer whose square is nine.&quot;
+ensure root * root = 9 else retry.
+show root.</code></pre>
+<p>The editor checks source syntax as you type; <strong>Preview</strong> runs the deterministic prefix and shows where an answer is needed; <strong>Run</strong> invokes your chosen model through the admitted runner. An explicit model choice remains the choice; unavailable resources are visible failures or inconclusive checks. <strong>Choose agents…</strong> exposes advanced model, node, effort and multi-agent choices. <strong>Check the machines</strong> refreshes installed inventory without loading a model. Saved names do not by themselves establish readiness.</p>
+<p>Incorrect source is underlined in <strong>Write</strong> and <strong>English</strong>. Click a problem, or use <strong>F8</strong> and <strong>Shift+F8</strong>, to inspect it. English also shows a source-linked circuit of inputs, workers, selected memory and check gates. <a href="editor.html">Underlines and instruction circuits</a> explains the controls and what the source checks establish.</p>
+<p>The <strong>English</strong> example <strong>Moving white dot</strong> preserves the thirty-four original English statements <span class="guide-local">(local repository: <code>../../examples/english/moving-dot.english.txt</code>)</span>. Check them, choose a model, and run the build. Nine small implementation tasks pass through the ordinary native runner, JavaScript checks, and the exact browser interpreter before any completed implementation is exposed. A failed pixel build offers <strong>Retry remaining tasks</strong>: it preserves the original English and failed run, locally rechecks accepted functions, and starts a separate run for the remaining work. After the build completes, <strong>Open display</strong> runs the accepted functions on the device opening Symblic. Each frame computes its position, clears and draws the binary buffer, presents it, observes a browser rendering opportunity, then waits at least one sixtieth of a second before computing the next frame. Playback makes no model calls.</p>
+<p>This English entry is a supported, checked grammar: inconsistent quantities and unsupported clauses are refused with source diagnostics. It is not arbitrary-English understanding. The browser interprets accepted functions as bounded data and supplies the display and timer primitives. The original physical-display obligations remain visible: browser device-pixel measurements do not attest the monitor panel, RGB zero does not measure optical black, and a rendering callback does not establish completed physical scanout. The requested wait is a minimum elapsed software delay after a rendering opportunity, so it is not a promise of exactly sixty frames per second.</p>
+<p>The saved Qwen dot run (recorded on the original host; not public) completed on October 6, 2026. It retained seven rechecked functions from a failed build and generated the remaining two, with no further retries. Independent checks covered all eight hundred horizontal positions, and the live browser completed its natural wrap. Verification record <span class="guide-local">(local repository: <code>evidence/2026-10-06-english-dot.json</code>)</span> separates the software results from the unverified physical requirements. Open the saved run and choose <strong>Open display</strong>; playback makes no model calls.</p>
+<p>For a builder and critic, open <strong>Workcards</strong>, keep its square-root example, select the two models, <strong>Prepare checked team</strong>, then <strong>Open in Write</strong>. Inspect the generated source before running. Each proposal must satisfy your executable predicates and the critic; agreement cannot override a failed predicate. <a href="workcards.html">Workcards and typed program holes</a> explain the terminal interface and multiple reviewers.</p>
+<h2>Examples of useful projects</h2>
+<div class="guide-table" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Small model&#39;s part</th>
+<th>What Symblic can check or execute</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A game or terminal animation</td>
+<td>Propose a small rule, update function or display component</td>
+<td>Check examples and invariants, assemble verified parts, run bounded loops; <a href="cmatrix.html">CMatrix example</a></td>
+</tr>
+<tr>
+<td>Invoice or table processing</td>
+<td>Extract one explicitly typed field at a time with its source evidence</td>
+<td>Check types, ranges, arithmetic totals and supplied source spans; a matching number alone does not establish the right item</td>
+</tr>
+<tr>
+<td>Scheduling</td>
+<td>Propose assignments for a bounded set of people, rooms and times</td>
+<td>Check no overlaps, required coverage and declared availability; exact finite solvers can handle supported constraint subsets</td>
+</tr>
+<tr>
+<td>Scientific calculations</td>
+<td>Propose a finite field or parameter candidate</td>
+<td>Compute exact residuals, declared units and supported energy/certificate checks; <a href="vorticity.html">worked field construction</a></td>
+</tr>
+<tr>
+<td>Code generation</td>
+<td>Fill visible typed holes or propose one tested function</td>
+<td>Parse each choice, run finite tests, reject counterexamples and preserve failed attempts; finite tests are not a universal proof</td>
+</tr>
+<tr>
+<td>A recurring workflow</td>
+<td>Supply a checked program for each bounded step</td>
+<td>Schedule with the fleet runner, launch admitted native runs, wait, join, update durable operator state and retain uncertain outcomes; <a href="supervisor.html">Supervisor</a></td>
+</tr>
+<tr>
+<td>Specializing a small model</td>
+<td>Reuse eligible accepted examples from chosen runs</td>
+<td>Export provenance, freeze split groups, train a LoRA adapter, compare baseline and adapter on the same held-out prompts; <a href="distillation.html">distillation</a></td>
+</tr>
+</tbody></table>
+</div><p>Break a large problem into a sequence of small contracts. Give each part an explicit input, answer type, acceptance predicates and call limit. Feed only accepted results to the next stage, and keep an independent end-to-end check for the assembled result. Missing premises or incomplete checks still require your judgment.</p>
+<h2>Loops, decisions and waits</h2>
+<p>Native <code>if</code> / <code>elif</code> / <code>else</code>, Boolean implication and biconditional expressions, bounded <code>for</code> loops, functions and supported finite logic adapters are available. A <code>for</code> iteration has its own scope; it is not an unrestricted mutable <code>while</code> loop. The language does not implement every formal logic.</p>
+<p>For persistent waits and recurring execution, use a <strong>Supervisor</strong> workflow. Its <code>delay</code> and bounded <code>wait</code> steps survive browser disconnects; the fleet runner&#39;s minute reconciliation pulse makes them suitable for automation, not subsecond animation timing. Put conditions over model or tool results inside the native program so the normal flow and effect checks still apply.</p>
+<h2>What the current evidence establishes</h2>
+<p>A real two-call local Llama3.2 1B builder/critic task returned <code>3</code>, and native checks verified its square and sign. A larger Qwen3 4B finite-field example completed with 20 calls and no repairs, with a zero residual under its declared equations. These are demonstrations on named tasks, not a model ranking or a guarantee of arbitrary reasoning.</p>
+<p>The Qwen2.5 0.5B training pilot performed four actual LoRA updates. Its frozen three-item comparison changed from 0/3 to 1/3 reference agreement, and a separate physics question still failed. That small result establishes a functioning training/inference path, not a general accuracy gain. Keep failed outputs, refusals and resource limits in the record.</p>
+<p>The <strong>?</strong> help button explains individual controls. <a href="portable.html">Portable execution</a> gives the measured Linux x86/ARM subset and its exclusions.</p>
+<footer><a href="index.html">Start here</a> · <a href="../symblic.html#write">Open Write</a><p>Commands and examples run only when you choose to execute them.</p></footer></main></div>
+</body></html>

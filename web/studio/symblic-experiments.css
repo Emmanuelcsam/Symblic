@@ -1,0 +1,24 @@
+.sy-experiments { max-width: 1100px; margin: 0 auto; min-width: 0; }
+.sy-experiments .unit { min-width: 0; }
+.sy-experiments h2,.sy-experiments h3,.sy-experiments h4,.sy-experiments p,.sy-experiments li { overflow-wrap: anywhere; }
+.sy-experiments select,.sy-experiments textarea { width: 100%; max-width: 100%; box-sizing: border-box; font-size: 16px; color: var(--tx1); background: var(--bg1); border: 1px solid var(--brd); border-radius: 6px; padding: 12px; }
+.sy-experiments button { min-height: 44px; white-space: normal; }
+.sy-experiments textarea { font-family: ui-monospace,monospace; line-height: 1.5; resize: vertical; }
+.sy-experiments label { display: block; margin: 12px 0 6px; }
+.sy-experiment-actions,.sy-experiment-sources { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.sy-experiments summary { cursor: pointer; padding: 12px 0; overflow-wrap: anywhere; }
+.sy-experiments pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 420px; overflow: auto; padding: 12px; border: 1px solid var(--brd); border-radius: 6px; }
+.sy-experiment-values { display: grid; gap: 8px; margin: 10px 0 20px; }
+.sy-experiment-values>div { min-width: 0; padding: 10px 12px; border: 1px solid var(--brd); border-radius: 6px; }
+.sy-experiment-values dt { font-weight: 600; overflow-wrap: anywhere; }
+.sy-experiment-values dd { margin: 7px 0 0; min-width: 0; overflow-wrap: anywhere; }
+.sy-experiments [role=alert] { border: 1px solid currentColor; border-radius: 6px; padding: 12px; overflow-wrap: anywhere; }
+@media(max-width:600px) { .sy-experiment-actions .btn { flex: 1 1 160px; } .sy-experiment-values>div { padding: 8px; } }
+
+.sy-experiment-figure { margin: 20px 0; min-width: 0; }
+.sy-experiment-figure figcaption { font-weight: 600; margin-bottom: 8px; }
+.sy-experiment-plot { display: block; width: 100%; height: auto; color: var(--tx1); overflow: visible; }
+.sy-experiment-plot text { fill: currentColor; font: 14px system-ui,sans-serif; }
+.sy-experiment-legend { display: flex; flex-wrap: wrap; gap: 8px 20px; list-style: none; padding: 0; font-size: 13px; }
+
+@media(max-width:600px) { .sy-experiment-plot text { font-size:20px; } }

@@ -1,0 +1,13 @@
+# Checked small-model pricing page
+
+Qwen3:4b-instruct generated the unchanged [card function](plan_card.js), [CSS function](pricing_style.js), [page assembler](pricing.js) and resulting [static page](pricing.html) through Symblic, served by Ollama on a CPU-only machine. The author supplied objectives, decomposition, validators and orchestration; no candidate function or output HTML was hand repaired.
+
+The page presents Basic $0, Studio $12 and Team $30, with a responsive grid, readable text, 44px minimum buttons and a keyboard focus outline. Select buttons are static presentation controls in this example. Card tests include HTML escaping and exact prices. Native checks cover the CSS and complete page; an independent HTML parser checks structure and data, with five corrupted variants rejected. Browser evidence records actual layout, keyboard focus and contrast checks separately.
+
+The family used 16 real model calls, including failed whole-page and assembler attempts. A later attempt kept accepted helper bytes and the assembler objective unchanged while naming model-context bindings after their actual exported functions. That round passed in two calls; earlier rejections remain rejected in [evidence.json](evidence.json). This finite example does not establish general model capability. Full synthetic raw receipts were not published; their counts and hashes are published here.
+
+Run `python3 examples/small-model-pricing-20261007/verify.py` for independent checks. The playback program `examples/45-small-model-pricing.sym` (`tools/symblic run examples/45-small-model-pricing.sym --max-calls 0 --dir NEW_FOLDER`) executes the exact accepted functions and their tests with zero model calls and creates a separate current-runtime receipt.
+
+The naming failure was a manual authoring/harness pitfall. The existing spec-sheet compiler already inserts only directly used dependency code into labeled JavaScript blocks and names the real exports explicitly; its internal `unit_` binding names are not exposed as callable functions. No core parser/compiler change was needed. Manual programs should label explicit Code context with actual function names and separate direct model context from the full runtime dependency closure.
+
+Browser checks passed at 1280×800 and 390×844: three columns on desktop, stacked cards on phone, no horizontal overflow, three visible keyboard focuses, 44px minimum buttons and zero accessibility-check violations, page errors or network requests. See [desktop](pricing-desktop.png), [phone](pricing-phone.png) and the [browser receipt](browser-verification.json).

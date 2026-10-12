@@ -1,0 +1,279 @@
+{
+  "family": "frontier_F6_vending_machine_v1",
+  "hidden_tests": [
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[])",
+      "{\"credit\":0,\"outputs\":[]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"refund\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"refund\",\"amount\":0}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":100},{\"type\":\"select\",\"item\":\"A\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":100},{\"type\":\"vend\",\"item\":\"A\",\"change\":35}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":10},{\"type\":\"select\",\"item\":\"C\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":35},{\"type\":\"vend\",\"item\":\"C\",\"change\":0}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":5},{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"refund\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":100},{\"type\":\"credit\",\"credit\":105},{\"type\":\"vend\",\"item\":\"B\",\"change\":5},{\"type\":\"refund\",\"amount\":0}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"coin\",\"value\":100},{\"type\":\"select\",\"item\":\"B\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":25},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":75},{\"type\":\"credit\",\"credit\":125},{\"type\":\"vend\",\"item\":\"B\",\"change\":25}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":1},{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":0},{\"type\":\"coin\",\"value\":-5},{\"type\":\"refund\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"reject\",\"value\":1},{\"type\":\"reject\",\"value\":50},{\"type\":\"reject\",\"value\":0},{\"type\":\"reject\",\"value\":-5},{\"type\":\"refund\",\"amount\":0}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"select\",\"item\":\"__proto__\"},{\"type\":\"select\",\"item\":\"toString\"},{\"type\":\"select\",\"item\":\"\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"error\",\"reason\":\"unknown_item\"}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":100},{\"type\":\"select\",\"item\":\"constructor\"},{\"type\":\"refund\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":100},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"refund\",\"amount\":100}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":10},{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":10},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"select\",\"item\":\"C\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":10},{\"type\":\"refund\",\"amount\":10},{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":35},{\"type\":\"vend\",\"item\":\"C\",\"change\":0},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":35}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":100},{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"select\",\"item\":\"A\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":100},{\"type\":\"credit\",\"credit\":200},{\"type\":\"vend\",\"item\":\"A\",\"change\":135},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":65}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":5},{\"type\":\"select\",\"item\":\"C\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":5},{\"type\":\"credit\",\"credit\":10},{\"type\":\"credit\",\"credit\":15},{\"type\":\"credit\",\"credit\":20},{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":30},{\"type\":\"credit\",\"credit\":35},{\"type\":\"vend\",\"item\":\"C\",\"change\":0}]}"
+    ],
+    [
+      "vend({},[{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"A\"}])",
+      "{\"credit\":25,\"outputs\":[{\"type\":\"credit\",\"credit\":25},{\"type\":\"error\",\"reason\":\"unknown_item\"}]}"
+    ],
+    [
+      "vend({\"constructor\":40},[{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"constructor\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":50},{\"type\":\"vend\",\"item\":\"constructor\",\"change\":10}]}"
+    ],
+    [
+      "vend({\"X\":9007199254740991},[{\"type\":\"coin\",\"value\":100},{\"type\":\"select\",\"item\":\"X\"}])",
+      "{\"credit\":100,\"outputs\":[{\"type\":\"credit\",\"credit\":100},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":9007199254740891}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":10},{\"type\":\"coin\",\"value\":1},{\"type\":\"coin\",\"value\":25}])",
+      "{\"credit\":35,\"outputs\":[{\"type\":\"credit\",\"credit\":10},{\"type\":\"reject\",\"value\":1},{\"type\":\"credit\",\"credit\":35}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":1},{\"type\":\"select\",\"item\":\"B\"}])",
+      "{\"credit\":25,\"outputs\":[{\"type\":\"credit\",\"credit\":25},{\"type\":\"reject\",\"value\":1},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":75}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"refund\"},{\"type\":\"select\",\"item\":\"D\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"D\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"B\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"refund\",\"amount\":0},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"credit\",\"credit\":25},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"credit\",\"credit\":50},{\"type\":\"credit\",\"credit\":150},{\"type\":\"credit\",\"credit\":175},{\"type\":\"vend\",\"item\":\"B\",\"change\":75}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":100},{\"type\":\"refund\"},{\"type\":\"refund\"},{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"select\",\"item\":\"C\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":100},{\"type\":\"credit\",\"credit\":100},{\"type\":\"credit\",\"credit\":105},{\"type\":\"credit\",\"credit\":130},{\"type\":\"credit\",\"credit\":230},{\"type\":\"refund\",\"amount\":230},{\"type\":\"refund\",\"amount\":0},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":65},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":35}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"select\",\"item\":\"D\"},{\"type\":\"select\",\"item\":\"C\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":100},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":100},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":35},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":35}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":10},{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":5},{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":50},{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":25}])",
+      "{\"credit\":25,\"outputs\":[{\"type\":\"reject\",\"value\":50},{\"type\":\"credit\",\"credit\":10},{\"type\":\"reject\",\"value\":50},{\"type\":\"credit\",\"credit\":15},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":50},{\"type\":\"reject\",\"value\":50},{\"type\":\"credit\",\"credit\":40},{\"type\":\"reject\",\"value\":50},{\"type\":\"refund\",\"amount\":40},{\"type\":\"credit\",\"credit\":25}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":100},{\"type\":\"select\",\"item\":\"D\"},{\"type\":\"select\",\"item\":\"D\"},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"select\",\"item\":\"D\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":10},{\"type\":\"refund\"},{\"type\":\"refund\"},{\"type\":\"select\",\"item\":\"D\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":100},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"vend\",\"item\":\"C\",\"change\":65},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":125},{\"type\":\"credit\",\"credit\":135},{\"type\":\"refund\",\"amount\":135},{\"type\":\"refund\",\"amount\":0},{\"type\":\"error\",\"reason\":\"unknown_item\"}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":10},{\"type\":\"coin\",\"value\":1}])",
+      "{\"credit\":245,\"outputs\":[{\"type\":\"credit\",\"credit\":100},{\"type\":\"reject\",\"value\":50},{\"type\":\"credit\",\"credit\":200},{\"type\":\"credit\",\"credit\":225},{\"type\":\"credit\",\"credit\":230},{\"type\":\"credit\",\"credit\":235},{\"type\":\"credit\",\"credit\":245},{\"type\":\"reject\",\"value\":1}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"coin\",\"value\":5},{\"type\":\"select\",\"item\":\"D\"},{\"type\":\"select\",\"item\":\"D\"},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":50},{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"select\",\"item\":\"A\"}])",
+      "{\"credit\":5,\"outputs\":[{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":35},{\"type\":\"credit\",\"credit\":5},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":30},{\"type\":\"reject\",\"value\":50},{\"type\":\"reject\",\"value\":50},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":60},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":30},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":60}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":1},{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":1}])",
+      "{\"credit\":30,\"outputs\":[{\"type\":\"refund\",\"amount\":0},{\"type\":\"credit\",\"credit\":25},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":10},{\"type\":\"refund\",\"amount\":25},{\"type\":\"credit\",\"credit\":25},{\"type\":\"reject\",\"value\":1},{\"type\":\"reject\",\"value\":50},{\"type\":\"credit\",\"credit\":30},{\"type\":\"reject\",\"value\":1}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":10},{\"type\":\"coin\",\"value\":1},{\"type\":\"select\",\"item\":\"A\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"refund\",\"amount\":0},{\"type\":\"credit\",\"credit\":100},{\"type\":\"credit\",\"credit\":200},{\"type\":\"credit\",\"credit\":210},{\"type\":\"reject\",\"value\":1},{\"type\":\"vend\",\"item\":\"A\",\"change\":145}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"refund\"},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"refund\"},{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":25}])",
+      "{\"credit\":25,\"outputs\":[{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":50},{\"type\":\"credit\",\"credit\":75},{\"type\":\"vend\",\"item\":\"C\",\"change\":40},{\"type\":\"refund\",\"amount\":0},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":35},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":35},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":65},{\"type\":\"refund\",\"amount\":0},{\"type\":\"refund\",\"amount\":0},{\"type\":\"credit\",\"credit\":25}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":10},{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"select\",\"item\":\"C\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":65},{\"type\":\"refund\",\"amount\":0},{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":35},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":30},{\"type\":\"vend\",\"item\":\"C\",\"change\":0}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"coin\",\"value\":10},{\"type\":\"coin\",\"value\":10},{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":100},{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":100}])",
+      "{\"credit\":100,\"outputs\":[{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":35},{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":50},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":50},{\"type\":\"credit\",\"credit\":60},{\"type\":\"credit\",\"credit\":70},{\"type\":\"reject\",\"value\":50},{\"type\":\"credit\",\"credit\":170},{\"type\":\"refund\",\"amount\":170},{\"type\":\"credit\",\"credit\":100}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":50}])",
+      "{\"credit\":30,\"outputs\":[{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":100},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":65},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":100},{\"type\":\"credit\",\"credit\":25},{\"type\":\"reject\",\"value\":50},{\"type\":\"credit\",\"credit\":30},{\"type\":\"reject\",\"value\":50}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":10}])",
+      "{\"credit\":160,\"outputs\":[{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":125},{\"type\":\"credit\",\"credit\":150},{\"type\":\"credit\",\"credit\":160}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":5},{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":5},{\"type\":\"coin\",\"value\":1},{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":50},{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"coin\",\"value\":1}])",
+      "{\"credit\":35,\"outputs\":[{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":30},{\"type\":\"refund\",\"amount\":30},{\"type\":\"credit\",\"credit\":5},{\"type\":\"credit\",\"credit\":10},{\"type\":\"reject\",\"value\":1},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":90},{\"type\":\"credit\",\"credit\":35},{\"type\":\"reject\",\"value\":50},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":30},{\"type\":\"reject\",\"value\":1}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":100},{\"type\":\"refund\"},{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"D\"},{\"type\":\"select\",\"item\":\"C\"},{\"type\":\"select\",\"item\":\"B\"},{\"type\":\"coin\",\"value\":100}])",
+      "{\"credit\":100,\"outputs\":[{\"type\":\"credit\",\"credit\":100},{\"type\":\"refund\",\"amount\":100},{\"type\":\"credit\",\"credit\":100},{\"type\":\"credit\",\"credit\":125},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"vend\",\"item\":\"C\",\"change\":90},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":100},{\"type\":\"credit\",\"credit\":100}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":50},{\"type\":\"coin\",\"value\":100},{\"type\":\"coin\",\"value\":1},{\"type\":\"select\",\"item\":\"C\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"reject\",\"value\":50},{\"type\":\"credit\",\"credit\":100},{\"type\":\"reject\",\"value\":1},{\"type\":\"vend\",\"item\":\"C\",\"change\":65}]}"
+    ],
+    [
+      "vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":10},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":1},{\"type\":\"refund\"}])",
+      "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":10},{\"type\":\"credit\",\"credit\":35},{\"type\":\"reject\",\"value\":1},{\"type\":\"refund\",\"amount\":35}]}"
+    ],
+    [
+      "(()=>{try{vend({\"A\":0},[{\"type\":\"coin\",\"value\":5}]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":-5},[]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":1.5},[]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend([],[]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend(null,[]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":\"50\"},[]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":65,\"B\":100,\"C\":35},\"events\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":\"25\"}]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"select\",\"item\":5}]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"kick\"}]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":65,\"B\":100,\"C\":35},[null]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":65,\"B\":100,\"C\":35},[{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\"}]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{vend({\"A\":65,\"B\":100,\"C\":35},[{\"item\":\"A\"}]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ]
+  ],
+  "id": "frontier-f6-vending-machine-v1",
+  "request": {
+    "allowed_outputs": [
+      "result.js"
+    ],
+    "artifact_format": "javascript_script",
+    "assumptions": [],
+    "budget": {
+      "context_chars": 32768,
+      "max_calls": 8,
+      "max_candidates": 4,
+      "max_depth": 4,
+      "max_units": 64,
+      "max_workers": 3,
+      "retries": 2,
+      "wall_seconds": 300
+    },
+    "exports": [
+      {
+        "name": "vend",
+        "signature": "vend(prices,events)"
+      }
+    ],
+    "language": "javascript",
+    "objective": "Build vend(prices,events), a deterministic vending machine simulation that reports one output per event. Return plain JavaScript source defining vend as a top-level function.",
+    "requirements": [
+      {
+        "acceptance": "TESTED",
+        "id": "machine",
+        "text": "vend(prices,events) simulates a vending machine that starts with credit 0, processes the events in order and returns {\"credit\":c,\"outputs\":list}: the final credit and exactly one output object per event."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "coin",
+        "text": "A {\"type\":\"coin\",\"value\":v} event with v equal to 5, 10, 25 or 100 adds v to the credit and outputs {\"type\":\"credit\",\"credit\":newCredit}; any other safe integer v leaves the credit unchanged and outputs {\"type\":\"reject\",\"value\":v}."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "select",
+        "text": "A {\"type\":\"select\",\"item\":s} event outputs {\"type\":\"error\",\"reason\":\"unknown_item\"} when s is not an own property of prices, {\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":price-credit} when the credit is below the price, and otherwise {\"type\":\"vend\",\"item\":s,\"change\":credit-price}, after which the credit is 0."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "refund",
+        "text": "A {\"type\":\"refund\"} event outputs {\"type\":\"refund\",\"amount\":credit} and sets the credit to 0."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "errors",
+        "text": "Throw an Error when prices is not a plain object whose values are positive safe integers, when events is not an array, or when an event is not an object whose type is \"coin\" with a safe-integer value, \"select\" with a string item, or \"refund\"."
+      }
+    ],
+    "tests": [
+      {
+        "call": "vend({\"A\":65},[{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":25},{\"type\":\"coin\",\"value\":25},{\"type\":\"select\",\"item\":\"A\"}])",
+        "expected": "{\"credit\":0,\"outputs\":[{\"type\":\"credit\",\"credit\":25},{\"type\":\"credit\",\"credit\":50},{\"type\":\"credit\",\"credit\":75},{\"type\":\"vend\",\"item\":\"A\",\"change\":10}]}",
+        "requirement_ids": [
+          "machine",
+          "coin",
+          "select"
+        ]
+      },
+      {
+        "call": "vend({\"A\":65},[{\"type\":\"coin\",\"value\":3},{\"type\":\"select\",\"item\":\"A\"},{\"type\":\"select\",\"item\":\"Z\"},{\"type\":\"refund\"}])",
+        "expected": "{\"credit\":0,\"outputs\":[{\"type\":\"reject\",\"value\":3},{\"type\":\"error\",\"reason\":\"insufficient_credit\",\"needed\":65},{\"type\":\"error\",\"reason\":\"unknown_item\"},{\"type\":\"refund\",\"amount\":0}]}",
+        "requirement_ids": [
+          "coin",
+          "select",
+          "refund"
+        ]
+      },
+      {
+        "call": "(()=>{try{vend({\"A\":0},[]);return false}catch(e){return e instanceof Error}})()",
+        "expected": "true",
+        "requirement_ids": [
+          "errors"
+        ]
+      }
+    ],
+    "version": 1
+  },
+  "split": "dev"
+}

@@ -1,0 +1,71 @@
+program Units.
+note Exact unit conversions and the vocabulary that pins what each unit means.
+note Every factor is an exact definition, so conversions are exact rationals and round trips are lossless:
+note the international yard and pound (1959): yard = 0.9144 m, pound = 0.45359237 kg (NIST SP 811);
+note US gallon = 231 cubic inches = 3.785411784 L; imperial gallon = 4.54609 L (UK, 1985);
+note standard gravity 9.80665 m/s2, so pound-force = 4.4482216152605 N; atmosphere = 101325 Pa;
+note thermochemical calorie = 4.184 J; nautical mile = 1852 m; kelvin = degree Celsius + 273.15.
+note Importing this module also gives every ask that mentions one of these units its exact definition.
+
+term inch means "the international inch: exactly 2.54 centimetres".
+term foot means "the international foot: exactly 0.3048 metres (12 inches)".
+term mile means "the international statute mile: exactly 1609.344 metres (5280 feet)".
+term "nautical mile" means "exactly 1852 metres".
+term pound means "the avoirdupois pound (mass): exactly 0.45359237 kilograms".
+term ounce means "the avoirdupois ounce (mass): 1/16 pound, exactly 28.349523125 grams; not a fluid ounce".
+term gallon means "the US liquid gallon: exactly 3.785411784 litres, unless the text says imperial (4.54609 litres)".
+term ton means "ambiguous: say short ton (2000 pounds), long ton (2240 pounds) or tonne (1000 kilograms)".
+term tonne means "the metric ton: exactly 1000 kilograms".
+term psi means "pound-force per square inch: exactly 4.4482216152605 newtons per 0.00064516 square metres, about 6894.757 pascals".
+term calorie means "the thermochemical calorie: exactly 4.184 joules; a food Calorie (kcal) is 1000 of them".
+
+note Metres per unit of length.
+let length_in_m = {m: 1, cm: 0.01, mm: 0.001, um: 0.000001, nm: 0.000000001, km: 1000, inch: 0.0254, ft: 0.3048, yd: 0.9144, mile: 1609.344, nmi: 1852}.
+note Kilograms per unit of mass.
+let mass_in_kg = {kg: 1, g: 0.001, mg: 0.000001, tonne: 1000, lb: 0.45359237, oz: 0.028349523125, short_ton: 907.18474, long_ton: 1016.0469088}.
+note Cubic metres per unit of volume.
+let volume_in_m3 = {m3: 1, l: 0.001, ml: 0.000001, cm3: 0.000001, us_gal: 0.003785411784, imp_gal: 0.00454609, us_floz: 0.0000295735295625, in3: 0.000016387064, ft3: 0.028316846592}.
+note Pascals per unit of pressure.
+let pressure_in_pa = {pa: 1, kpa: 1000, mpa: 1000000, gpa: 1000000000, bar: 100000, atm: 101325, psi: 4.4482216152605 / 0.00064516, torr: 101325 / 760}.
+note Joules per unit of energy.
+let energy_in_j = {j: 1, kj: 1000, cal: 4.184, kcal: 4184, wh: 3600, kwh: 3600000, ev: 0.0000000000000000001602176634}.
+
+note Convert x from one unit to another (unit names as in the tables above, e.g. "inch", "cm").
+function convert_length(x: Number, unit_from: Text, unit_to: Text) -> Number = x * length_in_m[unit_from] / length_in_m[unit_to].
+function convert_mass(x: Number, unit_from: Text, unit_to: Text) -> Number = x * mass_in_kg[unit_from] / mass_in_kg[unit_to].
+function convert_volume(x: Number, unit_from: Text, unit_to: Text) -> Number = x * volume_in_m3[unit_from] / volume_in_m3[unit_to].
+function convert_pressure(x: Number, unit_from: Text, unit_to: Text) -> Number = x * pressure_in_pa[unit_from] / pressure_in_pa[unit_to].
+function convert_energy(x: Number, unit_from: Text, unit_to: Text) -> Number = x * energy_in_j[unit_from] / energy_in_j[unit_to].
+
+note Temperatures are affine, not proportional, so they have their own functions.
+function c_to_f(c: Number) -> Number = c * 9 / 5 + 32.
+function f_to_c(f: Number) -> Number = (f - 32) * 5 / 9.
+function c_to_k(c: Number) -> Number = c + 273.15.
+function k_to_c(k: Number) -> Number = k - 273.15.
+
+assert convert_length(1, "inch", "cm") = 2.54.
+
+test "the international inch is exactly 2.54 cm and a mile 1.609344 km" do
+  assert convert_length(1, "inch", "cm") = 2.54.
+  assert convert_length(1, "mile", "km") = 1.609344.
+  assert convert_length(12, "inch", "ft") = 1.
+end.
+
+test "round trips are exact (rationals, no rounding)" do
+  assert all x in [1, 3/7, 12.5, 1000]: convert_length(convert_length(x, "mile", "um"), "um", "mile") = x.
+  assert all x in [1, 2/3, 0.1]: convert_mass(convert_mass(x, "lb", "g"), "g", "lb") = x.
+end.
+
+test "temperatures" do
+  assert c_to_f(-40) = -40.
+  assert f_to_c(212) = 100.
+  assert c_to_k(0) = 273.15.
+  assert k_to_c(c_to_k(21.5)) = 21.5.
+end.
+
+test "pressure and energy" do
+  assert convert_pressure(1, "atm", "kpa") = 101.325.
+  assert round(convert_pressure(1, "psi", "pa"), 6) = 6894.757293.
+  assert convert_energy(1, "kcal", "kj") = 4.184.
+  assert convert_volume(1, "us_gal", "in3") = 231.
+end.

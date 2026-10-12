@@ -1,0 +1,380 @@
+{
+  "family": "frontier_F5_expression_evaluator_v1",
+  "hidden_tests": [
+    [
+      "parse(\"(2+3)*4\")",
+      "{\"type\":\"bin\",\"op\":\"*\",\"left\":{\"type\":\"bin\",\"op\":\"+\",\"left\":{\"type\":\"num\",\"value\":2},\"right\":{\"type\":\"num\",\"value\":3}},\"right\":{\"type\":\"num\",\"value\":4}}"
+    ],
+    [
+      "parse(\"2^3^2\")",
+      "{\"type\":\"bin\",\"op\":\"^\",\"left\":{\"type\":\"num\",\"value\":2},\"right\":{\"type\":\"bin\",\"op\":\"^\",\"left\":{\"type\":\"num\",\"value\":3},\"right\":{\"type\":\"num\",\"value\":2}}}"
+    ],
+    [
+      "parse(\"-2^2\")",
+      "{\"type\":\"neg\",\"arg\":{\"type\":\"bin\",\"op\":\"^\",\"left\":{\"type\":\"num\",\"value\":2},\"right\":{\"type\":\"num\",\"value\":2}}}"
+    ],
+    [
+      "parse(\"a-b-c\")",
+      "{\"type\":\"bin\",\"op\":\"-\",\"left\":{\"type\":\"bin\",\"op\":\"-\",\"left\":{\"type\":\"var\",\"name\":\"a\"},\"right\":{\"type\":\"var\",\"name\":\"b\"}},\"right\":{\"type\":\"var\",\"name\":\"c\"}}"
+    ],
+    [
+      "parse(\"8/4/2\")",
+      "{\"type\":\"bin\",\"op\":\"/\",\"left\":{\"type\":\"bin\",\"op\":\"/\",\"left\":{\"type\":\"num\",\"value\":8},\"right\":{\"type\":\"num\",\"value\":4}},\"right\":{\"type\":\"num\",\"value\":2}}"
+    ],
+    [
+      "parse(\"-(-x)\")",
+      "{\"type\":\"neg\",\"arg\":{\"type\":\"neg\",\"arg\":{\"type\":\"var\",\"name\":\"x\"}}}"
+    ],
+    [
+      "parse(\"2^-1\")",
+      "{\"type\":\"bin\",\"op\":\"^\",\"left\":{\"type\":\"num\",\"value\":2},\"right\":{\"type\":\"neg\",\"arg\":{\"type\":\"num\",\"value\":1}}}"
+    ],
+    [
+      "parse(\"x*-y\")",
+      "{\"type\":\"bin\",\"op\":\"*\",\"left\":{\"type\":\"var\",\"name\":\"x\"},\"right\":{\"type\":\"neg\",\"arg\":{\"type\":\"var\",\"name\":\"y\"}}}"
+    ],
+    [
+      "parse(\"((a))\")",
+      "{\"type\":\"var\",\"name\":\"a\"}"
+    ],
+    [
+      "parse(\"1-2+3\")",
+      "{\"type\":\"bin\",\"op\":\"+\",\"left\":{\"type\":\"bin\",\"op\":\"-\",\"left\":{\"type\":\"num\",\"value\":1},\"right\":{\"type\":\"num\",\"value\":2}},\"right\":{\"type\":\"num\",\"value\":3}}"
+    ],
+    [
+      "parse(\"a^b*c\")",
+      "{\"type\":\"bin\",\"op\":\"*\",\"left\":{\"type\":\"bin\",\"op\":\"^\",\"left\":{\"type\":\"var\",\"name\":\"a\"},\"right\":{\"type\":\"var\",\"name\":\"b\"}},\"right\":{\"type\":\"var\",\"name\":\"c\"}}"
+    ],
+    [
+      "parse(\"--a\")",
+      "{\"type\":\"neg\",\"arg\":{\"type\":\"neg\",\"arg\":{\"type\":\"var\",\"name\":\"a\"}}}"
+    ],
+    [
+      "parse(\"2*3^2\")",
+      "{\"type\":\"bin\",\"op\":\"*\",\"left\":{\"type\":\"num\",\"value\":2},\"right\":{\"type\":\"bin\",\"op\":\"^\",\"left\":{\"type\":\"num\",\"value\":3},\"right\":{\"type\":\"num\",\"value\":2}}}"
+    ],
+    [
+      "(()=>{try{parse(\"\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"1+\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"*2\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"1+2)\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"2 3\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"2x\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"+1\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"1 + * 2\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"()\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"x^\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"1.5.2\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"2 % 3\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{parse(\"-\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "evaluate(\"1+2*3-4\")",
+      "3"
+    ],
+    [
+      "evaluate(\"(1+2)*(3+4)\")",
+      "21"
+    ],
+    [
+      "evaluate(\"2^10\")",
+      "1024"
+    ],
+    [
+      "evaluate(\"2^3^2\")",
+      "512"
+    ],
+    [
+      "evaluate(\"-2^2\")",
+      "-4"
+    ],
+    [
+      "evaluate(\"(-2)^2\")",
+      "4"
+    ],
+    [
+      "evaluate(\"(-2)^3\")",
+      "-8"
+    ],
+    [
+      "evaluate(\"2^-2\")",
+      "0.25"
+    ],
+    [
+      "evaluate(\"0^0\")",
+      "1"
+    ],
+    [
+      "evaluate(\"4^0.5\")",
+      "2"
+    ],
+    [
+      "evaluate(\"0.1+0.2\")",
+      "0.30000000000000004"
+    ],
+    [
+      "evaluate(\"1/3\")",
+      "0.3333333333333333"
+    ],
+    [
+      "evaluate(\"64/4/2\")",
+      "8"
+    ],
+    [
+      "evaluate(\"x*y-z\",{\"x\":3,\"y\":4,\"z\":5})",
+      "7"
+    ],
+    [
+      "evaluate(\"rate*hours\",{\"rate\":12.5,\"hours\":8})",
+      "100"
+    ],
+    [
+      "evaluate(\"-x\",{\"x\":-7})",
+      "7"
+    ],
+    [
+      "evaluate(\"a/b\",{\"a\":7,\"b\":2})",
+      "3.5"
+    ],
+    [
+      "evaluate(\"2*pi*r\",{\"pi\":3.14159,\"r\":10})",
+      "62.8318"
+    ],
+    [
+      "evaluate(\"n\",{\"n\":0})",
+      "0"
+    ],
+    [
+      "(()=>{try{evaluate(\"x\",{});return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"toString\",{});return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"constructor+1\",{});return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"x\",{\"x\":\"3\"});return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"x\",{\"x\":null});return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"0/0\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"5/(2-2)\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"2^1024\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"(-8)^(1/3)\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"a*10\",{\"a\":1e+308});return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(\"1\",null);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{evaluate(5);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "tokenize(\"(a1+_b)^2.75\")",
+      "[{\"type\":\"op\",\"value\":\"(\",\"pos\":0},{\"type\":\"id\",\"value\":\"a1\",\"pos\":1},{\"type\":\"op\",\"value\":\"+\",\"pos\":3},{\"type\":\"id\",\"value\":\"_b\",\"pos\":4},{\"type\":\"op\",\"value\":\")\",\"pos\":6},{\"type\":\"op\",\"value\":\"^\",\"pos\":7},{\"type\":\"num\",\"value\":2.75,\"pos\":8}]"
+    ],
+    [
+      "(()=>{try{tokenize(\"1;2\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ]
+  ],
+  "id": "frontier-f5-expression-evaluator-v1",
+  "request": {
+    "allowed_outputs": [
+      "result.js"
+    ],
+    "artifact_format": "javascript_script",
+    "assumptions": [],
+    "budget": {
+      "context_chars": 32768,
+      "max_calls": 8,
+      "max_candidates": 4,
+      "max_depth": 4,
+      "max_units": 64,
+      "max_workers": 3,
+      "retries": 2,
+      "wall_seconds": 300
+    },
+    "exports": [
+      {
+        "name": "tokenize",
+        "signature": "tokenize(source)"
+      },
+      {
+        "name": "parse",
+        "signature": "parse(source)"
+      },
+      {
+        "name": "evaluate",
+        "signature": "evaluate(source,env)"
+      }
+    ],
+    "language": "javascript",
+    "objective": "Build a tokenizer, a recursive-descent parser and an evaluator for a small arithmetic expression language. Return plain JavaScript source defining tokenize, parse and evaluate as top-level functions.",
+    "requirements": [
+      {
+        "acceptance": "TESTED",
+        "id": "lexical",
+        "text": "tokenize(source) splits a string into tokens of a small expression language. A number is one or more ASCII digits, optionally followed by '.' and one or more ASCII digits (no sign, no exponent, at most one '.'); its value is the JavaScript number it spells. An identifier is an ASCII letter or '_' followed by ASCII letters, digits or '_'. An operator is one of + - * / ^ ( ). Space, tab, carriage return and line feed only separate tokens. Tokens may touch without whitespace, and the longest possible number or identifier is always taken."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "tokens",
+        "text": "tokenize returns an array of token objects {type, value, pos} in source order: type is \"num\", \"id\" or \"op\"; value is the number, the identifier text or the operator character; pos is the zero-based index of the token's first character in source. An empty or whitespace-only source gives []."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "lexErrors",
+        "text": "tokenize throws an Error when source is not a string or contains any other character, such as '.', ',', '=', '%', '$', a non-ASCII letter or digit, or other whitespace; a '.' is only valid between the digits of one number."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "grammar",
+        "text": "parse(source) tokenizes source and parses all of its tokens with this grammar: expr := term (('+'|'-') term)* ; term := unary (('*'|'/') unary)* ; unary := '-' unary | power ; power := primary ('^' unary)? ; primary := number | identifier | '(' expr ')'. So + - * / are left-associative, ^ is right-associative and binds tighter than a unary minus on its left (-2^2 is -(2^2)), and the right operand of ^ may start with unary minus (2^-1). There is no unary plus."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "ast",
+        "text": "parse returns a tree of plain objects: {\"type\":\"num\",\"value\":n} for a number, {\"type\":\"var\",\"name\":s} for an identifier, {\"type\":\"neg\",\"arg\":node} for unary minus and {\"type\":\"bin\",\"op\":o,\"left\":node,\"right\":node} for a binary operator o. Parentheses add no node."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "syntax",
+        "text": "parse throws an Error for any tokenize error, an empty source, a missing operand, unbalanced parentheses, two operands in a row (such as \"2 3\" or \"2x\"), and any token left over after a complete expression."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "eval",
+        "text": "evaluate(source,env) returns the number obtained from parse(source) with JavaScript arithmetic: + - * / as usual and a^b as Math.pow(a,b). An identifier takes the value of env's own property of that name. env is a plain object; when omitted it means {}."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "evalErrors",
+        "text": "evaluate throws an Error for any parse error, an env that is not a plain object, an identifier that is not an own property of env holding a finite number, division by zero, and any intermediate or final result that is not finite (NaN or Infinity)."
+      }
+    ],
+    "tests": [
+      {
+        "call": "tokenize(\"x*(y+1)\")",
+        "expected": "[{\"type\":\"id\",\"value\":\"x\",\"pos\":0},{\"type\":\"op\",\"value\":\"*\",\"pos\":1},{\"type\":\"op\",\"value\":\"(\",\"pos\":2},{\"type\":\"id\",\"value\":\"y\",\"pos\":3},{\"type\":\"op\",\"value\":\"+\",\"pos\":4},{\"type\":\"num\",\"value\":1,\"pos\":5},{\"type\":\"op\",\"value\":\")\",\"pos\":6}]",
+        "requirement_ids": [
+          "lexical",
+          "tokens"
+        ]
+      },
+      {
+        "call": "(()=>{try{tokenize(\"a % b\");return false}catch(e){return e instanceof Error}})()",
+        "expected": "true",
+        "requirement_ids": [
+          "lexErrors"
+        ]
+      },
+      {
+        "call": "parse(\"1+2*3\")",
+        "expected": "{\"type\":\"bin\",\"op\":\"+\",\"left\":{\"type\":\"num\",\"value\":1},\"right\":{\"type\":\"bin\",\"op\":\"*\",\"left\":{\"type\":\"num\",\"value\":2},\"right\":{\"type\":\"num\",\"value\":3}}}",
+        "requirement_ids": [
+          "grammar",
+          "ast"
+        ]
+      },
+      {
+        "call": "parse(\"-x^2\")",
+        "expected": "{\"type\":\"neg\",\"arg\":{\"type\":\"bin\",\"op\":\"^\",\"left\":{\"type\":\"var\",\"name\":\"x\"},\"right\":{\"type\":\"num\",\"value\":2}}}",
+        "requirement_ids": [
+          "grammar",
+          "ast"
+        ]
+      },
+      {
+        "call": "(()=>{try{parse(\"(1+2\");return false}catch(e){return e instanceof Error}})()",
+        "expected": "true",
+        "requirement_ids": [
+          "syntax"
+        ]
+      },
+      {
+        "call": "evaluate(\"2*(3+4)\")",
+        "expected": "14",
+        "requirement_ids": [
+          "eval"
+        ]
+      },
+      {
+        "call": "evaluate(\"a/b\",{\"a\":1,\"b\":4})",
+        "expected": "0.25",
+        "requirement_ids": [
+          "eval"
+        ]
+      },
+      {
+        "call": "(()=>{try{evaluate(\"1/0\");return false}catch(e){return e instanceof Error}})()",
+        "expected": "true",
+        "requirement_ids": [
+          "evalErrors"
+        ]
+      }
+    ],
+    "version": 1
+  },
+  "split": "dev"
+}

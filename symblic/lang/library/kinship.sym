@@ -1,0 +1,20 @@
+program Kinship.
+note Family relations derived by the kernel (Datalog) from parent(P, C) facts. A model only has to
+note extract the parent facts from a story; every multi-hop relation is then computed, not guessed.
+
+rule child(C, P) if parent(P, C).
+rule ancestor(A, D) if parent(A, D).
+rule ancestor(A, D) if parent(A, X) and ancestor(X, D).
+rule descendant(D, A) if ancestor(A, D).
+rule sibling(X, Y) if parent(P, X) and parent(P, Y) and X != Y.
+rule grandparent(G, C) if parent(G, P) and parent(P, C).
+rule cousin(X, Y) if parent(PX, X) and parent(PY, Y) and sibling(PX, PY).
+
+test "three generations" do
+  fact parent(ada, ben), parent(ada, cy), parent(ben, dee), parent(cy, eli).
+  assert holds ancestor(ada, dee).
+  assert holds grandparent(ada, eli).
+  assert holds cousin(dee, eli).
+  assert holds sibling(ben, cy).
+  assert not (holds sibling(ben, ben)).
+end.

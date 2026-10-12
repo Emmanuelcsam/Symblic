@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f1eb"><title>Build one step at a time · Symblic</title>
+<link rel="stylesheet" href="guides.css"></head><body>
+<a class="guide-skip" href="#guide">Skip to guide</a>
+<header class="guide-header"><a href="../symblic.html#write">← Symblic</a><span>Guides</span><a href="../symblic.html#workcards">Open Workcards</a></header>
+<div class="guide-layout"><details class="guide-menu" open><summary>Browse guides</summary><nav aria-label="Symblic guides"><a href="index.html">Start here</a>
+<a href="editor.html">Underlines and instruction circuits</a>
+<a href="steps.html" aria-current="page">Build one step at a time</a>
+<a href="steps-evidence.html">Small-model results</a>
+<a href="workcards.html">Workcards</a>
+<a href="supervisor.html">Supervisor</a>
+<a href="distillation.html">Training a small model</a>
+<a href="portable.html">Portable execution</a>
+<a href="vorticity.html">Field construction</a></nav></details>
+<main id="guide" class="guide-prose"><h1>Build one checked step at a time</h1>
+<p>Symblic keeps the objective and the accepted work. The model receives one small construction task, the exact functions it may use, and a finite set of possible expressions. Local checks decide whether its choice fits. A rejected choice can be corrected within a fixed budget; an exhausted budget stops construction visibly unless the explicit finite completion option is enabled. Later steps never consume a rejected piece.</p>
+<p>For example, one English instruction is <strong>“Subtract used from start to return the remaining item count.”</strong> Its function is <code>remaining_items(start: Int, used: Int) -&gt; Int</code>. The visible menu can contain <code>start + used</code>, <code>used - start</code>, <code>start - used</code> and <code>start * start</code>. Checks such as <code>remaining_items(9, 4) = 5</code> and <code>remaining_items(4, 4) = 0</code> reject plausible mistakes. The worker returns the exact expression it chooses. Symblic checks that expression; it does not secretly choose the passing answer for the model. The completed record also retains its original 1-based choice index for assembly.</p>
+<p>The English instruction describes the job. The signature, dependencies, choices and executable predicates make its fit conditions concrete. English alone cannot guarantee correctness. A weak model can still choose incorrectly, and inadequate checks can still admit a wrong program.</p>
+<p>Native enum answers carry the exact expressions. A single expression, or choices that native enum normalization would consider alike, use a bounded text answer with an exact membership check before the authored checks. All original expressions stay in order; an unlisted answer cannot adopt the fallback function body.</p>
+<h2>Use the page</h2>
+<ol>
+<li>Open Symblic → <strong>Workcards</strong> → <strong>Build one step at a time</strong>.</li>
+<li>Choose <strong>Load parcel program example</strong>. Review the English steps; expand <strong>Edit instructions, choices and checks</strong> to edit the full contract.</li>
+<li>Select an installed worker model and its node. For bounded completion after a rejected proposal, enable <strong>Let the engine try the finite menu after rejected model attempts</strong> and set corrections to <strong>0</strong>: one model proposal per step, then explicit finite checking if needed. <strong>Prepare checked steps</strong> validates and pins the construction without calling a model.</li>
+<li>Choose <strong>Open construction in Write</strong>, then run. The ordinary Runs page records every attempt and check.</li>
+<li>Copy the completed construction&#39;s run ID. Return to Workcards, enter it under <strong>Get a completed program</strong>, and choose <strong>Get checked program</strong>.</li>
+<li>Open the assembled program in Write or download its <code>.sym</code> file. Supply its declared inputs before running it. This execution has a zero-model-call budget.</li>
+</ol>
+<p>Recovery works after a page reload. It reads the saved run, checks its exact source, inputs, runtime pins, choices and passing native receipts, then assembles the file. A browser cannot claim that a selection passed. Changed or incomplete records refuse recovery. This is coherence checking of local records, not cryptographic authentication against somebody who can rewrite the entire private run store.</p>
+<h2>When the model repeats a mistake</h2>
+<p>Finite completion is an explicit option, off by default. After a model answer fails the checks and exhausts its correction budget, the engine tries the caller-authored expressions in their declared order under the same native checks. It records every trial, adopts the first passing expression and marks that step as engine-selected. It does not claim that the model supplied the replacement or that the passing choice is unique.</p>
+<p>All local checks run again for a replacement. A final combined check can still fail after local choices pass; this mode stops and does not backtrack through earlier accepted steps. The parcel example includes a tax case that distinguishes rounding the final fraction from rounding before multiplication. Candidate type or domain errors can reject a choice. An unavailable provider, malformed reply that never binds an answer, exhausted resources, an unavailable checker or a stop still ends the run visibly. If no candidate passes, or the final combined checks fail, there is no completed artifact. This bounds a finite construction problem; it does not establish the adequacy of the menus or tests to every possible objective.</p>
+<p>The <a href="steps-evidence.html">measured Llama 1B results</a> include a <a href="steps-parcel-built.html">completed program</a> and a saved zero-model-call dashboard run.</p>
+<h2>A program with thirteen connected pieces</h2>
+<p>The <a href="steps-parcel.html">parcel request</a> constructs area, volume, dimensional weight, chargeable weight, rounded billing units, base price, an oversize decision, its fee, subtotal, a bounded promotion, net price, rounded tax and final price. Each instruction builds a reusable function. Earlier accepted functions are available only when a step lists them in <code>uses</code>. The worker sees each declared dependency&#39;s signature, English instruction and selected expression. To expose a deeper dependency too, list that earlier function explicitly.</p>
+<p>The caller supplies the final native program body, which loops over parcel records and produces all intermediate values and a total. Each model proposal selects one of the thirteen function expressions; optional finite completion can select a replacement after failed checks. The caller supplies the surrounding loop, menus and tests. The <a href="steps-parcel-inputs.html">sample inputs</a> contain three parcels, including oversize and promotion-cap cases. In Write, paste the value of <code>parcels</code> into that declared input. Replace it with new records to run the same functions again without a model.</p>
+<p>The sample arithmetic uses integer dimensions, weights and price units. Use consistent units and positive divisors, increments and tax denominators. It is a programming example, not a carrier&#39;s tariff or a production billing policy.</p>
+<h2>Write a precise construction line</h2>
+<p>Each step declares:</p>
+<ul>
+<li><code>instruction</code>: one operation, named inputs, exact direction and any boundary rule. Prefer “round upward to a whole billing unit” to “calculate a fair charge.”</li>
+<li><code>parameters</code> and <code>returns</code>: closed native types.</li>
+<li><code>uses</code>: only earlier functions needed for this step. No entire transcript or unrelated future work is sent.</li>
+<li><code>choices</code>: distinct, exact native expressions. Every supplied choice remains visible, including wrong ones.</li>
+<li><code>checks</code>: executable predicates that call this function. Include unequal inputs, zero or boundary cases, and cases that distinguish the plausible mistakes.</li>
+</ul>
+<p><code>final_checks</code> test the combined functions. The optional <code>program</code> is the pure native body that uses them. Keep an independent set of cases outside the model context to evaluate the completed artifact. Passing the construction checks establishes those checks, not the completeness of the objective.</p>
+<p>Write explicit input domains and boundary behavior. Native checks can reject an erroneous selected expression and retry within the call budget; exhaustion stops construction visibly. Split an instruction further when it needs several independent decisions. Symblic bounds the work and catches encoded failures; it cannot make every model incapable of error.</p>
+<p>Each step has one correction budget shared by all its local checks, evaluated in authored order. Every replacement choice starts those checks again from the first one. Ordinary expression errors, including division by zero, indexing errors or a wrong return type, reject that choice and can be corrected. Resource exhaustion or an unavailable checker does not establish that the choice is wrong.</p>
+<h2>Terminal use</h2>
+<pre tabindex="0" aria-label="Code example"><code>tools/symblic-workcard compile --kind steps \
+  --request examples/steps-parcel.json \
+  --by ollama:llama3.2:1b@node-f
+
+tools/symblic-workcard run --kind steps \
+  --request examples/steps-parcel.json \
+  --by ollama:llama3.2:1b@node-f \
+  --retries 0 --context-budget 12000 --finite-fallback \
+  --dir /private/new-parcel-construction
+
+tools/symblic-workcard result --dir /private/new-parcel-construction</code></pre>
+<p>Use an available admitted node and a new private folder. A successful run writes <code>assembled.sym</code>; <code>result</code> reconstructs the artifact from the existing records without a model call. Reusing a nonempty run folder refuses rather than silently repeating work.</p>
+<p><code>--retries</code>, <code>--context-budget</code> and <code>--finite-fallback</code> also apply to steps <code>prepare</code> and <code>compile</code>. The <code>fill</code> command is for slots; step construction selects its expressions during <code>run</code>.</p>
+<p>The operator-only API provides <code>POST /api/automation/symblic/workcards/steps/compile</code> with <code>request</code>, <code>by</code>, optional <code>retries</code>, <code>context_budget</code> and boolean <code>finite_fallback</code>; preparation returns the pinned native source, inputs and options. <code>POST /api/automation/symblic/workcards/steps/result</code> accepts only a saved native run <code>id</code>. The ordinary native run endpoint owns execution.</p>
+<h2>Bounds and evidence</h2>
+<p>This first construction interface supports 1–64 steps, up to 16 choices, 12 parameters and dependencies, and 32 local checks per step. Each step allows 0–5 corrections. Model calls are bounded by <code>steps × (corrections + 1)</code>. Optional finite completion evaluates at most the authored menu size (up to 16 candidates) per failed step and adds no model calls. Native context budgets count characters, including request overhead; they are not token or RAM measurements. Oversized contexts refuse before dispatch. Effects, arbitrary code, external named types, dynamic evaluation and model calls inside choices are excluded.</p>
+<p>The assembled file contains the selected functions, the authored assertions and the caller&#39;s program body. It has no model asks. Preparation checks grammar, scope and supported operations; it is not a complete static type check of expressions. For example, a final program that calls an integer function with text can prepare successfully and fail its type check when executed. The caller&#39;s program body is not executed during construction. Assembly is preparation; running the file on independent inputs supplies additional behavioral evidence. Model failures, unreachable steps, retries, context sizes and costs must remain visible when comparing this approach with a larger single prompt.</p>
+<p>Recovery uses the current compiler and pinned runtime. A compiler or runtime upgrade can refuse recovery of an old construction. Keep the downloaded <code>.sym</code> file and its original private run records when upgrading.</p>
+<footer><a href="index.html">Start here</a> · <a href="../symblic.html#workcards">Open Workcards</a><p>Commands and examples run only when you choose to execute them.</p></footer></main></div>
+</body></html>

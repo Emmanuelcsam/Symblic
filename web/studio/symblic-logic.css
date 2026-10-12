@@ -1,0 +1,16 @@
+.sy-logic { max-width: 960px; margin: 0 auto; }
+/* Preparing or changing a proof rebuilds these panels. Keep their text readable
+   throughout each update while retaining Studio's short entrance motion. */
+main.anim .sy-logic .unit { animation-name: sy-logic-rise; }
+@keyframes sy-logic-rise { from { transform: translateY(14px); } to { transform: none; } }
+.sy-logic-form { display: grid; gap: 12px; }
+.sy-logic-form label { font-weight: 600; }
+.sy-logic textarea, .sy-logic input, .sy-logic select { font-size: 16px; padding: 12px; border: 1px solid var(--brd); border-radius: 6px; background: var(--bg1); color: var(--tx1); min-width: 0; max-width: 100%; }
+.sy-logic textarea { width: 100%; box-sizing: border-box; resize: vertical; line-height: 1.5; }
+.sy-logic input { width: 8rem; }
+.sy-logic button { min-height: 44px; justify-self: start; }
+.sy-logic pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 28rem; overflow: auto; }
+.sy-logic details { margin-top: 16px; }
+.sy-logic summary { padding: 12px 0; cursor: pointer; }
+.sy-logic-error { color: var(--err); }
+@media (max-width: 600px) { .sy-logic h2 { font-size: 1.35rem; } .sy-logic button { width: 100%; } }

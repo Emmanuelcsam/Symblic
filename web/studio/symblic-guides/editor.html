@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f1eb"><title>Underlines and instruction circuits · Symblic</title>
+<link rel="stylesheet" href="guides.css"></head><body>
+<a class="guide-skip" href="#guide">Skip to guide</a>
+<header class="guide-header"><a href="../symblic.html#write">← Symblic</a><span>Guides</span><a href="../symblic.html#english">Open English</a></header>
+<div class="guide-layout"><details class="guide-menu" open><summary>Browse guides</summary><nav aria-label="Symblic guides"><a href="index.html">Start here</a>
+<a href="editor.html" aria-current="page">Underlines and instruction circuits</a>
+<a href="steps.html">Build one step at a time</a>
+<a href="steps-evidence.html">Small-model results</a>
+<a href="workcards.html">Workcards</a>
+<a href="supervisor.html">Supervisor</a>
+<a href="distillation.html">Training a small model</a>
+<a href="portable.html">Portable execution</a>
+<a href="vorticity.html">Field construction</a></nav></details>
+<main id="guide" class="guide-prose"><h1>Underlines and your instruction circuit</h1>
+<p>The <strong>Write</strong> and <strong>English</strong> editors check your source as you type. Errors have red wavy underlines; warnings have amber underlines. The problem list gives the message and location in words, so you can use it without relying on color.</p>
+<h2>Find and fix a problem</h2>
+<ol>
+<li>Pause briefly after typing to let the source check finish.</li>
+<li>Click or tap a problem below the editor to select its location. With the editor focused, <strong>F8</strong> selects the next problem and <strong>Shift+F8</strong> selects the previous one. On a desktop, hovering over an underline shows its explanation.</li>
+<li>Edit the source. Earlier underlines clear immediately while the new check is pending.</li>
+</ol>
+<p>For example, this native program has a syntax error at the closing parenthesis:</p>
+<pre tabindex="0" aria-label="Code example"><code>let total = 1 + ).</code></pre>
+<p>Changing the expression to <code>1 + 2</code> fixes that syntax error. Passing a source check still does not establish that the program calculates what you intended.</p>
+<p>The same controls work for a <code>.symd</code> paper in <strong>Write</strong>. Diagnostics refer to the original paper, including mapped Symblic code blocks. In <strong>English</strong>, they refer to your original instructions rather than the generated native program.</p>
+<p>When the checker identifies a token, that token is underlined. Some checks identify only a line or an insertion point; the problem list says so. Diagnostics without a reliable source location remain in the list. A generated native diagnostic may map only to an English statement&#39;s line. The editor does not invent a more precise position.</p>
+<h2>Read the English circuit</h2>
+<p>Open <strong>English</strong> and enter:</p>
+<pre tabindex="0" aria-label="Code example"><code>Remember base is 7.
+Ask for result as a whole number: &quot;Add one to base. Return the sum.&quot;.
+Using only base.
+Accept only if result equals base plus 1.
+Show result.</code></pre>
+<p>After the source check succeeds, <strong>Your instruction circuit</strong> shows these components:</p>
+<div class="guide-table" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Input</td>
+<td><code>Remember</code> supplies a named value.</td>
+</tr>
+<tr>
+<td>Worker</td>
+<td><code>Ask for</code> declares one model task and its answer type.</td>
+</tr>
+<tr>
+<td>Selected inputs</td>
+<td><code>Using only</code> names the values included in that worker&#39;s context.</td>
+</tr>
+<tr>
+<td>Check gate</td>
+<td><code>Accept only if</code> declares the predicate that must pass before execution advances.</td>
+</tr>
+<tr>
+<td>Output</td>
+<td><code>Show</code> or <code>Display</code> presents a value.</td>
+</tr>
+</tbody></table>
+</div><p>The <code>result</code> worker reads <code>base</code>; its check gate reads <code>result</code> and <code>base</code>; the output reads <code>result</code>. Each named connection links to the source line that supplies that value. Clicking a component&#39;s line button selects its original instruction.</p>
+<p>Connections come from the compiled program&#39;s parsed reads and bindings. A word appearing inside the quoted instruction does not automatically create a connection. <strong>Using only</strong> is the explicit wiring for model context.</p>
+<p>This view covers the straight-line English grammar. It preserves the authored statements and can show generated grid checks, but it does not display runtime values or turn the source into a new execution format. Its check gates say <strong>not run</strong> because this view describes declarations. Running the program produces a separate run record; the circuit itself does not change into a run receipt.</p>
+<h2>What checking establishes</h2>
+<p>Source checking uses Symblic&#39;s existing parsers, available static checks and authoring warnings. It can detect syntax errors, some name/type/option mistakes and unsafe retry structure. The existing bounded pure lint may examine predicates. It makes no model calls and starts no program, external action or subprocess.</p>
+<p>Some faults appear only when values are supplied and the program executes. Passing examples or predicates also depends on whether those checks capture your objective. Spelling, polished English and model agreement do not establish that relationship.</p>
+<p>Parsing can stop at the first syntax error. Long diagnostic lists are bounded, with the visible limit reported. An unavailable check is shown as unavailable rather than a passing document. Source edits invalidate the prior diagnostics and circuit. If inline ranges are unavailable on an older server, the existing Write diagnostics remain the fallback.</p>
+<p>Use <strong>Preview</strong> to inspect the deterministic prefix and next model request, then <strong>Run</strong> when ready. For building functions from tiny checked steps, see <a href="steps.html">Build one step at a time</a>.</p>
+<h2>Accept lines and retry feedback</h2>
+<p>A retry is honest about what it shows the model, and that honesty has a consequence for accept lines.
+Retry feedback carries only what the kernel computed from the answer alone: a value from an input,
+an observation or another result never reaches it. The failed check&#39;s own text is always part of the
+feedback, and when the whole check reads the answer alone the kernel&#39;s error for that answer is
+included too.</p>
+<p>So an accept line is a specification the model can read, not a secret. <code>Accept only if wrong equals 5</code>
+compares the answer with a value written in the line itself: on a retry the model sees that text and
+can answer it directly. A passing check establishes conformance, not independent computation. When the
+checker sees an accept line whose whole check reads the answer alone, it marks the line with a warning
+(ENG_ACCEPT_READABLE) saying what a retry exposes, and a run&#39;s evidence names the same line as
+model-readable on each retried attempt.</p>
+<h2>Design references</h2>
+<ul>
+<li><strong>Logic Penguin</strong> supplies a useful example of feedback attached to individual proof lines, with unavailable references and damaged dependencies distinguished. Symblic uses its own checkers and calculus. <a href="https://github.com/frabjous/logicpenguin/blob/da325893b81f6be1fd20443a9218b556a2e19790/public/js/checkers/derivation-check.js">Inspected checker, commit da32589</a>.</li>
+<li><strong>TeXtidote</strong> demonstrates how transformed text can retain ranges pointing back to the original source. It is a document and grammar linter; the Symblic underlines come from Symblic&#39;s language checkers. <a href="https://github.com/sylvainhalle/textidote/blob/241beb356ff37dd4495bdaa0d58721888282cd16/Source/Core/src/ca/uqac/lif/textidote/as/AnnotatedString.java">Inspected source mapping, commit 241beb3</a>.</li>
+<li><strong>Magmide</strong> proposes separating the logic used to constrain a program from the host that executes it. Its repository explicitly describes itself as dormant and early; it is a design reference here, not a verification backend. <a href="https://github.com/magmide/magmide/blob/79eadf59f4790bd8dbb51d2f41c437c60bcd0873/README.md">Inspected project description, commit 79eadf5</a>.</li>
+</ul>
+<p>These references informed the design. No code was copied from these repositories, and no upstream dependency or service was installed for this feature.</p>
+<footer><a href="index.html">Start here</a> · <a href="../symblic.html#english">Open English</a><p>Commands and examples run only when you choose to execute them.</p></footer></main></div>
+</body></html>

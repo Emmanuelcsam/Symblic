@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f1eb"><title>Team example · Symblic</title>
+<link rel="stylesheet" href="guides.css"></head><body>
+<a class="guide-skip" href="#guide">Skip to guide</a>
+<header class="guide-header"><a href="../symblic.html#write">← Symblic</a><span>Guides</span><a href="../symblic.html#workcards">Open Workcards</a></header>
+<div class="guide-layout"><details class="guide-menu" open><summary>Browse guides</summary><nav aria-label="Symblic guides"><a href="index.html">Start here</a>
+<a href="editor.html">Underlines and instruction circuits</a>
+<a href="steps.html">Build one step at a time</a>
+<a href="steps-evidence.html">Small-model results</a>
+<a href="workcards.html">Workcards</a>
+<a href="supervisor.html">Supervisor</a>
+<a href="distillation.html">Training a small model</a>
+<a href="portable.html">Portable execution</a>
+<a href="vorticity.html">Field construction</a></nav></details>
+<main id="guide" class="guide-prose"><h1>Team example</h1><p>This reviewed request accompanies the Workcards guide. Replace the model and node choices with applicators you have installed before running it.</p><pre tabindex="0" aria-label="Example source"><code>{
+  &quot;instruction&quot;: &quot;Find a positive integer whose square is nine.&quot;,
+  &quot;answer_type&quot;: &quot;Int&quot;,
+  &quot;checks&quot;: [&quot;answer * answer = 9&quot;, &quot;answer &gt; 0&quot;],
+  &quot;builder&quot;: &quot;ollama:llama3.2:1b&quot;,
+  &quot;reviewers&quot;: [
+    {&quot;role&quot;: &quot;critic&quot;, &quot;by&quot;: &quot;ollama:llama3.2:1b&quot;, &quot;instruction&quot;: &quot;Check the proposed integer against both constraints. Reject a violated constraint with a concrete reason.&quot;}
+  ],
+  &quot;rounds&quot;: 2,
+  &quot;context_budget&quot;: 24000
+}
+</code></pre><footer><a href="index.html">Start here</a> · <a href="../symblic.html#workcards">Open Workcards</a><p>Commands and examples run only when you choose to execute them.</p></footer></main></div>
+</body></html>

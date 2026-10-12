@@ -1,0 +1,42 @@
+/* Styles for the static Symblic guides. In the original host they inherited the shared page library's fonts and
+   theme tokens (/studio.css); the defaults below keep the guides readable as plain static files. */
+:root { --bg1:#fbfaf7; --bg2:#f4f1eb; --tx1:#1d1b18; --tx3:#6b665d; --brd:#d9d3c7; --acc-tx:#a74a06; --mono:ui-monospace, Menlo, Consolas, monospace; }
+@media (prefers-color-scheme: dark) { :root { --bg1:#171614; --bg2:#1f1d1a; --tx1:#f1ede6; --tx3:#a29b8f; --brd:#3a3631; --acc-tx:#f5a466; } }
+body { margin:0; background:var(--bg1); color:var(--tx1); font:16px/1.6 system-ui, sans-serif; }
+
+/* Curated static guides inherit Studio's fonts, theme tokens and saved theme. */
+.guide-header { max-width: 1140px; margin: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 18px 24px; border-bottom: 1px solid var(--brd); }
+.guide-header span { flex: 1; color: var(--tx3); font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+.guide-header a, .guide-menu a { display: inline-flex; align-items: center; min-height: 44px; }
+.guide-layout { max-width: 1140px; margin: 28px auto; padding: 0 24px 48px; display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 40px; }
+.guide-menu { align-self: start; border: 1px solid var(--brd); border-radius: 4px; }
+.guide-menu summary { padding: 12px; cursor: pointer; font-weight: 700; min-height: 48px; }
+.guide-menu nav { display: grid; padding: 0 12px 12px; }
+.guide-menu a { padding: 6px 8px; line-height: 1.35; }
+.guide-menu [aria-current="page"] { background: var(--bg2); color: var(--tx1); font-weight: 700; }
+.guide-prose { width: 100%; min-width: 0; max-width: none; margin: 0; padding: 0; font-size: 16px; line-height: 1.7; overflow-wrap: anywhere; }
+.guide-prose h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin: 0 0 24px; letter-spacing: -.035em; }
+.guide-prose h2 { font-size: 24px; line-height: 1.3; margin: 36px 0 14px; }
+.guide-prose h3 { font-size: 20px; margin: 26px 0 12px; }
+.guide-prose p, .guide-prose ul, .guide-prose ol, .guide-prose pre, .guide-table { margin: 0 0 20px; }
+.guide-prose ul, .guide-prose ol { padding-left: 26px; }
+.guide-prose li { margin: 7px 0; }
+.guide-prose li p { margin-bottom: 8px; }
+.guide-prose a, .guide-header a, .guide-menu a { color: var(--acc-tx); text-underline-offset: 3px; }
+.guide-prose code { font-family: var(--mono); font-size: .86em; }
+.guide-prose pre { max-width: 100%; overflow-x: auto; padding: 18px; border: 1px solid var(--brd); border-radius: 4px; background: var(--bg2); line-height: 1.55; white-space: pre; overflow-wrap: normal; }
+.guide-table { max-width: 100%; overflow: auto; border: 1px solid var(--brd); }
+.guide-table table { width: 100%; min-width: 520px; border-collapse: collapse; }
+.guide-table th, .guide-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--brd); vertical-align: top; }
+.guide-table th { background: var(--bg2); }
+.guide-local, .guide-prose footer { color: var(--tx3); }
+.guide-prose footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--brd); font-size: 14px; }
+.guide-skip { position: absolute; left: 12px; top: -100px; background: var(--bg1); color: var(--tx1); padding: 12px; z-index: 100; }
+.guide-skip:focus { top: 8px; }
+:focus-visible { outline: 2px solid var(--acc-tx); outline-offset: 3px; }
+@media (max-width: 720px) {
+  .guide-header { padding: 10px 16px; gap: 12px; }
+  .guide-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 0 16px 32px; margin-top: 18px; }
+  .guide-menu nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+  .guide-prose pre { padding: 12px; }
+}

@@ -1,0 +1,99 @@
+(* Symblic authoring contract 1: canonical portable SUBSET, not the full language.
+   Authority: symblic.parse(source, execution_profile="verified").
+   One statement/header/end per physical line. Whitespace separates word tokens;
+   indentation is optional. All simple statements below end in a period + LF.
+   This EBNF is guidance, not an executable decoder or replacement validator.
+   Semantic/profile/name/type constraints are additional. Actual core accepts
+   aliases, Unicode names/operators, more statements, and more string forms.
+   Program input data should be passed as named inputs, not source interpolation. *)
+
+program = { statement } ;
+statement = simple, ".", LF | if-block | for-block | routine-block ;
+simple = "program", identifier
+       | "use", options
+       | "given", identifier, ":", type, [ "=", expression ]
+       | "let", identifier, [ ":", type ], "=", expression
+       | "define", identifier, "as", type
+       | "term", identifier, "means", string
+       | "import", identifier, [ "as", identifier ]
+       | "function", identifier, parameters, "->", type, "=", expression
+       | ask
+       | "ensure", expression, [ "else", ( "retry" | "fail" | "warn" ) ], [ "because", string ]
+       | ( "assert" | "expect" ), expression
+       | ( "show" | "return" | "draw" ), expression
+       | "forget", identifier, { ",", identifier } ;
+ask = "ask", identifier, ":", type, string,
+      [ "for", "each", identifier, "in", expression ],
+      [ "from", identifier, { ",", identifier } ],
+      [ "by", string ], [ "with", options ] ;
+options = identifier, "=", expression, { ",", identifier, "=", expression } ;
+(* Option names must be drawn from catalog.core.ask_options/use_options.
+   'profile' is program-level only. Unknown names and profile conflicts refuse. *)
+if-block = "if", expression, "then", LF, { statement },
+           { "elif", expression, "then", LF, { statement } },
+           [ "else", LF, { statement } ], "end.", LF ;
+for-block = "for", identifier, "in", expression, "do", LF, { statement }, "end.", LF ;
+routine-block = "routine", identifier, parameters, "->", type,
+                [ "with", options ], "do", LF, { statement }, "end.", LF ;
+parameters = "(", [ parameter, { ",", parameter } ], ")" ;
+parameter = identifier, ":", type, [ "=", expression ] ;
+
+type = "Int", [ "in", signed-decimal, "..", signed-decimal ]
+     | "Number", [ "in", signed-decimal, "..", signed-decimal ]
+     | "Bool" | "Text" | "Any" | "Svg" | "Code", [ "js" ]
+     | "one", "of", "{", identifier, ",", identifier, { ",", identifier }, "}"
+     | ( "List" | "Set" ), "of", type, [ "length", integer, [ "..", integer ] ]
+     | "Record", "{", identifier, ":", type, { ",", identifier, ":", type }, "}"
+     | identifier | "(", type, ")" ;
+(* Enum options must remain distinct under the actual option-normalization rules.
+   Record TYPES require a field; the empty record VALUE is {:}. Bounds are checked. *)
+
+expression = "if", expression, "then", expression, "else", expression
+           | ( "all" | "any" | "none" ), identifier, "in", set-expression, ":", expression
+           | implication ;
+implication = equivalence, [ "implies", implication ] ;
+equivalence = disjunction, { "iff", disjunction } ;
+disjunction = exclusive, { "or", exclusive } ;
+exclusive = conjunction, { "xor", conjunction } ;
+conjunction = negation, { "and", negation } ;
+negation = "not", negation | comparison ;
+comparison = set-expression, { compare-op, set-expression } ;
+compare-op = "=" | "!=" | "<" | "<=" | ">" | ">=" | "in" | "not in" | "subset" | "divides" ;
+set-expression = range, { ( "union" | "intersect" | "minus" ), range } ;
+range = addition, [ "..", addition ] ;
+addition = product, { ( "+" | "-" ), product } ;
+product = unary, { ( "*" | "/" | "//" | "mod" ), unary } ;
+unary = ( "+" | "-" ), unary | power ;
+power = postfix, [ "^", unary ] ;
+postfix = primary, { ".", identifier | "[", expression, "]" } ;
+primary = decimal | string | "true" | "false" | identifier
+        | "(", expression, ")"
+        | callable, "(", [ arguments ], ")"
+        | "[", [ expression, { ",", expression } ], "]"
+        | "[", expression, "for", identifier, "in", set-expression, [ "if", expression ], "]"
+        | "{", [ expression, { ",", expression } ], "}"
+        | "{:}"
+        | "{", identifier, ":", expression, { ",", identifier, ":", expression }, "}" ;
+callable = identifier, [ ".", identifier ] ;
+arguments = expression, { ",", expression }, [ ",", named-arguments ] | named-arguments ;
+named-arguments = identifier, "=", expression, { ",", identifier, "=", expression } ;
+(* Positional arguments precede named ones. Invocation/type/name validity is not
+   established by parsing. Prefer explicit fields and complete required inputs. *)
+
+identifier = ascii-letter, { ascii-letter | digit | "_" } ;
+(* Portable authoring choice: do not use keyword/operator spellings as names.
+   Actual core Unicode identifiers follow Python Unicode word classes, exactly. *)
+integer = digit, { digit } ;
+decimal = integer, [ ".", integer ], [ ( "e" | "E" ), [ "+" | "-" ], integer ] ;
+signed-decimal = [ "+" | "-" ], decimal ;
+string = '"', { safe-character | escape | "{{" | "}}" | "{", identifier, "}" }, '"' ;
+escape = BACKSLASH, ( "n" | "t" | BACKSLASH | DQUOTE ) ;
+BACKSLASH = ? U+005C reverse solidus ? ;
+DQUOTE = ? U+0022 quotation mark ? ;
+safe-character = ? Unicode scalar other than C0 controls, backslash, double quote, { or } ? ;
+(* The portable subset only interpolates a simple named binding.
+   Core strings are NOT JSON strings: a JSON \uXXXX escape is not decoded by
+   the core string reader. Pass arbitrary text through given inputs instead. *)
+ascii-letter = "A" .. "Z" | "a" .. "z" ;
+digit = "0" .. "9" ;
+LF = ? U+000A line feed ? ;

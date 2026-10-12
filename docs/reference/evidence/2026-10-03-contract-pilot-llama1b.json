@@ -1,0 +1,2998 @@
+{
+  "date": "2026-10-03",
+  "events": [
+    {
+      "cell": "06d7b4c37968e78c",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "39616e4721911ae8",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "5245f21599624559",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "6de241a814b67266",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "df7cbcf7da3ade08",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "5c7fe8a99fe74e3a",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "204d1bda36ff0dc9",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "5be60dd4d5ddb073",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "6b7f4b071575c6a1",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "7a7ff9e3e9046590",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "732eea1b8e5cb675",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "9780029cc4a26551",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "18399e57c0d5809d",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "1ec9463cd4c7422f",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "6d898243a65120e9",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "e6b6eea051ff6f1b",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "7882ff7967df0c37",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "d85a19a415c6cb77",
+      "event": "assigned",
+      "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71"
+    },
+    {
+      "cell": "06d7b4c37968e78c",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:48:06.608+00:00",
+      "cell": "06d7b4c37968e78c",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "62d92ef94e4517c979391f5ceffa753e2821a8af2fc329e183033001f994edbe",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:48:20.064+00:00",
+      "cell": "06d7b4c37968e78c",
+      "elapsed_seconds": 13.407,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "5559758ffd7afb4ef19f7ce02ba61f070f79e7dd12db2d551a2c666abf4c605e",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "initial",
+            "value": 170
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "86e665c42a242ca29195020ef35e3669dc6d34a1c4e7c0f014a09b9dec37813c",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_9ff3b0a0d35d"
+        },
+        "model": "llama3.2:1b",
+        "ms": 13407,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:48:20.167+00:00",
+      "cell": "06d7b4c37968e78c",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "695ed6881e41e48c7a9a2addaaca8e4eb3ed78ba23f33ebcff4f32679ec3467d",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "claude",
+          "model": "haiku",
+          "node": "",
+          "spec": "claude:haiku",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261004,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:48:36.684+00:00",
+      "cell": "06d7b4c37968e78c",
+      "elapsed_seconds": 16.468,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "03db9f3c686ea549f645796683255c98eec0c745c802f38641b74e3063255c00",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "remaining",
+            "value": 130
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": false,
+            "model": "haiku",
+            "num_ctx": null,
+            "num_gpu": null,
+            "prompt_sha": "86e665c42a242ca29195020ef35e3669dc6d34a1c4e7c0f014a09b9dec37813c",
+            "sample": 1,
+            "seed": null,
+            "temperature": null
+          },
+          "run": "r_5b952fc6a323"
+        },
+        "model": "haiku",
+        "ms": 16468,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 2,
+      "cell": "06d7b4c37968e78c",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "remaining",
+        "value": "130"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "remaining",
+          "value": "130"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "initial",
+          "value": "170"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "basis-1",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": true,
+      "selected": "claude:haiku",
+      "status": "done"
+    },
+    {
+      "cell": "39616e4721911ae8",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:48:36.918+00:00",
+      "cell": "39616e4721911ae8",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "069ca85b4fe5eddba68b7b02da84384dce767c64424751f806da7dc7e56c7096",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:48:45.384+00:00",
+      "cell": "39616e4721911ae8",
+      "elapsed_seconds": 8.392,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "eaca80cf7f82ed90b959ba68d70f5b389f0cc8c14195f2af138ebcd86ffb62f1",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "initial",
+            "value": 70
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "06d4d34f3235325f3c8d11f01bbddb8514c425ff88f865f4f40cf705514fa0ad",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_25915d1757a8"
+        },
+        "model": "llama3.2:1b",
+        "ms": 8392,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:48:45.507+00:00",
+      "cell": "39616e4721911ae8",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "e248fd93bc59dee406143cf6e18260a2c72eb0d9be234476579be6327fac70cf",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "claude",
+          "model": "haiku",
+          "node": "",
+          "spec": "claude:haiku",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261004,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:48:54.509+00:00",
+      "cell": "39616e4721911ae8",
+      "elapsed_seconds": 8.829,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "7836516f9af5433d5c9f4282b9eb5546f1dfc09a397727ac812c724501a6e329",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "initial",
+            "value": 80
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": false,
+            "model": "haiku",
+            "num_ctx": null,
+            "num_gpu": null,
+            "prompt_sha": "06d4d34f3235325f3c8d11f01bbddb8514c425ff88f865f4f40cf705514fa0ad",
+            "sample": 1,
+            "seed": null,
+            "temperature": null
+          },
+          "run": "r_ba40ef124307"
+        },
+        "model": "haiku",
+        "ms": 8829,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 2,
+      "cell": "39616e4721911ae8",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "initial",
+        "value": "80"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "initial",
+          "value": "80"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "initial",
+          "value": "70"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "basis-0",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": true,
+      "selected": "claude:haiku",
+      "status": "done"
+    },
+    {
+      "cell": "5245f21599624559",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:48:54.955+00:00",
+      "cell": "5245f21599624559",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "0906105b427f80174bed61c61f2bcd31878728286e31d4462e68b733b3759c67",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:04.563+00:00",
+      "cell": "5245f21599624559",
+      "elapsed_seconds": 9.372,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "cca31c30916bb6092fc9ab427c496f4da3904fea45485c87c3612697b07530be",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "any",
+            "value": 2
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "76c8d8ff9ce472ac7b4a4a6b30f24c902cfa85240a63c4cfad8111141134612f",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_6d2828ac9edb"
+        },
+        "model": "llama3.2:1b",
+        "ms": 9371,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:49:04.692+00:00",
+      "cell": "5245f21599624559",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "6419baa790101de887c911680a639d346c86cbb60c83bb737717e96da5df3bd5",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "claude",
+          "model": "haiku",
+          "node": "",
+          "spec": "claude:haiku",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261004,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:11.301+00:00",
+      "cell": "5245f21599624559",
+      "elapsed_seconds": 6.501,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "063246014aa3b913d62b18168e61911f79627f4fe1c16e80a13e018e1b2ce826",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "all",
+            "value": 2
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": false,
+            "model": "haiku",
+            "num_ctx": null,
+            "num_gpu": null,
+            "prompt_sha": "76c8d8ff9ce472ac7b4a4a6b30f24c902cfa85240a63c4cfad8111141134612f",
+            "sample": 1,
+            "seed": null,
+            "temperature": null
+          },
+          "run": "r_23eda63838d7"
+        },
+        "model": "haiku",
+        "ms": 6501,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 2,
+      "cell": "5245f21599624559",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "all",
+        "value": "2"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "all",
+          "value": "2"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "any",
+          "value": "2"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "scope-0",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": true,
+      "selected": "claude:haiku",
+      "status": "done"
+    },
+    {
+      "cell": "6de241a814b67266",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:12.200+00:00",
+      "cell": "6de241a814b67266",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "48696fc4fa96819fe691867cdef029e193f502962a1aff3059d28275ad4b895b",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:19.312+00:00",
+      "cell": "6de241a814b67266",
+      "elapsed_seconds": 6.624,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "25afb3f64637aa5facc5d6b5bfe8df0d6269434e7cd29cd66b02227ec92d3706",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "total": 1.0
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "b3611ea2c1a2fa934bb303f2a59beff6fb9168fcbfe2e11f663fbc27e2771470",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_981f4494d410"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6623,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:49:19.428+00:00",
+      "cell": "6de241a814b67266",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "08df4921b62889b42aa707dbcf202bb403e67a45281b02929fae0e4e5bf2de6d",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:27.509+00:00",
+      "cell": "6de241a814b67266",
+      "elapsed_seconds": 7.989,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "25afb3f64637aa5facc5d6b5bfe8df0d6269434e7cd29cd66b02227ec92d3706",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "total": 1.0
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "5d50a9e4cf38baf3cb840234c9b0f8f89a1991e16915702a4b07de7ddfb0336b",
+            "sample": 1,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_c863c072307d"
+        },
+        "model": "llama3.2:1b",
+        "ms": 7988,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 2,
+      "cell": "6de241a814b67266",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "19/10"
+      },
+      "family": "unit",
+      "final": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "first_pass": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "item": "unit-1",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "failed"
+    },
+    {
+      "cell": "df7cbcf7da3ade08",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:28.883+00:00",
+      "cell": "df7cbcf7da3ade08",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "ce6442e5fa5604c1ee9dd1df030905a2adee058994336a10e3e37863bc75a2f3",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:36.224+00:00",
+      "cell": "df7cbcf7da3ade08",
+      "elapsed_seconds": 6.695,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "5559758ffd7afb4ef19f7ce02ba61f070f79e7dd12db2d551a2c666abf4c605e",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "initial",
+            "value": 170
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "f90adebfd6fcf4577eaa5734c169b16a0966156a887c520e822d10b777d45c97",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_1579d9a64040"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6695,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "df7cbcf7da3ade08",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "remaining",
+        "value": "130"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "initial",
+          "value": "170"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "initial",
+          "value": "170"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "basis-1",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "5c7fe8a99fe74e3a",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:36.581+00:00",
+      "cell": "5c7fe8a99fe74e3a",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "85fb0cd2ea1ad7059b485a293d2f834c0779a9bc98deb46b4f179229752c7f9f",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:43.016+00:00",
+      "cell": "5c7fe8a99fe74e3a",
+      "elapsed_seconds": 6.285,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "cca31c30916bb6092fc9ab427c496f4da3904fea45485c87c3612697b07530be",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "any",
+            "value": 2
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "3a6caa3b1e3f45472717e78d9123ce095b4582812ffb47857531d4edaa8e1878",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_177ebf783cf9"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6284,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:49:43.136+00:00",
+      "cell": "5c7fe8a99fe74e3a",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "00743f8d0ea3fd7f7fc342a85cf997d1e2207eb6a89ed15525cfc3f61adf5028",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "claude",
+          "model": "haiku",
+          "node": "",
+          "spec": "claude:haiku",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261004,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:49.586+00:00",
+      "cell": "5c7fe8a99fe74e3a",
+      "elapsed_seconds": 6.383,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "192b834d6e31d5f8cd4713aadb582ee90c20357e09f4f1656055912df677cf08",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "any",
+            "value": 3
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": false,
+            "model": "haiku",
+            "num_ctx": null,
+            "num_gpu": null,
+            "prompt_sha": "3a6caa3b1e3f45472717e78d9123ce095b4582812ffb47857531d4edaa8e1878",
+            "sample": 1,
+            "seed": null,
+            "temperature": null
+          },
+          "run": "r_ca35442ebdad"
+        },
+        "model": "haiku",
+        "ms": 6382,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 2,
+      "cell": "5c7fe8a99fe74e3a",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "any",
+        "value": "3"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "any",
+          "value": "3"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "any",
+          "value": "2"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "scope-1",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": true,
+      "selected": "claude:haiku",
+      "status": "done"
+    },
+    {
+      "cell": "204d1bda36ff0dc9",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:49.986+00:00",
+      "cell": "204d1bda36ff0dc9",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "ef920636f12640a9fc7f18c5ea813d42ef823d36e670c0b45ef72c0462fabf9c",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:49:54.384+00:00",
+      "cell": "204d1bda36ff0dc9",
+      "elapsed_seconds": 4.165,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "1c7b8d4c73a152b59474703479a14a8bb8b6869ed53340c30692bab4ca646e2f",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "initial": 80,
+          "remaining": 65
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "b51473f7714fe0b53d151a7e83861c14dab2fa39a7c11e47a0ee6022831245a0",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_10b0afb72638"
+        },
+        "model": "llama3.2:1b",
+        "ms": 4164,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:49:54.543+00:00",
+      "cell": "204d1bda36ff0dc9",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "aef13dc04745832b05b5854733e28fdb8580cee4bd6a42f3925c57aab151ca98",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:01.910+00:00",
+      "cell": "204d1bda36ff0dc9",
+      "elapsed_seconds": 7.261,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "011fcce9bcc292ac13f16be0e49eb6e5456f8c7655852bac10506389e2b6cd65",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "initial": 80,
+          "remaining": 65
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "86fb480648842f4b64c1a51a084f14cc370ef9e4b1e08998873c80109cc5510a",
+            "sample": 1,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_391d544d8ea5"
+        },
+        "model": "llama3.2:1b",
+        "ms": 7260,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 2,
+      "cell": "204d1bda36ff0dc9",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "initial",
+        "value": "80"
+      },
+      "family": "basis",
+      "final": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "first_pass": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "item": "basis-0",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "failed"
+    },
+    {
+      "cell": "5be60dd4d5ddb073",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:02.079+00:00",
+      "cell": "5be60dd4d5ddb073",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "1d8c0ba0e8a3502b86a8f140986b8f2be6da5c3a03e5cf7219507ed0e69355b2",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:06.290+00:00",
+      "cell": "5be60dd4d5ddb073",
+      "elapsed_seconds": 4.12,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "c97afc8ea09f689f92e132fe03350df076290835cc791f702b004f9071ef1d35",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "total": 1.025
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "c58b13a9d959338d34a9cee4037c1b7ec26e27a5dcb8e99fe4d35ce8db3221ac",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_935c09f34536"
+        },
+        "model": "llama3.2:1b",
+        "ms": 4119,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:50:06.519+00:00",
+      "cell": "5be60dd4d5ddb073",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "ecbcd5e474c2d608067253c9add4fe6e1368dfb5fe1b006e1dfc52a4b0c205f3",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:10.771+00:00",
+      "cell": "5be60dd4d5ddb073",
+      "elapsed_seconds": 4.157,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "81c561f09b9be2c13981015eb43af11a689a11a1e3794cebd8d7f574f34e4d9c",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "total": 1.25
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "5615b6e39eb58b70727ddb12f8ba55cd5246a6076c521ec538a88ef0ac30ef4b",
+            "sample": 1,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_cfe2b69a3747"
+        },
+        "model": "llama3.2:1b",
+        "ms": 4157,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 2,
+      "cell": "5be60dd4d5ddb073",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "39/40"
+      },
+      "family": "unit",
+      "final": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "first_pass": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "item": "unit-0",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "failed"
+    },
+    {
+      "cell": "6b7f4b071575c6a1",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:11.175+00:00",
+      "cell": "6b7f4b071575c6a1",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "920e29ff9ffb3d5e257840914ebbf73c7063afa252981889163d392e027efb4c",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:17.513+00:00",
+      "cell": "6b7f4b071575c6a1",
+      "elapsed_seconds": 6.168,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "cca31c30916bb6092fc9ab427c496f4da3904fea45485c87c3612697b07530be",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "any",
+            "value": 2
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "ddc872bdd0927e26aa46bc83e84e75fe479c87037e9a73619ee6ffe97d428fd8",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_79dcd8740055"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6167,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "6b7f4b071575c6a1",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "any",
+        "value": "3"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "any",
+          "value": "2"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "any",
+          "value": "2"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "scope-1",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "7a7ff9e3e9046590",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:17.656+00:00",
+      "cell": "7a7ff9e3e9046590",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "453e70ddfe04f01da5c6d8340c2f8a64dd8f6f3acf427928e13ab1a4e2f29445",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:23.933+00:00",
+      "cell": "7a7ff9e3e9046590",
+      "elapsed_seconds": 6.175,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "204e005a6ea42227ac54a5aa7212cb186ad31e05fe1d683c412f84920beebadf",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 3.25
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "a8e36578168f6d9c6c2918f84fe580c9efd3d9a8cdd74c4a75a8d69e31fc3019",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_16cb75d15df1"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6175,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "7a7ff9e3e9046590",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "39/40"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "13/4"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "13/4"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "unit-0",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "732eea1b8e5cb675",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:24.080+00:00",
+      "cell": "732eea1b8e5cb675",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "3b4bd9d4a5b51f53567078fa16e2ff58f76615a5e9c053b1d29b9c8a2a23f18c",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:30.452+00:00",
+      "cell": "732eea1b8e5cb675",
+      "elapsed_seconds": 6.325,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "eaca80cf7f82ed90b959ba68d70f5b389f0cc8c14195f2af138ebcd86ffb62f1",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "initial",
+            "value": 70
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "20c9d63d80178bf754ecd2f07b7f44626060dc782973fa8de9ea01a0cfcc6d9b",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_befabee8a47a"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6324,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "732eea1b8e5cb675",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "initial",
+        "value": "80"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "initial",
+          "value": "70"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "initial",
+          "value": "70"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "basis-0",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "9780029cc4a26551",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:30.641+00:00",
+      "cell": "9780029cc4a26551",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "b61678f9003a53a5bdec292593c7216d0b6198c9cc1971e0f0a6f83aca7bf05d",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:38.950+00:00",
+      "cell": "9780029cc4a26551",
+      "elapsed_seconds": 8.26,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "cca31c30916bb6092fc9ab427c496f4da3904fea45485c87c3612697b07530be",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "any",
+            "value": 2
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "c556d67e0a2e52f60761e5bbadcfb53c66d08ae56dc46bd2e3f3ffd7e7583eba",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_b8054a7ad450"
+        },
+        "model": "llama3.2:1b",
+        "ms": 8260,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "9780029cc4a26551",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "all",
+        "value": "2"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "any",
+          "value": "2"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "any",
+          "value": "2"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "scope-0",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "18399e57c0d5809d",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:39.358+00:00",
+      "cell": "18399e57c0d5809d",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "15f6929b7e412ed4c2fbb69e80fe3c0ca63c0024b0eaddeb213eeecc62054d04",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:43.703+00:00",
+      "cell": "18399e57c0d5809d",
+      "elapsed_seconds": 4.271,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "d93943e35941948110ffb7473df0a1c5a39fafdd50d33e77ea3b90b5d8ffbc7b",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "choice": 0,
+          "value": "4"
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "37cbc6751f39337a27310fadfcc96aaa0861a7ea498012322dcdb14a5ef7c4d6",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_bc4d3df2b1f0"
+        },
+        "model": "llama3.2:1b",
+        "ms": 4271,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:50:43.785+00:00",
+      "cell": "18399e57c0d5809d",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "c45041f44aa445c1ef660508689344712a5a91267aff3ca053ceaa178ee6fc71",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:47.989+00:00",
+      "cell": "18399e57c0d5809d",
+      "elapsed_seconds": 4.153,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "49a445599d88fa1e916051c72e3906f0d54e06f5a2e4e6fbebb852a53e055258",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "choice": 1,
+          "value": 2
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "51b16d28959ce140a20ce19182361126b515e89f68c82513aa97b140ecbc315c",
+            "sample": 1,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_e9c87f70ad29"
+        },
+        "model": "llama3.2:1b",
+        "ms": 4152,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 2,
+      "cell": "18399e57c0d5809d",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "all",
+        "value": "2"
+      },
+      "family": "scope",
+      "final": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "first_pass": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "item": "scope-0",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "failed"
+    },
+    {
+      "cell": "1ec9463cd4c7422f",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:48.168+00:00",
+      "cell": "1ec9463cd4c7422f",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "da7b07120eed74c4d4de854fc6e559fac2c6e890200d893cb13ae524b5132062",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:50:54.394+00:00",
+      "cell": "1ec9463cd4c7422f",
+      "elapsed_seconds": 6.171,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "204e005a6ea42227ac54a5aa7212cb186ad31e05fe1d683c412f84920beebadf",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 3.25
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "c80823524571d8abef5647267db50ede8b69b9f9baf0fd086a62e109ec4b2ffd",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_b304df2ebe04"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6170,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:50:54.463+00:00",
+      "cell": "1ec9463cd4c7422f",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "ed09eb721a5dff31249955026bf0ebf34a2837aaa1459bc128dfa583302559c6",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "claude",
+          "model": "haiku",
+          "node": "",
+          "spec": "claude:haiku",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261004,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:00.745+00:00",
+      "cell": "1ec9463cd4c7422f",
+      "elapsed_seconds": 6.23,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "f86ff760378e47f9ef082dbb9b60d8550889d20945e83eb41d87b27e82e77584",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 0.975
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": false,
+            "model": "haiku",
+            "num_ctx": null,
+            "num_gpu": null,
+            "prompt_sha": "c80823524571d8abef5647267db50ede8b69b9f9baf0fd086a62e109ec4b2ffd",
+            "sample": 1,
+            "seed": null,
+            "temperature": null
+          },
+          "run": "r_ed203cee0004"
+        },
+        "model": "haiku",
+        "ms": 6229,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 2,
+      "cell": "1ec9463cd4c7422f",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "39/40"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "39/40"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "13/4"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "unit-0",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": true,
+      "selected": "claude:haiku",
+      "status": "done"
+    },
+    {
+      "cell": "6d898243a65120e9",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:00.936+00:00",
+      "cell": "6d898243a65120e9",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "4023e35093fec1b9951d094fae2eae5461c215bfaba048aeea72e2eb7983e5f9",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:07.115+00:00",
+      "cell": "6d898243a65120e9",
+      "elapsed_seconds": 6.141,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "c68019b16908c3c8ac4625323391fcbe786515af97962db3993835329b68dc78",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 4.95
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "ea23b2ba15560ce16ea7ced93682da6db23bb5a8352ff6710096c23df2a00484",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_acae2bfb0f77"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6140,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:51:07.331+00:00",
+      "cell": "6d898243a65120e9",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "3dd8370dbef2ab93769bcfee51ecf32c71405f02346714deb376798376546aca",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "claude",
+          "model": "haiku",
+          "node": "",
+          "spec": "claude:haiku",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261004,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:15.750+00:00",
+      "cell": "6d898243a65120e9",
+      "elapsed_seconds": 8.279,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "6365f7a5544f71d17b3e959716bfadd7ab76f399680158c018af8e9e750dddeb",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 1.9
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": false,
+            "model": "haiku",
+            "num_ctx": null,
+            "num_gpu": null,
+            "prompt_sha": "ea23b2ba15560ce16ea7ced93682da6db23bb5a8352ff6710096c23df2a00484",
+            "sample": 1,
+            "seed": null,
+            "temperature": null
+          },
+          "run": "r_f532d12b004b"
+        },
+        "model": "haiku",
+        "ms": 8278,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 2,
+      "cell": "6d898243a65120e9",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "19/10"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "19/10"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "99/20"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "unit-1",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": true,
+      "selected": "claude:haiku",
+      "status": "done"
+    },
+    {
+      "cell": "e6b6eea051ff6f1b",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:18.443+00:00",
+      "cell": "e6b6eea051ff6f1b",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "f5fa8bb8fc0561ebf0df5fee74c5772af06ef56bd74573aca074d69d77822bac",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:23.084+00:00",
+      "cell": "e6b6eea051ff6f1b",
+      "elapsed_seconds": 4.418,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "962b5da1b8a16fc667095e079c64a9acf1ad7669b6fa95a29beced9f073465de",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "count": 2
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "8242403e1d8c3d61678a04e5b091fb3278b82e11fea37cf1ff161efa26877787",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_29f52da6f6bd"
+        },
+        "model": "llama3.2:1b",
+        "ms": 4417,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:51:23.188+00:00",
+      "cell": "e6b6eea051ff6f1b",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "95a363d369024e27d005bb1d3bdb6dd785a81df8168ec1cd49bcd43f9c6c7f61",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:27.696+00:00",
+      "cell": "e6b6eea051ff6f1b",
+      "elapsed_seconds": 4.272,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "522a5055bd829bd78e35f346240a052b28b9f4c4af56a2e5b269f10f78346c5a",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "choice": "1",
+          "value": 2
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "fa75309ca277c6aa6344482e29d3064f4cf3832f82f3426b5365ae563a8ca9dc",
+            "sample": 1,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_be34c37b9f2f"
+        },
+        "model": "llama3.2:1b",
+        "ms": 4271,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 2,
+      "cell": "e6b6eea051ff6f1b",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "any",
+        "value": "3"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "1",
+          "value": "2"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "item": "scope-1",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "7882ff7967df0c37",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:28.963+00:00",
+      "cell": "7882ff7967df0c37",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "a27384425c04d410ce5dd70952c8f87b52d2ccaa1b388d125f5e102e22d964cd",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:35.428+00:00",
+      "cell": "7882ff7967df0c37",
+      "elapsed_seconds": 6.322,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "f86a0ce88e5db2c0fa5bfede87e622521c0b0a4e17d0caee2001ee2dec789760",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": null,
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "5d16eeb6aaf37f2bb013560ca073b216071149801cb7dc9fac7bb9ddd4efd189",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_53b63b960b69"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6322,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:51:35.471+00:00",
+      "cell": "7882ff7967df0c37",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "a485b5f4943d1ff6c9722941ea4be843a8184f24c816eb8ae9cc295e10215c1e",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:39.692+00:00",
+      "cell": "7882ff7967df0c37",
+      "elapsed_seconds": 4.164,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "2126b12b04b2c8f31303d9a5b2c1db1493f89e4d711d7cef198adc93d2998679",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": null,
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "8ab437e32fbfe87d5e54be99329c19cc7e2e9de8e249f607be1a1dbff560a943",
+            "sample": 1,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_85b0ab854e9e"
+        },
+        "model": "llama3.2:1b",
+        "ms": 4163,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 2,
+      "cell": "7882ff7967df0c37",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "remaining",
+        "value": "130"
+      },
+      "family": "basis",
+      "final": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "first_pass": {
+        "answer": null,
+        "correct": false,
+        "valid": false
+      },
+      "item": "basis-1",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "failed"
+    },
+    {
+      "cell": "d85a19a415c6cb77",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:40.601+00:00",
+      "cell": "d85a19a415c6cb77",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "6d93cdf426bf76eaf84c31f0952a9f11ff8f662308f019317a9d8384500486e7",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "llama3.2:1b",
+          "node": "",
+          "spec": "ollama:llama3.2:1b",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:51:47.388+00:00",
+      "cell": "d85a19a415c6cb77",
+      "elapsed_seconds": 6.496,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "b1ec2169a0e641570f3653ae3114c7bb49834b314edb97cb9a318452abcc260b",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 4.475
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "llama3.2:1b",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "15a25aa2bbcfb9cc425cee96ade01817ed988faf4cdea949c2b5d3e899b2604c",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_62e1c8850bc2"
+        },
+        "model": "llama3.2:1b",
+        "ms": 6495,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "d85a19a415c6cb77",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "19/10"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "179/40"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "179/40"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "unit-1",
+      "model": "ollama:llama3.2:1b",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    }
+  ],
+  "format": "symblic-contract-diagnostic-v1",
+  "measurement_limits": [
+    "Synthetic held-out instances of exposed templates, not a novel-domain holdout.",
+    "Checked arm includes a reference contract and conditional stronger fallback.",
+    "Equal call ceilings do not imply equal consumed calls or identical prompts.",
+    "No confidence or superiority claim from this small diagnostic.",
+    "Reply cap rejects received output; backend generation uses existing admitted limits.",
+    "Six synthetic task instances; templates exposed, seed and cases frozen before calls.",
+    "A format error and a semantic error both count as unsuccessful end-to-end communication; the same strict scorer checks all arms.",
+    "Checked arm has an executable reference predicate plus conditional haiku fallback; this is a package intervention, not proof of intrinsic small-model reasoning gain.",
+    "Model names are backend-reported aliases; exact model weights/cloud revision are not pinned by the current admitted adapter.",
+    "Backend-reported deterministic sampling settings are logged, but do not establish cross-node or repeated-run model determinism.",
+    "No statistical superiority, causality, or independence inference is supported by six paired cases."
+  ],
+  "original_ledger_sha256": "5edbfcf8c8901661d569d483132a340f32e75be4046d81b57b9cf5da5f088502",
+  "phase": "llama1b_initial_diagnostic",
+  "preregistration": {
+    "analysis": {
+      "denominator": "all_assigned_cells",
+      "independence": "not_established",
+      "paired_by": [
+        "model",
+        "item"
+      ],
+      "primary": "first_call_correct",
+      "repairs_and_fallback": "reported_separately",
+      "secondary": "final_accepted_correct"
+    },
+    "cells": [
+      {
+        "arm": "checked_escalation",
+        "family": "basis",
+        "id": "06d7b4c37968e78c",
+        "item": "basis-1",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "4df29b23fd1ac9f08e6a09b52a964a3ef3e2d4396f28cd6e8569e07d8911cba0",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A tank initially contains 170 litres. 40 litres are removed. The next instruction removes 25% of the remaining amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"remaining\" and answer.value = (170 - 40) else retry.\n",
+        "source_sha256": "8126334e67c3d5bf323d7f72cebf116924367844515465357648a281c9f32e3b"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "basis",
+        "id": "39616e4721911ae8",
+        "item": "basis-0",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "020fcf796fc18859a34c3042e7261f66958dc44a83fc4e355dc4472384de7a1e",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A tank initially contains 80 litres. 10 litres are removed. The next instruction removes 25% of the initial amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"initial\" and answer.value = 80 else retry.\n",
+        "source_sha256": "8409953c279347748b35d1877d6ea964aeb7076e714cf14c39a78ff90765d40e"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "scope",
+        "id": "5245f21599624559",
+        "item": "scope-0",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "5ff162827a8a5d48f5078c1f3a04570e5e1db52963945276275a30118dea6584",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"Teams have these reading lists: [[6, 4], [6, 7], [8, 6], [4, 5]]. Count teams for which every reading is strictly greater than 5. choice is all; value is the number of qualifying teams. Equality does not qualify. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"all\" and answer.value = len([r for r in [[6, 4], [6, 7], [8, 6], [4, 5]] if len([x for x in r if x > 5]) = len(r)]) else retry.\n",
+        "source_sha256": "5671dc8e6702a64ca72d21c67691f5799cbc6009c6ffc933142bd6568e38e5bc"
+      },
+      {
+        "arm": "natural",
+        "family": "unit",
+        "id": "6de241a814b67266",
+        "item": "unit-1",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "315b6579e4776c9d9adf94447c4747276ce0e8c497000b5e8cc1f6851ee25f71",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "typed",
+        "family": "basis",
+        "id": "df7cbcf7da3ade08",
+        "item": "basis-1",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "4df29b23fd1ac9f08e6a09b52a964a3ef3e2d4396f28cd6e8569e07d8911cba0",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A tank initially contains 170 litres. 40 litres are removed. The next instruction removes 25% of the remaining amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "d5ea02c93a897793e97bb7b49806234a7214f71a6d99d466e80ee7267754bbcf"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "scope",
+        "id": "5c7fe8a99fe74e3a",
+        "item": "scope-1",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "5d668d0f26a4fb3839a4a19ad77f563baca02821a316265dd91ae34095845212",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"Teams have these reading lists: [[5, 3], [3, 1], [1, 2], [3, 4]]. Count teams for which at least one reading is strictly greater than 2. choice is any; value is the number of qualifying teams. Equality does not qualify. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"any\" and answer.value = len([r for r in [[5, 3], [3, 1], [1, 2], [3, 4]] if len([x for x in r if x > 2]) > 0]) else retry.\n",
+        "source_sha256": "74f0051af3816aa23f4ef46d79e107500b546adbb003e486f9d36286ee562cc1"
+      },
+      {
+        "arm": "natural",
+        "family": "basis",
+        "id": "204d1bda36ff0dc9",
+        "item": "basis-0",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "020fcf796fc18859a34c3042e7261f66958dc44a83fc4e355dc4472384de7a1e",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "natural",
+        "family": "unit",
+        "id": "5be60dd4d5ddb073",
+        "item": "unit-0",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "54ab303186ffc4517ade0add85e1afb7d91d9f16664ae1de95724339c0ebeaa7",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "typed",
+        "family": "scope",
+        "id": "6b7f4b071575c6a1",
+        "item": "scope-1",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "5d668d0f26a4fb3839a4a19ad77f563baca02821a316265dd91ae34095845212",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"Teams have these reading lists: [[5, 3], [3, 1], [1, 2], [3, 4]]. Count teams for which at least one reading is strictly greater than 2. choice is any; value is the number of qualifying teams. Equality does not qualify. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "6dd2b37bce209c54f3975cef60e11f90add744f396424b1df5f2c36d5cbf6041"
+      },
+      {
+        "arm": "typed",
+        "family": "unit",
+        "id": "7a7ff9e3e9046590",
+        "item": "unit-0",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "54ab303186ffc4517ade0add85e1afb7d91d9f16664ae1de95724339c0ebeaa7",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A device emits 3 pulses, each lasting 325 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "2a98a5649ea50acc092a21e2e8818e0b7a90230306437f5e7aa36c36aab908d4"
+      },
+      {
+        "arm": "typed",
+        "family": "basis",
+        "id": "732eea1b8e5cb675",
+        "item": "basis-0",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "020fcf796fc18859a34c3042e7261f66958dc44a83fc4e355dc4472384de7a1e",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A tank initially contains 80 litres. 10 litres are removed. The next instruction removes 25% of the initial amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "7f0afaf757a48dc9d26473853887ab3af6896c6dc5513c6044a38e698dd87ca9"
+      },
+      {
+        "arm": "typed",
+        "family": "scope",
+        "id": "9780029cc4a26551",
+        "item": "scope-0",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "5ff162827a8a5d48f5078c1f3a04570e5e1db52963945276275a30118dea6584",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"Teams have these reading lists: [[6, 4], [6, 7], [8, 6], [4, 5]]. Count teams for which every reading is strictly greater than 5. choice is all; value is the number of qualifying teams. Equality does not qualify. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "bbddd42e53cd56e408995bcc66cb4b68c77682fdd984bb749dd4da87b328a170"
+      },
+      {
+        "arm": "natural",
+        "family": "scope",
+        "id": "18399e57c0d5809d",
+        "item": "scope-0",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "5ff162827a8a5d48f5078c1f3a04570e5e1db52963945276275a30118dea6584",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "unit",
+        "id": "1ec9463cd4c7422f",
+        "item": "unit-0",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "54ab303186ffc4517ade0add85e1afb7d91d9f16664ae1de95724339c0ebeaa7",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A device emits 3 pulses, each lasting 325 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"seconds\" and answer.value * 1000 = 325 * 3 else retry.\n",
+        "source_sha256": "66f6ce18f0c04e4fe5fc17c36e993dd2bcfb8edcbf35b14fb6c1e6be412742b9"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "unit",
+        "id": "6d898243a65120e9",
+        "item": "unit-1",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "315b6579e4776c9d9adf94447c4747276ce0e8c497000b5e8cc1f6851ee25f71",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A device emits 4 pulses, each lasting 475 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"seconds\" and answer.value * 1000 = 475 * 4 else retry.\n",
+        "source_sha256": "baebb4569f3f4ed718eb98197515025bc06fc732a8a4960a4a2679b2b65bfdc4"
+      },
+      {
+        "arm": "natural",
+        "family": "scope",
+        "id": "e6b6eea051ff6f1b",
+        "item": "scope-1",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "5d668d0f26a4fb3839a4a19ad77f563baca02821a316265dd91ae34095845212",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "natural",
+        "family": "basis",
+        "id": "7882ff7967df0c37",
+        "item": "basis-1",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "4df29b23fd1ac9f08e6a09b52a964a3ef3e2d4396f28cd6e8569e07d8911cba0",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "typed",
+        "family": "unit",
+        "id": "d85a19a415c6cb77",
+        "item": "unit-1",
+        "model": "ollama:llama3.2:1b",
+        "question_sha256": "315b6579e4776c9d9adf94447c4747276ce0e8c497000b5e8cc1f6851ee25f71",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A device emits 4 pulses, each lasting 475 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:llama3.2:1b\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "933ad696b297f446efdf6b5780b1d326135348629e58b2e8e2c79bc201b8be59"
+      }
+    ],
+    "count": 6,
+    "fallback": "claude:haiku",
+    "files": {
+      "tools/scripts/symblic_contract_pilot.py": "757fb1af2e562ab6a8384fe116f854ec05f3d533953ab4719a502ef89c9873c5",
+      "symblic/kernel/language.py": "dedc5dc06f064c1b8dd929525bcb64b9c7ab90b2d9666479d273f012121a4b71",
+      "symblic/providers/applicators.py": "93b5708d484186ef70c8bc65decf51699327d947eccce4c35b83e297f841c9fd",
+      "symblic/kernel/effects.py": "ddde1baae8124d8b437b291be2060d63aa954d398cb76af87d74b76cdd436a7f",
+      "symblic/kernel/evidence.py": "915f9a50c0e534dfb3d646b092b590766d8f4d45c4f3e9b7207b4b17e75803f3",
+      "symblic/adapters/geometry.py": "ab7b7d40ed7d85a49e4512e3f05efdbea7dcbab267fe7e513126ab4d0a4388cc",
+      "symblic/lang/abstraction.py": "5b471cf6d3468b61b3ec81fd558f428c3b3b08811830ec64262671dd3f766d38",
+      "symblic/adapters/render.py": "06c8c0aea966d95067debe1eb9684f34514473fb8c4e59f3481f782921d17dd1",
+      "symblic/kernel/run.py": "89b015d6b4b0eec2c5c73a1b864b4576b7ca1724c72bb5a1a40d485f5b2a946d"
+    },
+    "items": [
+      {
+        "expected": {
+          "choice": "any",
+          "value": "3"
+        },
+        "family": "scope",
+        "id": "scope-1",
+        "parameters": {
+          "choice": "any",
+          "rows": [
+            [
+              5,
+              3
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "threshold": 2
+        },
+        "predicate": "answer.choice = \"any\" and answer.value = len([r for r in [[5, 3], [3, 1], [1, 2], [3, 4]] if len([x for x in r if x > 2]) > 0])",
+        "question": "Teams have these reading lists: [[5, 3], [3, 1], [1, 2], [3, 4]]. Count teams for which at least one reading is strictly greater than 2. choice is any; value is the number of qualifying teams. Equality does not qualify."
+      },
+      {
+        "expected": {
+          "choice": "seconds",
+          "value": "19/10"
+        },
+        "family": "unit",
+        "id": "unit-1",
+        "parameters": {
+          "count": 4,
+          "divisor": 1000,
+          "duration": 475
+        },
+        "predicate": "answer.choice = \"seconds\" and answer.value * 1000 = 475 * 4",
+        "question": "A device emits 4 pulses, each lasting 475 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds."
+      },
+      {
+        "expected": {
+          "choice": "all",
+          "value": "2"
+        },
+        "family": "scope",
+        "id": "scope-0",
+        "parameters": {
+          "choice": "all",
+          "rows": [
+            [
+              6,
+              4
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              6
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "threshold": 5
+        },
+        "predicate": "answer.choice = \"all\" and answer.value = len([r for r in [[6, 4], [6, 7], [8, 6], [4, 5]] if len([x for x in r if x > 5]) = len(r)])",
+        "question": "Teams have these reading lists: [[6, 4], [6, 7], [8, 6], [4, 5]]. Count teams for which every reading is strictly greater than 5. choice is all; value is the number of qualifying teams. Equality does not qualify."
+      },
+      {
+        "expected": {
+          "choice": "seconds",
+          "value": "39/40"
+        },
+        "family": "unit",
+        "id": "unit-0",
+        "parameters": {
+          "count": 3,
+          "divisor": 1000,
+          "duration": 325
+        },
+        "predicate": "answer.choice = \"seconds\" and answer.value * 1000 = 325 * 3",
+        "question": "A device emits 3 pulses, each lasting 325 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds."
+      },
+      {
+        "expected": {
+          "choice": "initial",
+          "value": "80"
+        },
+        "family": "basis",
+        "id": "basis-0",
+        "parameters": {
+          "choice": "initial",
+          "initial": 80,
+          "removed": 10
+        },
+        "predicate": "answer.choice = \"initial\" and answer.value = 80",
+        "question": "A tank initially contains 80 litres. 10 litres are removed. The next instruction removes 25% of the initial amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed."
+      },
+      {
+        "expected": {
+          "choice": "remaining",
+          "value": "130"
+        },
+        "family": "basis",
+        "id": "basis-1",
+        "parameters": {
+          "choice": "remaining",
+          "initial": 170,
+          "removed": 40
+        },
+        "predicate": "answer.choice = \"remaining\" and answer.value = (170 - 40)",
+        "question": "A tank initially contains 170 litres. 40 litres are removed. The next instruction removes 25% of the remaining amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed."
+      }
+    ],
+    "kernel": {
+      "canon": 3,
+      "geometry": 2,
+      "id": "5c633d7aa8a5f0fb",
+      "lang": "2.1",
+      "max_digits": 4000,
+      "python": "3.12.3",
+      "unicode": "15.0.0"
+    },
+    "limits": [
+      "Synthetic held-out instances of exposed templates, not a novel-domain holdout.",
+      "Checked arm includes a reference contract and conditional stronger fallback.",
+      "Equal call ceilings do not imply equal consumed calls or identical prompts.",
+      "No confidence or superiority claim from this small diagnostic.",
+      "Reply cap rejects received output; backend generation uses existing admitted limits."
+    ],
+    "max_calls_per_cell": 2,
+    "max_prompt_chars": 8000,
+    "max_reply_chars": 8192,
+    "max_seconds": 1800,
+    "max_total_calls": 36,
+    "models": [
+      "ollama:llama3.2:1b"
+    ],
+    "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71",
+    "purpose": "diagnostic_only_no_general_gain_claim",
+    "seed": 20261003,
+    "version": 1
+  },
+  "summary": {
+    "arms": {
+      "checked_escalation": {
+        "actual_placements": [
+          {
+            "calls": 1,
+            "model": "haiku",
+            "node": "node-a"
+          },
+          {
+            "calls": 2,
+            "model": "llama3.2:1b",
+            "node": "node-a"
+          },
+          {
+            "calls": 2,
+            "model": "haiku",
+            "node": "node-b"
+          },
+          {
+            "calls": 1,
+            "model": "llama3.2:1b",
+            "node": "node-b"
+          },
+          {
+            "calls": 1,
+            "model": "haiku",
+            "node": "node-d"
+          },
+          {
+            "calls": 1,
+            "model": "llama3.2:1b",
+            "node": "node-d"
+          },
+          {
+            "calls": 1,
+            "model": "haiku",
+            "node": "node-f"
+          },
+          {
+            "calls": 1,
+            "model": "llama3.2:1b",
+            "node": "node-f"
+          },
+          {
+            "calls": 1,
+            "model": "haiku",
+            "node": "node-i"
+          },
+          {
+            "calls": 1,
+            "model": "llama3.2:1b",
+            "node": "node-i"
+          }
+        ],
+        "assigned": 6,
+        "call_elapsed_seconds": 102.458,
+        "call_finished_at_utc": "2026-10-03T12:51:15.750+00:00",
+        "call_started_at_utc": "2026-10-03T12:48:06.608+00:00",
+        "calls": 12,
+        "false_acceptance": {
+          "assigned": 6,
+          "count": 0
+        },
+        "final_correct": 6,
+        "finished": 6,
+        "first_pass_correct": 0,
+        "status": {
+          "done": 6
+        }
+      },
+      "natural": {
+        "actual_placements": [
+          {
+            "calls": 2,
+            "model": "llama3.2:1b",
+            "node": "node-a"
+          },
+          {
+            "calls": 2,
+            "model": "llama3.2:1b",
+            "node": "node-b"
+          },
+          {
+            "calls": 3,
+            "model": "llama3.2:1b",
+            "node": "node-d"
+          },
+          {
+            "calls": 3,
+            "model": "llama3.2:1b",
+            "node": "node-f"
+          },
+          {
+            "calls": 2,
+            "model": "llama3.2:1b",
+            "node": "node-i"
+          }
+        ],
+        "assigned": 6,
+        "call_elapsed_seconds": 61.916,
+        "call_finished_at_utc": "2026-10-03T12:51:39.692+00:00",
+        "call_started_at_utc": "2026-10-03T12:49:12.200+00:00",
+        "calls": 12,
+        "false_acceptance": {
+          "assigned": 6,
+          "count": 1
+        },
+        "final_correct": 0,
+        "finished": 6,
+        "first_pass_correct": 0,
+        "status": {
+          "done": 1,
+          "failed": 5
+        }
+      },
+      "typed": {
+        "actual_placements": [
+          {
+            "calls": 1,
+            "model": "llama3.2:1b",
+            "node": "node-a"
+          },
+          {
+            "calls": 1,
+            "model": "llama3.2:1b",
+            "node": "node-b"
+          },
+          {
+            "calls": 1,
+            "model": "llama3.2:1b",
+            "node": "node-d"
+          },
+          {
+            "calls": 1,
+            "model": "llama3.2:1b",
+            "node": "node-f"
+          },
+          {
+            "calls": 2,
+            "model": "llama3.2:1b",
+            "node": "node-i"
+          }
+        ],
+        "assigned": 6,
+        "call_elapsed_seconds": 40.119,
+        "call_finished_at_utc": "2026-10-03T12:51:47.388+00:00",
+        "call_started_at_utc": "2026-10-03T12:49:28.883+00:00",
+        "calls": 6,
+        "false_acceptance": {
+          "assigned": 6,
+          "count": 6
+        },
+        "final_correct": 0,
+        "finished": 6,
+        "first_pass_correct": 0,
+        "status": {
+          "done": 6
+        }
+      }
+    },
+    "assigned": 18,
+    "calls": 30,
+    "finished": 18,
+    "limits": [
+      "Synthetic held-out instances of exposed templates, not a novel-domain holdout.",
+      "Checked arm includes a reference contract and conditional stronger fallback.",
+      "Equal call ceilings do not imply equal consumed calls or identical prompts.",
+      "No confidence or superiority claim from this small diagnostic.",
+      "Reply cap rejects received output; backend generation uses existing admitted limits."
+    ],
+    "plan_sha256": "1c55bd27e68f8bb8f4af91f7ddbd2f2e73f4f57a90bc9b6deda879292e8c0b71",
+    "purpose": "diagnostic_only_no_general_gain_claim",
+    "unknown_after_interruption": []
+  },
+  "verification": {
+    "completed_calls": 30,
+    "network": "only existing admitted Applicators/the fleet runner worker node paths",
+    "per_cell_max_calls": 2,
+    "process_exit_code": 0,
+    "source_archive": "Initial run pins source hashes; complete source-byte archive was added for the subsequent qwen run.",
+    "source_import_pinning": "files hashed before/after eager Symblic/applicator imports and compared before execution; no reload",
+    "total_cap": 36,
+    "unit_result": "success",
+    "unknown_calls": 0
+  },
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

@@ -1,0 +1,7337 @@
+{
+ "generated": "2026-10-10 17:42",
+ "rows": [
+  {
+   "name": "markdown-claude-haiku-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": "bc31289005d9",
+   "models": [
+    "claude:haiku"
+   ],
+   "pins": [
+    "host"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 13,
+   "units_accepted": 13,
+   "first_try_units": 13,
+   "calls": 26,
+   "calls_ok": 23,
+   "model_minutes": 2.9,
+   "wall_minutes": 1.7,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7fee242508ba"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9bfcff9121c9"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f47d12f37aaf"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3cf43607da28"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3e98a94693cc"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d802f0d59ea1"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1acddc0b81f3"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "96de4efcb5bd"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4238bdd88581"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1ac5e1f67602"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "60f37cc3fd89"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "12026b45eb80"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "642e7395d38e"
+    }
+   ],
+   "at": "2026-10-10 16:57:40",
+   "built_url": "/symblic/atomic/builds/markdown-claude-haiku-r1/markdown.html"
+  },
+  {
+   "name": "markdown-claude-haiku-r2",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": "bc31289005d9",
+   "models": [
+    "claude:haiku"
+   ],
+   "pins": [
+    "host"
+   ],
+   "rep": 2,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 13,
+   "units_accepted": 13,
+   "first_try_units": 13,
+   "calls": 26,
+   "calls_ok": 26,
+   "model_minutes": 3.0,
+   "wall_minutes": 1.7,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7fee242508ba"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9bfcff9121c9"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f47d12f37aaf"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4b1321d1f072"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "eeabeedc48f7"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d802f0d59ea1"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1acddc0b81f3"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "af6d5454fbb6"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c9c87c134265"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d79777b147f5"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "60f37cc3fd89"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "12026b45eb80"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "6fea8e487ef3"
+    }
+   ],
+   "at": "2026-10-10 16:57:40",
+   "built_url": "/symblic/atomic/builds/markdown-claude-haiku-r2/markdown.html"
+  },
+  {
+   "name": "markdown-exact-ollama-gemma3-1b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "exact",
+   "normalized": true,
+   "sheet_sha": "c2dacf993f6f",
+   "models": [
+    "ollama:gemma3:1b"
+   ],
+   "pins": [
+    "node-i"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 37,
+   "first_try_units": 37,
+   "calls": 74,
+   "calls_ok": 44,
+   "model_minutes": 7.3,
+   "wall_minutes": 4.5,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "14ca848a627a"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0d6d336f3309"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9a9491db7cb8"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "af86b71bda8e"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7aa6bd734428"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f506ca11908f"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "589c8ef82c22"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "67bc3dfd6af3"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "14f38cbd8a7c"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "96b9eb0b1503"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fd15dd36fe89"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5be484ea2296"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f9e70fe089b4"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "de097d46d080"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c69c97ef439d"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f86426794242"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "230e78a8a137"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "edca4de48dec"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a7732cb5385d"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fc353daa766e"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "95b266429422"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "59c9b8b38051"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fdeefb134534"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d1dd3d5ba6bc"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "55ab1a3b900b"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cf453177d60f"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b6fc90b07688"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c155c8a932f9"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87f7cbd5bd0e"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "bf1a9615037e"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a7f20f27b854"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "20ff9c021cb8"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9882dabec4f3"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "2df0ffb70f5c"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1f83af1fe57d"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "12026b45eb80"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a070e8a7d2d6"
+    }
+   ],
+   "at": "2026-10-10 16:57:41",
+   "built_url": "/symblic/atomic/builds/markdown-exact-ollama-gemma3-1b-r1/markdown.html"
+  },
+  {
+   "name": "markdown-exact-ollama-gemma3-1b-r2",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "exact",
+   "normalized": true,
+   "sheet_sha": "c2dacf993f6f",
+   "models": [
+    "ollama:gemma3:1b"
+   ],
+   "pins": [
+    "node-d"
+   ],
+   "rep": 2,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": 0,
+   "units_total": 37,
+   "units_accepted": 37,
+   "first_try_units": 37,
+   "calls": 74,
+   "calls_ok": 42,
+   "model_minutes": 21.6,
+   "wall_minutes": 12.8,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "14ca848a627a"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0d6d336f3309"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9a9491db7cb8"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "af86b71bda8e"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7aa6bd734428"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f506ca11908f"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "589c8ef82c22"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "67bc3dfd6af3"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "14f38cbd8a7c"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "96b9eb0b1503"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fd15dd36fe89"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5be484ea2296"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f9e70fe089b4"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "de097d46d080"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c69c97ef439d"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f86426794242"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "230e78a8a137"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "edca4de48dec"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a7732cb5385d"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fc353daa766e"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "95b266429422"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "59c9b8b38051"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fdeefb134534"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d1dd3d5ba6bc"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "55ab1a3b900b"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cf453177d60f"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b6fc90b07688"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c155c8a932f9"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87f7cbd5bd0e"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "bf1a9615037e"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a7f20f27b854"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "20ff9c021cb8"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9882dabec4f3"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "2df0ffb70f5c"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1f83af1fe57d"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "12026b45eb80"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a070e8a7d2d6"
+    }
+   ],
+   "at": "2026-10-10 17:09:40",
+   "built_url": "/symblic/atomic/builds/markdown-exact-ollama-gemma3-1b-r2/markdown.html"
+  },
+  {
+   "name": "markdown-exact-ollama-llama3.2-1b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "exact",
+   "normalized": true,
+   "sheet_sha": "c2dacf993f6f",
+   "models": [
+    "ollama:llama3.2:1b"
+   ],
+   "pins": [
+    "node-b"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 37,
+   "first_try_units": 37,
+   "calls": 103,
+   "calls_ok": 70,
+   "model_minutes": 49.5,
+   "wall_minutes": 29.6,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e7b59ae5125c"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "43d7c6161491"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9a9491db7cb8"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "af86b71bda8e"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "94fc24d07333"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "597980189b22"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "77c83a111e8e"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a7c14600b4e9"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "caebf98ec814"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "723c67db2be6"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fd15dd36fe89"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5be484ea2296"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f9e70fe089b4"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "de097d46d080"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c69c97ef439d"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f86426794242"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "230e78a8a137"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4778595c0164"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "481de26d374c"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fc353daa766e"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 6,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1cde753a2b11"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "59c9b8b38051"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5399db2e376b"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d1dd3d5ba6bc"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 7,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "55ab1a3b900b"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 8,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cf453177d60f"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "ecec7ffac6ea"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c9305e6c62df"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87f7cbd5bd0e"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "bf1a9615037e"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a7f20f27b854"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cea70a82415f"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9882dabec4f3"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "930cae990f17"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "60f37cc3fd89"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "12026b45eb80"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a070e8a7d2d6"
+    }
+   ],
+   "at": "2026-10-10 16:57:42",
+   "built_url": "/symblic/atomic/builds/markdown-exact-ollama-llama3.2-1b-r1/markdown.html"
+  },
+  {
+   "name": "markdown-exact-ollama-llama3.2-1b-r2",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "exact",
+   "normalized": true,
+   "sheet_sha": "c2dacf993f6f",
+   "models": [
+    "ollama:llama3.2:1b"
+   ],
+   "pins": [
+    "node-a"
+   ],
+   "rep": 2,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": 0,
+   "units_total": 37,
+   "units_accepted": 37,
+   "first_try_units": 37,
+   "calls": 101,
+   "calls_ok": 72,
+   "model_minutes": 78.9,
+   "wall_minutes": 44.1,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e7b59ae5125c"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "43d7c6161491"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9a9491db7cb8"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "af86b71bda8e"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "94fc24d07333"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "597980189b22"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "77c83a111e8e"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a7c14600b4e9"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "caebf98ec814"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "723c67db2be6"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fd15dd36fe89"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5be484ea2296"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f9e70fe089b4"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "de097d46d080"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c69c97ef439d"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f86426794242"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "230e78a8a137"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4778595c0164"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "481de26d374c"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fc353daa766e"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 6,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1cde753a2b11"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "59c9b8b38051"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5399db2e376b"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d1dd3d5ba6bc"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 6,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "55ab1a3b900b"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 8,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cf453177d60f"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "ecec7ffac6ea"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c9305e6c62df"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87f7cbd5bd0e"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "bf1a9615037e"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a7f20f27b854"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cea70a82415f"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9882dabec4f3"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "930cae990f17"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "60f37cc3fd89"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "12026b45eb80"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a070e8a7d2d6"
+    }
+   ],
+   "at": "2026-10-10 17:41:44",
+   "built_url": "/symblic/atomic/builds/markdown-exact-ollama-llama3.2-1b-r2/markdown.html"
+  },
+  {
+   "name": "markdown-exact-ollama-qwen2.5-0.5b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "exact",
+   "normalized": true,
+   "sheet_sha": "c2dacf993f6f",
+   "models": [
+    "ollama:qwen2.5:0.5b"
+   ],
+   "pins": [
+    "node-b"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 34,
+   "first_try_units": 34,
+   "calls": 101,
+   "calls_ok": 74,
+   "model_minutes": 35.8,
+   "wall_minutes": 19.8,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fc538e8e3f21"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d3bdea911216"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4fc308b9bdcd"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3e92abdee6fe"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f47d12f37aaf"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3b6a250bb072"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d06555b7edce"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cce7afb04ad4"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3b41294b7c76"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c52395a03641"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1b2284188315"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "06b642ce18e5"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "196177897233"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4ce70ce816ae"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4b243da027f1"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e57dadf32868"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "230e78a8a137"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "edca4de48dec"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 7,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "366a8f277b55"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fc353daa766e"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "82e91206a57b"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a8064334bfdb"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "144634574d95"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d1dd3d5ba6bc"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4d20e9595a2b"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1f974905b5cf"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b6fc90b07688"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "74121ff853c7"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87f7cbd5bd0e"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "bf1a9615037e"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f70e84d618eb"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "20ff9c021cb8"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c5423aa97776"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b1408d0ff6bc"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:42"
+  },
+  {
+   "name": "markdown-exact-ollama-qwen2.5-0.5b-r2",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "exact",
+   "normalized": true,
+   "sheet_sha": "c2dacf993f6f",
+   "models": [
+    "ollama:qwen2.5:0.5b"
+   ],
+   "pins": [
+    "node-b"
+   ],
+   "rep": 2,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": 1,
+   "units_total": 37,
+   "units_accepted": 34,
+   "first_try_units": 34,
+   "calls": 96,
+   "calls_ok": 66,
+   "model_minutes": 35.9,
+   "wall_minutes": 19.8,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fc538e8e3f21"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d3bdea911216"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4fc308b9bdcd"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "ce271bfd78d4"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f47d12f37aaf"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3b6a250bb072"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d06555b7edce"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cce7afb04ad4"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3b41294b7c76"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c52395a03641"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1b2284188315"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "06b642ce18e5"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "196177897233"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4ce70ce816ae"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4b243da027f1"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e57dadf32868"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "230e78a8a137"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "edca4de48dec"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 7,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a6c31ee54952"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fc353daa766e"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "82e91206a57b"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a8064334bfdb"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "144634574d95"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d1dd3d5ba6bc"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4d20e9595a2b"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1f974905b5cf"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b6fc90b07688"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "74121ff853c7"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87f7cbd5bd0e"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "bf1a9615037e"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f70e84d618eb"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "20ff9c021cb8"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c5423aa97776"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b1408d0ff6bc"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 17:17:30"
+  },
+  {
+   "name": "markdown-fine-ollama-gemma3-1b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": true,
+   "variant": "fine",
+   "normalized": true,
+   "sheet_sha": "cba226f2b762",
+   "models": [
+    "ollama:gemma3:1b"
+   ],
+   "pins": [
+    "node-a"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 3,
+   "first_try_units": 3,
+   "calls": 33,
+   "calls_ok": 32,
+   "model_minutes": 23.1,
+   "wall_minutes": 13.4,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 13,
+     "candidates": 4,
+     "rejected": 3,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7aa4abcfee77"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f343be19e970"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "be7659cf63fd"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:42"
+  },
+  {
+   "name": "markdown-fine-ollama-granite3.3-2b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": true,
+   "variant": "fine",
+   "normalized": false,
+   "sheet_sha": "f1918c1f556f",
+   "models": [
+    "ollama:granite3.3:2b"
+   ],
+   "pins": [
+    "node-i"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 37,
+   "first_try_units": 37,
+   "calls": 140,
+   "calls_ok": 122,
+   "model_minutes": 39.8,
+   "wall_minutes": 24.6,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a149d0614a30"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "43d7c6161491"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a5d17df00773"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c82b56f98c46"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f9c4d24f6fc1"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 12,
+     "candidates": 4,
+     "rejected": 3,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3b6a250bb072"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 6,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d06555b7edce"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8ca1e385157e"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d84fa1337eef"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "52ed2f057564"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9bf9aae20d71"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "2bf2b94f637e"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "011207f5fab5"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fd9fcd90468f"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0429a3b1c053"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 6,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "27fe17c4f28c"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 8,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f4fe2a097d41"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c6dd119ec81b"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c6095160eee8"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "21aa4dbae28c"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1cde753a2b11"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3d7d4f4f4611"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 3,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "279989f7803a"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4423b746a3ba"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e52d7bf17335"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3eb10151846b"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d04305a9303e"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "812c34c26bcd"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "80418352791b"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0b4ce5003aeb"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f70e84d618eb"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4b1d7d079431"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c5423aa97776"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f544c73f5a3a"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b3183cc38540"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4f6cc04dc3c2"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e703f08fb3a2"
+    }
+   ],
+   "at": "2026-10-10 16:57:43",
+   "built_url": "/symblic/atomic/builds/markdown-fine-ollama-granite3.3-2b-r1/markdown.html"
+  },
+  {
+   "name": "markdown-fine-ollama-llama3.2-1b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": true,
+   "variant": "fine",
+   "normalized": true,
+   "sheet_sha": "cba226f2b762",
+   "models": [
+    "ollama:llama3.2:1b"
+   ],
+   "pins": [
+    "node-f"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 3,
+   "first_try_units": 3,
+   "calls": 24,
+   "calls_ok": 21,
+   "model_minutes": 10.4,
+   "wall_minutes": 6.8,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c09d94fe16f8"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0a2badc8054d"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e0597350760f"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:43"
+  },
+  {
+   "name": "markdown-fine-ollama-qwen2.5-0.5b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": true,
+   "variant": "fine",
+   "normalized": true,
+   "sheet_sha": "cba226f2b762",
+   "models": [
+    "ollama:qwen2.5:0.5b"
+   ],
+   "pins": [
+    "node-f"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 3,
+   "first_try_units": 3,
+   "calls": 26,
+   "calls_ok": 24,
+   "model_minutes": 17.2,
+   "wall_minutes": 9.9,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a09d64a74cca"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d3bdea911216"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4fc308b9bdcd"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:43"
+  },
+  {
+   "name": "markdown-fine-ollama-qwen2.5-coder-3b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": true,
+   "variant": "fine",
+   "normalized": false,
+   "sheet_sha": null,
+   "models": [
+    "ollama:qwen2.5-coder:3b"
+   ],
+   "pins": [
+    "node-f"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 37,
+   "first_try_units": 37,
+   "calls": 81,
+   "calls_ok": 48,
+   "model_minutes": 49.3,
+   "wall_minutes": 26.6,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8bad7564538e"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d3bdea911216"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4fc308b9bdcd"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7f8530d6c91b"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f47d12f37aaf"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3b6a250bb072"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d06555b7edce"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cce7afb04ad4"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "bc454e82946a"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c52395a03641"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1b2284188315"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "06b642ce18e5"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "196177897233"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4ce70ce816ae"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4b243da027f1"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "737b4578b26e"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87bd12bad6ff"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0dc68d58fa96"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9db49e0fab38"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "55ed4396ecf8"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "82e91206a57b"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a8064334bfdb"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "144634574d95"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d1dd3d5ba6bc"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4d20e9595a2b"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1f974905b5cf"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b6fc90b07688"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "74121ff853c7"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87f7cbd5bd0e"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cc402d0928be"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f70e84d618eb"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "99875add3266"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c5423aa97776"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b1408d0ff6bc"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "60f37cc3fd89"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "88672f55a395"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a070e8a7d2d6"
+    }
+   ],
+   "at": "2026-10-10 16:57:44",
+   "built_url": "/symblic/atomic/builds/markdown-fine-ollama-qwen2.5-coder-3b-r1/markdown.html"
+  },
+  {
+   "name": "markdown-fine-ollama-qwen2.5-coder-3b-r2",
+   "target": "markdown",
+   "mono": false,
+   "fine": true,
+   "variant": "fine",
+   "normalized": true,
+   "sheet_sha": "cba226f2b762",
+   "models": [
+    "ollama:qwen2.5-coder:3b"
+   ],
+   "pins": [
+    "node-f"
+   ],
+   "rep": 2,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 37,
+   "first_try_units": 37,
+   "calls": 76,
+   "calls_ok": 43,
+   "model_minutes": 43.0,
+   "wall_minutes": 25.4,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7fee242508ba"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d3bdea911216"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4fc308b9bdcd"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7f8530d6c91b"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f47d12f37aaf"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3b6a250bb072"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d06555b7edce"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cce7afb04ad4"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "bc454e82946a"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c52395a03641"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1b2284188315"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "06b642ce18e5"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "196177897233"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4ce70ce816ae"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4b243da027f1"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e57dadf32868"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87bd12bad6ff"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0dc68d58fa96"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9db49e0fab38"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "32da9f3e9f4e"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "82e91206a57b"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a8064334bfdb"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "144634574d95"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d1dd3d5ba6bc"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4d20e9595a2b"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1f974905b5cf"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b6fc90b07688"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "74121ff853c7"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87f7cbd5bd0e"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cc402d0928be"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f70e84d618eb"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "99875add3266"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c5423aa97776"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b1408d0ff6bc"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "60f37cc3fd89"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "88672f55a395"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a070e8a7d2d6"
+    }
+   ],
+   "at": "2026-10-10 16:57:44",
+   "built_url": "/symblic/atomic/builds/markdown-fine-ollama-qwen2.5-coder-3b-r2/markdown.html"
+  },
+  {
+   "name": "markdown-fine-ollama-qwen3-4b-instruct-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": true,
+   "variant": "fine",
+   "normalized": false,
+   "sheet_sha": "f1918c1f556f",
+   "models": [
+    "ollama:qwen3:4b-instruct"
+   ],
+   "pins": [
+    "node-b"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 37,
+   "units_accepted": 37,
+   "first_try_units": 37,
+   "calls": 74,
+   "calls_ok": 42,
+   "model_minutes": 55.5,
+   "wall_minutes": 30.3,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7ef10be40a51"
+    },
+    {
+     "unit": "unit_strong",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "97ba9c151520"
+    },
+    {
+     "unit": "unit_em",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "6fdb9cab4ccb"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "96933824bf4a"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "52de067cb576"
+    },
+    {
+     "unit": "unit_isCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f8ba3d973e3b"
+    },
+    {
+     "unit": "unit_renderCodeSpan",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "bca305f4a09b"
+    },
+    {
+     "unit": "unit_renderTextPart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "830f38feaf04"
+    },
+    {
+     "unit": "unit_inlinePart",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "653d5c180602"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c52395a03641"
+    },
+    {
+     "unit": "unit_isFenceLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "533fe2031603"
+    },
+    {
+     "unit": "unit_isBlankLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "454f3694469c"
+    },
+    {
+     "unit": "unit_isHeadingLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c583a2e5e789"
+    },
+    {
+     "unit": "unit_isRuleLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "eebb4e92d055"
+    },
+    {
+     "unit": "unit_isOwnBlockLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "204b4da51193"
+    },
+    {
+     "unit": "unit_flush",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c9bc59824b7c"
+    },
+    {
+     "unit": "unit_stepInFence",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "87bd12bad6ff"
+    },
+    {
+     "unit": "unit_stepOutside",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "255c2631f837"
+    },
+    {
+     "unit": "unit_stepLine",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9bbfc02d0b03"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "55ed4396ecf8"
+    },
+    {
+     "unit": "unit_isQuoteBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "82e91206a57b"
+    },
+    {
+     "unit": "unit_isUlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1bf574ef24a5"
+    },
+    {
+     "unit": "unit_isOlBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fb9631b6d56e"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "54f5df1aa509"
+    },
+    {
+     "unit": "unit_headingLevel",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9a257c35c503"
+    },
+    {
+     "unit": "unit_headingText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "24b4fba51db8"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "452ca6ba8afe"
+    },
+    {
+     "unit": "unit_codeLang",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "183a0b33c27f"
+    },
+    {
+     "unit": "unit_codeBodyLines",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9ad2aa6640ad"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "859adc0e2abb"
+    },
+    {
+     "unit": "unit_listItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4e7347334583"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d03269e5c875"
+    },
+    {
+     "unit": "unit_quoteText",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "2fb159f4e9f4"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a2743f7cf551"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "036c1529f157"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "48b72cb7d32b"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c578d0b8e250"
+    }
+   ],
+   "at": "2026-10-10 16:57:45",
+   "built_url": "/symblic/atomic/builds/markdown-fine-ollama-qwen3-4b-instruct-r1/markdown.html"
+  },
+  {
+   "name": "markdown-mono-claude-haiku-r1",
+   "target": "markdown",
+   "mono": true,
+   "fine": false,
+   "variant": "mono",
+   "normalized": false,
+   "sheet_sha": "2fdadb76a520",
+   "models": [
+    "claude:haiku"
+   ],
+   "pins": [
+    "host"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 1,
+   "units_accepted": 1,
+   "first_try_units": 1,
+   "calls": 2,
+   "calls_ok": 2,
+   "model_minutes": 0.7,
+   "wall_minutes": 0.4,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b703f12cad26"
+    }
+   ],
+   "at": "2026-10-10 16:57:45",
+   "built_url": "/symblic/atomic/builds/markdown-mono-claude-haiku-r1/markdown.html"
+  },
+  {
+   "name": "markdown-mono-claude-sonnet-r1",
+   "target": "markdown",
+   "mono": true,
+   "fine": false,
+   "variant": "mono",
+   "normalized": false,
+   "sheet_sha": "2fdadb76a520",
+   "models": [
+    "claude:sonnet"
+   ],
+   "pins": [
+    "host"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 1,
+   "units_accepted": 1,
+   "first_try_units": 1,
+   "calls": 2,
+   "calls_ok": 2,
+   "model_minutes": 0.5,
+   "wall_minutes": 0.3,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8df29bbfa39d"
+    }
+   ],
+   "at": "2026-10-10 16:57:46",
+   "built_url": "/symblic/atomic/builds/markdown-mono-claude-sonnet-r1/markdown.html"
+  },
+  {
+   "name": "markdown-mono-ollama-llama3.2-1b-r1",
+   "target": "markdown",
+   "mono": true,
+   "fine": false,
+   "variant": "mono",
+   "normalized": false,
+   "sheet_sha": "2fdadb76a520",
+   "models": [
+    "ollama:llama3.2:1b"
+   ],
+   "pins": [
+    "node-a"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 1,
+   "units_accepted": 0,
+   "first_try_units": 0,
+   "calls": 16,
+   "calls_ok": 11,
+   "model_minutes": 120.3,
+   "wall_minutes": 66.3,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:46"
+  },
+  {
+   "name": "markdown-mono-ollama-qwen2.5-coder-3b-r1",
+   "target": "markdown",
+   "mono": true,
+   "fine": false,
+   "variant": "mono",
+   "normalized": false,
+   "sheet_sha": "2fdadb76a520",
+   "models": [
+    "ollama:qwen2.5-coder:3b"
+   ],
+   "pins": [
+    "node-i"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 1,
+   "units_accepted": 0,
+   "first_try_units": 0,
+   "calls": 16,
+   "calls_ok": 16,
+   "model_minutes": 50.1,
+   "wall_minutes": 31.1,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:46"
+  },
+  {
+   "name": "markdown-mono-ollama-qwen3-4b-instruct-r1",
+   "target": "markdown",
+   "mono": true,
+   "fine": false,
+   "variant": "mono",
+   "normalized": false,
+   "sheet_sha": "2fdadb76a520",
+   "models": [
+    "ollama:qwen3:4b-instruct"
+   ],
+   "pins": [
+    "node-d"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 1,
+   "units_accepted": 0,
+   "first_try_units": 0,
+   "calls": 16,
+   "calls_ok": 9,
+   "model_minutes": 209.9,
+   "wall_minutes": 110.8,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:46"
+  },
+  {
+   "name": "markdown-ollama-gemma3-1b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": null,
+   "models": [
+    "ollama:gemma3:1b"
+   ],
+   "pins": [],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 13,
+   "units_accepted": 0,
+   "first_try_units": 0,
+   "calls": 16,
+   "calls_ok": 16,
+   "model_minutes": 11.8,
+   "wall_minutes": 8.6,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:46"
+  },
+  {
+   "name": "markdown-ollama-granite3.3-2b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": null,
+   "models": [
+    "ollama:granite3.3:2b"
+   ],
+   "pins": [
+    "node-d"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 13,
+   "units_accepted": 3,
+   "first_try_units": 3,
+   "calls": 26,
+   "calls_ok": 24,
+   "model_minutes": 49.0,
+   "wall_minutes": 31.9,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 6,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9c6bd50bf57d"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0060a27f7337"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "daf6f4e4bc8f"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:46"
+  },
+  {
+   "name": "markdown-ollama-llama3.2-1b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": null,
+   "models": [
+    "ollama:llama3.2:1b"
+   ],
+   "pins": [
+    "node-a"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 13,
+   "units_accepted": 3,
+   "first_try_units": 3,
+   "calls": 33,
+   "calls_ok": 31,
+   "model_minutes": 62.8,
+   "wall_minutes": 39.0,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "abec5c157e29"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 13,
+     "candidates": 4,
+     "rejected": 3,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "db947b5384d1"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "95ca9e681657"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:46"
+  },
+  {
+   "name": "markdown-ollama-qwen2.5-0.5b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": null,
+   "models": [
+    "ollama:qwen2.5:0.5b"
+   ],
+   "pins": [
+    "node-f"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 13,
+   "units_accepted": 0,
+   "first_try_units": 0,
+   "calls": 16,
+   "calls_ok": 16,
+   "model_minutes": 25.2,
+   "wall_minutes": 16.2,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:47"
+  },
+  {
+   "name": "markdown-ollama-qwen2.5-coder-3b-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": null,
+   "models": [
+    "ollama:qwen2.5-coder:3b"
+   ],
+   "pins": [
+    "node-i"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 13,
+   "units_accepted": 4,
+   "first_try_units": 4,
+   "calls": 34,
+   "calls_ok": 30,
+   "model_minutes": 19.1,
+   "wall_minutes": 12.4,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "19436dcb23f7"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "edd9d33a3c66"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f47d12f37aaf"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 12,
+     "candidates": 4,
+     "rejected": 3,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "93af8b71d836"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:47"
+  },
+  {
+   "name": "markdown-ollama-qwen3-4b-instruct-r1",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": null,
+   "models": [
+    "ollama:qwen3:4b-instruct"
+   ],
+   "pins": [
+    "node-b"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 13,
+   "units_accepted": 13,
+   "first_try_units": 13,
+   "calls": 28,
+   "calls_ok": 15,
+   "model_minutes": 51.4,
+   "wall_minutes": 28.1,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "524d25c10413"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "85a6a9fd536b"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "52de067cb576"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "03e06ca0ea6d"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "acab237c32aa"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b61db96727d1"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4288a56089f7"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4656b6618208"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "96290a2f812b"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "51d78118d494"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "036c1529f157"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "90a0ac65ec59"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a3704ad42e99"
+    }
+   ],
+   "at": "2026-10-10 16:57:47",
+   "built_url": "/symblic/atomic/builds/markdown-ollama-qwen3-4b-instruct-r1/markdown.html"
+  },
+  {
+   "name": "markdown-ollama-qwen3-4b-instruct-r2",
+   "target": "markdown",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": "bc31289005d9",
+   "models": [
+    "ollama:qwen3:4b-instruct"
+   ],
+   "pins": [
+    "node-a"
+   ],
+   "rep": 2,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 13,
+   "units_accepted": 13,
+   "first_try_units": 13,
+   "calls": 28,
+   "calls_ok": 14,
+   "model_minutes": 67.3,
+   "wall_minutes": 35.7,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 500,
+    "pass": 500,
+    "fail": 0,
+    "errors": 0,
+    "plain": 8,
+    "plainOf": 8,
+    "fingerprint": "2662abdb7f298d32",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_escapeHtml",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "524d25c10413"
+    },
+    {
+     "unit": "unit_strongEm",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "85a6a9fd536b"
+    },
+    {
+     "unit": "unit_links",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "52de067cb576"
+    },
+    {
+     "unit": "unit_inline",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "03e06ca0ea6d"
+    },
+    {
+     "unit": "unit_splitBlocks",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "acab237c32aa"
+    },
+    {
+     "unit": "unit_blockType",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b61db96727d1"
+    },
+    {
+     "unit": "unit_renderHeading",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4288a56089f7"
+    },
+    {
+     "unit": "unit_renderCode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4656b6618208"
+    },
+    {
+     "unit": "unit_renderList",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "96290a2f812b"
+    },
+    {
+     "unit": "unit_renderQuote",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "51d78118d494"
+    },
+    {
+     "unit": "unit_renderParagraph",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "036c1529f157"
+    },
+    {
+     "unit": "unit_renderBlock",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "90a0ac65ec59"
+    },
+    {
+     "unit": "unit_render",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a3704ad42e99"
+    }
+   ],
+   "at": "2026-10-10 16:57:48",
+   "built_url": "/symblic/atomic/builds/markdown-ollama-qwen3-4b-instruct-r2/markdown.html"
+  },
+  {
+   "name": "regex-claude-haiku-r1",
+   "target": "regex",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": "a955c04c32c7",
+   "models": [
+    "claude:haiku"
+   ],
+   "pins": [
+    "host"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 17,
+   "units_accepted": 17,
+   "first_try_units": 17,
+   "calls": 34,
+   "calls_ok": 34,
+   "model_minutes": 3.7,
+   "wall_minutes": 2.1,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 400,
+    "pass": 400,
+    "fail": 0,
+    "errors": 0,
+    "fingerprint": "b4afa97ab1c647eb",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_isDigit",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7949f897e0f0"
+    },
+    {
+     "unit": "unit_matchEsc",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "96f078d18786"
+    },
+    {
+     "unit": "unit_readClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c84d85d75c2c"
+    },
+    {
+     "unit": "unit_matchClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e4b1d95f9cb2"
+    },
+    {
+     "unit": "unit_tokenize",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8f71d19e3900"
+    },
+    {
+     "unit": "unit_parseAtom",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a0ee3915da55"
+    },
+    {
+     "unit": "unit_parseQuant",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "830b560c876f"
+    },
+    {
+     "unit": "unit_parseSeq",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9ac2d8a6a663"
+    },
+    {
+     "unit": "unit_parseAlt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8ad21017cf00"
+    },
+    {
+     "unit": "unit_parse",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cef71610cfc5"
+    },
+    {
+     "unit": "unit_matchOne",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d09a48c1e0f1"
+    },
+    {
+     "unit": "unit_matchSeq",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d68e908347eb"
+    },
+    {
+     "unit": "unit_matchAlt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "ccd13e839aef"
+    },
+    {
+     "unit": "unit_matchGroup",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a7d96aac6ea0"
+    },
+    {
+     "unit": "unit_matchRep",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "83974a1c2355"
+    },
+    {
+     "unit": "unit_matchNode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "201e6d2e2c0a"
+    },
+    {
+     "unit": "unit_search",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "19651045034a"
+    }
+   ],
+   "at": "2026-10-10 16:57:48",
+   "built_url": "/symblic/atomic/builds/regex-claude-haiku-r1/regex.html"
+  },
+  {
+   "name": "regex-exact-ollama-gemma3-1b-r1",
+   "target": "regex",
+   "mono": false,
+   "fine": false,
+   "variant": "exact",
+   "normalized": true,
+   "sheet_sha": "6473b82ea20b",
+   "models": [
+    "ollama:gemma3:1b"
+   ],
+   "pins": [
+    "node-b"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 34,
+   "units_accepted": 13,
+   "first_try_units": 13,
+   "calls": 42,
+   "calls_ok": 33,
+   "model_minutes": 24.2,
+   "wall_minutes": 14.6,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_isDigit",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3edaa642fdcc"
+    },
+    {
+     "unit": "unit_isWordChar",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "6136133d2dee"
+    },
+    {
+     "unit": "unit_isSpace",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8ac96f5e5d37"
+    },
+    {
+     "unit": "unit_matchEsc",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "2e8ffdae5095"
+    },
+    {
+     "unit": "unit_classAtomAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c3008557a3fd"
+    },
+    {
+     "unit": "unit_rangeFollows",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "77065d0171ae"
+    },
+    {
+     "unit": "unit_classItemAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1b631ff579f0"
+    },
+    {
+     "unit": "unit_readClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9bf51a694a53"
+    },
+    {
+     "unit": "unit_matchClassItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "6e4949274111"
+    },
+    {
+     "unit": "unit_matchClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8e8ec2be31d7"
+    },
+    {
+     "unit": "unit_tokenEscapeAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8947a75dee6d"
+    },
+    {
+     "unit": "unit_tokenRepAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a55612429612"
+    },
+    {
+     "unit": "unit_tokenSimple",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8efb3922df2a"
+    },
+    {
+     "unit": "unit_tokenAt",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:48"
+  },
+  {
+   "name": "regex-exact-ollama-llama3.2-1b-r1",
+   "target": "regex",
+   "mono": false,
+   "fine": false,
+   "variant": "exact",
+   "normalized": true,
+   "sheet_sha": "6473b82ea20b",
+   "models": [
+    "ollama:llama3.2:1b"
+   ],
+   "pins": [
+    "node-i"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": 1,
+   "units_total": 34,
+   "units_accepted": 16,
+   "first_try_units": 16,
+   "calls": 64,
+   "calls_ok": 51,
+   "model_minutes": 39.9,
+   "wall_minutes": 22.7,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_isDigit",
+     "status": "ok",
+     "calls": 6,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f4d2561d5253"
+    },
+    {
+     "unit": "unit_isWordChar",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4621ec9571a1"
+    },
+    {
+     "unit": "unit_isSpace",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "2fea3416e709"
+    },
+    {
+     "unit": "unit_matchEsc",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "96c247451789"
+    },
+    {
+     "unit": "unit_classAtomAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d77f9fd0b600"
+    },
+    {
+     "unit": "unit_rangeFollows",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c7fadb7d6c5c"
+    },
+    {
+     "unit": "unit_classItemAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c65cbfd60903"
+    },
+    {
+     "unit": "unit_readClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3a0c9494a92f"
+    },
+    {
+     "unit": "unit_matchClassItem",
+     "status": "ok",
+     "calls": 4,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "6e4949274111"
+    },
+    {
+     "unit": "unit_matchClass",
+     "status": "ok",
+     "calls": 3,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "024ab488a407"
+    },
+    {
+     "unit": "unit_tokenEscapeAt",
+     "status": "ok",
+     "calls": 11,
+     "candidates": 4,
+     "rejected": 3,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5c62f8a095f3"
+    },
+    {
+     "unit": "unit_tokenRepAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a55612429612"
+    },
+    {
+     "unit": "unit_tokenSimple",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e0633ab36c9d"
+    },
+    {
+     "unit": "unit_tokenAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "2eef5f016001"
+    },
+    {
+     "unit": "unit_tokenize",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a47b0326550d"
+    },
+    {
+     "unit": "unit_atomFromToken",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d2070d2cb425"
+    },
+    {
+     "unit": "unit_parseGroup",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 17:00:31"
+  },
+  {
+   "name": "regex-exact-ollama-qwen2.5-0.5b-r1",
+   "target": "regex",
+   "mono": false,
+   "fine": false,
+   "variant": "exact",
+   "normalized": true,
+   "sheet_sha": "6473b82ea20b",
+   "models": [
+    "ollama:qwen2.5:0.5b"
+   ],
+   "pins": [
+    "node-b"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 34,
+   "units_accepted": 14,
+   "first_try_units": 14,
+   "calls": 47,
+   "calls_ok": 36,
+   "model_minutes": 29.5,
+   "wall_minutes": 15.9,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_isDigit",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e538835c91f8"
+    },
+    {
+     "unit": "unit_isWordChar",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1ad10c85b3c0"
+    },
+    {
+     "unit": "unit_isSpace",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "55cb2225ff25"
+    },
+    {
+     "unit": "unit_matchEsc",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "2e8ffdae5095"
+    },
+    {
+     "unit": "unit_classAtomAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c3008557a3fd"
+    },
+    {
+     "unit": "unit_rangeFollows",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f4591193818e"
+    },
+    {
+     "unit": "unit_classItemAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "845149ec7093"
+    },
+    {
+     "unit": "unit_readClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9bf51a694a53"
+    },
+    {
+     "unit": "unit_matchClassItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "6e4949274111"
+    },
+    {
+     "unit": "unit_matchClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "8e8ec2be31d7"
+    },
+    {
+     "unit": "unit_tokenEscapeAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "24e97bc79f43"
+    },
+    {
+     "unit": "unit_tokenRepAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a55612429612"
+    },
+    {
+     "unit": "unit_tokenSimple",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e0633ab36c9d"
+    },
+    {
+     "unit": "unit_tokenAt",
+     "status": "ok",
+     "calls": 5,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "2eef5f016001"
+    },
+    {
+     "unit": "unit_tokenize",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:48"
+  },
+  {
+   "name": "regex-fine-ollama-qwen2.5-coder-3b-r1",
+   "target": "regex",
+   "mono": false,
+   "fine": true,
+   "variant": "fine",
+   "normalized": false,
+   "sheet_sha": "c6b11e182979",
+   "models": [
+    "ollama:qwen2.5-coder:3b"
+   ],
+   "pins": [
+    "node-f"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 34,
+   "units_accepted": 34,
+   "first_try_units": 34,
+   "calls": 68,
+   "calls_ok": 39,
+   "model_minutes": 57.6,
+   "wall_minutes": 31.5,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 400,
+    "pass": 400,
+    "fail": 0,
+    "errors": 0,
+    "fingerprint": "b4afa97ab1c647eb",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_isDigit",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "e538835c91f8"
+    },
+    {
+     "unit": "unit_isWordChar",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1ad10c85b3c0"
+    },
+    {
+     "unit": "unit_isSpace",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "55cb2225ff25"
+    },
+    {
+     "unit": "unit_matchEsc",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "119f9f79719a"
+    },
+    {
+     "unit": "unit_classAtomAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "ff0725488f62"
+    },
+    {
+     "unit": "unit_rangeFollows",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f4591193818e"
+    },
+    {
+     "unit": "unit_classItemAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "60bbcb4f2433"
+    },
+    {
+     "unit": "unit_readClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9978685ef925"
+    },
+    {
+     "unit": "unit_matchClassItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "6e4949274111"
+    },
+    {
+     "unit": "unit_matchClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "ed47f6dbb366"
+    },
+    {
+     "unit": "unit_tokenEscapeAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "24e97bc79f43"
+    },
+    {
+     "unit": "unit_tokenRepAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "930672cbcb8d"
+    },
+    {
+     "unit": "unit_tokenSimple",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "6ec10914db68"
+    },
+    {
+     "unit": "unit_tokenAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f5bc0d65acb7"
+    },
+    {
+     "unit": "unit_tokenize",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4cb16a0e91c0"
+    },
+    {
+     "unit": "unit_atomFromToken",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "46b600f474b4"
+    },
+    {
+     "unit": "unit_parseGroup",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7599b6c96cb6"
+    },
+    {
+     "unit": "unit_parseAtom",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d07b24709c2d"
+    },
+    {
+     "unit": "unit_quantBounds",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f53156b3ded3"
+    },
+    {
+     "unit": "unit_parseQuant",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7a424e1d497f"
+    },
+    {
+     "unit": "unit_seqEnds",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "689aea064e89"
+    },
+    {
+     "unit": "unit_parseSeq",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "68d997fb92e0"
+    },
+    {
+     "unit": "unit_parseAlt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "20d708364e24"
+    },
+    {
+     "unit": "unit_parse",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "ca18ee9318e0"
+    },
+    {
+     "unit": "unit_charMatches",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5e77c11e8119"
+    },
+    {
+     "unit": "unit_matchOne",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c59382bc18c6"
+    },
+    {
+     "unit": "unit_matchSeq",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "d68e908347eb"
+    },
+    {
+     "unit": "unit_matchAlt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "cd9416570157"
+    },
+    {
+     "unit": "unit_withCapture",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "c092ff8c4a8e"
+    },
+    {
+     "unit": "unit_matchGroup",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "70ef79ccd03b"
+    },
+    {
+     "unit": "unit_matchRep",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "545dc0672290"
+    },
+    {
+     "unit": "unit_matchNode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4a18c4524978"
+    },
+    {
+     "unit": "unit_searchAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "ae66fb7b927a"
+    },
+    {
+     "unit": "unit_search",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4adbd7a31044"
+    }
+   ],
+   "at": "2026-10-10 16:57:49",
+   "built_url": "/symblic/atomic/builds/regex-fine-ollama-qwen2.5-coder-3b-r1/regex.html"
+  },
+  {
+   "name": "regex-fine-ollama-qwen3-4b-instruct-r1",
+   "target": "regex",
+   "mono": false,
+   "fine": true,
+   "variant": "fine",
+   "normalized": false,
+   "sheet_sha": "c6b11e182979",
+   "models": [
+    "ollama:qwen3:4b-instruct"
+   ],
+   "pins": [
+    "node-i"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 34,
+   "units_accepted": 34,
+   "first_try_units": 34,
+   "calls": 68,
+   "calls_ok": 37,
+   "model_minutes": 24.1,
+   "wall_minutes": 13.2,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 400,
+    "pass": 400,
+    "fail": 0,
+    "errors": 0,
+    "fingerprint": "b4afa97ab1c647eb",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_isDigit",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f4d2561d5253"
+    },
+    {
+     "unit": "unit_isWordChar",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fce6360e32d7"
+    },
+    {
+     "unit": "unit_isSpace",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "33505971b001"
+    },
+    {
+     "unit": "unit_matchEsc",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "421b6a1c7ca1"
+    },
+    {
+     "unit": "unit_classAtomAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5cca9099b45c"
+    },
+    {
+     "unit": "unit_rangeFollows",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "a9a2ad41009b"
+    },
+    {
+     "unit": "unit_classItemAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "4172010fee7b"
+    },
+    {
+     "unit": "unit_readClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "43b8fdc58445"
+    },
+    {
+     "unit": "unit_matchClassItem",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1691268350c3"
+    },
+    {
+     "unit": "unit_matchClass",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "fc90f3c6d134"
+    },
+    {
+     "unit": "unit_tokenEscapeAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1ab3b0140fb4"
+    },
+    {
+     "unit": "unit_tokenRepAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1da68cd755dc"
+    },
+    {
+     "unit": "unit_tokenSimple",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3f0cdf7f70ca"
+    },
+    {
+     "unit": "unit_tokenAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f04122cc808e"
+    },
+    {
+     "unit": "unit_tokenize",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "886866c48a54"
+    },
+    {
+     "unit": "unit_atomFromToken",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f0cbcf11aa9d"
+    },
+    {
+     "unit": "unit_parseGroup",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "b8bc93cf2ec9"
+    },
+    {
+     "unit": "unit_parseAtom",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0e5a68d0b1c8"
+    },
+    {
+     "unit": "unit_quantBounds",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "abc33ecb3fe4"
+    },
+    {
+     "unit": "unit_parseQuant",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "0c6a3a7d63e5"
+    },
+    {
+     "unit": "unit_seqEnds",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3dbd7de315ab"
+    },
+    {
+     "unit": "unit_parseSeq",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "01a44c7a1ab0"
+    },
+    {
+     "unit": "unit_parseAlt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "22b66985f6d4"
+    },
+    {
+     "unit": "unit_parse",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "ae5be3355a66"
+    },
+    {
+     "unit": "unit_charMatches",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "219c999bcc05"
+    },
+    {
+     "unit": "unit_matchOne",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "dc1a420f9122"
+    },
+    {
+     "unit": "unit_matchSeq",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "6dd64e059cee"
+    },
+    {
+     "unit": "unit_matchAlt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7c4577c61879"
+    },
+    {
+     "unit": "unit_withCapture",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1b8a55411445"
+    },
+    {
+     "unit": "unit_matchGroup",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "5cd2cb7c893d"
+    },
+    {
+     "unit": "unit_matchRep",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "3936f389d8d2"
+    },
+    {
+     "unit": "unit_matchNode",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "1272ccbe474d"
+    },
+    {
+     "unit": "unit_searchAt",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "9f913bec19f0"
+    },
+    {
+     "unit": "unit_search",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "098cffcd0d8e"
+    }
+   ],
+   "at": "2026-10-10 16:57:49",
+   "built_url": "/symblic/atomic/builds/regex-fine-ollama-qwen3-4b-instruct-r1/regex.html"
+  },
+  {
+   "name": "regex-mono-claude-haiku-r1",
+   "target": "regex",
+   "mono": true,
+   "fine": false,
+   "variant": "mono",
+   "normalized": false,
+   "sheet_sha": "a3998e64fb9c",
+   "models": [
+    "claude:haiku"
+   ],
+   "pins": [
+    "host"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "done",
+   "exit": null,
+   "units_total": 1,
+   "units_accepted": 1,
+   "first_try_units": 1,
+   "calls": 2,
+   "calls_ok": 2,
+   "model_minutes": 0.7,
+   "wall_minutes": 0.4,
+   "nodes": [],
+   "harness": {
+    "ok": true,
+    "cases": 400,
+    "pass": 400,
+    "fail": 0,
+    "errors": 0,
+    "fingerprint": "b4afa97ab1c647eb",
+    "sample": []
+   },
+   "per_unit": [
+    {
+     "unit": "unit_isDigit",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "097a539905b2"
+    }
+   ],
+   "at": "2026-10-10 16:57:50",
+   "built_url": "/symblic/atomic/builds/regex-mono-claude-haiku-r1/regex.html"
+  },
+  {
+   "name": "regex-ollama-qwen2.5-coder-3b-r1",
+   "target": "regex",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": "a955c04c32c7",
+   "models": [
+    "ollama:qwen2.5-coder:3b"
+   ],
+   "pins": [
+    "node-f"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": 1,
+   "units_total": 17,
+   "units_accepted": 2,
+   "first_try_units": 2,
+   "calls": 20,
+   "calls_ok": 19,
+   "model_minutes": 59.6,
+   "wall_minutes": 36.9,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_isDigit",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7949f897e0f0"
+    },
+    {
+     "unit": "unit_matchEsc",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "34cd76a1109e"
+    },
+    {
+     "unit": "unit_readClass",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 17:01:16"
+  },
+  {
+   "name": "regex-ollama-qwen3-4b-instruct-r1",
+   "target": "regex",
+   "mono": false,
+   "fine": false,
+   "variant": "units",
+   "normalized": false,
+   "sheet_sha": "a955c04c32c7",
+   "models": [
+    "ollama:qwen3:4b-instruct"
+   ],
+   "pins": [
+    "node-i"
+   ],
+   "rep": 1,
+   "samples": 2,
+   "retries": 3,
+   "rounds": 2,
+   "status": "failed",
+   "exit": null,
+   "units_total": 17,
+   "units_accepted": 2,
+   "first_try_units": 2,
+   "calls": 20,
+   "calls_ok": 18,
+   "model_minutes": 24.6,
+   "wall_minutes": 16.2,
+   "nodes": [],
+   "harness": {
+    "ok": false,
+    "error": "no built file"
+   },
+   "per_unit": [
+    {
+     "unit": "unit_isDigit",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "7e01590665b4"
+    },
+    {
+     "unit": "unit_matchEsc",
+     "status": "ok",
+     "calls": 2,
+     "candidates": 2,
+     "rejected": 1,
+     "repairs": 0,
+     "first_try": true,
+     "code_sha": "f237785335e9"
+    },
+    {
+     "unit": "unit_readClass",
+     "status": "failed",
+     "calls": 16,
+     "candidates": 4,
+     "rejected": 4,
+     "repairs": 0,
+     "first_try": false,
+     "code_sha": null
+    }
+   ],
+   "at": "2026-10-10 16:57:50"
+  }
+ ],
+ "models": [
+  "claude:haiku",
+  "claude:sonnet",
+  "ollama:gemma3:1b",
+  "ollama:granite3.3:2b",
+  "ollama:llama3.2:1b",
+  "ollama:qwen2.5-coder:3b",
+  "ollama:qwen2.5:0.5b",
+  "ollama:qwen3:4b-instruct"
+ ],
+ "targets": {
+  "markdown": {
+   "units": 13,
+   "examples": 77,
+   "harness": "500 random documents vs the reference"
+  },
+  "regex": {
+   "units": 17,
+   "examples": 107,
+   "harness": "400 random cases vs RegExp"
+  }
+ }
+}

@@ -1,0 +1,17 @@
+program Graphs.
+note Reachability over edge(X, Y) facts (directed), computed by the kernel's Datalog.
+note linked(X, Y) is the undirected view; cyclic(X) means X can reach itself.
+
+rule reachable(X, Y) if edge(X, Y).
+rule reachable(X, Z) if edge(X, Y) and reachable(Y, Z).
+rule cyclic(X) if reachable(X, X).
+rule linked(X, Y) if edge(X, Y).
+rule linked(Y, X) if edge(X, Y).
+
+test "a chain and a loop" do
+  fact edge(a, b), edge(b, c), edge(c, a), edge(c, d).
+  assert holds reachable(a, d).
+  assert holds cyclic(b).
+  assert not (holds reachable(d, a)).
+  assert holds linked(d, c).
+end.

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f1eb"><title>Parcel construction request · Symblic</title>
+<link rel="stylesheet" href="guides.css"></head><body>
+<a class="guide-skip" href="#guide">Skip to guide</a>
+<header class="guide-header"><a href="../symblic.html#write">← Symblic</a><span>Guides</span><a href="../symblic.html#workcards">Open Workcards</a></header>
+<div class="guide-layout"><details class="guide-menu" open><summary>Browse guides</summary><nav aria-label="Symblic guides"><a href="index.html">Start here</a>
+<a href="editor.html">Underlines and instruction circuits</a>
+<a href="steps.html">Build one step at a time</a>
+<a href="steps-evidence.html">Small-model results</a>
+<a href="workcards.html">Workcards</a>
+<a href="supervisor.html">Supervisor</a>
+<a href="distillation.html">Training a small model</a>
+<a href="portable.html">Portable execution</a>
+<a href="vorticity.html">Field construction</a></nav></details>
+<main id="guide" class="guide-prose"><h1>Parcel construction request</h1><p>This reviewed request accompanies the Workcards guide. Replace the model and node choices with applicators you have installed before running it.</p><pre tabindex="0" aria-label="Example source"><code>{
+  &quot;final_checks&quot;: [
+    &quot;parcel_total(taxable_charge(parcel_subtotal(base_charge(billing_units(billable_weight(13,dimensional_weight(parcel_volume(7,11,3),10)),5),17),oversize_charge(is_oversized(11,12),19)),parcel_discount(85,80,11)),sales_tax(74,7,100)) = 80&quot;
+  ],
+  &quot;program&quot;: &quot;given parcels: List of Any length 1..100.\nfor parcel in parcels do\n  assert parcel.length &gt; 0 and parcel.width &gt; 0 and parcel.height &gt; 0.\n  assert parcel.actual &gt; 0 and parcel.divisor &gt; 0 and parcel.increment &gt; 0.\n  assert parcel.rate &gt;= 0 and parcel.limit &gt;= 0 and parcel.fee &gt;= 0.\n  assert parcel.threshold &gt;= 0 and parcel.promotion &gt;= 0 and parcel.numerator &gt;= 0 and parcel.denominator &gt; 0.\n  let area_value = parcel_area(parcel.length,parcel.width).\n  let volume_value = parcel_volume(parcel.length,parcel.width,parcel.height).\n  let dimensional_value = dimensional_weight(volume_value,parcel.divisor).\n  let weight_value = billable_weight(parcel.actual,dimensional_value).\n  let units_value = billing_units(weight_value,parcel.increment).\n  let base_value = base_charge(units_value,parcel.rate).\n  let oversized_value = is_oversized(max(parcel.length,parcel.width,parcel.height),parcel.limit).\n  let extra_value = oversize_charge(oversized_value,parcel.fee).\n  let subtotal_value = parcel_subtotal(base_value,extra_value).\n  let discount_value = parcel_discount(subtotal_value,parcel.threshold,parcel.promotion).\n  let taxable_value = taxable_charge(subtotal_value,discount_value).\n  let tax_value = sales_tax(taxable_value,parcel.numerator,parcel.denominator).\n  let total_value = parcel_total(taxable_value,tax_value).\n  let row = {id: parcel.id, area: area_value, volume: volume_value, dimensional: dimensional_value, billable: weight_value, units: units_value, base: base_value, oversized: oversized_value, extra: extra_value, subtotal: subtotal_value, discount: discount_value, taxable: taxable_value, tax: tax_value, total: total_value}.\nend.\nlet result = {quotes: row, count: len(row), total: sum([item.total for item in row])}.\nshow result as \&quot;parcel quotations\&quot;.\n&quot;,
+  &quot;steps&quot;: [
+    {
+      &quot;checks&quot;: [
+        &quot;parcel_area(2,3) = 6&quot;,
+        &quot;parcel_area(5,4) = 20&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;length * width&quot;,
+        &quot;length * length&quot;,
+        &quot;max(length,width)&quot;,
+        &quot;length + width&quot;
+      ],
+      &quot;instruction&quot;: &quot;Multiply length by width to obtain rectangular base area in square centimetres; inputs are positive whole centimetres.&quot;,
+      &quot;name&quot;: &quot;parcel_area&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;length&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;width&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;parcel_volume(2,3,4) = 24&quot;,
+        &quot;parcel_volume(5,4,2) = 40&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;parcel_area(length,width) + height&quot;,
+        &quot;parcel_area(length,width) * width&quot;,
+        &quot;parcel_area(length,width) * height&quot;,
+        &quot;parcel_area(length,width) - height&quot;
+      ],
+      &quot;instruction&quot;: &quot;Multiply the accepted parcel_area(length,width) by height to obtain volume in cubic centimetres; inputs are positive whole centimetres.&quot;,
+      &quot;name&quot;: &quot;parcel_volume&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;length&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;width&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;height&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: [
+        &quot;parcel_area&quot;
+      ]
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;dimensional_weight(11,5) = 3&quot;,
+        &quot;dimensional_weight(10,5) = 2&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;volume * divisor&quot;,
+        &quot;floor(volume / divisor)&quot;,
+        &quot;ceil(volume / divisor)&quot;,
+        &quot;ceil(divisor / volume)&quot;
+      ],
+      &quot;instruction&quot;: &quot;Divide volume by divisor and round upward to a whole gram, including when the division leaves a remainder; volume and divisor are positive whole numbers and divisor is cubic centimetres per gram.&quot;,
+      &quot;name&quot;: &quot;dimensional_weight&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;volume&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;divisor&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;billable_weight(3,8) = 8&quot;,
+        &quot;billable_weight(9,2) = 9&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;actual&quot;,
+        &quot;min(actual,dimensional)&quot;,
+        &quot;max(actual,dimensional)&quot;,
+        &quot;actual + dimensional&quot;
+      ],
+      &quot;instruction&quot;: &quot;Choose the greater of actual and dimensional weight, in grams; both are positive whole numbers.&quot;,
+      &quot;name&quot;: &quot;billable_weight&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;actual&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;dimensional&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;billing_units(11,5) = 3&quot;,
+        &quot;billing_units(10,5) = 2&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;ceil(increment / weight)&quot;,
+        &quot;weight * increment&quot;,
+        &quot;floor(weight / increment)&quot;,
+        &quot;ceil(weight / increment)&quot;
+      ],
+      &quot;instruction&quot;: &quot;Divide billable weight by the positive gram increment and round upward to a whole number of billing units, including a partial final unit.&quot;,
+      &quot;name&quot;: &quot;billing_units&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;weight&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;increment&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;base_charge(3,7) = 21&quot;,
+        &quot;base_charge(2,0) = 0&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;rate&quot;,
+        &quot;units * rate&quot;,
+        &quot;units - rate&quot;,
+        &quot;units + rate&quot;
+      ],
+      &quot;instruction&quot;: &quot;Multiply the whole number of billing units by the nonnegative price in cents per unit to obtain the base charge in cents.&quot;,
+      &quot;name&quot;: &quot;base_charge&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;units&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;rate&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;is_oversized(11,10) = true&quot;,
+        &quot;is_oversized(10,10) = false&quot;,
+        &quot;is_oversized(9,10) = false&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;longest = limit&quot;,
+        &quot;longest &lt; limit&quot;,
+        &quot;longest &gt;= limit&quot;,
+        &quot;longest &gt; limit&quot;
+      ],
+      &quot;instruction&quot;: &quot;Return true only when longest, the longest edge in whole centimetres, is strictly greater than limit; equality is not oversized.&quot;,
+      &quot;name&quot;: &quot;is_oversized&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;longest&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;limit&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Bool&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;oversize_charge(true,17) = 17&quot;,
+        &quot;oversize_charge(false,17) = 0&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;if oversized then 0 else fee&quot;,
+        &quot;0&quot;,
+        &quot;if oversized then fee else 0&quot;,
+        &quot;fee&quot;
+      ],
+      &quot;instruction&quot;: &quot;Return the nonnegative fee in cents if oversized is true; otherwise return zero cents.&quot;,
+      &quot;name&quot;: &quot;oversize_charge&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;oversized&quot;,
+          &quot;type&quot;: &quot;Bool&quot;
+        },
+        {
+          &quot;name&quot;: &quot;fee&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;parcel_subtotal(12,5) = 17&quot;,
+        &quot;parcel_subtotal(7,0) = 7&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;max(base,extra)&quot;,
+        &quot;base * extra&quot;,
+        &quot;base + extra&quot;,
+        &quot;base - extra&quot;
+      ],
+      &quot;instruction&quot;: &quot;Add the accepted nonnegative base charge and oversize charge to obtain the subtotal in cents.&quot;,
+      &quot;name&quot;: &quot;parcel_subtotal&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;base&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;extra&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;parcel_discount(20,20,7) = 7&quot;,
+        &quot;parcel_discount(5,0,9) = 5&quot;,
+        &quot;parcel_discount(19,20,7) = 0&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;if subtotal &gt;= threshold then min(promotion,subtotal) else 0&quot;,
+        &quot;if subtotal &gt; threshold then min(promotion,subtotal) else 0&quot;,
+        &quot;if subtotal &gt;= threshold then promotion else 0&quot;,
+        &quot;if subtotal &lt; threshold then min(promotion,subtotal) else 0&quot;
+      ],
+      &quot;instruction&quot;: &quot;If subtotal is at least threshold, return the lesser of promotion and subtotal; otherwise return zero; all inputs are nonnegative cents, so the discount never exceeds subtotal.&quot;,
+      &quot;name&quot;: &quot;parcel_discount&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;subtotal&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;threshold&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;promotion&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;taxable_charge(20,7) = 13&quot;,
+        &quot;taxable_charge(5,5) = 0&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;subtotal&quot;,
+        &quot;discount - subtotal&quot;,
+        &quot;subtotal - discount&quot;,
+        &quot;subtotal + discount&quot;
+      ],
+      &quot;instruction&quot;: &quot;Subtract the accepted discount from subtotal to obtain the taxable charge in cents; inputs obey zero &lt;= discount &lt;= subtotal.&quot;,
+      &quot;name&quot;: &quot;taxable_charge&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;subtotal&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;discount&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;sales_tax(7,3,10) = 3&quot;,
+        &quot;sales_tax(10,3,10) = 3&quot;,
+        &quot;sales_tax(0,3,10) = 0&quot;,
+        &quot;sales_tax(74,7,100) = 6&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;floor(amount * numerator / denominator)&quot;,
+        &quot;ceil(amount / denominator) * numerator&quot;,
+        &quot;ceil(amount * numerator / denominator)&quot;,
+        &quot;ceil(amount * denominator / numerator)&quot;
+      ],
+      &quot;instruction&quot;: &quot;Multiply the nonnegative taxable amount by numerator divided by the positive denominator and round upward to whole cents; numerator is nonnegative and the fraction is the tax rate.&quot;,
+      &quot;name&quot;: &quot;sales_tax&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;amount&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;numerator&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;denominator&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    },
+    {
+      &quot;checks&quot;: [
+        &quot;parcel_total(13,3) = 16&quot;,
+        &quot;parcel_total(0,0) = 0&quot;
+      ],
+      &quot;choices&quot;: [
+        &quot;taxable + tax&quot;,
+        &quot;taxable * tax&quot;,
+        &quot;max(taxable,tax)&quot;,
+        &quot;taxable - tax&quot;
+      ],
+      &quot;instruction&quot;: &quot;Add the accepted taxable charge and accepted tax to obtain the final charge in cents; both inputs are nonnegative.&quot;,
+      &quot;name&quot;: &quot;parcel_total&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;name&quot;: &quot;taxable&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;tax&quot;,
+          &quot;type&quot;: &quot;Int&quot;
+        }
+      ],
+      &quot;returns&quot;: &quot;Int&quot;,
+      &quot;uses&quot;: []
+    }
+  ],
+  &quot;title&quot;: &quot;Parcel quotation from thirteen checked bricks — order 7&quot;
+}
+</code></pre><footer><a href="index.html">Start here</a> · <a href="../symblic.html#workcards">Open Workcards</a><p>Commands and examples run only when you choose to execute them.</p></footer></main></div>
+</body></html>

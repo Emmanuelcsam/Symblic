@@ -1,0 +1,24 @@
+program Records.
+note Comparing two records field by field, computed by the kernel. Two answers can agree on every field they
+note share and both be wrong: agreement on shared fields is not correctness. A field only one record has is
+note neither a conflict nor an agreement.
+
+note The names of the fields both records have whose values differ, sorted.
+function conflicts(a: Any, b: Any) -> List of Text = sort([k for k in keys(a) if k in keys(b) and a[k] != b[k]]).
+
+note Whether the two records have no conflicts: every field they share has the same value.
+function agree(a: Any, b: Any) -> Bool = len(conflicts(a, b)) = 0.
+
+test "conflicts" do
+  assert conflicts({x: 1, y: 2}, {x: 1, y: 3}) = ["y"].
+  assert conflicts({b: 1, a: 2, c: 3}, {c: 4, b: 5, a: 2}) = ["b", "c"].
+  assert conflicts({x: 1, y: 2}, {z: 1}) = [].
+  assert conflicts({n: 1.50}, {n: 3/2}) = [].
+  assert conflicts({s: "Tin"}, {s: "tin"}) = ["s"].
+end.
+
+test "agree" do
+  assert agree({x: 1, y: [1, 2]}, {x: 1, y: [1, 2], z: "extra"}).
+  assert not agree({x: 1, y: [1, 2]}, {x: 1, y: [2, 1]}).
+  assert agree({x: 1}, {y: 2}).
+end.

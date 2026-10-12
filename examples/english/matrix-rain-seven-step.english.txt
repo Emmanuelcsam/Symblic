@@ -1,0 +1,53 @@
+Build a character animation called Matrix rain.
+Use the standard character canvas and a complete repeating sequence.
+Show green characters on a black background with the brightest leading characters and progressively darker trails.
+
+Ask the model to make letters.
+Choose the uppercase English letter at the requested position and repeat the alphabet after its end.
+Use no earlier steps.
+Check the beginning, the end and repeated journeys through the alphabet.
+Finish this step.
+
+Ask the model to make movement.
+Move a row by the requested distance and wrap between the bottom and the top in either direction.
+Use no earlier steps.
+Check every canvas row with forward, backward and stationary movement.
+Finish this step.
+
+Ask the model to make leading positions.
+Start the leftmost column at the top.
+Start each following column below the previous column by the trail length and wrap below the bottom to the top.
+Move the leftmost column downward at normal speed.
+Alternate each following column between double speed and normal speed.
+Use only movement.
+Check the initial positions, both speeds and repeated journeys through the canvas.
+Finish this step.
+
+Ask the model to make trailing positions.
+Place each later trail character immediately above the previous character and wrap above the top to the bottom.
+Use only movement.
+Check every trail position at the top, middle and bottom of the canvas.
+Finish this step.
+
+Ask the model to make shades.
+Give the leading character the brightest shade and make each later trail character progressively darker until the darkest shade.
+Use no earlier steps.
+Check the leading shade, every trail shade and saturation at the darkest shade.
+Finish this step.
+
+Ask the model to make frames.
+Fill each separate vertical column with its leading character and trailing characters.
+Choose each character from its column position plus the elapsed frame position plus its distance behind the leader.
+Restart the frame position at the beginning whenever the complete canvas cycle finishes.
+Use the restarted frame position for both character selection and movement so that every repetition begins identically.
+Use only letters and leading positions and trailing positions and shades.
+Check every character position, letter and shade against the earlier accepted steps.
+Finish this step.
+
+Ask the model to make animation.
+Create successive frames from the initial canvas until every stream returns to its starting position.
+Use only frames.
+Check the complete sequence, its ordering and its return to the initial frame.
+Finish this step.
+
+Display the accepted animation and repeat it in the character player.

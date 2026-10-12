@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Background: Deep Solid Black (#000000) -->
+  <rect width="512" height="512" fill="#000000" />
+
+  <!-- Symblic Gentzen Sequent Mark:
+       Grounded in Gerhard Gentzen's (1934) Sequent Calculus and Natural Deduction.
+       The central horizontal bar represents the formal inference line (deductive step),
+       with upper premise brackets and lower conclusion brackets forming a balanced,
+       monolithic 'S' monogram. -->
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- Top Premise Horizon -->
+    <line x1="160" y1="130" x2="352" y2="130" stroke-width="26" />
+    <!-- Upper Antecedent Drop -->
+    <line x1="160" y1="130" x2="160" y2="246" stroke-width="26" />
+    
+    <!-- Gentzen Main Deduction Bar (Inference Fraction Line) -->
+    <line x1="130" y1="256" x2="382" y2="256" stroke-width="32" />
+    
+    <!-- Lower Consequent Stem -->
+    <line x1="352" y1="266" x2="352" y2="382" stroke-width="26" />
+    <!-- Bottom Conclusion Horizon -->
+    <line x1="160" y1="382" x2="352" y2="382" stroke-width="26" />
+  </g>
+
+  <!-- Sequent Premise Punctuation (Gentzen Antecedent Colon / Proof Term) -->
+  <rect x="339" y="117" width="26" height="26" fill="#FFFFFF" />
+  
+  <!-- Conclusion Terminator Point (.) -->
+  <circle cx="160" cy="382" r="13" fill="#FFFFFF" />
+</svg>

@@ -1,0 +1,11 @@
+[
+  {"op": "add", "page": {
+    "title": "Symblic Beta: Kirby Animation",
+    "href": "/symblic-beta-kirby",
+    "group": "Build",
+    "keywords": ["symblic", "beta", "kirby", "animation", "english statements"],
+    "dir": "symblic-beta-kirby",
+    "index": "kirby.html",
+    "sub": "Kirby movement and jump animation test generated from 4 strict English statements by fresh agent sessions"
+  }}
+]

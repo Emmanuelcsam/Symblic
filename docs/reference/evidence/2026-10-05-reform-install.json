@@ -1,0 +1,66 @@
+{
+  "canonical_version": 3,
+  "execution_receipt_version": 2,
+  "installed_runtime_release_files": 198,
+  "integrity_records": {
+    "effective_manifest_sha256": "7fcd479b25992451eb690c28023a019fbcb1d7bbbc2153347653372a7d1b4899",
+    "independent_release_review_sha256": "facab3aab0e3fddeddaa480cd8d54c6e5c0f0762927300d18ff646063a890185",
+    "live_verification_sha256": "5f81c1e4f68a2a65a75c960d14154d01618e2fda34591f161f915ff72b814cdb",
+    "proxy_fix_plan_sha256": "1fddddf588dcd31039110041a1cd73c183c324cc732ace04533720aaa3a1975c",
+    "release_manifest_sha256": "580ba7247e9829ea26c1fd02fdb87e0863d707cda5a49bfebd4d92e672c47c25",
+    "release_plan_sha256": "eeea684e606ee082145dd60aaf7b5e969dbafe9ed44b569d01926f646fe00ec1"
+  },
+  "kernel_id": "f14447f814751f21",
+  "language_version": "2.5",
+  "live_verification": {
+    "http_paths": [
+      "/automation-studio/symblic.html",
+      "/api/automation/symblic/meta",
+      "/api/automation/symblic/delegate/catalog",
+      "/api/automation/symblic/check",
+      "/api/automation/symblic/delegate/compile"
+    ],
+    "http_status": 200,
+    "native_pinned_execution": {
+      "calls": 0,
+      "canonical": {
+        "#q": "1/2"
+      },
+      "kernel_id": "f14447f814751f21",
+      "receipt_version": 2,
+      "status": "done",
+      "strict_policy": "strict"
+    }
+  },
+  "observed_at": "2026-10-05T06:53:02.215328+00:00",
+  "release": "Symblic Reform 3 / 2026-10-05",
+  "scope": [
+    "Installation and scoped verification, not a fresh model benchmark or universal execution guarantee.",
+    "Native live arithmetic has no model or host effect and no persistent Store.",
+    "Initial live identity-proxy error was repaired and verified before this status.",
+    "Optional linear solver and reusable graph composer remain separate private work at this observation.",
+    "Public aggregate model measurements name their own earlier frozen configurations."
+  ],
+  "status": "installed_and_live_verified",
+  "strict_model_pins_capability": true,
+  "tests": {
+    "agent_entry": {
+      "passed": 36,
+      "seconds": 16.615
+    },
+    "combined_runtime": {
+      "passed": 229,
+      "seconds": 29.387
+    },
+    "identity_after_proxy_repair": {
+      "passed": 55,
+      "seconds": 34.748
+    },
+    "independent_proxy_boundary": {
+      "passed": 8,
+      "seconds": 0.016
+    }
+  },
+  "unchanged_dependencies_checked": 59,
+  "version": 1
+}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Background: Pure Matte Black -->
+  <rect width="512" height="512" fill="#0A0A0A" />
+
+  <!-- Symblic Frege Assertion Mark:
+       Grounded in Gottlob Frege's Begriffsschrift (1879) judgment stroke 
+       and the formal turnstile (⊢ / ⊨), structured into an austere 'S' monogram. -->
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- Top Horizontal Premise Bar -->
+    <line x1="160" y1="140" x2="352" y2="140" stroke-width="28" />
+    
+    <!-- Upper Vertical Proof Axis -->
+    <line x1="160" y1="126" x2="160" y2="256" stroke-width="28" />
+    
+    <!-- Central Transverse Deduction Bar (Entailment Bridge) -->
+    <line x1="146" y1="256" x2="366" y2="256" stroke-width="28" />
+    
+    <!-- Lower Vertical Proof Axis -->
+    <line x1="352" y1="256" x2="352" y2="386" stroke-width="28" />
+    
+    <!-- Bottom Horizontal Conclusion Bar -->
+    <line x1="160" y1="372" x2="352" y2="372" stroke-width="28" />
+  </g>
+
+  <!-- The Statement Point / Ground Truth Period (.) -->
+  <circle cx="210" cy="372" r="20" fill="#0A0A0A" stroke="#FFFFFF" stroke-width="8" />
+  <circle cx="210" cy="372" r="8" fill="#FFFFFF" />
+</svg>

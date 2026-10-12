@@ -1,0 +1,193 @@
+# Twin helix galaxy: a counter-rotating double helix around a ringed planet.
+# Every visible cell is an exact integer projection; every Ask is one small claim.
+Remember 'grid width' is 25.
+Remember 'grid height' is 21.
+Remember 'center col' is 12.
+Remember 'center row' is 10.
+Remember 'outer radius' is 6.
+Remember 'inner radius' is 3.
+Remember 'moon radius' is 10.
+Remember 'outer star 0 row' is 13.
+Remember 'outer star 1 row' is 11.
+Remember 'outer star 2 row' is 9.
+Remember 'outer star 3 row' is 7.
+Remember 'inner star 4 row' is 15.
+Remember 'inner star 5 row' is 12.
+Remember 'inner star 6 row' is 8.
+Remember 'inner star 7 row' is 5.
+
+# ---------------- Frame 1: the outer helix at angles zero, ninety, one hundred eighty and two hundred seventy ----------------
+Ask for 'frame 1 outer star 0 column' as a whole number: "The numeric CONTEXT value named center_col is the center column of the canvas. The numeric CONTEXT value named outer_radius is the radius of the outer circle. The star stands at angle zero, on the horizontal arm to the right of the center. Add the center column and the outer radius. Return the star's column.".
+Using only 'center col' and 'outer radius'.
+Accept only if 'frame 1 outer star 0 column' equals 'center col' plus 'outer radius'.
+Accept only if 'frame 1 outer star 0 column' is at least 0.
+Accept only if 'frame 1 outer star 0 column' is at most 'grid width' minus 1.
+
+Ask for 'frame 1 outer star 1 column' as a whole number: "The numeric CONTEXT value named center_col is the center column of the canvas. The star stands at angle ninety, on the vertical axis of its circle, so its horizontal offset from the center is zero. Return the star's column.".
+Using only 'center col'.
+Accept only if 'frame 1 outer star 1 column' equals 'center col'.
+
+Ask for 'frame 1 outer star 1 depth' as one of "near", "side" or "far": "The star at angle ninety lies on the near side of its circle. Return the depth word for the near side.".
+Accept only if 'frame 1 outer star 1 depth' equals "near".
+
+Ask for 'frame 1 inner star 4 column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The numeric CONTEXT value named inner_radius is the radius of the inner circle. The inner star stands at angle zero, on the horizontal arm to the right of the center. Add the center column and the inner radius. Return the star's column.".
+Using only 'center col' and 'inner radius'.
+Accept only if 'frame 1 inner star 4 column' equals 'center col' plus 'inner radius'.
+Accept only if 'frame 1 inner star 4 column' is at most 'grid width' minus 1.
+
+Ask for 'frame 1 moon column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The numeric CONTEXT value named moon_radius is the radius of the moon's square path. The moon begins on the horizontal arm to the right of the center. Add the center column and the moon radius. Return the moon's column.".
+Using only 'center col' and 'moon radius'.
+Accept only if 'frame 1 moon column' equals 'center col' plus 'moon radius'.
+Accept only if 'frame 1 moon column' is at most 'grid width' minus 1.
+
+Display "+" at column 'frame 1 outer star 0 column' and row 'outer star 0 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "@" at column 'frame 1 outer star 1 column' and row 'outer star 1 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 6 and row 9 on a grid 'grid width' columns by 'grid height' rows.
+Display "." at column 12 and row 7 on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 'frame 1 inner star 4 column' and row 'inner star 4 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "@" at column 12 and row 12 on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 9 and row 8 on a grid 'grid width' columns by 'grid height' rows.
+Display "." at column 12 and row 5 on a grid 'grid width' columns by 'grid height' rows.
+Display "O" at column 'center col' and row 'center row' on a grid 'grid width' columns by 'grid height' rows.
+Display "-" at column 10 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "-" at column 14 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "o" at column 'frame 1 moon column' and row 'center row' on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 2 and row 1 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 22 and row 2 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 4 and row 18 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 20 and row 17 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 1 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 23 and row 12 on a grid 'grid width' columns by 'grid height' rows.
+
+# ---------------- Frame 2: one quarter turn clockwise; the inner helix turns the opposite way ----------------
+Ask for 'frame 2 outer star 0 column' as a whole number: "The numeric CONTEXT value named center_col is the center column of the canvas. The star has rotated one quarter turn clockwise from angle zero to angle ninety and now stands on the vertical axis of its circle, so its horizontal offset from the center is zero. Return the star's column.".
+Using only 'center col'.
+Accept only if 'frame 2 outer star 0 column' equals 'center col'.
+
+Ask for 'frame 2 outer star 3 column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The numeric CONTEXT value named outer_radius is the radius of the outer circle. This star has rotated from angle two hundred seventy to angle zero, onto the horizontal arm to the right of the center. Add the center column and the outer radius. Return the star's column.".
+Using only 'center col' and 'outer radius'.
+Accept only if 'frame 2 outer star 3 column' equals 'center col' plus 'outer radius'.
+Accept only if 'frame 2 outer star 3 column' is at most 'grid width' minus 1.
+
+Ask for 'frame 2 outer star 2 depth' as one of "near", "side" or "far": "The star has rotated to angle two hundred seventy, on the far side of its circle. Return the depth word for the far side.".
+Accept only if 'frame 2 outer star 2 depth' equals "far".
+
+Ask for 'frame 2 inner star 6 column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The inner circle turns against the outer circle. This inner star has rotated from angle one hundred eighty to angle ninety and now stands on the vertical axis of its circle, so its horizontal offset from the center is zero. Return the star's column.".
+Using only 'center col'.
+Accept only if 'frame 2 inner star 6 column' equals 'center col'.
+
+Ask for 'frame 2 moon row' as a whole number: "The numeric CONTEXT value named center_row is the center row of the canvas. The numeric CONTEXT value named moon_radius is the radius of the moon's square path. The moon has moved one quarter turn clockwise and now sits below the center. Add the center row and the moon radius. Return the moon's row.".
+Using only 'center row' and 'moon radius'.
+Accept only if 'frame 2 moon row' equals 'center row' plus 'moon radius'.
+Accept only if 'frame 2 moon row' is at most 'grid height' minus 1.
+
+Display "@" at column 'frame 2 outer star 0 column' and row 'outer star 0 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 6 and row 11 on a grid 'grid width' columns by 'grid height' rows.
+Display "." at column 12 and row 'outer star 2 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 'frame 2 outer star 3 column' and row 'outer star 3 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "." at column 12 and row 15 on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 15 and row 12 on a grid 'grid width' columns by 'grid height' rows.
+Display "@" at column 'frame 2 inner star 6 column' and row 'inner star 6 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 9 and row 5 on a grid 'grid width' columns by 'grid height' rows.
+Display "O" at column 'center col' and row 'center row' on a grid 'grid width' columns by 'grid height' rows.
+Display "-" at column 10 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "-" at column 14 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "o" at column 'center col' and row 'frame 2 moon row' on a grid 'grid width' columns by 'grid height' rows.
+Display "'" at column 22 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 2 and row 2 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 22 and row 1 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 3 and row 17 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 21 and row 18 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 1 and row 12 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 23 and row 9 on a grid 'grid width' columns by 'grid height' rows.
+
+# ---------------- Frame 3: a half turn; the moon passes to the left ----------------
+Ask for 'frame 3 outer star 0 column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The numeric CONTEXT value named outer_radius is the radius of the outer circle. The star has rotated a half turn to angle one hundred eighty, on the horizontal arm to the left of the center. Subtract the outer radius from the center column. Return the star's column.".
+Using only 'center col' and 'outer radius'.
+Accept only if 'frame 3 outer star 0 column' equals 'center col' minus 'outer radius'.
+Accept only if 'frame 3 outer star 0 column' is at least 0.
+
+Ask for 'frame 3 outer star 1 depth' as one of "near", "side" or "far": "The star has rotated a half turn plus a quarter to angle two hundred seventy, on the far side of its circle. Return the depth word for the far side.".
+Accept only if 'frame 3 outer star 1 depth' equals "far".
+
+Ask for 'frame 3 inner star 4 column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The numeric CONTEXT value named inner_radius is the radius of the inner circle. The inner circle turns against the outer circle; this star has rotated to angle one hundred eighty, on the horizontal arm to the left of the center. Subtract the inner radius from the center column. Return the star's column.".
+Using only 'center col' and 'inner radius'.
+Accept only if 'frame 3 inner star 4 column' equals 'center col' minus 'inner radius'.
+Accept only if 'frame 3 inner star 4 column' is at least 0.
+
+Ask for 'frame 3 moon column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The numeric CONTEXT value named moon_radius is the radius of the moon's square path. The moon has moved a half turn and now sits to the left of the center. Subtract the moon radius from the center column. Return the moon's column.".
+Using only 'center col' and 'moon radius'.
+Accept only if 'frame 3 moon column' equals 'center col' minus 'moon radius'.
+Accept only if 'frame 3 moon column' is at least 0.
+
+Ask for 'frame 3 outer star 3 column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The star began at angle two hundred seventy and has rotated two quarter turns, ending at angle ninety, on the vertical axis of its circle, so its horizontal offset from the center is zero. Return the star's column.".
+Using only 'center col'.
+Accept only if 'frame 3 outer star 3 column' equals 'center col'.
+
+Display "+" at column 'frame 3 outer star 0 column' and row 'outer star 0 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "." at column 12 and row 'outer star 1 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 18 and row 9 on a grid 'grid width' columns by 'grid height' rows.
+Display "@" at column 'frame 3 outer star 3 column' and row 'outer star 3 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 'frame 3 inner star 4 column' and row 'inner star 4 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "." at column 12 and row 12 on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 15 and row 8 on a grid 'grid width' columns by 'grid height' rows.
+Display "@" at column 12 and row 5 on a grid 'grid width' columns by 'grid height' rows.
+Display "O" at column 'center col' and row 'center row' on a grid 'grid width' columns by 'grid height' rows.
+Display "-" at column 10 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "-" at column 14 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "o" at column 'frame 3 moon column' and row 'center row' on a grid 'grid width' columns by 'grid height' rows.
+Display "'" at column 12 and row 20 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 2 and row 1 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 22 and row 2 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 4 and row 18 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 20 and row 17 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 1 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 23 and row 12 on a grid 'grid width' columns by 'grid height' rows.
+
+# ---------------- Frame 4: three quarter turns; the moon rises above the planet ----------------
+Ask for 'frame 4 outer star 1 column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The numeric CONTEXT value named outer_radius is the radius of the outer circle. This star has rotated three quarter turns from angle ninety back to angle zero, on the horizontal arm to the right of the center. Add the center column and the outer radius. Return the star's column.".
+Using only 'center col' and 'outer radius'.
+Accept only if 'frame 4 outer star 1 column' equals 'center col' plus 'outer radius'.
+Accept only if 'frame 4 outer star 1 column' is at most 'grid width' minus 1.
+
+Ask for 'frame 4 outer star 0 depth' as one of "near", "side" or "far": "The star has rotated three quarter turns to angle two hundred seventy, on the far side of its circle. Return the depth word for the far side.".
+Accept only if 'frame 4 outer star 0 depth' equals "far".
+
+Ask for 'frame 4 inner star 5 column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The numeric CONTEXT value named inner_radius is the radius of the inner circle. The inner circle turns against the outer circle; this star has rotated to angle one hundred eighty, on the horizontal arm to the left of the center. Subtract the inner radius from the center column. Return the star's column.".
+Using only 'center col' and 'inner radius'.
+Accept only if 'frame 4 inner star 5 column' equals 'center col' minus 'inner radius'.
+Accept only if 'frame 4 inner star 5 column' is at least 0.
+
+Ask for 'frame 4 moon row' as a whole number: "The numeric CONTEXT value named center_row is the center row of the canvas. The numeric CONTEXT value named moon_radius is the radius of the moon's square path. The moon has moved three quarter turns and now sits above the center. Subtract the moon radius from the center row. Return the moon's row.".
+Using only 'center row' and 'moon radius'.
+Accept only if 'frame 4 moon row' equals 'center row' minus 'moon radius'.
+Accept only if 'frame 4 moon row' is at least 0.
+
+Ask for 'frame 4 inner star 6 column' as a whole number: "The numeric CONTEXT value named center_col is the center column. The inner circle turns against the outer circle; this star has rotated to angle two hundred seventy, on the vertical axis of its circle, so its horizontal offset from the center is zero. Return the star's column.".
+Using only 'center col'.
+Accept only if 'frame 4 inner star 6 column' equals 'center col'.
+
+Display "." at column 12 and row 'outer star 0 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 'frame 4 outer star 1 column' and row 'outer star 1 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "@" at column 12 and row 'outer star 2 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 6 and row 7 on a grid 'grid width' columns by 'grid height' rows.
+Display "@" at column 12 and row 15 on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 'frame 4 inner star 5 column' and row 'inner star 5 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "." at column 'frame 4 inner star 6 column' and row 'inner star 6 row' on a grid 'grid width' columns by 'grid height' rows.
+Display "+" at column 15 and row 5 on a grid 'grid width' columns by 'grid height' rows.
+Display "O" at column 'center col' and row 'center row' on a grid 'grid width' columns by 'grid height' rows.
+Display "-" at column 10 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "-" at column 14 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "o" at column 'center col' and row 'frame 4 moon row' on a grid 'grid width' columns by 'grid height' rows.
+Display "'" at column 2 and row 10 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 2 and row 2 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 22 and row 1 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 3 and row 17 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 21 and row 18 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 1 and row 12 on a grid 'grid width' columns by 'grid height' rows.
+Display "*" at column 23 and row 9 on a grid 'grid width' columns by 'grid height' rows.
+
+# The twin helix has returned to its starting angle after four quarter turns.
+Ask for 'cycle length' as a whole number: "The outer helix advances one quarter turn per frame and must return to its starting angle before the animation repeats. Count the quarter turns in one complete cycle. Return the count.".
+Accept only if 'cycle length' equals 4.
+Show 'cycle length'.

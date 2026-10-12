@@ -1,0 +1,1089 @@
+#!/usr/bin/env python3
+"""symblic-task: a command-line client of a host's Symblic task engine (/api/symblicos/). Stdlib, loopback only.
+
+    symblic-task catalog [--json]                       engines, models, machines and modes the engine offers
+    symblic-task workspace NAME                         create the project folder NAME on the host (idempotent)
+    symblic-task lint FILE [--root DIR]                 check the statements before any agent minute is spent
+    symblic-task start --lines FILE | --instruction TEXT | --sheet SHEET.md
+                 [--root DIR] [--cwd DIR] [--node NODE] [--engine E] [--model M] [--effort E]
+                 [--mode lines|agent] [--context-note FILE] [--parallel N] [--id ID] [--no-auto] [--worktree]
+                 [--auto-next] [--headless] [--json]
+                 --auto-next accepts a line whose agent process ended with evidence (no refusal, no claim the
+                 disk contradicts) and launches the next line unattended; --headless runs agy/claude/mistral
+                 in print mode so the process ends when the turn ends. Use both for unattended lines on a node.
+    symblic-task get ID [--screen] [--json]             one task: status, steps, evidence, warnings
+    symblic-task wait ID [--max SECONDS] [--interval S] [--json]
+                                                        poll until a line awaits review or the task ends; print the summary
+    symblic-task next ID | resume ID | cancel ID        finish the reviewed line and launch the next; re-attach; stop
+    symblic-task list [--status S] [--limit N] [--json] the ledger, newest first
+    symblic-task start ... --autogen [--candidates K] [--regenerate R] [--decompose D] [--children C] [--handoff G]
+                 [--perpetual SECONDS] [--agents-max N] [--attempt-seconds S] [--wall-seconds S]
+                 [--strategies fresh,feedback,other_node,other_engine,stronger_model] [--check 'INDEX:command']...
+                 [--final 'command']... [--hidden 'command']... [--no-syntax] [--allow-no-change] [--no-headless]
+                 [--until-done] [--designer] [--no-self-split] [--novelty-limit N] [--saturation N]
+                 any of these makes the start an autogen run: K candidates per statement in own checkouts, R
+                 regenerations, splits up to depth D into C lines, G handoff generations, verdicts by code only;
+                 --check INDEX is the 0-based statement index; --check/--final/--hidden repeat.
+                 One agent per line is the default (--candidates 1). --until-done removes the clock and count caps
+                 unless you give --agents-max/--wall-seconds explicitly (a safety cap: the run then ends stuck,
+                 never failed): agents keep regenerating, subdividing and re-planning until the checks pass or the
+                 node is stuck. --designer: a first agent writes AUTOGEN-TESTS.sh, checked on every candidate;
+                 --no-self-split: no worker may answer with AUTOGEN-SPLIT.txt; --novelty-limit N: attempts without
+                 progress before a node is split; --saturation N: a perpetual lane stops after N generations in a
+                 row find nothing new (0 never)
+    symblic-task start --sheet SHEET.md --root DIR --model MODEL --node NODE [--engine local] --autogen [...]
+                 a spec sheet (docs/reference/SPEC-SHEETS.md) as ONE autogen statement on the kernel lane: a light local
+                 model writes its units one fresh context at a time, js_test checks each, the file is assembled from
+                 passing units; regenerations keep the units an earlier build accepted, a stalled unit is split
+                 (docs/reference/LOCAL-AUTOGEN.md); --check 0:command adds the operator's check on the assembled file
+    symblic-task autogen list [--status S] [--limit N] [--json] | catalog [--json]
+    symblic-task autogen get RUN_ID [--tasks] [--json]  the run tree: nodes, attempts, winner, budget, final checks
+    symblic-task autogen wait RUN_ID [--max S] [--interval S] [--json]
+                                                        poll until the run ends; one line per status change
+    symblic-task autogen cancel RUN_ID | resume RUN_ID [--agents-max N] [--wall-seconds S]
+                                                        stop every attempt; re-attach the coordinator, or reopen a
+                                                        stuck run after changing the statement, checks or catalogue;
+                                                        resume's flags raise a spent cap (0 lifts it under until_done)
+
+The engine starts one fresh agent per nonblank line (lines mode) in the workspace you name, keeps a durable
+record per task, and never trusts the agent's own claims. `tools/symblic lanes` prints the statement
+rules; `lint` applies them. --root DIR sets the workspace and puts the beta-proven folder lock into the
+context note. Options are top-level task fields; a nested "options" object is refused by the server.
+
+Exit codes: 0 fine, 1 the engine refused or the task failed (or the autogen run is stuck), 2 bad command line
+or the routes are not live, 3 the host is not answering, 4 wait reached --max.
+
+Host-only: every command except `lint` (and --help) talks to the task API of the original host system
+(integration/host/symblicos_engine.py and symblicos_tasks.py hold its server side), which is not part of this
+repository. Without such a host those commands exit 3 (nothing answers) or 2 (the routes are absent).
+`lint` runs locally: it applies symblic.autogen.policy.lint, or the copy of its rules below (local_lint)
+when the package cannot be imported. Set SYMBLIC_TASK_URL to the host's loopback address
+(default http://127.0.0.1:8080, where the original host listened).
+"""
+import importlib
+import json
+import os
+import re
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+
+DEFAULT_URL = 'http://127.0.0.1:8080'
+LOOPBACK_HOSTS = ('127.0.0.1', '::1', 'localhost')
+BASE = (os.environ.get('SYMBLIC_TASK_URL') or DEFAULT_URL).strip().rstrip('/')
+API = '/api/symblicos/'
+TIMEOUT = 60
+TERMINAL = ('completed', 'cancelled', 'failed', 'unknown')
+AUTOGEN_TERMINAL = TERMINAL + ('stuck',)   # stuck (until_done): nothing novel left; autogen resume reopens it
+MAX_LINES, MAX_CHARS = 64, 60000
+OK, REFUSED, USAGE, NO_ANSWER, TIMED_OUT = 0, 1, 2, 3, 4
+VERBS = ('create', 'extend', 'add', 'write', 'run', 'make', 'build', 'update', 'replace', 'remove', 'delete',
+         'verify', 'check', 'implement', 'rename', 'move', 'copy', 'install', 'generate', 'produce', 'append',
+         'record', 'fix', 'rewrite', 'convert', 'export', 'read', 'inspect', 'test', 'compile', 'document', 'split',
+         'index', 'monitor', 'watch', 'collect', 'summarize', 'summarise', 'research', 'scan')  # keep equal to symblic.autogen.policy.VERBS
+CHECKOUT_LOCK = ('Your working folder is exactly the git checkout you were started in (run pwd once). Every file '
+                 'your statement names is created or modified directly in that checkout, at the relative path '
+                 'given. Do not explore other tests, modules or folders, do not investigate this machine or '
+                 'your own environment, do not start background searches; read only the files your statement '
+                 'names, execute your statement and finish. Keep every name, count and behavior exactly as your '
+                 'statement fixes it.')
+FOLDER_LOCK = ('Your working folder is exactly {root}; every file your statement names is created or modified '
+               'directly in that folder. Do not explore, search or read anything outside that folder; do not '
+               'investigate this machine, other projects, your prompt files or your own environment; do not start '
+               'background searches; execute your statement and finish. Keep every name, count and behavior exactly '
+               'as your statement fixes it.')
+# Autogen candidates run in their own checkouts, so the folder lock above (which names the project
+# folder) would send them into the operator's copy; this note maps the named folder onto the checkout.
+AUTOGEN_FOLDER = ('You are one autogen candidate working in your own git checkout of the project workspace {cwd}. '
+                  'Where a statement names the folder {cwd}, use the same relative path inside your checkout '
+                  'instead; never write into {cwd} itself (the owner\'s copy; code promotes accepted results there).')
+AUTOGEN_INT_FLAGS = (('candidates', 'candidates'), ('regenerate', 'regenerate'), ('decompose', 'depth'),
+                     ('children', 'children'), ('handoff', 'generations'), ('agents_max', 'agents_max'),
+                     ('attempt_seconds', 'attempt_seconds'), ('wall_seconds', 'wall_seconds'),
+                     ('novelty_limit', 'novelty_limit'), ('saturation', 'saturation'))
+AUTOGEN_FLAGS = ('autogen', 'perpetual', 'strategies', 'check', 'final', 'hidden', 'no_syntax',
+                 'allow_no_change', 'until_done', 'designer', 'no_self_split', 'sheet') + tuple(flag for flag, _ in AUTOGEN_INT_FLAGS)
+AUTOGEN_ID_MAX = 120   # the coordinator appends ':<node>-a<n>' to make each attempt's 160-character task id
+CHECKOUT_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+_POLICY = None         # symblic.autogen.policy once imported; False when this checkout does not have it
+
+
+class ApiError(Exception):
+    def __init__(self, message, exit_code=REFUSED, data=None, status=None):
+        super().__init__(message)
+        self.exit_code = exit_code
+        self.data = data or {}
+        self.status = status          # the HTTP status of a refusal the server answered
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}), _NoRedirect())
+
+
+def loopback_base(raw):
+    raw = (raw or DEFAULT_URL).strip().rstrip('/')
+    u = urllib.parse.urlsplit(raw)
+    if u.scheme != 'http' or (u.hostname or '').lower() not in LOOPBACK_HOSTS or u.path or u.query:
+        raise ApiError(f'SYMBLIC_TASK_URL must be the host on this machine, like {DEFAULT_URL}', USAGE)
+    return raw
+
+
+def request(route, body=None, query=None):
+    base = loopback_base(BASE)
+    url = base + API + route + ('?' + urllib.parse.urlencode(query) if query else '')
+    data = None if body is None else json.dumps(body).encode('utf-8')
+    req = urllib.request.Request(url, data=data, method='GET' if body is None else 'POST')
+    req.add_header('Host', urllib.parse.urlsplit(base).netloc)
+    req.add_header('Accept', 'application/json')
+    req.add_header('User-Agent', 'symblic-task-cli')
+    if data is not None:
+        req.add_header('Content-Type', 'application/json')
+    try:
+        with OPENER.open(req, timeout=TIMEOUT) as res:
+            return json.loads(res.read().decode('utf-8') or '{}')
+    except urllib.error.HTTPError as e:
+        raw = e.read().decode('utf-8', 'replace')
+        try:
+            payload = json.loads(raw or '{}')
+        except ValueError:
+            payload = {}
+        if e.code == 404 and not payload:
+            raise ApiError(f'The /api/symblicos/ routes are not served at {base}: this command needs a host that serves '
+                           'them (see integration/host/README.md).', USAGE) from None
+        raise ApiError(f'HTTP {e.code}: {payload.get("error") or raw[:300] or "no reason given"}', REFUSED, payload,
+                       status=e.code) from None
+    except urllib.error.URLError as e:
+        raise ApiError(f'The host is not answering at {base} ({e.reason}).', NO_ANSWER) from None
+    except (TimeoutError, OSError) as e:
+        raise ApiError(f'The host did not answer at {base} ({e}).', NO_ANSWER) from None
+
+
+# ------------------------------------------------------------------------------ statements
+
+def statements(text):
+    return [line.strip() for line in text.splitlines() if line.strip()]
+
+
+def policy_module():
+    """symblic.autogen.policy from this checkout (the server applies the same rules), or None when absent."""
+    global _POLICY
+    if _POLICY is None:
+        added = CHECKOUT_ROOT not in sys.path
+        if added:
+            sys.path.insert(0, CHECKOUT_ROOT)
+        try:
+            module = importlib.import_module('symblic.autogen.policy')
+            _POLICY = module if callable(getattr(module, 'lint', None)) else False
+        except Exception:          # absent, or mid-edit in the live checkout: the local rules apply
+            _POLICY = False
+        finally:
+            if added and CHECKOUT_ROOT in sys.path:
+                sys.path.remove(CHECKOUT_ROOT)   # keep the checkout from shadowing later imports
+    return _POLICY or None
+
+
+def lint(lines, root=''):
+    """Findings as (level, line_no, message). Errors stop a start; warnings print. The rules are
+    single-sourced in symblic.autogen.policy.lint; local_lint is the fallback when it cannot be imported."""
+    module = policy_module()
+    if module is not None:
+        return [tuple(f) for f in module.lint(lines, root)]
+    return local_lint(lines, root)
+
+
+def local_lint(lines, root=''):
+    """Findings as (level, line_no, message). Errors stop a start; warnings print."""
+    out = []
+    if not lines:
+        return [('error', 0, 'no statements: the file has no nonblank line')]
+    if len(lines) > MAX_LINES:
+        out.append(('error', 0, f'{len(lines)} statements; the engine takes at most {MAX_LINES} per task'))
+    if sum(len(x) + 1 for x in lines) > MAX_CHARS:
+        out.append(('error', 0, f'the statements exceed {MAX_CHARS} characters in total'))
+    names_folder = re.compile(r'(?:in|into|inside|under) the folder /[^\s,;]+|/home/[^\s,;]+')
+    pronoun_only = re.compile(r'^(?:it|this|that|the (?:file|folder|project|previous|same) )', re.I)
+    extend = re.compile(r'^(?:extend|update|modify|change|edit|rewrite|revise)\b', re.I)
+    verify_line = any(re.search(r'\bverif', x, re.I) and re.search(r'\.txt\b', x) for x in lines)
+    for n, line in enumerate(lines, 1):
+        if len(line) < 20:
+            out.append(('error', n, 'shorter than 20 characters: one full self-contained statement per line'))
+        if len(line) > 1500:
+            out.append(('warning', n, 'longer than 1500 characters: split it into one concern per line'))
+        first = re.match(r'[A-Za-z]+', line)
+        if not first or first.group(0).lower() not in VERBS:
+            out.append(('warning', n, 'does not start with an action verb (Create the file X ..., Extend the file Y ...)'))
+        if not names_folder.search(line) and not root:
+            out.append(('warning', n, 'names no absolute folder; fresh agents cannot resolve "the current folder" (write "in the folder /home/.../NAME" or pass --root)'))
+        if pronoun_only.match(line):
+            out.append(('warning', n, 'starts with a pronoun or "the file": name the file and folder, every line is a fresh context'))
+        if extend.match(line) and 'keeping every existing part' not in line:
+            out.append(('warning', n, 'an edit statement without "keeping every existing part": fresh agents replace what they do not see'))
+        if re.search(r'\b(?:the previous|the last|as before|like above|earlier)\b', line, re.I):
+            out.append(('warning', n, 'refers to earlier lines; a fresh agent sees only this line and the context note'))
+    if not verify_line:
+        out.append(('warning', 0, 'no verify statement: end with one that runs a concrete check and writes verify.txt in an exact format'))
+    return out
+
+
+def print_lint(findings, as_json=False):
+    if as_json:
+        print(json.dumps([{'level': lv, 'line': n, 'message': m} for lv, n, m in findings], indent=2))
+    else:
+        for lv, n, m in findings:
+            print(f'{lv}{(" line " + str(n)) if n else ""}: {m}')
+        errors = sum(1 for lv, _, _ in findings if lv == 'error')
+        print(f'{len(findings)} finding(s), {errors} error(s)')
+    return REFUSED if any(lv == 'error' for lv, _, _ in findings) else OK
+
+
+# ------------------------------------------------------------------------------ printing
+
+def step_summary(step):
+    ev = step.get('evidence') or {}
+    changes = (ev.get('changes') or {}) if isinstance(ev, dict) else {}
+    comp = step.get('completion') or {}
+    return {'index': step.get('index'), 'status': step.get('status'), 'agent': step.get('agent_id') or '',
+            'running': bool(step.get('running')), 'stalled': bool(step.get('stalled')),
+            'files_changed': changes.get('files_changed') if changes else None,
+            'warning': (ev.get('warning') or '') if isinstance(ev, dict) else '',
+            'error': step.get('error') or '', 'reason': (comp.get('reason') or '')[:160],
+            'url': step.get('url') or '', 'instruction': (step.get('instruction') or '')[:100]}
+
+
+def task_summary(task):
+    steps = [step_summary(s) for s in task.get('steps') or []]
+    return {'id': task.get('id'), 'status': task.get('status'), 'mode': task.get('mode'),
+            'engine': (task.get('options') or {}).get('engine'), 'node': (task.get('options') or {}).get('node'),
+            'workspace': task.get('workspace') or (task.get('options') or {}).get('cwd'),
+            'error': task.get('error') or '', 'stalled_hint': task.get('stalled_hint') or '',
+            'resume_required': bool(task.get('resume_required')), 'steps': steps,
+            'next_action': next_action(task, steps)}
+
+
+def next_action(task, steps):
+    status = task.get('status')
+    if status in TERMINAL:
+        return 'done: verify the files and checks yourself; ' + status
+    if task.get('resume_required'):
+        return 'resume: the coordinator is absent (symblic-task resume ID)'
+    gated = [s for s in steps if s['status'] == 'awaiting_review']
+    if gated:
+        s = gated[0]
+        if s['running']:
+            return f'wait: line {s["index"]} is gated but its agent is still running; inspect {s["url"]}, then next'
+        return f'review: line {s["index"]} ended; read its evidence/files, then symblic-task next ID'
+    if task.get('stalled_hint'):
+        return 'inspect: a line has run 15 min without evidence; open its terminal url'
+    return 'wait: lines are running'
+
+
+def show(task, as_json=False, screen=False):
+    s = task_summary(task)
+    if as_json:
+        if screen and task.get('screen'):
+            s['screen'] = task['screen'][-4000:]
+        print(json.dumps(s, indent=2, ensure_ascii=False))
+        return
+    print(f'{s["id"]}  {s["status"]}  {s["mode"]} on {s["node"]} via {s["engine"]}  workspace {s["workspace"]}')
+    for st in s['steps']:
+        flags = ' running' if st['running'] else ''
+        flags += ' STALLED' if st['stalled'] else ''
+        fc = '' if st['files_changed'] is None else f' files_changed={st["files_changed"]}'
+        print(f'  [{st["index"]}] {st["status"]}{flags}{fc}  {st["instruction"]}')
+        if st['warning']:
+            print(f'      warning: {st["warning"]}')
+        if st['error']:
+            print(f'      error: {st["error"]}')
+        if st['url']:
+            print(f'      terminal: {st["url"]}')
+    if s['error']:
+        print(f'  error: {s["error"]}')
+    if s['stalled_hint']:
+        print(f'  {s["stalled_hint"]}')
+    print(f'  next: {s["next_action"]}')
+    if screen and task.get('screen'):
+        print('--- screen tail ---')
+        print(task['screen'][-2500:])
+
+
+# ------------------------------------------------------------------------------ commands
+
+def cmd_catalog(o):
+    d = request('catalog')
+    if o.get('json'):
+        print(json.dumps(d, indent=2, ensure_ascii=False)); return OK
+    print('modes:', ', '.join(d.get('modes') or []), '  parallel_max:', d.get('parallel_max'))
+    nodes = d.get('nodes') or []
+    print('machines:', ', '.join((n.get('id') or n.get('name') or str(n)) if isinstance(n, dict) else str(n) for n in nodes))
+    for eng, spec in (d.get('specs') or {}).items():
+        models = d.get('models', {}).get(eng) or []
+        default = ((d.get('settings') or {}).get('engines') or {}).get(eng, {}).get('model') or ''
+        print(f'  {eng:9} {len(models):3} models' + (f'  default {default}' if default else '') + f'  {(spec.get("blurb") or "")[:60]}')
+    return OK
+
+
+def cmd_workspace(o, args):
+    if not args:
+        print('workspace needs a NAME (a-z, 0-9, _ -)'); return USAGE
+    d = request('workspace/create', {'name': args[0]})
+    print(json.dumps(d, indent=2) if o.get('json') else f'{d.get("cwd")}  {"created" if d.get("created") else "exists"}')
+    return OK
+
+
+def read_lines_file(path):
+    try:
+        with open(path, encoding='utf-8') as f:
+            return statements(f.read())
+    except OSError as e:
+        raise ApiError(f'cannot read {path}: {e}', USAGE) from None
+
+
+def cmd_lint(o, args):
+    if not args:
+        print('lint needs a FILE of statements'); return USAGE
+    return print_lint(lint(read_lines_file(args[0]), o.get('root', '')), o.get('json'))
+
+
+def cmd_start(o):
+    root = o.get('root', '').rstrip('/')
+    if o.get('sheet'):
+        if o.get('lines') or o.get('instruction'):
+            print('--sheet takes the place of --lines and --instruction: the sheet is the one statement'); return USAGE
+        return cmd_autogen_sheet(o)
+    if o.get('lines'):
+        lines = read_lines_file(o['lines'])
+        mode = o.get('mode') or 'lines'
+    elif o.get('instruction'):
+        lines = statements(o['instruction'])
+        mode = o.get('mode') or 'agent'
+    else:
+        print('start needs --lines FILE or --instruction TEXT'); return USAGE
+    if mode not in ('lines', 'agent'):
+        print('--mode is lines or agent'); return USAGE
+    if autogen_requested(o):
+        return cmd_autogen_start(o, lines)
+    # In an own checkout (--worktree) the folder is the checkout the host creates, so the
+    # absolute-folder rule does not apply; the lint is told a root exists.
+    findings = lint(lines, root or ('<checkout>' if o.get('worktree') else '')) if mode == 'lines' else []
+    errors = [f for f in findings if f[0] == 'error']
+    if errors:
+        print_lint(findings); return REFUSED
+    if findings and not o.get('json'):
+        print_lint(findings)
+    cwd = o.get('cwd') or root
+    if not cwd:
+        print('name the workspace: --root DIR (or --cwd DIR); create one with: symblic-task workspace NAME'); return USAGE
+    note = ''
+    if o.get('context_note'):
+        with open(o['context_note'], encoding='utf-8') as f:
+            note = f.read().strip()
+    if root:
+        note = (FOLDER_LOCK.format(root=root) + ('\n\n' + note if note else ''))[:12000]
+    elif o.get('worktree'):
+        # An own checkout: the folder is wherever the host started the agent, so the lock names
+        # it by pwd. Without it a fresh agent explored other tests for minutes (2026-10-10).
+        note = (CHECKOUT_LOCK + ('\n\n' + note if note else ''))[:12000]
+    slug = re.sub(r'[^a-z0-9]+', '-', ' '.join(lines)[:40].lower()).strip('-') or 'task'
+    body = {'client_request_id': o.get('id') or f'{slug}-{int(time.time())}',
+            'instruction': '\n'.join(lines), 'mode': mode, 'node': o.get('node') or 'host', 'cwd': cwd,
+            'auto': not o.get('no_auto'), 'worktree': bool(o.get('worktree'))}
+    for key in ('engine', 'model', 'effort'):
+        if o.get(key):
+            body[key] = o[key]
+    body.setdefault('engine', 'agy')
+    if note:
+        body['context_note'] = note
+    if o.get('parallel'):
+        body['parallel'] = int(o['parallel'])
+    if o.get('auto_next'):
+        body['auto_next'] = True
+    if o.get('headless'):
+        body['headless'] = True
+    d = request('tasks/start', body)
+    task = d.get('task') or {}
+    if o.get('json'):
+        print(json.dumps({'id': task.get('id'), 'duplicate': d.get('duplicate'), 'task': task_summary(task)}, indent=2))
+    else:
+        print(f'{task.get("id")}  {"(duplicate of an earlier start)" if d.get("duplicate") else "started"}  '
+              f'{len(lines)} line(s) on {body["node"]} via {body["engine"]}  workspace {cwd}')
+        print(f'follow: symblic-task wait {task.get("id")}')
+    return OK
+
+
+def cmd_get(o, args):
+    if not args:
+        print('get needs a task ID'); return USAGE
+    d = request('tasks/get', query={'id': args[0]})
+    show(d.get('task') or {}, o.get('json'), screen=o.get('screen'))
+    return OK
+
+
+def cmd_wait(o, args):
+    if not args:
+        print('wait needs a task ID'); return USAGE
+    limit = float(o.get('max') or 1800)
+    interval = max(3.0, float(o.get('interval') or 15))
+    started = time.time()
+    last = ''
+    outage = None
+    while True:
+        try:
+            task = (request('tasks/get', query={'id': args[0]}) or {}).get('task') or {}
+        except ApiError as e:
+            # A restart of the host's web server drops a few polls; the
+            # task record survives it, so the wait does too, for a bounded time.
+            if e.exit_code != NO_ANSWER:
+                raise
+            outage = outage or time.time()
+            if time.time() - outage > 180:
+                raise
+            if not o.get('json'):
+                print(f'{time.strftime("%H:%M:%S")}  host not answering; retrying')
+            time.sleep(5)
+            continue
+        outage = None
+        s = task_summary(task)
+        line = f'{s["status"]} ' + ' '.join(f'[{st["index"]}]{st["status"]}{"*" if st["running"] else ""}' for st in s['steps'])
+        if line != last and not o.get('json'):
+            print(f'{time.strftime("%H:%M:%S")}  {line}')
+            last = line
+        gate_ready = any(st['status'] == 'awaiting_review' and not st['running'] for st in s['steps'])
+        if s['status'] in TERMINAL or gate_ready or s['resume_required']:
+            show(task, o.get('json'), screen=True)
+            return REFUSED if s['status'] in ('failed', 'unknown', 'cancelled') else OK
+        if time.time() - started > limit:
+            show(task, o.get('json'), screen=True)
+            if not o.get('json'):
+                print(f'wait: {limit:.0f}s reached; the task is still running (a gated line with a live TUI agent '
+                      'never ends its turn from here: inspect its terminal, then `symblic-task next`)')
+            return TIMED_OUT
+        time.sleep(interval)
+
+
+def cmd_control(action, o, args):
+    if not args:
+        print(f'{action} needs a task ID'); return USAGE
+    d = request('tasks/control', {'id': args[0], 'action': action})
+    show(d.get('task') or {}, o.get('json'))
+    return OK
+
+
+def cmd_list(o):
+    rows = (request('tasks') or {}).get('tasks') or []
+    want = o.get('status')
+    rows = [r for r in rows if not want or r.get('status') == want][:int(o.get('limit') or 20)]
+    if o.get('json'):
+        print(json.dumps([task_summary(r) for r in rows], indent=2, ensure_ascii=False)); return OK
+    for r in rows:
+        opts = r.get('options') or {}
+        steps = r.get('steps') or []
+        done = sum(1 for st in steps if st.get('status') == 'completed')
+        when = time.strftime('%m-%d %H:%M', time.localtime(float(r.get('created') or 0)))
+        print(f'{r.get("id")}  {when}  {r.get("status"):15} {r.get("mode"):5} {opts.get("engine") or "":8} {opts.get("node") or "":8} '
+              f'{done}/{len(steps)}  {(r.get("instruction") or "")[:50].replace(chr(10), " ")}')
+    return OK
+
+
+# ------------------------------------------------------------------------------ autogen
+
+def autogen_requested(o):
+    return any(key in o for key in AUTOGEN_FLAGS)
+
+
+def _int_flag(o, key):
+    try:
+        return int(o[key])
+    except (TypeError, ValueError):
+        raise ApiError(f'--{key.replace("_", "-")} needs a whole number, not {o[key]!r}', USAGE) from None
+
+
+def autogen_policy(o, lines):
+    """The autogen policy object from the command line: only the fields given (a given 0 stays 0); the server
+    fills the defaults and refuses out-of-range values. With --until-done, agents_max and wall_seconds left out
+    default to 0 (unlimited), and a given --agents-max/--wall-seconds N is honoured as a safety cap (the run then
+    ends stuck, never failed), so the two are sent only when the operator gives them."""
+    spec = {}
+    for flag, field in AUTOGEN_INT_FLAGS:
+        if flag in o:
+            spec[field] = _int_flag(o, flag)
+    if 'perpetual' in o:
+        spec['perpetual'] = True
+        spec['interval_seconds'] = _int_flag(o, 'perpetual')
+    if 'strategies' in o:
+        spec['strategies'] = [s.strip() for s in o['strategies'].split(',') if s.strip()]
+    if o.get('check'):
+        checks = {}
+        for item in o['check']:
+            index, sep, command = item.partition(':')
+            index = index.strip()
+            if not sep or not index.isdigit() or not command.strip():
+                raise ApiError(f"--check takes 'INDEX:command' with INDEX the 0-based statement index, not {item!r}", USAGE)
+            if int(index) >= len(lines):
+                raise ApiError(f'--check {index}: there are {len(lines)} statement(s), indexed from 0', USAGE)
+            checks.setdefault(str(int(index)), []).append(command.strip())
+        spec['checks'] = checks
+    for key in ('final', 'hidden'):
+        if o.get(key):
+            spec[key] = [c.strip() for c in o[key]]
+    if o.get('no_syntax'):
+        spec['syntax'] = False
+    if o.get('allow_no_change'):
+        spec['require_change'] = False
+    if o.get('until_done'):
+        spec['until_done'] = True
+    if o.get('designer'):
+        spec['designer'] = True
+    if o.get('no_self_split'):
+        spec['self_split'] = False
+    return spec
+
+
+def cmd_autogen_start(o, lines):
+    for flag, key in (('--parallel', 'parallel'), ('--worktree', 'worktree'), ('--auto-next', 'auto_next'),
+                      ('--no-auto', 'no_auto')):
+        if o.get(key):
+            print(f'{flag} does not apply to an autogen run: every attempt is its own one-statement task in its '
+                  'own checkout, accepted by code'); return USAGE
+    if o.get('mode') == 'agent':
+        print('--mode agent does not apply to an autogen run: each nonblank line is one statement'); return USAGE
+    root = o.get('root', '').rstrip('/')
+    cwd = o.get('cwd') or root
+    # The server lints with the workspace as the root; so does this.
+    findings = lint(lines, root or cwd)
+    if any(f[0] == 'error' for f in findings):
+        print_lint(findings); return REFUSED
+    if findings and not o.get('json'):
+        print_lint(findings)
+    if not cwd:
+        print('name the workspace: --root DIR (or --cwd DIR), a git workspace; create one with: symblic-task workspace NAME'); return USAGE
+    policy = autogen_policy(o, lines)
+    module = policy_module()
+    if module is not None and callable(getattr(module, 'normalize', None)):
+        try:
+            module.normalize(policy)
+        except ValueError as e:
+            print(f'autogen policy refused: {e}'); return USAGE
+    note = ''
+    if o.get('context_note'):
+        with open(o['context_note'], encoding='utf-8') as f:
+            note = f.read().strip()
+    note = (AUTOGEN_FOLDER.format(cwd=cwd) + ' ' + CHECKOUT_LOCK + ('\n\n' + note if note else ''))[:12000]
+    slug = re.sub(r'[^a-z0-9]+', '-', ' '.join(lines)[:40].lower()).strip('-') or 'task'
+    request_id = o.get('id') or f'{slug}-{int(time.time())}'
+    if len(request_id) > AUTOGEN_ID_MAX:
+        print(f'--id is at most {AUTOGEN_ID_MAX} characters for an autogen run (attempt ids extend it)'); return USAGE
+    body = {'client_request_id': request_id, 'instruction': '\n'.join(lines), 'node': o.get('node') or 'host',
+            'cwd': cwd, 'context_note': note, 'headless': not o.get('no_headless'), 'autogen': policy}
+    for key in ('engine', 'model', 'effort'):
+        if o.get(key):
+            body[key] = o[key]
+    body.setdefault('engine', 'agy')
+    d = request('autogen/start', body)
+    run = d.get('run') or {}
+    if o.get('json'):
+        print(json.dumps({'id': run.get('id'), 'duplicate': d.get('duplicate'), 'run': run_view(run)}, indent=2, ensure_ascii=False))
+    else:
+        budget = run.get('budget') or {}
+        print(f'{run.get("id")}  {"(duplicate of an earlier start)" if d.get("duplicate") else "started"}  '
+              f'{len(lines)} statement(s) on {body["node"]} via {body["engine"]}  workspace {cwd}  '
+              f'agents_max {_agents_cap(budget)}{"  until done" if _until_done(run) else ""}')
+        print(f'follow: symblic-task autogen wait {run.get("id")}')
+    return OK
+
+
+def sheet_problems(text):
+    """symblic.spec.sheets' problems for a spec sheet, from this checkout (the server checks again), or None when it
+    cannot be imported here."""
+    added = CHECKOUT_ROOT not in sys.path
+    if added:
+        sys.path.insert(0, CHECKOUT_ROOT)
+    try:
+        from symblic.spec import sheets as symblic_spec
+        try:
+            return list(symblic_spec.problems(symblic_spec.parse(text)))
+        except ValueError as e:                  # SheetError: a section the format does not know
+            return [str(e)]
+    except Exception:
+        return None
+    finally:
+        if added and CHECKOUT_ROOT in sys.path:
+            sys.path.remove(CHECKOUT_ROOT)
+
+
+def cmd_autogen_sheet(o):
+    """start --sheet: the sheet file verbatim as the one statement of a local autogen run (kernel lane)."""
+    try:
+        with open(o['sheet'], encoding='utf-8') as f:
+            text = f.read()
+    except OSError as e:
+        raise ApiError(f'cannot read {o["sheet"]}: {e}', USAGE) from None
+    engine = o.get('engine') or 'local'
+    if engine != 'local':
+        print('a spec sheet runs on the local kernel lane: --engine local (the default with --sheet)'); return USAGE
+    for flag, key in (('--parallel', 'parallel'), ('--worktree', 'worktree'), ('--auto-next', 'auto_next'),
+                      ('--no-auto', 'no_auto'), ('--mode', 'mode'), ('--perpetual', 'perpetual'), ('--designer', 'designer')):
+        if o.get(key):
+            print(f'{flag} does not apply to a spec sheet: each attempt is one kernel build, checked by code'); return USAGE
+    if not o.get('model'):
+        print('--sheet needs --model, an Ollama model installed on the node (for example qwen3:4b-instruct)'); return USAGE
+    node = o.get('node') or ''
+    if not node or node == 'host':
+        print('--sheet needs --node, a worker node such as node-a: the model runs there, the host only orchestrates'); return USAGE
+    root = o.get('root', '').rstrip('/')
+    cwd = o.get('cwd') or root
+    if not cwd:
+        print('name the workspace: --root DIR (or --cwd DIR), a git workspace; create one with: symblic-task workspace NAME'); return USAGE
+    found = sheet_problems(text)
+    if found:
+        for problem in found:
+            print(f'error: {problem}')
+        print(f'{len(found)} problem(s) in {o["sheet"]}; check it with: tools/symblic spec check {o["sheet"]}')
+        return REFUSED
+    policy = autogen_policy(o, [text])
+    module = policy_module()
+    if module is not None and callable(getattr(module, 'normalize', None)):
+        try:
+            module.normalize(policy)
+        except ValueError as e:
+            print(f'autogen policy refused: {e}'); return USAGE
+    note = ''
+    if o.get('context_note'):
+        with open(o['context_note'], encoding='utf-8') as f:
+            note = f.read().strip()[:12000]
+    title = next((line[2:].strip() for line in text.splitlines() if line.startswith('# ')), 'sheet')
+    slug = re.sub(r'[^a-z0-9]+', '-', ('sheet ' + title)[:40].lower()).strip('-') or 'sheet'
+    request_id = o.get('id') or f'{slug}-{int(time.time())}'
+    if len(request_id) > AUTOGEN_ID_MAX:
+        print(f'--id is at most {AUTOGEN_ID_MAX} characters for an autogen run (attempt ids extend it)'); return USAGE
+    body = {'client_request_id': request_id, 'instruction': text, 'sheet': True, 'engine': 'local', 'model': o['model'],
+            'node': node, 'cwd': cwd, 'context_note': note, 'headless': True, 'autogen': policy}
+    if o.get('effort'):
+        body['effort'] = o['effort']
+    d = request('autogen/start', body)
+    run = d.get('run') or {}
+    if o.get('json'):
+        print(json.dumps({'id': run.get('id'), 'duplicate': d.get('duplicate'), 'run': run_view(run)}, indent=2, ensure_ascii=False))
+    else:
+        budget = run.get('budget') or {}
+        print(f'{run.get("id")}  {"(duplicate of an earlier start)" if d.get("duplicate") else "started"}  '
+              f'spec sheet {title} on {node} via ollama:{o["model"]}  workspace {cwd}  '
+              f'agents_max {_agents_cap(budget)}{"  until done" if _until_done(run) else ""}')
+        print(f'follow: symblic-task autogen wait {run.get("id")}')
+    return OK
+
+
+def _when(ts, fmt='%m-%d %H:%M'):
+    try:
+        return time.strftime(fmt, time.localtime(float(ts))) if ts else '-'
+    except (TypeError, ValueError, OverflowError, OSError):
+        return '-'
+
+
+def run_tree(run):
+    """Nodes in execution order: each top statement followed by the lines it was split into."""
+    nodes = [n for n in run.get('nodes') or [] if isinstance(n, dict)]
+    by_id = {n.get('id'): n for n in nodes}
+    out, seen = [], set()
+
+    def walk(node_id):
+        node = by_id.get(node_id)
+        if node is None or node_id in seen:
+            return
+        seen.add(node_id)
+        out.append(node)
+        for child in node.get('children') or []:
+            walk(child)
+    for node_id in run.get('order') or [n.get('id') for n in nodes if n.get('parent') is None]:
+        walk(node_id)
+    out += [n for n in nodes if n.get('id') not in seen]
+    return out
+
+
+def statement_label(text):
+    """One line for a statement: a spec sheet (a whole markdown file) shows as its title and unit count."""
+    text = str(text or '')
+    if text.startswith('# ') and '\n## Unit `' in text:
+        title = text.split('\n', 1)[0][2:].strip()
+        return f'spec sheet {title} ({text.count(chr(10) + "## Unit `")} units)'
+    return ' '.join(text.split())
+
+
+def _plural(n, word):
+    return f'{n} {word}{"" if n == 1 else "s"}'
+
+
+def _agents_cap(budget):
+    """agents_max as shown: 0 means unlimited (an until_done run)."""
+    cap = (budget or {}).get('agents_max', '?')
+    return 'unlimited' if cap == 0 and not isinstance(cap, bool) else cap
+
+
+def _until_done(run):
+    return bool((run.get('policy') or {}).get('until_done') or (run.get('summary') or {}).get('until_done'))
+
+
+def _count(value):
+    return value if isinstance(value, int) and not isinstance(value, bool) else 0
+
+
+def _progress_counts(node):
+    """A node's best measured progress as counts: files made or changed, checks passed, checkpoint items done."""
+    progress = node.get('progress') if isinstance(node.get('progress'), dict) else {}
+    files = progress.get('files')
+    out = {'files': len(files) if isinstance(files, list) else _count(files),
+           'checks': _count(progress.get('checks')), 'done': _count(progress.get('done'))}
+    if 'units' in progress:                     # kernel lane: spec-sheet units the kernel accepted
+        out['units'] = _count(progress.get('units'))
+    return out
+
+
+def run_next(run):
+    status, rid = run.get('status'), run.get('id')
+    if status == 'completed':
+        return f'done: every statement accepted and promoted into {(run.get("base") or {}).get("cwd")}; verify the files yourself'
+    if status == 'cancelled':
+        return 'done: cancelled'
+    if status == 'stuck':
+        return (f'resume: symblic-task autogen resume {rid} [--agents-max N] [--wall-seconds S] after changing the '
+                'statement, the checks or the catalogue')
+    if status in ('failed', 'unknown'):
+        hint = f'; inspect the attempts, then symblic-task autogen resume {rid}' if status == 'unknown' else ''
+        return f'failed: {run.get("error") or status}{hint}'
+    if run.get('resume_required'):
+        return f'resume: the coordinator is absent (symblic-task autogen resume {rid})'
+    for node in run_tree(run):
+        if node.get('status') == 'pending':
+            live = [a for a in node.get('attempts') or [] if a.get('status') in ('queued', 'running')]
+            return f'wait: {node.get("id")} has {_plural(len(live), "attempt")} running'
+    return 'wait: the coordinator is running'
+
+
+def _task_url(tasks, task_id):
+    task = (tasks or {}).get(task_id) or {}
+    steps = task.get('steps') or [{}]
+    return (steps[0] or {}).get('url') or ''
+
+
+def attempt_view(a, tasks=None):
+    verdict = a.get('verdict') or {}
+    failed = [{'kind': c.get('kind'), 'what': c.get('file') or c.get('command') or '',
+               'output': str(c.get('output') or '')[:300] if c.get('public', True) else '(hidden)'}
+              for c in verdict.get('checks') or [] if not c.get('passed')]
+    view = {'id': a.get('id'), 'kind': a.get('kind'), 'strategy': a.get('strategy'), 'status': a.get('status'),
+            'failure': a.get('failure') or '', 'engine': a.get('engine') or '', 'node': a.get('node') or '',
+            'model': a.get('model') or '', 'generation': a.get('generation') or 0, 'task_id': a.get('task_id') or '',
+            'error': str(a.get('error') or '')[:300], 'failed_checks': failed}
+    if tasks is not None:
+        view['url'] = _task_url(tasks, a.get('task_id'))
+    kernel = a.get('kernel') if isinstance(a.get('kernel'), dict) else None
+    if kernel:                                  # a kernel-lane attempt: a spec-sheet build or a unit split, no task
+        view['kernel'] = {'mode': kernel.get('mode') or '', 'units': _count(kernel.get('units_accepted')),
+                          'total': _count(kernel.get('units_total')), 'stalled': kernel.get('stalled') or '',
+                          'unit': kernel.get('heading') or kernel.get('unit') or '', 'run_dir': kernel.get('run_dir') or ''}
+    return view
+
+
+def _kernel_note(a):
+    k = a.get('kernel')
+    if not k:
+        return ''
+    if k['mode'] == 'split':
+        return f'  split {k["unit"]}'
+    return f'  units {k["units"]}/{k["total"]}' + (f' (stopped at {k["stalled"]})' if k['stalled'] and a['status'] != 'accepted' else '')
+
+
+def run_view(run):
+    """A compact, stable view of a run row for --json and the human rendering."""
+    tasks = run.get('tasks') if isinstance(run.get('tasks'), dict) else None
+    nodes = [{'id': n.get('id'), 'parent': n.get('parent'), 'depth': n.get('depth') or 0, 'status': n.get('status'),
+              'statement': (n.get('statement') or '')[:200], 'label': statement_label(n.get('statement'))[:200],
+              'winner': n.get('winner') or '',
+              'generation': n.get('generation') or 0, 'children': n.get('children') or [],
+              'error': n.get('error') or '', 'stale': _count(n.get('stale')), 'progress': _progress_counts(n),
+              'perpetual': bool(n.get('perpetual')), 'items_total': _count(n.get('items_total')),
+              'handoff_stale': _count(n.get('handoff_stale')), 'integrations': _count(n.get('integrations')),
+              'attempts': [attempt_view(a, tasks) for a in n.get('attempts') or []]}
+             for n in run_tree(run)]
+    return {'id': run.get('id'), 'status': run.get('status'), 'error': run.get('error') or '',
+            'created': run.get('created'), 'updated': run.get('updated'), 'base': run.get('base') or {},
+            'budget': run.get('budget') or {}, 'until_done': _until_done(run),
+            'resume_required': bool(run.get('resume_required')),
+            'nodes': nodes, 'final': run.get('final'), 'next_action': run_next(run)}
+
+
+def show_run(run, as_json=False):
+    v = run_view(run)
+    if as_json:
+        print(json.dumps(v, indent=2, ensure_ascii=False))
+        return
+    base, budget = v['base'], v['budget']
+    print(f'{v["id"]}  {v["status"]}  {_plural(len(run.get("lines") or []), "statement")} on {base.get("node")} '
+          f'via {base.get("engine")}{(" " + base["model"]) if base.get("model") else ""}  workspace {base.get("cwd")}')
+    line = f'  budget: agents {budget.get("agents_started", 0)}/{_agents_cap(budget)}'
+    if budget.get('deadline') is not None:            # null: no clock (until_done with wall_seconds 0)
+        line += f'  deadline {_when(budget["deadline"])}'
+    print(line + ('  until done' if v['until_done'] else ''))
+    for n in v['nodes']:
+        pad = '  ' + '  ' * n['depth']
+        extra = f'  winner {n["winner"]}' if n['winner'] else ''
+        extra += f'  -> {", ".join(n["children"])}' if n['children'] else ''
+        extra += f'  gen {n["generation"]}' if n['generation'] else ''
+        extra += f'  stale {n["stale"]}' if n['stale'] else ''
+        extra += f'  handoff stale {n["handoff_stale"]}' if n['handoff_stale'] else ''
+        extra += f'  integrations {n["integrations"]}' if n['integrations'] else ''
+        p = n['progress']
+        extra += f'  progress files {p["files"]} checks {p["checks"]} done {p["done"]}' if any(p.values()) else ''
+        extra += f' units {p["units"]}' if p.get('units') else ''
+        extra += f'  items {n["items_total"]}' if n['perpetual'] else ''
+        print(f'{pad}{n["id"]}  {n["status"]}{extra}  {n["label"][:90]}')
+        if n['error']:
+            print(f'{pad}    error: {n["error"][:200]}')
+        for a in n['attempts']:
+            if a['kind'] == 'integration':
+                # no agent ran: every child was accepted, the assembled result failed the parent's own checks
+                label = 'integration check failed' if a['status'] == 'failed' else f'integration {a["status"]}'
+                print(f'{pad}    {a["id"]} {label}')
+            else:
+                where = f'{a["engine"]}@{a["node"]}' + (f' {a["model"]}' if a['model'] else '')
+                gen = f' gen {a["generation"]}' if a['generation'] else ''
+                print(f'{pad}    {a["id"]} {a["kind"]}/{a["strategy"]} {a["status"]}'
+                      f'{(" " + a["failure"]) if a["failure"] else ""}{gen}  {where}{_kernel_note(a)}')
+            for c in a['failed_checks'][:4]:
+                first = (c['output'].strip().splitlines() or [''])[-1][:140]
+                print(f'{pad}      check {c["kind"]} {c["what"][:60]}: {first}')
+            if a['error'] and not a['failed_checks']:
+                print(f'{pad}      error: {a["error"][:200]}')
+            if a.get('url'):
+                print(f'{pad}      terminal: {a["url"]}')
+            elif a['task_id'] and a['status'] in ('queued', 'running'):
+                print(f'{pad}      task: {a["task_id"]}')
+            elif a.get('kernel') and a['kernel']['run_dir'] and a['status'] in ('queued', 'running'):
+                print(f'{pad}      build: {a["kernel"]["run_dir"]} (log {a["kernel"]["run_dir"]}.log)')
+    final = v['final']
+    if isinstance(final, dict):
+        checks = final.get('checks') or []
+        print(f'  final: {sum(1 for c in checks if c.get("passed"))}/{len(checks)} check(s) passed')
+        for c in checks:
+            if not c.get('passed'):
+                print(f'    failed: {c.get("command")}: {(str(c.get("output") or "").strip().splitlines() or [""])[-1][:140]}')
+    if v['error']:
+        print(f'  error: {v["error"]}')
+    print(f'  next: {v["next_action"]}')
+
+
+def run_status_line(run):
+    return f'{run.get("status")} ' + ' '.join(
+        f'{n.get("id")}:{n.get("status")}({_plural(len(n.get("attempts") or []), "attempt")})' for n in run_tree(run))
+
+
+def cmd_autogen_list(o):
+    rows = (request('autogen') or {}).get('runs') or []
+    want = o.get('status')
+    rows = [r for r in rows if not want or r.get('status') == want][:int(o.get('limit') or 20)]
+    if o.get('json'):
+        print(json.dumps([run_view(r) for r in rows], indent=2, ensure_ascii=False)); return OK
+    for r in rows:
+        budget = r.get('budget') or {}
+        top = [n for n in r.get('nodes') or [] if n.get('parent') is None]
+        done = sum(1 for n in top if n.get('status') == 'accepted')
+        print(f'{r.get("id")}  {_when(r.get("created"))}  {r.get("status") or "":10} {done}/{len(top)}  '
+              f'agents {budget.get("agents_started", 0)}/{_agents_cap(budget)}  '
+              f'{statement_label((r.get("lines") or [""])[0])[:50]}')
+    return OK
+
+
+def cmd_autogen_get(o, args):
+    if not args:
+        print('autogen get needs a RUN_ID'); return USAGE
+    query = {'id': args[0]}
+    if o.get('tasks'):
+        query['tasks'] = '1'
+    show_run((request('autogen/get', query=query) or {}).get('run') or {}, o.get('json'))
+    return OK
+
+
+def cmd_autogen_wait(o, args):
+    if not args:
+        print('autogen wait needs a RUN_ID'); return USAGE
+    limit = float(o.get('max') or 6 * 3600)
+    interval = max(3.0, float(o.get('interval') or 20))
+    started = time.time()
+    last = ''
+    outage = None
+    absent = 0
+    while True:
+        try:
+            run = (request('autogen/get', query={'id': args[0]}) or {}).get('run') or {}
+        except ApiError as e:
+            # The run record survives a restart of the host's web server; the wait does too, for a bounded time.
+            if e.exit_code != NO_ANSWER:
+                raise
+            outage = outage or time.time()
+            if time.time() - outage > 180:
+                raise
+            if not o.get('json'):
+                print(f'{time.strftime("%H:%M:%S")}  host not answering; retrying')
+            time.sleep(5)
+            continue
+        outage = None
+        line = run_status_line(run)
+        if line != last and not o.get('json'):
+            print(f'{time.strftime("%H:%M:%S")}  {line}')
+            last = line
+        # resume_required is briefly true between a start and its worker taking the lock: two polls in a row.
+        absent = absent + 1 if run.get('resume_required') else 0
+        if run.get('status') in AUTOGEN_TERMINAL or absent >= 2:
+            show_run(run, o.get('json'))
+            return REFUSED if run.get('status') in ('failed', 'unknown', 'cancelled', 'stuck') else OK
+        if time.time() - started > limit:
+            show_run(run, o.get('json'))
+            if not o.get('json'):
+                print(f'wait: {limit:.0f}s reached; the run is still going (symblic-task autogen wait {args[0]} again)')
+            return TIMED_OUT
+        time.sleep(interval)
+
+
+def cmd_autogen_control(action, o, args):
+    if not args:
+        print(f'autogen {action} needs a RUN_ID'); return USAGE
+    body = {'id': args[0], 'action': action}
+    # resume RUN_ID --agents-max N --wall-seconds S raises a spent explicit cap (0 lifts it, until_done only);
+    # only the keys given are sent, and the server checks them against the run's policy
+    extend = {key: _int_flag(o, key) for key in ('agents_max', 'wall_seconds') if key in o}
+    if extend and action != 'resume':
+        print('--agents-max/--wall-seconds extend a resume; autogen cancel takes only RUN_ID'); return USAGE
+    if extend:
+        body['extend'] = extend
+    try:
+        d = request('autogen/control', body)
+    except ApiError as e:
+        if e.status != 409 or not e.data.get('error'):
+            raise
+        print(e.data['error'], file=sys.stderr)          # the server's refusal, verbatim
+        key = re.search(r'extend \{"(agents_max|wall_seconds)"', e.data['error'])
+        if key and action == 'resume':
+            print(f'with this CLI: symblic-task autogen resume {args[0]} --{key.group(1).replace("_", "-")} N', file=sys.stderr)
+        return REFUSED
+    run = d.get('run') or {}
+    show_run(run, o.get('json'))
+    # the server takes an extension only when it resumes a stuck run; say so when the run does not carry it
+    applied = {'agents_max': (run.get('budget') or {}).get('agents_max'),
+               'wall_seconds': (run.get('policy') or {}).get('wall_seconds')}
+    unchanged = [key for key, value in extend.items() if applied[key] != value]
+    if unchanged and not o.get('json'):
+        print(f'note: {", ".join(unchanged)} not changed: an extension applies only when a stuck run is resumed')
+    return OK
+
+
+def cmd_autogen_catalog(o):
+    d = request('autogen/catalog')
+    if o.get('json'):
+        print(json.dumps(d, indent=2, ensure_ascii=False)); return OK
+    defaults = d.get('defaults') or {}
+    for key, (low, high) in (d.get('limits') or {}).items():
+        print(f'  {key:17} {low}-{high}  default {defaults.get(key)}')
+    switches = [(key, value) for key, value in defaults.items() if isinstance(value, bool)]
+    if switches:
+        print('switches:', '  '.join(f'{key} {"true" if value else "false"}' for key, value in switches))
+    if 'until_done' in defaults:
+        print('until_done: agents_max and wall_seconds default to 0 (unlimited) unless given; a spent cap or no novel '
+              'action leaves the run stuck (resumable), not failed')
+    print('strategies:', ', '.join(d.get('strategies') or []), '  default', ','.join(defaults.get('strategies') or []))
+    print('failure classes:', ', '.join(d.get('failure_classes') or []))
+    print(f'handoff files: {d.get("handoff_file")} + {d.get("checkpoint_file")}')
+    return OK
+
+
+def cmd_autogen(o, args):
+    sub, rest = (args[0] if args else ''), args[1:]
+    if sub == 'list':
+        return cmd_autogen_list(o)
+    if sub == 'catalog':
+        return cmd_autogen_catalog(o)
+    if sub == 'get':
+        return cmd_autogen_get(o, rest)
+    if sub == 'wait':
+        return cmd_autogen_wait(o, rest)
+    if sub in ('cancel', 'resume'):
+        return cmd_autogen_control(sub, o, rest)
+    print('autogen takes list | catalog | get RUN_ID | wait RUN_ID | cancel RUN_ID | resume RUN_ID')
+    return USAGE
+
+
+USAGE_TEXT = __doc__.split('\n\n')[1]
+FLAGS_WITH_VALUE = {'--root', '--cwd', '--node', '--engine', '--model', '--effort', '--mode', '--context-note', '--sheet',
+                    '--parallel', '--id', '--lines', '--instruction', '--max', '--interval', '--status', '--limit',
+                    '--candidates', '--regenerate', '--decompose', '--children', '--handoff', '--perpetual',
+                    '--agents-max', '--attempt-seconds', '--wall-seconds', '--strategies', '--check', '--final', '--hidden',
+                    '--novelty-limit', '--saturation'}
+REPEATABLE = {'--check', '--final', '--hidden'}
+
+
+def parse(argv):
+    opts, args = {}, []
+    it = iter(argv)
+    for a in it:
+        if a in FLAGS_WITH_VALUE:
+            try:
+                value = next(it)
+            except StopIteration:
+                raise ApiError(f'{a} needs a value', USAGE) from None
+            if a in REPEATABLE:
+                opts.setdefault(a[2:].replace('-', '_'), []).append(value)
+            else:
+                opts[a[2:].replace('-', '_')] = value
+        elif a in ('--json', '--screen', '--no-auto', '--worktree', '--auto-next', '--headless',
+                   '--autogen', '--no-syntax', '--allow-no-change', '--no-headless', '--tasks',
+                   '--until-done', '--designer', '--no-self-split'):
+            opts[a[2:].replace('-', '_')] = True
+        elif a in ('-h', '--help'):
+            opts['help'] = True
+        else:
+            args.append(a)
+    return opts, args
+
+
+def main(argv):
+    try:
+        opts, args = parse(argv)
+        if opts.get('help') or not args:
+            print(USAGE_TEXT)
+            return OK if opts.get('help') else USAGE
+        cmd, rest = args[0], args[1:]
+        if cmd == 'catalog':
+            return cmd_catalog(opts)
+        if cmd == 'workspace':
+            return cmd_workspace(opts, rest)
+        if cmd == 'lint':
+            return cmd_lint(opts, rest)
+        if cmd == 'start':
+            return cmd_start(opts)
+        if cmd == 'get':
+            return cmd_get(opts, rest)
+        if cmd == 'wait':
+            return cmd_wait(opts, rest)
+        if cmd in ('next', 'resume', 'cancel'):
+            return cmd_control(cmd, opts, rest)
+        if cmd == 'list':
+            return cmd_list(opts)
+        if cmd == 'autogen':
+            return cmd_autogen(opts, rest)
+    except ApiError as e:
+        print(f'symblic-task: {e}', file=sys.stderr)
+        return e.exit_code
+    print(USAGE_TEXT)
+    return USAGE
+
+
+if __name__ == '__main__':
+    try:
+        sys.exit(main(sys.argv[1:]))
+    except BrokenPipeError:            # `| head` closed the pipe: not an error
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        sys.exit(OK)

@@ -1,0 +1,24 @@
+---
+effort: high
+---
+# Preparing a ceramic slurry (draft)
+
+A slurry recipe is written the way lab protocols often are. A reader works out how much of each
+ingredient to weigh.
+
+## The recipe
+
+```symblic
+given recipe: Text = """Prepare 200 g of a 40% alumina slurry in deionised water with 1% dispersant."""
+define Masses as Record {alumina_g: Number, dispersant_g: Number, water_g: Number}
+```
+
+## Weighing
+
+Work out the mass of each ingredient to weigh, in grams.
+
+```symblic
+ask masses: Masses "How many grams of alumina, dispersant and water should be weighed?" from recipe
+ensure masses.alumina_g + masses.dispersant_g + masses.water_g = 200 else retry because "the slurry weighs 200 g in total".
+show masses.
+```

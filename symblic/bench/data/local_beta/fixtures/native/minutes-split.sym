@@ -1,0 +1,13 @@
+program Minutes split.
+note Local beta fixture (2026-10-11). Two chained typed asks; the second sees the first answer. The kernel checks the relation.
+note Expected output: "hours and minutes" = [2, 15].
+
+given minutes: Int = 135.
+
+ask hours: Int in 0..10 "How many whole hours are in {minutes} minutes? Return only the number of whole hours." from minutes
+ensure hours = floor(minutes / 60) else retry because "whole hours are the minutes divided by 60, rounded down".
+
+ask rest: Int in 0..59 "Take {hours} whole hours out of {minutes} minutes. How many minutes are left over?" from minutes, hours
+ensure hours * 60 + rest = minutes else retry because "the whole hours and the minutes left over must add up to the total minutes".
+
+show [hours, rest] as "hours and minutes".

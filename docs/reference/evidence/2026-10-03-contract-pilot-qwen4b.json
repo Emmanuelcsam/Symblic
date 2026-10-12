@@ -1,0 +1,2472 @@
+{
+  "date": "2026-10-03",
+  "events": [
+    {
+      "cell": "17554c0a655acac8",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "ed13752b2d084644",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "f6144a75ef2665dd",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "7efcd171c2db6d75",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "af6445077847e208",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "1ce4e90f0fd3a7ab",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "68a1e3b32a21f87f",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "140adbf97630a481",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "814cdf6d332e3c6e",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "4cbe9cfa12d7982d",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "99bd6da2bf80bc90",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "a80fb053d4c9f6fb",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "293575437efceed1",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "9a2d33230263fc02",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "50464477068f1083",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "5db228ef367644be",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "a518605c35a68380",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "0473aa3300787fa2",
+      "event": "assigned",
+      "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a"
+    },
+    {
+      "cell": "17554c0a655acac8",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:56:54.839+00:00",
+      "cell": "17554c0a655acac8",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "24b73cb10d81ca2e09917c246eff60194f93390aa4a7b92f4607e2aa61e6c361",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:57:34.762+00:00",
+      "cell": "17554c0a655acac8",
+      "elapsed_seconds": 39.873,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "36808d1e0e1b68c0cb1409d39876fb6f805a8ab0c7d6dd7a5e13214b810d8059",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "remaining",
+            "value": 135
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "86e665c42a242ca29195020ef35e3669dc6d34a1c4e7c0f014a09b9dec37813c",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_7748d6f535b4"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 39872,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:57:34.833+00:00",
+      "cell": "17554c0a655acac8",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "695ed6881e41e48c7a9a2addaaca8e4eb3ed78ba23f33ebcff4f32679ec3467d",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "claude",
+          "model": "haiku",
+          "node": "",
+          "spec": "claude:haiku",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261004,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:57:56.854+00:00",
+      "cell": "17554c0a655acac8",
+      "elapsed_seconds": 21.955,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "03db9f3c686ea549f645796683255c98eec0c745c802f38641b74e3063255c00",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "remaining",
+            "value": 130
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": false,
+            "model": "haiku",
+            "num_ctx": null,
+            "num_gpu": null,
+            "prompt_sha": "86e665c42a242ca29195020ef35e3669dc6d34a1c4e7c0f014a09b9dec37813c",
+            "sample": 1,
+            "seed": null,
+            "temperature": null
+          },
+          "run": "r_946499be8c3a"
+        },
+        "model": "haiku",
+        "ms": 21954,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 2,
+      "cell": "17554c0a655acac8",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "remaining",
+        "value": "130"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "remaining",
+          "value": "130"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "remaining",
+          "value": "135"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "basis-1",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": true,
+      "selected": "claude:haiku",
+      "status": "done"
+    },
+    {
+      "cell": "ed13752b2d084644",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:57:57.243+00:00",
+      "cell": "ed13752b2d084644",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "38dc1a3f995055e3e52e3a245ddb1e20d4a28f6775cbd73aa38e24a7078f440a",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:58:29.919+00:00",
+      "cell": "ed13752b2d084644",
+      "elapsed_seconds": 32.562,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "7836516f9af5433d5c9f4282b9eb5546f1dfc09a397727ac812c724501a6e329",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "initial",
+            "value": 80
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "06d4d34f3235325f3c8d11f01bbddb8514c425ff88f865f4f40cf705514fa0ad",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_d69f45fa1ec2"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 32562,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 1,
+      "cell": "ed13752b2d084644",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "initial",
+        "value": "80"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "initial",
+          "value": "80"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "initial",
+          "value": "80"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "basis-0",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": "ollama:qwen3:4b-instruct",
+      "status": "done"
+    },
+    {
+      "cell": "f6144a75ef2665dd",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:58:30.063+00:00",
+      "cell": "f6144a75ef2665dd",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "9d33c327f84243d7280e620970e75cc9a58706563bfb30d7bbe5583d9bfdc46d",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:58:54.789+00:00",
+      "cell": "f6144a75ef2665dd",
+      "elapsed_seconds": 24.657,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "9bef0d192131685e79dcce6e8d74648f3689db76c2a02d1f8a42da1bd47ac7d8",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "all",
+            "value": 1
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "76c8d8ff9ce472ac7b4a4a6b30f24c902cfa85240a63c4cfad8111141134612f",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_a2de928dc3e9"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 24656,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "at_utc": "2026-10-03T12:58:54.908+00:00",
+      "cell": "f6144a75ef2665dd",
+      "event": "call_started",
+      "number": 2,
+      "request_sha256": "6419baa790101de887c911680a639d346c86cbb60c83bb737717e96da5df3bd5",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "claude",
+          "model": "haiku",
+          "node": "",
+          "spec": "claude:haiku",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 1,
+        "seed": 20261004,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T12:59:00.461+00:00",
+      "cell": "f6144a75ef2665dd",
+      "elapsed_seconds": 5.366,
+      "event": "call_finished",
+      "number": 2,
+      "raw_text_sha256": "063246014aa3b913d62b18168e61911f79627f4fe1c16e80a13e018e1b2ce826",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "all",
+            "value": 2
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": false,
+            "model": "haiku",
+            "num_ctx": null,
+            "num_gpu": null,
+            "prompt_sha": "76c8d8ff9ce472ac7b4a4a6b30f24c902cfa85240a63c4cfad8111141134612f",
+            "sample": 1,
+            "seed": null,
+            "temperature": null
+          },
+          "run": "r_9bbd027f7ff4"
+        },
+        "model": "haiku",
+        "ms": 5365,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 2,
+      "cell": "f6144a75ef2665dd",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "all",
+        "value": "2"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "all",
+          "value": "2"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "all",
+          "value": "1"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "scope-0",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": true,
+      "selected": "claude:haiku",
+      "status": "done"
+    },
+    {
+      "cell": "7efcd171c2db6d75",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:59:01.018+00:00",
+      "cell": "7efcd171c2db6d75",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "14f4b25bab847fec0ba6ba0cdf5ceac57e73df6ac55e835410a00c97bae79d6e",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T12:59:35.606+00:00",
+      "cell": "7efcd171c2db6d75",
+      "elapsed_seconds": 34.505,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "6365f7a5544f71d17b3e959716bfadd7ab76f399680158c018af8e9e750dddeb",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 1.9
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "b3611ea2c1a2fa934bb303f2a59beff6fb9168fcbfe2e11f663fbc27e2771470",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_5d3cc81e4f20"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 34504,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 1,
+      "cell": "7efcd171c2db6d75",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "19/10"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "19/10"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "19/10"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "unit-1",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "af6445077847e208",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T12:59:35.805+00:00",
+      "cell": "af6445077847e208",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "6dc7aa1ee00d8bff8d2b69c51ffaacb7275126ad922b964fdd6a4be98d6d32f9",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T13:00:08.550+00:00",
+      "cell": "af6445077847e208",
+      "elapsed_seconds": 32.667,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "36808d1e0e1b68c0cb1409d39876fb6f805a8ab0c7d6dd7a5e13214b810d8059",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "remaining",
+            "value": 135
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "f90adebfd6fcf4577eaa5734c169b16a0966156a887c520e822d10b777d45c97",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_675192c09241"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 32666,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "af6445077847e208",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "remaining",
+        "value": "130"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "remaining",
+          "value": "135"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "remaining",
+          "value": "135"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "basis-1",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "1ce4e90f0fd3a7ab",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:00:08.945+00:00",
+      "cell": "1ce4e90f0fd3a7ab",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "ad4e7a1483544c3b094edcfd5d749b7bffbe6ba2ae17ec2593992ef84d4b80d9",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T13:00:47.698+00:00",
+      "cell": "1ce4e90f0fd3a7ab",
+      "elapsed_seconds": 38.637,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "192b834d6e31d5f8cd4713aadb582ee90c20357e09f4f1656055912df677cf08",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "any",
+            "value": 3
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "3a6caa3b1e3f45472717e78d9123ce095b4582812ffb47857531d4edaa8e1878",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_8f36da585e67"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 38636,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 1,
+      "cell": "1ce4e90f0fd3a7ab",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "any",
+        "value": "3"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "any",
+          "value": "3"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "any",
+          "value": "3"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "scope-1",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": "ollama:qwen3:4b-instruct",
+      "status": "done"
+    },
+    {
+      "cell": "68a1e3b32a21f87f",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:00:47.804+00:00",
+      "cell": "68a1e3b32a21f87f",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "247b00f5ea193505dad5487f3c9407c720a4aa023845c38cb9e31d08f48296ca",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T13:01:06.313+00:00",
+      "cell": "68a1e3b32a21f87f",
+      "elapsed_seconds": 18.476,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "15eebcd24a11e5e0cd65d70ebf16c468e4966b357543bb188c7ca089abb797f5",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "initial",
+            "value": "10"
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "b51473f7714fe0b53d151a7e83861c14dab2fa39a7c11e47a0ee6022831245a0",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_70eb20dfacab"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 18475,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 1,
+      "cell": "68a1e3b32a21f87f",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "initial",
+        "value": "80"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "initial",
+          "value": "10"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "initial",
+          "value": "10"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "basis-0",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "140adbf97630a481",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:01:06.793+00:00",
+      "cell": "140adbf97630a481",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "352d59a91b8d742a534cbdc6ff5c6ea8def3034c9c685ffef05ce63310b148b4",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T13:01:29.255+00:00",
+      "cell": "140adbf97630a481",
+      "elapsed_seconds": 22.394,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "f86ff760378e47f9ef082dbb9b60d8550889d20945e83eb41d87b27e82e77584",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 0.975
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "c58b13a9d959338d34a9cee4037c1b7ec26e27a5dcb8e99fe4d35ce8db3221ac",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_4b5b5698478a"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 22394,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 1,
+      "cell": "140adbf97630a481",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "39/40"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "39/40"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "39/40"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "unit-0",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "814cdf6d332e3c6e",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:01:29.566+00:00",
+      "cell": "814cdf6d332e3c6e",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "fb3d832aacf7b4c387aed0d823226f213a5385e59be0b3ace1667ffea23ae3a0",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T13:02:08.254+00:00",
+      "cell": "814cdf6d332e3c6e",
+      "elapsed_seconds": 38.585,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "192b834d6e31d5f8cd4713aadb582ee90c20357e09f4f1656055912df677cf08",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "any",
+            "value": 3
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "ddc872bdd0927e26aa46bc83e84e75fe479c87037e9a73619ee6ffe97d428fd8",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_2d9729a7ab1a"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 38585,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "814cdf6d332e3c6e",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "any",
+        "value": "3"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "any",
+          "value": "3"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "any",
+          "value": "3"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "scope-1",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "4cbe9cfa12d7982d",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:02:08.421+00:00",
+      "cell": "4cbe9cfa12d7982d",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "8e5aa963b013347aa5a5e38163a14b8824a5b53139d67e3fe8eb950f9fab5899",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T13:02:45.095+00:00",
+      "cell": "4cbe9cfa12d7982d",
+      "elapsed_seconds": 36.618,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "f86ff760378e47f9ef082dbb9b60d8550889d20945e83eb41d87b27e82e77584",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 0.975
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "a8e36578168f6d9c6c2918f84fe580c9efd3d9a8cdd74c4a75a8d69e31fc3019",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_28e367439d37"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 36617,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "4cbe9cfa12d7982d",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "39/40"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "39/40"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "39/40"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "unit-0",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "99bd6da2bf80bc90",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:02:45.321+00:00",
+      "cell": "99bd6da2bf80bc90",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "a587e4d3e752b820b6ff7a4b84f39f47f647807c3c41650b58d48a449765c2aa",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T13:03:25.017+00:00",
+      "cell": "99bd6da2bf80bc90",
+      "elapsed_seconds": 39.645,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "7836516f9af5433d5c9f4282b9eb5546f1dfc09a397727ac812c724501a6e329",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "initial",
+            "value": 80
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "20c9d63d80178bf754ecd2f07b7f44626060dc782973fa8de9ea01a0cfcc6d9b",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_c09fa81c1167"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 39644,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "99bd6da2bf80bc90",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "initial",
+        "value": "80"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "initial",
+          "value": "80"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "initial",
+          "value": "80"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "basis-0",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "a80fb053d4c9f6fb",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:03:25.197+00:00",
+      "cell": "a80fb053d4c9f6fb",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "52defdb1f7a8d6cbff0731192fd761b08a0f983f3737159d86aef977feb0162e",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T13:03:50.579+00:00",
+      "cell": "a80fb053d4c9f6fb",
+      "elapsed_seconds": 25.337,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "9bef0d192131685e79dcce6e8d74648f3689db76c2a02d1f8a42da1bd47ac7d8",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "all",
+            "value": 1
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "c556d67e0a2e52f60761e5bbadcfb53c66d08ae56dc46bd2e3f3ffd7e7583eba",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_27736fae7b71"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 25336,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "a80fb053d4c9f6fb",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "all",
+        "value": "2"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "all",
+          "value": "1"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "all",
+          "value": "1"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "scope-0",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "293575437efceed1",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:03:50.788+00:00",
+      "cell": "293575437efceed1",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "daad23ed57fedac154474fee1c6c00395116175285215273285b51297561e946",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T13:04:18.005+00:00",
+      "cell": "293575437efceed1",
+      "elapsed_seconds": 27.149,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "9bef0d192131685e79dcce6e8d74648f3689db76c2a02d1f8a42da1bd47ac7d8",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "all",
+            "value": 1
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "37cbc6751f39337a27310fadfcc96aaa0861a7ea498012322dcdb14a5ef7c4d6",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_37c373f416b8"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 27148,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 1,
+      "cell": "293575437efceed1",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "all",
+        "value": "2"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "all",
+          "value": "1"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "all",
+          "value": "1"
+        },
+        "correct": false,
+        "valid": true
+      },
+      "item": "scope-0",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "9a2d33230263fc02",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:04:18.492+00:00",
+      "cell": "9a2d33230263fc02",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "3ecae4d6ee9b6edd39873b9a1c5bb8cb52f9a55e728d1cf6721029059d547c94",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T13:05:01.866+00:00",
+      "cell": "9a2d33230263fc02",
+      "elapsed_seconds": 43.283,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "f86ff760378e47f9ef082dbb9b60d8550889d20945e83eb41d87b27e82e77584",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 0.975
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "c80823524571d8abef5647267db50ede8b69b9f9baf0fd086a62e109ec4b2ffd",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_8e4ae6280900"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 43283,
+        "node": "node-b",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 1,
+      "cell": "9a2d33230263fc02",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "39/40"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "39/40"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "39/40"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "unit-0",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": "ollama:qwen3:4b-instruct",
+      "status": "done"
+    },
+    {
+      "cell": "50464477068f1083",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:05:03.364+00:00",
+      "cell": "50464477068f1083",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "a68026bf874e1ef33f83d092118ba4ee2bd9cc326faeb2231a2b0cebee6927b1",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T13:05:42.916+00:00",
+      "cell": "50464477068f1083",
+      "elapsed_seconds": 38.808,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "6365f7a5544f71d17b3e959716bfadd7ab76f399680158c018af8e9e750dddeb",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 1.9
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "ea23b2ba15560ce16ea7ced93682da6db23bb5a8352ff6710096c23df2a00484",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_6b52a93ecd93"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 38807,
+        "node": "node-d",
+        "ok": true
+      }
+    },
+    {
+      "arm": "checked_escalation",
+      "calls": 1,
+      "cell": "50464477068f1083",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "19/10"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "19/10"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "19/10"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "unit-1",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": "ollama:qwen3:4b-instruct",
+      "status": "done"
+    },
+    {
+      "cell": "5db228ef367644be",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:05:45.167+00:00",
+      "cell": "5db228ef367644be",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "83ea02f92d4dfa5da84fdc21e27abc692bcc90e46526564f577e4a4602a60353",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T13:06:22.662+00:00",
+      "cell": "5db228ef367644be",
+      "elapsed_seconds": 36.984,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "b01333861b72ac31ea822fe9c0673827ab36091f240361886bcd3949b8267efd",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "choice": "any",
+          "value": 3
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "8242403e1d8c3d61678a04e5b091fb3278b82e11fea37cf1ff161efa26877787",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_f4b0858174ad"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 36983,
+        "node": "node-f",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 1,
+      "cell": "5db228ef367644be",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "any",
+        "value": "3"
+      },
+      "family": "scope",
+      "final": {
+        "answer": {
+          "choice": "any",
+          "value": "3"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "any",
+          "value": "3"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "scope-1",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "a518605c35a68380",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:06:24.739+00:00",
+      "cell": "a518605c35a68380",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "4b60323af32763b4e99ac394e9c4e03949e95e76efe3c689564bdf8a4bc2c5f1",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "at_utc": "2026-10-03T13:06:46.119+00:00",
+      "cell": "a518605c35a68380",
+      "elapsed_seconds": 20.753,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "c5aa55c9b1ceda8680030f519b71f451564f401a18b9a55f5513b9f8fea54a2e",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "remaining",
+            "value": "130"
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "5d16eeb6aaf37f2bb013560ca073b216071149801cb7dc9fac7bb9ddd4efd189",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_7d6360b8fe90"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 20753,
+        "node": "node-i",
+        "ok": true
+      }
+    },
+    {
+      "arm": "natural",
+      "calls": 1,
+      "cell": "a518605c35a68380",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "remaining",
+        "value": "130"
+      },
+      "family": "basis",
+      "final": {
+        "answer": {
+          "choice": "remaining",
+          "value": "130"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "remaining",
+          "value": "130"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "basis-1",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    },
+    {
+      "cell": "0473aa3300787fa2",
+      "event": "cell_started"
+    },
+    {
+      "at_utc": "2026-10-03T13:06:47.693+00:00",
+      "cell": "0473aa3300787fa2",
+      "event": "call_started",
+      "number": 1,
+      "request_sha256": "f697b6df765cb5a71bad4d5e9443b02ad898eadf277c92ad82d5061b6b404a03",
+      "requested": {
+        "app": {
+          "effort": "",
+          "engine": "ollama",
+          "model": "qwen3:4b-instruct",
+          "node": "",
+          "spec": "ollama:qwen3:4b-instruct",
+          "weight": 1.0
+        },
+        "effort": "low",
+        "sample": 0,
+        "seed": 20261003,
+        "temperature": 0,
+        "tools": "none"
+      },
+      "schema_sha256": "1b725e16252d2183e6f003e8b2cc8886f665ac3b9b650d050c4a999ff58b0074"
+    },
+    {
+      "at_utc": "2026-10-03T13:07:19.029+00:00",
+      "cell": "0473aa3300787fa2",
+      "elapsed_seconds": 31.115,
+      "event": "call_finished",
+      "number": 1,
+      "raw_text_sha256": "6365f7a5544f71d17b3e959716bfadd7ab76f399680158c018af8e9e750dddeb",
+      "reply": {
+        "error": null,
+        "fatal": null,
+        "json": {
+          "answer": {
+            "choice": "seconds",
+            "value": 1.9
+          }
+        },
+        "meta": {
+          "determinism": {
+            "deterministic": true,
+            "model": "qwen3:4b-instruct",
+            "num_ctx": 6144,
+            "num_gpu": null,
+            "prompt_sha": "15a25aa2bbcfb9cc425cee96ade01817ed988faf4cdea949c2b5d3e899b2604c",
+            "sample": 0,
+            "seed": 20261003,
+            "temperature": 0
+          },
+          "run": "r_bb43353712bd"
+        },
+        "model": "qwen3:4b-instruct",
+        "ms": 31114,
+        "node": "node-a",
+        "ok": true
+      }
+    },
+    {
+      "arm": "typed",
+      "calls": 1,
+      "cell": "0473aa3300787fa2",
+      "error": null,
+      "event": "cell_finished",
+      "expected": {
+        "choice": "seconds",
+        "value": "19/10"
+      },
+      "family": "unit",
+      "final": {
+        "answer": {
+          "choice": "seconds",
+          "value": "19/10"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "first_pass": {
+        "answer": {
+          "choice": "seconds",
+          "value": "19/10"
+        },
+        "correct": true,
+        "valid": true
+      },
+      "item": "unit-1",
+      "model": "ollama:qwen3:4b-instruct",
+      "repaired_or_escalated": false,
+      "selected": null,
+      "status": "done"
+    }
+  ],
+  "format": "symblic-contract-diagnostic-v1",
+  "measurement_limits": [
+    "Synthetic held-out instances of exposed templates, not a novel-domain holdout.",
+    "Checked arm includes a reference contract and conditional stronger fallback.",
+    "Equal call ceilings do not imply equal consumed calls or identical prompts.",
+    "No confidence or superiority claim from this small diagnostic.",
+    "Reply cap rejects received output; backend generation uses existing admitted limits.",
+    "A format error and a semantic error both count as unsuccessful end-to-end communication; the same strict scorer checks all arms.",
+    "Checked arm has an executable reference predicate plus conditional haiku fallback; this is a package intervention, not proof of intrinsic small-model reasoning gain.",
+    "Model names are backend-reported aliases; exact model weights/cloud revision are not pinned by the current admitted adapter.",
+    "Backend-reported deterministic sampling settings are logged, but do not establish cross-node or repeated-run model determinism.",
+    "No statistical superiority, causality, or independence inference is supported by six paired cases.",
+    "Comparative follow-up on the exact six already-exposed task instances from the llama1b diagnostic; not a new holdout.",
+    "Same seed, task instances, reference answers, prompts, and call ceilings as phase1; no response-driven prompt optimization.",
+    "Runner/applicator/effects source snapshot differs from phase1; source hashes identify both and no cross-version pooling is performed."
+  ],
+  "original_ledger_sha256": "5a37b069d1351803eb0e29ee5a970835fe8b70cf99bb36deebf8246318e8f0eb",
+  "phase": "qwen4b_comparative_same_cases",
+  "preregistration": {
+    "analysis": {
+      "denominator": "all_assigned_cells",
+      "independence": "not_established",
+      "paired_by": [
+        "model",
+        "item"
+      ],
+      "primary": "first_call_correct",
+      "repairs_and_fallback": "reported_separately",
+      "secondary": "final_accepted_correct"
+    },
+    "cells": [
+      {
+        "arm": "checked_escalation",
+        "family": "basis",
+        "id": "17554c0a655acac8",
+        "item": "basis-1",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "4df29b23fd1ac9f08e6a09b52a964a3ef3e2d4396f28cd6e8569e07d8911cba0",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A tank initially contains 170 litres. 40 litres are removed. The next instruction removes 25% of the remaining amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"remaining\" and answer.value = (170 - 40) else retry.\n",
+        "source_sha256": "7c1b750e9d743bf416106b4830b309751a4f2158d9511a04234fc5a568cbceab"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "basis",
+        "id": "ed13752b2d084644",
+        "item": "basis-0",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "020fcf796fc18859a34c3042e7261f66958dc44a83fc4e355dc4472384de7a1e",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A tank initially contains 80 litres. 10 litres are removed. The next instruction removes 25% of the initial amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"initial\" and answer.value = 80 else retry.\n",
+        "source_sha256": "d45e61fad123ae9d1eb9483168c0e642c017dd2c429960959f92f4f549e44017"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "scope",
+        "id": "f6144a75ef2665dd",
+        "item": "scope-0",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "5ff162827a8a5d48f5078c1f3a04570e5e1db52963945276275a30118dea6584",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"Teams have these reading lists: [[6, 4], [6, 7], [8, 6], [4, 5]]. Count teams for which every reading is strictly greater than 5. choice is all; value is the number of qualifying teams. Equality does not qualify. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"all\" and answer.value = len([r for r in [[6, 4], [6, 7], [8, 6], [4, 5]] if len([x for x in r if x > 5]) = len(r)]) else retry.\n",
+        "source_sha256": "2ef3f936cd9f9382fc72c5808370978fd66542adcedc8de46f1c861e0400c48a"
+      },
+      {
+        "arm": "natural",
+        "family": "unit",
+        "id": "7efcd171c2db6d75",
+        "item": "unit-1",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "315b6579e4776c9d9adf94447c4747276ce0e8c497000b5e8cc1f6851ee25f71",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "typed",
+        "family": "basis",
+        "id": "af6445077847e208",
+        "item": "basis-1",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "4df29b23fd1ac9f08e6a09b52a964a3ef3e2d4396f28cd6e8569e07d8911cba0",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A tank initially contains 170 litres. 40 litres are removed. The next instruction removes 25% of the remaining amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "93a1d83f1ea8563690edc28bd25d1de94f2037a587b197c2ab8df2797499d7c0"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "scope",
+        "id": "1ce4e90f0fd3a7ab",
+        "item": "scope-1",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "5d668d0f26a4fb3839a4a19ad77f563baca02821a316265dd91ae34095845212",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"Teams have these reading lists: [[5, 3], [3, 1], [1, 2], [3, 4]]. Count teams for which at least one reading is strictly greater than 2. choice is any; value is the number of qualifying teams. Equality does not qualify. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"any\" and answer.value = len([r for r in [[5, 3], [3, 1], [1, 2], [3, 4]] if len([x for x in r if x > 2]) > 0]) else retry.\n",
+        "source_sha256": "9698ff70041e495cebe1c4fe58ea01130779f0ecb3203aac3ba484628100b409"
+      },
+      {
+        "arm": "natural",
+        "family": "basis",
+        "id": "68a1e3b32a21f87f",
+        "item": "basis-0",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "020fcf796fc18859a34c3042e7261f66958dc44a83fc4e355dc4472384de7a1e",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "natural",
+        "family": "unit",
+        "id": "140adbf97630a481",
+        "item": "unit-0",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "54ab303186ffc4517ade0add85e1afb7d91d9f16664ae1de95724339c0ebeaa7",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "typed",
+        "family": "scope",
+        "id": "814cdf6d332e3c6e",
+        "item": "scope-1",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "5d668d0f26a4fb3839a4a19ad77f563baca02821a316265dd91ae34095845212",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"Teams have these reading lists: [[5, 3], [3, 1], [1, 2], [3, 4]]. Count teams for which at least one reading is strictly greater than 2. choice is any; value is the number of qualifying teams. Equality does not qualify. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "26d676c8d6eb64d1bc0c017110a32ebd64a66615609e578f1b29e0fc5cfa03cf"
+      },
+      {
+        "arm": "typed",
+        "family": "unit",
+        "id": "4cbe9cfa12d7982d",
+        "item": "unit-0",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "54ab303186ffc4517ade0add85e1afb7d91d9f16664ae1de95724339c0ebeaa7",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A device emits 3 pulses, each lasting 325 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "052e75c3afacdb7d31aad215e5b0abf6e02101060f53364c4d2f041b5784a84a"
+      },
+      {
+        "arm": "typed",
+        "family": "basis",
+        "id": "99bd6da2bf80bc90",
+        "item": "basis-0",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "020fcf796fc18859a34c3042e7261f66958dc44a83fc4e355dc4472384de7a1e",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A tank initially contains 80 litres. 10 litres are removed. The next instruction removes 25% of the initial amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "a686abc67793d97c1c5e82a7a1f531bc7c4185321872eb222e609213fc76cb2b"
+      },
+      {
+        "arm": "typed",
+        "family": "scope",
+        "id": "a80fb053d4c9f6fb",
+        "item": "scope-0",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "5ff162827a8a5d48f5078c1f3a04570e5e1db52963945276275a30118dea6584",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"Teams have these reading lists: [[6, 4], [6, 7], [8, 6], [4, 5]]. Count teams for which every reading is strictly greater than 5. choice is all; value is the number of qualifying teams. Equality does not qualify. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "6f62ea5e16f2e29009d04f4055e4b10ea69e18d9cf009b9f834202591af7ec19"
+      },
+      {
+        "arm": "natural",
+        "family": "scope",
+        "id": "293575437efceed1",
+        "item": "scope-0",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "5ff162827a8a5d48f5078c1f3a04570e5e1db52963945276275a30118dea6584",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "unit",
+        "id": "9a2d33230263fc02",
+        "item": "unit-0",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "54ab303186ffc4517ade0add85e1afb7d91d9f16664ae1de95724339c0ebeaa7",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A device emits 3 pulses, each lasting 325 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"seconds\" and answer.value * 1000 = 325 * 3 else retry.\n",
+        "source_sha256": "55b8376f3741a4daf0506d31612746d951dbe2320a79ebfafd811e9d40377ace"
+      },
+      {
+        "arm": "checked_escalation",
+        "family": "unit",
+        "id": "50464477068f1083",
+        "item": "unit-1",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "315b6579e4776c9d9adf94447c4747276ce0e8c497000b5e8cc1f6851ee25f71",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A device emits 4 pulses, each lasting 475 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\", \"claude:haiku\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=0, route=escalate.\nensure answer.choice = \"seconds\" and answer.value * 1000 = 475 * 4 else retry.\n",
+        "source_sha256": "3f280086575a3f12f981af93f0938ecb5abbf0e6dea80c302c1c751e8e6e8738"
+      },
+      {
+        "arm": "natural",
+        "family": "scope",
+        "id": "5db228ef367644be",
+        "item": "scope-1",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "5d668d0f26a4fb3839a4a19ad77f563baca02821a316265dd91ae34095845212",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "natural",
+        "family": "basis",
+        "id": "a518605c35a68380",
+        "item": "basis-1",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "4df29b23fd1ac9f08e6a09b52a964a3ef3e2d4396f28cd6e8569e07d8911cba0",
+        "source": "",
+        "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "arm": "typed",
+        "family": "unit",
+        "id": "0473aa3300787fa2",
+        "item": "unit-1",
+        "model": "ollama:qwen3:4b-instruct",
+        "question_sha256": "315b6579e4776c9d9adf94447c4747276ce0e8c497000b5e8cc1f6851ee25f71",
+        "source": "ask answer: Record {choice: one of {initial, remaining, seconds, all, any}, value: Number} \"A device emits 4 pulses, each lasting 475 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds. Return only JSON with exactly choice and value, optionally inside an answer object. No explanation. Write exact numbers or fractions as numeric literals or strings. Keep the reply under 180 characters.\" by [\"ollama:qwen3:4b-instruct\"] with effort=low, context=none, tools=none, temperature=0, seed=20261003, retries=1.\n",
+        "source_sha256": "f81b6069fe1153e197bc0d924b0e741c5598c7e00472f14d9fd559590ff37a42"
+      }
+    ],
+    "count": 6,
+    "fallback": "claude:haiku",
+    "files": {
+      "tools/scripts/symblic_contract_pilot.py": "95108cd8bbd303ce3df34f10ab4cd63855bd929c902ba5d2b6e3d83acdbe5264",
+      "symblic/kernel/language.py": "dedc5dc06f064c1b8dd929525bcb64b9c7ab90b2d9666479d273f012121a4b71",
+      "symblic/providers/applicators.py": "ee3834f996fc7471dfc7d7924e85c598cc000beec366c61b85b9fce9bf7e7d28",
+      "symblic/kernel/effects.py": "a5c0f35eaa647a96c07173c6357d33a251a8041ac3ce4cfd150c0b880980afe7",
+      "symblic/kernel/evidence.py": "915f9a50c0e534dfb3d646b092b590766d8f4d45c4f3e9b7207b4b17e75803f3",
+      "symblic/adapters/geometry.py": "ab7b7d40ed7d85a49e4512e3f05efdbea7dcbab267fe7e513126ab4d0a4388cc",
+      "symblic/lang/abstraction.py": "5b471cf6d3468b61b3ec81fd558f428c3b3b08811830ec64262671dd3f766d38",
+      "symblic/adapters/render.py": "06c8c0aea966d95067debe1eb9684f34514473fb8c4e59f3481f782921d17dd1",
+      "symblic/kernel/run.py": "3d18287c4f94973ee261c47b9df7afd10300f6570feab2fcbf37bd949da2c906"
+    },
+    "items": [
+      {
+        "expected": {
+          "choice": "any",
+          "value": "3"
+        },
+        "family": "scope",
+        "id": "scope-1",
+        "parameters": {
+          "choice": "any",
+          "rows": [
+            [
+              5,
+              3
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "threshold": 2
+        },
+        "predicate": "answer.choice = \"any\" and answer.value = len([r for r in [[5, 3], [3, 1], [1, 2], [3, 4]] if len([x for x in r if x > 2]) > 0])",
+        "question": "Teams have these reading lists: [[5, 3], [3, 1], [1, 2], [3, 4]]. Count teams for which at least one reading is strictly greater than 2. choice is any; value is the number of qualifying teams. Equality does not qualify."
+      },
+      {
+        "expected": {
+          "choice": "seconds",
+          "value": "19/10"
+        },
+        "family": "unit",
+        "id": "unit-1",
+        "parameters": {
+          "count": 4,
+          "divisor": 1000,
+          "duration": 475
+        },
+        "predicate": "answer.choice = \"seconds\" and answer.value * 1000 = 475 * 4",
+        "question": "A device emits 4 pulses, each lasting 475 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds."
+      },
+      {
+        "expected": {
+          "choice": "all",
+          "value": "2"
+        },
+        "family": "scope",
+        "id": "scope-0",
+        "parameters": {
+          "choice": "all",
+          "rows": [
+            [
+              6,
+              4
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              6
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "threshold": 5
+        },
+        "predicate": "answer.choice = \"all\" and answer.value = len([r for r in [[6, 4], [6, 7], [8, 6], [4, 5]] if len([x for x in r if x > 5]) = len(r)])",
+        "question": "Teams have these reading lists: [[6, 4], [6, 7], [8, 6], [4, 5]]. Count teams for which every reading is strictly greater than 5. choice is all; value is the number of qualifying teams. Equality does not qualify."
+      },
+      {
+        "expected": {
+          "choice": "seconds",
+          "value": "39/40"
+        },
+        "family": "unit",
+        "id": "unit-0",
+        "parameters": {
+          "count": 3,
+          "divisor": 1000,
+          "duration": 325
+        },
+        "predicate": "answer.choice = \"seconds\" and answer.value * 1000 = 325 * 3",
+        "question": "A device emits 3 pulses, each lasting 325 milliseconds. Report the total ON time, excluding gaps, in seconds. choice is seconds and value is the exact total. One second is 1000 milliseconds."
+      },
+      {
+        "expected": {
+          "choice": "initial",
+          "value": "80"
+        },
+        "family": "basis",
+        "id": "basis-0",
+        "parameters": {
+          "choice": "initial",
+          "initial": 80,
+          "removed": 10
+        },
+        "predicate": "answer.choice = \"initial\" and answer.value = 80",
+        "question": "A tank initially contains 80 litres. 10 litres are removed. The next instruction removes 25% of the initial amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed."
+      },
+      {
+        "expected": {
+          "choice": "remaining",
+          "value": "130"
+        },
+        "family": "basis",
+        "id": "basis-1",
+        "parameters": {
+          "choice": "remaining",
+          "initial": 170,
+          "removed": 40
+        },
+        "predicate": "answer.choice = \"remaining\" and answer.value = (170 - 40)",
+        "question": "A tank initially contains 170 litres. 40 litres are removed. The next instruction removes 25% of the remaining amount. Identify the percentage basis: choice is initial or remaining; value is the litres in that basis BEFORE applying 25%, not the amount removed."
+      }
+    ],
+    "kernel": {
+      "canon": 3,
+      "geometry": 2,
+      "id": "5c633d7aa8a5f0fb",
+      "lang": "2.1",
+      "max_digits": 4000,
+      "python": "3.12.3",
+      "unicode": "15.0.0"
+    },
+    "limits": [
+      "Synthetic held-out instances of exposed templates, not a novel-domain holdout.",
+      "Checked arm includes a reference contract and conditional stronger fallback.",
+      "Equal call ceilings do not imply equal consumed calls or identical prompts.",
+      "No confidence or superiority claim from this small diagnostic.",
+      "Reply cap rejects received output; backend generation uses existing admitted limits."
+    ],
+    "max_calls_per_cell": 2,
+    "max_prompt_chars": 8000,
+    "max_reply_chars": 8192,
+    "max_seconds": 1800,
+    "max_total_calls": 36,
+    "models": [
+      "ollama:qwen3:4b-instruct"
+    ],
+    "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a",
+    "purpose": "diagnostic_only_no_general_gain_claim",
+    "seed": 20261003,
+    "source_archive": "source_snapshot",
+    "version": 1
+  },
+  "summary": {
+    "arms": {
+      "checked_escalation": {
+        "actual_placements": [
+          {
+            "calls": 1,
+            "model": "haiku",
+            "node": "node-a"
+          },
+          {
+            "calls": 2,
+            "model": "qwen3:4b-instruct",
+            "node": "node-b"
+          },
+          {
+            "calls": 1,
+            "model": "haiku",
+            "node": "node-d"
+          },
+          {
+            "calls": 1,
+            "model": "qwen3:4b-instruct",
+            "node": "node-d"
+          },
+          {
+            "calls": 2,
+            "model": "qwen3:4b-instruct",
+            "node": "node-f"
+          },
+          {
+            "calls": 1,
+            "model": "qwen3:4b-instruct",
+            "node": "node-i"
+          }
+        ],
+        "assigned": 6,
+        "call_elapsed_seconds": 245.141,
+        "call_finished_at_utc": "2026-10-03T13:05:42.916+00:00",
+        "call_started_at_utc": "2026-10-03T12:56:54.839+00:00",
+        "calls": 8,
+        "false_acceptance": {
+          "assigned": 6,
+          "count": 0
+        },
+        "final_correct": 6,
+        "finished": 6,
+        "first_pass_correct": 4,
+        "status": {
+          "done": 6
+        }
+      },
+      "natural": {
+        "actual_placements": [
+          {
+            "calls": 2,
+            "model": "qwen3:4b-instruct",
+            "node": "node-a"
+          },
+          {
+            "calls": 1,
+            "model": "qwen3:4b-instruct",
+            "node": "node-b"
+          },
+          {
+            "calls": 1,
+            "model": "qwen3:4b-instruct",
+            "node": "node-f"
+          },
+          {
+            "calls": 2,
+            "model": "qwen3:4b-instruct",
+            "node": "node-i"
+          }
+        ],
+        "assigned": 6,
+        "call_elapsed_seconds": 160.261,
+        "call_finished_at_utc": "2026-10-03T13:06:46.119+00:00",
+        "call_started_at_utc": "2026-10-03T12:59:01.018+00:00",
+        "calls": 6,
+        "false_acceptance": {
+          "assigned": 6,
+          "count": 2
+        },
+        "final_correct": 4,
+        "finished": 6,
+        "first_pass_correct": 4,
+        "status": {
+          "done": 6
+        }
+      },
+      "typed": {
+        "actual_placements": [
+          {
+            "calls": 1,
+            "model": "qwen3:4b-instruct",
+            "node": "node-a"
+          },
+          {
+            "calls": 1,
+            "model": "qwen3:4b-instruct",
+            "node": "node-b"
+          },
+          {
+            "calls": 2,
+            "model": "qwen3:4b-instruct",
+            "node": "node-d"
+          },
+          {
+            "calls": 1,
+            "model": "qwen3:4b-instruct",
+            "node": "node-f"
+          },
+          {
+            "calls": 1,
+            "model": "qwen3:4b-instruct",
+            "node": "node-i"
+          }
+        ],
+        "assigned": 6,
+        "call_elapsed_seconds": 203.967,
+        "call_finished_at_utc": "2026-10-03T13:07:19.029+00:00",
+        "call_started_at_utc": "2026-10-03T12:59:35.805+00:00",
+        "calls": 6,
+        "false_acceptance": {
+          "assigned": 6,
+          "count": 2
+        },
+        "final_correct": 4,
+        "finished": 6,
+        "first_pass_correct": 4,
+        "status": {
+          "done": 6
+        }
+      }
+    },
+    "assigned": 18,
+    "calls": 20,
+    "finished": 18,
+    "limits": [
+      "Synthetic held-out instances of exposed templates, not a novel-domain holdout.",
+      "Checked arm includes a reference contract and conditional stronger fallback.",
+      "Equal call ceilings do not imply equal consumed calls or identical prompts.",
+      "No confidence or superiority claim from this small diagnostic.",
+      "Reply cap rejects received output; backend generation uses existing admitted limits."
+    ],
+    "plan_sha256": "4917a74792a36924fc51e3f56f843c4565576e079c94d10f7b8c81415713689a",
+    "purpose": "diagnostic_only_no_general_gain_claim",
+    "unknown_after_interruption": []
+  },
+  "verification": {
+    "completed_calls": 20,
+    "network": "only existing admitted Applicators/the fleet runner worker node paths",
+    "per_cell_max_calls": 2,
+    "process_exit_code": 0,
+    "source_archive": "Exact imported source bytes archived before calls; all per-file SHA256 values verified against preregistration.",
+    "source_archive_hashes": {
+      "tools/scripts/symblic_contract_pilot.py": "95108cd8bbd303ce3df34f10ab4cd63855bd929c902ba5d2b6e3d83acdbe5264",
+      "symblic/kernel/language.py": "dedc5dc06f064c1b8dd929525bcb64b9c7ab90b2d9666479d273f012121a4b71",
+      "symblic/providers/applicators.py": "ee3834f996fc7471dfc7d7924e85c598cc000beec366c61b85b9fce9bf7e7d28",
+      "symblic/kernel/effects.py": "a5c0f35eaa647a96c07173c6357d33a251a8041ac3ce4cfd150c0b880980afe7",
+      "symblic/kernel/evidence.py": "915f9a50c0e534dfb3d646b092b590766d8f4d45c4f3e9b7207b4b17e75803f3",
+      "symblic/adapters/geometry.py": "ab7b7d40ed7d85a49e4512e3f05efdbea7dcbab267fe7e513126ab4d0a4388cc",
+      "symblic/lang/abstraction.py": "5b471cf6d3468b61b3ec81fd558f428c3b3b08811830ec64262671dd3f766d38",
+      "symblic/adapters/render.py": "06c8c0aea966d95067debe1eb9684f34514473fb8c4e59f3481f782921d17dd1",
+      "symblic/kernel/run.py": "3d18287c4f94973ee261c47b9df7afd10300f6570feab2fcbf37bd949da2c906"
+    },
+    "source_import_pinning": "files hashed before/after eager Symblic/applicator imports and compared before execution; no reload",
+    "total_cap": 36,
+    "unit_result": "success",
+    "unknown_calls": 0
+  },
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

@@ -1,0 +1,41 @@
+---
+effort: high
+---
+# Preparing a ceramic slurry
+
+A slurry recipe is written the way lab protocols often are. Its percentages are defined below, the
+reader only reads the numbers off the recipe, and the kernel works out the masses, so any group of
+readers weighs the same amounts.
+
+## Definitions
+
+- **slurry percentage**: the mass of alumina as a percentage of the mass of the whole slurry (w/w)
+- **dispersant percentage**: the mass of dispersant as a percentage of the mass of dry alumina (dry-weight basis), not of the whole slurry
+
+## The recipe
+
+```symblic
+given recipe: Text = """Prepare 200 g of a 40% alumina slurry in deionised water with 1% dispersant."""
+define Recipe as Record {total_g: Number, slurry_pct: Number, dispersant_pct: Number}
+```
+
+## Reading the recipe
+
+Read the three numbers exactly as the recipe states them: the total mass in grams, the slurry
+percentage and the dispersant percentage. Do not convert or compute anything.
+
+```symblic
+ask r: Recipe "Read the total mass, the slurry percentage and the dispersant percentage from the recipe." from recipe
+```
+
+## Weighing
+
+The kernel computes the masses from the definitions: alumina is the slurry percentage of the total;
+dispersant is the dispersant percentage of the alumina; water is the rest.
+
+```symblic
+let alumina_g = r.total_g * r.slurry_pct / 100.
+let dispersant_g = alumina_g * r.dispersant_pct / 100.
+let water_g = r.total_g - alumina_g - dispersant_g.
+show {alumina_g: alumina_g, dispersant_g: dispersant_g, water_g: water_g}.
+```

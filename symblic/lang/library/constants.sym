@@ -1,0 +1,38 @@
+program Constants.
+note The SI defining constants (exact by definition since 20 May 2019; BIPM, The International System of
+note Units, 9th edition, Table 1) and constants derived from them exactly. Values are in SI units; the
+note kernel keeps them as exact rationals, so a product such as R = N_A k is exact too.
+
+term "speed of light" means "exactly 299 792 458 metres per second (the SI defining constant c)".
+term "Avogadro constant" means "exactly 6.022 140 76 × 10^23 per mole (N_A)".
+term "Boltzmann constant" means "exactly 1.380 649 × 10^-23 joules per kelvin (k)".
+term "elementary charge" means "exactly 1.602 176 634 × 10^-19 coulombs (e)".
+term "Planck constant" means "exactly 6.626 070 15 × 10^-34 joule seconds (h)".
+term "standard gravity" means "exactly 9.806 65 metres per second squared (g_n)".
+term "standard atmosphere" means "exactly 101 325 pascals".
+
+note Defining constants: caesium hyperfine frequency (Hz), c (m/s), h (J s), e (C), k (J/K), N_A (1/mol), K_cd (lm/W).
+note Import it qualified (import constants as si.) and write si.planck, or import the names you use.
+let caesium_frequency = 9192631770.
+let speed_of_light = 299792458.
+let planck = 6.62607015e-34.
+let elementary_charge = 1.602176634e-19.
+let boltzmann = 1.380649e-23.
+let avogadro = 6.02214076e23.
+let luminous_efficacy = 683.
+note Exact derived constants: molar gas constant R = N_A k (J/(mol K)), Faraday constant F = N_A e (C/mol),
+note the reduced Planck constant needs pi (a 30-place decimal), so it is a function of the kernel's pi.
+let gas_constant = avogadro * boltzmann.
+let faraday = avogadro * elementary_charge.
+let standard_gravity = 9.80665.
+let standard_atmosphere = 101325.
+function reduced_planck() -> Number = planck / (2 * pi).
+note Convenience: photon energy E = h f (J) and wavelength from frequency (m).
+function photon_energy(f: Number) -> Number = planck * f.
+function wavelength(f: Number) -> Number = speed_of_light / f.
+
+test "derived constants are exact" do
+  assert gas_constant = 8.31446261815324.
+  assert faraday = 96485.3321233100184.
+  assert photon_energy(1) = planck.
+end.

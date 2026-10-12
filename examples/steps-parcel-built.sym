@@ -1,0 +1,69 @@
+use profile=verified, context=none, coercion=strict, determine=false, solve=false.
+function parcel_area(length: Int, width: Int) -> Int = (length * width).
+assert (parcel_area(2,3) = 6).
+assert (parcel_area(5,4) = 20).
+function parcel_volume(length: Int, width: Int, height: Int) -> Int = (parcel_area(length,width) * height).
+assert (parcel_volume(2,3,4) = 24).
+assert (parcel_volume(5,4,2) = 40).
+function dimensional_weight(volume: Int, divisor: Int) -> Int = (ceil(volume / divisor)).
+assert (dimensional_weight(11,5) = 3).
+assert (dimensional_weight(10,5) = 2).
+function billable_weight(actual: Int, dimensional: Int) -> Int = (max(actual,dimensional)).
+assert (billable_weight(3,8) = 8).
+assert (billable_weight(9,2) = 9).
+function billing_units(weight: Int, increment: Int) -> Int = (ceil(weight / increment)).
+assert (billing_units(11,5) = 3).
+assert (billing_units(10,5) = 2).
+function base_charge(units: Int, rate: Int) -> Int = (units * rate).
+assert (base_charge(3,7) = 21).
+assert (base_charge(2,0) = 0).
+function is_oversized(longest: Int, limit: Int) -> Bool = (longest > limit).
+assert (is_oversized(11,10) = true).
+assert (is_oversized(10,10) = false).
+assert (is_oversized(9,10) = false).
+function oversize_charge(oversized: Bool, fee: Int) -> Int = (if oversized then fee else 0).
+assert (oversize_charge(true,17) = 17).
+assert (oversize_charge(false,17) = 0).
+function parcel_subtotal(base: Int, extra: Int) -> Int = (base + extra).
+assert (parcel_subtotal(12,5) = 17).
+assert (parcel_subtotal(7,0) = 7).
+function parcel_discount(subtotal: Int, threshold: Int, promotion: Int) -> Int = (if subtotal >= threshold then min(promotion,subtotal) else 0).
+assert (parcel_discount(20,20,7) = 7).
+assert (parcel_discount(5,0,9) = 5).
+assert (parcel_discount(19,20,7) = 0).
+function taxable_charge(subtotal: Int, discount: Int) -> Int = (subtotal - discount).
+assert (taxable_charge(20,7) = 13).
+assert (taxable_charge(5,5) = 0).
+function sales_tax(amount: Int, numerator: Int, denominator: Int) -> Int = (ceil(amount * numerator / denominator)).
+assert (sales_tax(7,3,10) = 3).
+assert (sales_tax(10,3,10) = 3).
+assert (sales_tax(0,3,10) = 0).
+assert (sales_tax(74,7,100) = 6).
+function parcel_total(taxable: Int, tax: Int) -> Int = (taxable + tax).
+assert (parcel_total(13,3) = 16).
+assert (parcel_total(0,0) = 0).
+assert (parcel_total(taxable_charge(parcel_subtotal(base_charge(billing_units(billable_weight(13,dimensional_weight(parcel_volume(7,11,3),10)),5),17),oversize_charge(is_oversized(11,12),19)),parcel_discount(85,80,11)),sales_tax(74,7,100)) = 80).
+given parcels: List of Any length 1..100.
+for parcel in parcels do
+  assert parcel.length > 0 and parcel.width > 0 and parcel.height > 0.
+  assert parcel.actual > 0 and parcel.divisor > 0 and parcel.increment > 0.
+  assert parcel.rate >= 0 and parcel.limit >= 0 and parcel.fee >= 0.
+  assert parcel.threshold >= 0 and parcel.promotion >= 0 and parcel.numerator >= 0 and parcel.denominator > 0.
+  let area_value = parcel_area(parcel.length,parcel.width).
+  let volume_value = parcel_volume(parcel.length,parcel.width,parcel.height).
+  let dimensional_value = dimensional_weight(volume_value,parcel.divisor).
+  let weight_value = billable_weight(parcel.actual,dimensional_value).
+  let units_value = billing_units(weight_value,parcel.increment).
+  let base_value = base_charge(units_value,parcel.rate).
+  let oversized_value = is_oversized(max(parcel.length,parcel.width,parcel.height),parcel.limit).
+  let extra_value = oversize_charge(oversized_value,parcel.fee).
+  let subtotal_value = parcel_subtotal(base_value,extra_value).
+  let discount_value = parcel_discount(subtotal_value,parcel.threshold,parcel.promotion).
+  let taxable_value = taxable_charge(subtotal_value,discount_value).
+  let tax_value = sales_tax(taxable_value,parcel.numerator,parcel.denominator).
+  let total_value = parcel_total(taxable_value,tax_value).
+  let row = {id: parcel.id, area: area_value, volume: volume_value, dimensional: dimensional_value, billable: weight_value, units: units_value, base: base_value, oversized: oversized_value, extra: extra_value, subtotal: subtotal_value, discount: discount_value, taxable: taxable_value, tax: tax_value, total: total_value}.
+end.
+let result = {quotes: row, count: len(row), total: sum([item.total for item in row])}.
+show result as "parcel quotations".
+

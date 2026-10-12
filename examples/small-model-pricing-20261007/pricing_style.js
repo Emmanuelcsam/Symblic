@@ -1,0 +1,3 @@
+function pricingCSS() {
+  return "* { box-sizing: border-box; } body { margin: 0; background: #111; color: #f5f5f5; font-family: sans-serif; font-size: 16px; } main { padding: 16px; } .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; } .card { background: #222; padding: 24px; } button { min-height: 44px; font-size: 16px; color: #111; background: #eee; } button:focus-visible { outline: 3px solid #7dd3fc; outline-offset: 3px; }";
+}

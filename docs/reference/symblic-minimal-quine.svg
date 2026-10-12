@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <!-- Pure Matte Architectural Black -->
+  <rect width="800" height="800" rx="40" fill="#0A0B0E" />
+
+  <!-- The Symbolic Logic Mark: The Quine Bracket Monogram 'S' -->
+  <g transform="translate(400, 360)">
+    <!-- 
+      Constructed from pure formal logic bracket geometry.
+      Linewidth: 38px, exact 90-degree orthogonal precision.
+      Upper hook evokes logical negation (¬) and universal scope (∀).
+      Lower hook evokes implication (→) and semantic entailment (⊨).
+    -->
+    <path d="
+      M 110,-190 
+      H -70 
+      V -50 
+      H 70 
+      V 90 
+      H -110
+    " 
+    fill="none" 
+    stroke="#F5F6F8" 
+    stroke-width="38" 
+    stroke-linecap="square" 
+    stroke-linejoin="miter" />
+
+    <!-- The Statement Point: Every formal statement ends in a period (.) -->
+    <rect x="75" y="65" width="38" height="38" fill="#F5F6F8" />
+  </g>
+
+  <!-- Austere International Typographic Style Wordmark -->
+  <text x="400" y="630" 
+        font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Arial', sans-serif" 
+        font-size="42" 
+        font-weight="700" 
+        letter-spacing="16" 
+        fill="#F5F6F8" 
+        text-anchor="middle">
+    SYMBLIC
+  </text>
+
+  <text x="400" y="672" 
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Mono', 'Roboto Mono', Menlo, monospace" 
+        font-size="13" 
+        font-weight="400" 
+        letter-spacing="7" 
+        fill="#8A8F9A" 
+        text-anchor="middle">
+    FORMAL LOGIC RUNTIME
+  </text>
+</svg>

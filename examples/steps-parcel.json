@@ -1,0 +1,365 @@
+{
+  "final_checks": [
+    "parcel_total(taxable_charge(parcel_subtotal(base_charge(billing_units(billable_weight(13,dimensional_weight(parcel_volume(7,11,3),10)),5),17),oversize_charge(is_oversized(11,12),19)),parcel_discount(85,80,11)),sales_tax(74,7,100)) = 80"
+  ],
+  "program": "given parcels: List of Any length 1..100.\nfor parcel in parcels do\n  assert parcel.length > 0 and parcel.width > 0 and parcel.height > 0.\n  assert parcel.actual > 0 and parcel.divisor > 0 and parcel.increment > 0.\n  assert parcel.rate >= 0 and parcel.limit >= 0 and parcel.fee >= 0.\n  assert parcel.threshold >= 0 and parcel.promotion >= 0 and parcel.numerator >= 0 and parcel.denominator > 0.\n  let area_value = parcel_area(parcel.length,parcel.width).\n  let volume_value = parcel_volume(parcel.length,parcel.width,parcel.height).\n  let dimensional_value = dimensional_weight(volume_value,parcel.divisor).\n  let weight_value = billable_weight(parcel.actual,dimensional_value).\n  let units_value = billing_units(weight_value,parcel.increment).\n  let base_value = base_charge(units_value,parcel.rate).\n  let oversized_value = is_oversized(max(parcel.length,parcel.width,parcel.height),parcel.limit).\n  let extra_value = oversize_charge(oversized_value,parcel.fee).\n  let subtotal_value = parcel_subtotal(base_value,extra_value).\n  let discount_value = parcel_discount(subtotal_value,parcel.threshold,parcel.promotion).\n  let taxable_value = taxable_charge(subtotal_value,discount_value).\n  let tax_value = sales_tax(taxable_value,parcel.numerator,parcel.denominator).\n  let total_value = parcel_total(taxable_value,tax_value).\n  let row = {id: parcel.id, area: area_value, volume: volume_value, dimensional: dimensional_value, billable: weight_value, units: units_value, base: base_value, oversized: oversized_value, extra: extra_value, subtotal: subtotal_value, discount: discount_value, taxable: taxable_value, tax: tax_value, total: total_value}.\nend.\nlet result = {quotes: row, count: len(row), total: sum([item.total for item in row])}.\nshow result as \"parcel quotations\".\n",
+  "steps": [
+    {
+      "checks": [
+        "parcel_area(2,3) = 6",
+        "parcel_area(5,4) = 20"
+      ],
+      "choices": [
+        "length * width",
+        "length * length",
+        "max(length,width)",
+        "length + width"
+      ],
+      "instruction": "Multiply length by width to obtain rectangular base area in square centimetres; inputs are positive whole centimetres.",
+      "name": "parcel_area",
+      "parameters": [
+        {
+          "name": "length",
+          "type": "Int"
+        },
+        {
+          "name": "width",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "parcel_volume(2,3,4) = 24",
+        "parcel_volume(5,4,2) = 40"
+      ],
+      "choices": [
+        "parcel_area(length,width) + height",
+        "parcel_area(length,width) * width",
+        "parcel_area(length,width) * height",
+        "parcel_area(length,width) - height"
+      ],
+      "instruction": "Multiply the accepted parcel_area(length,width) by height to obtain volume in cubic centimetres; inputs are positive whole centimetres.",
+      "name": "parcel_volume",
+      "parameters": [
+        {
+          "name": "length",
+          "type": "Int"
+        },
+        {
+          "name": "width",
+          "type": "Int"
+        },
+        {
+          "name": "height",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": [
+        "parcel_area"
+      ]
+    },
+    {
+      "checks": [
+        "dimensional_weight(11,5) = 3",
+        "dimensional_weight(10,5) = 2"
+      ],
+      "choices": [
+        "volume * divisor",
+        "floor(volume / divisor)",
+        "ceil(volume / divisor)",
+        "ceil(divisor / volume)"
+      ],
+      "instruction": "Divide volume by divisor and round upward to a whole gram, including when the division leaves a remainder; volume and divisor are positive whole numbers and divisor is cubic centimetres per gram.",
+      "name": "dimensional_weight",
+      "parameters": [
+        {
+          "name": "volume",
+          "type": "Int"
+        },
+        {
+          "name": "divisor",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "billable_weight(3,8) = 8",
+        "billable_weight(9,2) = 9"
+      ],
+      "choices": [
+        "actual",
+        "min(actual,dimensional)",
+        "max(actual,dimensional)",
+        "actual + dimensional"
+      ],
+      "instruction": "Choose the greater of actual and dimensional weight, in grams; both are positive whole numbers.",
+      "name": "billable_weight",
+      "parameters": [
+        {
+          "name": "actual",
+          "type": "Int"
+        },
+        {
+          "name": "dimensional",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "billing_units(11,5) = 3",
+        "billing_units(10,5) = 2"
+      ],
+      "choices": [
+        "ceil(increment / weight)",
+        "weight * increment",
+        "floor(weight / increment)",
+        "ceil(weight / increment)"
+      ],
+      "instruction": "Divide billable weight by the positive gram increment and round upward to a whole number of billing units, including a partial final unit.",
+      "name": "billing_units",
+      "parameters": [
+        {
+          "name": "weight",
+          "type": "Int"
+        },
+        {
+          "name": "increment",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "base_charge(3,7) = 21",
+        "base_charge(2,0) = 0"
+      ],
+      "choices": [
+        "rate",
+        "units * rate",
+        "units - rate",
+        "units + rate"
+      ],
+      "instruction": "Multiply the whole number of billing units by the nonnegative price in cents per unit to obtain the base charge in cents.",
+      "name": "base_charge",
+      "parameters": [
+        {
+          "name": "units",
+          "type": "Int"
+        },
+        {
+          "name": "rate",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "is_oversized(11,10) = true",
+        "is_oversized(10,10) = false",
+        "is_oversized(9,10) = false"
+      ],
+      "choices": [
+        "longest = limit",
+        "longest < limit",
+        "longest >= limit",
+        "longest > limit"
+      ],
+      "instruction": "Return true only when longest, the longest edge in whole centimetres, is strictly greater than limit; equality is not oversized.",
+      "name": "is_oversized",
+      "parameters": [
+        {
+          "name": "longest",
+          "type": "Int"
+        },
+        {
+          "name": "limit",
+          "type": "Int"
+        }
+      ],
+      "returns": "Bool",
+      "uses": []
+    },
+    {
+      "checks": [
+        "oversize_charge(true,17) = 17",
+        "oversize_charge(false,17) = 0"
+      ],
+      "choices": [
+        "if oversized then 0 else fee",
+        "0",
+        "if oversized then fee else 0",
+        "fee"
+      ],
+      "instruction": "Return the nonnegative fee in cents if oversized is true; otherwise return zero cents.",
+      "name": "oversize_charge",
+      "parameters": [
+        {
+          "name": "oversized",
+          "type": "Bool"
+        },
+        {
+          "name": "fee",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "parcel_subtotal(12,5) = 17",
+        "parcel_subtotal(7,0) = 7"
+      ],
+      "choices": [
+        "max(base,extra)",
+        "base * extra",
+        "base + extra",
+        "base - extra"
+      ],
+      "instruction": "Add the accepted nonnegative base charge and oversize charge to obtain the subtotal in cents.",
+      "name": "parcel_subtotal",
+      "parameters": [
+        {
+          "name": "base",
+          "type": "Int"
+        },
+        {
+          "name": "extra",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "parcel_discount(20,20,7) = 7",
+        "parcel_discount(5,0,9) = 5",
+        "parcel_discount(19,20,7) = 0"
+      ],
+      "choices": [
+        "if subtotal >= threshold then min(promotion,subtotal) else 0",
+        "if subtotal > threshold then min(promotion,subtotal) else 0",
+        "if subtotal >= threshold then promotion else 0",
+        "if subtotal < threshold then min(promotion,subtotal) else 0"
+      ],
+      "instruction": "If subtotal is at least threshold, return the lesser of promotion and subtotal; otherwise return zero; all inputs are nonnegative cents, so the discount never exceeds subtotal.",
+      "name": "parcel_discount",
+      "parameters": [
+        {
+          "name": "subtotal",
+          "type": "Int"
+        },
+        {
+          "name": "threshold",
+          "type": "Int"
+        },
+        {
+          "name": "promotion",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "taxable_charge(20,7) = 13",
+        "taxable_charge(5,5) = 0"
+      ],
+      "choices": [
+        "subtotal",
+        "discount - subtotal",
+        "subtotal - discount",
+        "subtotal + discount"
+      ],
+      "instruction": "Subtract the accepted discount from subtotal to obtain the taxable charge in cents; inputs obey zero <= discount <= subtotal.",
+      "name": "taxable_charge",
+      "parameters": [
+        {
+          "name": "subtotal",
+          "type": "Int"
+        },
+        {
+          "name": "discount",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "sales_tax(7,3,10) = 3",
+        "sales_tax(10,3,10) = 3",
+        "sales_tax(0,3,10) = 0",
+        "sales_tax(74,7,100) = 6"
+      ],
+      "choices": [
+        "floor(amount * numerator / denominator)",
+        "ceil(amount / denominator) * numerator",
+        "ceil(amount * numerator / denominator)",
+        "ceil(amount * denominator / numerator)"
+      ],
+      "instruction": "Multiply the nonnegative taxable amount by numerator divided by the positive denominator and round upward to whole cents; numerator is nonnegative and the fraction is the tax rate.",
+      "name": "sales_tax",
+      "parameters": [
+        {
+          "name": "amount",
+          "type": "Int"
+        },
+        {
+          "name": "numerator",
+          "type": "Int"
+        },
+        {
+          "name": "denominator",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    },
+    {
+      "checks": [
+        "parcel_total(13,3) = 16",
+        "parcel_total(0,0) = 0"
+      ],
+      "choices": [
+        "taxable + tax",
+        "taxable * tax",
+        "max(taxable,tax)",
+        "taxable - tax"
+      ],
+      "instruction": "Add the accepted taxable charge and accepted tax to obtain the final charge in cents; both inputs are nonnegative.",
+      "name": "parcel_total",
+      "parameters": [
+        {
+          "name": "taxable",
+          "type": "Int"
+        },
+        {
+          "name": "tax",
+          "type": "Int"
+        }
+      ],
+      "returns": "Int",
+      "uses": []
+    }
+  ],
+  "title": "Parcel quotation from thirteen checked bricks — order 7"
+}

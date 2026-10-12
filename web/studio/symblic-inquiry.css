@@ -1,0 +1,12 @@
+.sy-inquiry {max-width:960px;margin:0 auto;min-width:0;}
+.sy-inquiry textarea {display:block;width:100%;box-sizing:border-box;font-size:16px;line-height:1.45;padding:12px;margin:8px 0 16px;border:1px solid var(--brd);border-radius:6px;background:var(--bg1);color:var(--tx1);font-family:ui-monospace,monospace;resize:vertical;}
+.sy-inquiry label {font-weight:600;}
+.sy-inquiry button {min-height:44px;white-space:normal;}
+.sy-inquiry-actions,.sy-inquiry-status {display:flex;gap:12px;flex-wrap:wrap;}
+.sy-inquiry-status > * {flex:1 1 260px;min-width:0;}
+.sy-inquiry pre {white-space:pre-wrap;overflow-wrap:anywhere;max-height:24rem;overflow:auto;}
+.sy-inquiry p,.sy-inquiry h2,.sy-inquiry h3,.sy-inquiry h4,.sy-inquiry strong {overflow-wrap:anywhere;}
+.sy-inquiry summary {padding:12px 0;cursor:pointer;overflow-wrap:anywhere;}
+.sy-inquiry .card {margin:12px 0;}
+.sy-inquiry-error {color:var(--err);overflow-wrap:anywhere;}
+@media(max-width:600px) {.sy-inquiry-actions {display:grid;grid-template-columns:1fr;}.sy-inquiry h2 {font-size:1.35rem;}}

@@ -1,0 +1,458 @@
+#!/usr/bin/env bash
+# symblic: the command-line entry point for the Symblic language and its tools.
+#
+#   tools/symblic check FILE.sym                  diagnostics, plan and determinism profile; no model is called
+#   tools/symblic preview FILE.sym [--by APP]     run the kernel up to the first `ask` and print exactly what it
+#                                                 would send to a model; no model is called
+#   tools/symblic run FILE.sym [--by APP] [--input name=value ...] [--dir FOLDER]
+#                                                 run a program; asks go to the applicator named by --by (a local
+#                                                 Ollama model or an agent command line you configured);
+#                                                 --dir keeps the record (calls.jsonl) so a rerun replays it
+#   tools/symblic replay FOLDER                   rerun a recorded run from its calls.jsonl; no model is called
+#   tools/symblic --help                          every command, including english, delegate, spec, mica, ...
+#
+# FILE may also be a .symd paper (docs/reference/LANGUAGE-3.md); `check` then reports the paper's own lines.
+#
+# How it works: this bash wrapper finds the repository root (the folder above tools/, also through a
+# symlink), picks a Python 3.12 interpreter (SYMBLIC_PYTHON, else ROOT/.venv/bin/python, else python3) and
+# runs the Python program at the bottom of this file inside symblic/kernel/process_limits.py, which first
+# sets an address-space and CPU-time ceiling for the whole command. The Python program is fixed text in this
+# file, never user input. Dependencies: the `symblic` package of this repository (standard library only for
+# `check`, `preview` and `replay`); `run` needs an applicator (symblic/providers/applicators.py).
+here="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
+py="${SYMBLIC_PYTHON:-$here/.venv/bin/python}"
+[ -x "$py" ] || py="$(command -v python3)"
+if [ -z "$py" ]; then
+    echo "symblic: no python3 found; set SYMBLIC_PYTHON to a Python 3.12 interpreter" >&2
+    exit 127
+fi
+if [ "${1:-}" = "experiments" ]; then
+    shift
+    exec "$py" -I "$here/symblic/kernel/process_limits.py" cli --module symblic.experiments.registry "$@"
+fi
+SYMBLIC_ROOT="$here" exec "$py" -I "$here/symblic/kernel/process_limits.py" cli --stdin-script "$@" <<'PY'
+import argparse, json, os, sys
+root = os.environ.get('SYMBLIC_ROOT') or os.getcwd()
+if root not in sys.path:
+    sys.path.insert(0, root)
+from symblic.kernel import language as S
+from symblic.kernel import run as SR
+
+HOST_ONLY = ('needs the original host system Symblic was built in (an HTTP server, a run store and an agent '
+             'runner); see integration/host/README.md')
+
+
+def host_only(command, error):
+    """A command whose code lives in integration/host/ and whose host is absent: say so, exit 2."""
+    print(f'symblic {command}: {HOST_ONLY} ({type(error).__name__}: {error})', file=sys.stderr)
+    sys.exit(2)
+
+
+# the abstraction layer's and the packages' commands live with their modules
+_cmd = sys.argv[1] if len(sys.argv) > 1 else ''
+if _cmd in ('tasks', 'task'):
+    # the task engine's command line (one fresh agent per line); a client of a host HTTP API
+    os.execv(sys.executable, [sys.executable, os.path.join(root, 'tools', 'symblic-task'), *sys.argv[2:]])
+if _cmd == 'lanes':
+    print('''Which way to hand work to models (docs/reference/START-HERE.md has the long version):
+
+  native     tools/symblic run FILE.sym        the kernel decides every formal step; a model answers only the
+                                               typed `ask` statements; `ensure` checks each answer
+  english    tools/symblic english run FILE    one plain-English statement per line, each one a fresh checked
+                                               model task; compiled to the native language first
+  delegate   tools/symblic delegate run TASK.json --dir FOLDER
+                                               one bounded unit with typed inputs and an acceptance check
+  spec       tools/symblic spec ...            a spec sheet split into small units that a light local model
+                                               writes one at a time, each checked by code
+  tasks      tools/symblic tasks ...           one fresh coding agent per line; needs the original host's task
+                                               API, so it does not run from this repository alone
+
+Statement rules for any lane: name every file by its exact path, say what must stay unchanged, give one
+action per statement, and put a check that code (not a model) can run after each one.''')
+    sys.exit(0)
+if _cmd in ('', '-h', '--help', 'help'):
+    # One place that names every command: the argparse parser below only knows the four native ones.
+    print('''usage: tools/symblic COMMAND ... (every command accepts --help; --agent-json gives one JSON document)
+
+  Native language (docs/reference/SPEC.md)
+    check FILE.sym                diagnostics, plan, determinism profile; no model
+    preview FILE.sym [--by APP]   the kernel up to the first ask and exactly what it would send; no model
+    run FILE.sym [--by APP] [--dir FOLDER] [--input name=value]   run; --dir keeps the record that replay reads
+    replay FOLDER                 rerun a recorded run from calls.jsonl; no model is asked
+    test | certify | lib | doc    the abstraction layer: tests, cohorts, standard library, module docs
+    paper check|compile|reproduce PAPER.symd
+    lock RUN_FOLDER | lock show|replay LOCK.json
+    grammar catalog|check         scoped EBNF and syntax/reference checks for authoring
+    constructor ...               read-only inspection of constructor run folders
+    experiments ...               finite, stateless experiments (symblic/experiments/)
+
+  Plain English, one fresh checked model task per statement (docs/reference/ENGLISH-STATEMENTS.md)
+    english check|compile|preview|run|resume|examples [FILE] [--by APP] [--dir FOLDER]
+
+  Hand a bounded unit to a small agent (docs/reference/AGENT-CARD.md)
+    delegate catalog [--template T] | delegate check TASK.json | delegate run TASK.json --dir FOLDER
+    graph catalog|example|compose     reusable typed groups of agents
+    spec ...                          spec sheets -> units -> local-model builds (docs/reference/SPEC-SHEETS.md)
+    mica capabilities|plan|validate|execute|status|resume|artifacts|calibration|benchmark|report
+                                      bounded contract assembly; JSON results (docs/reference/MICA.md)
+    inquiry ...                       pick the next evidence method for one claim
+    memory ...                        claim notebooks (needs the original host's run store)
+
+  Guide
+    lanes                         which way to hand work to models, with the statement rules
+
+  Needs the original host (kept for reference; see integration/host/README.md)
+    tasks workspace|lint|start|wait|next|resume|cancel|get|list   (= tools/symblic-task; lint runs locally)
+
+  Also: tools/symblic-workcard (bounded workcards), tools/symblic-context (source packs),
+  tools/symblic-distill (distillation jobs). --by names an applicator: ollama:MODEL[@HOST] for a local Ollama
+  model (SYMBLIC_OLLAMA_HOSTS), command:NAME for an agent command line you configure (SYMBLIC_COMMAND_NAME),
+  or fake for tests; see symblic/providers/README.md. `check`, `preview` and `replay` never call one.''')
+    sys.exit(0)
+if _cmd == 'mica':
+    from symblic.mica import cli as mica_cli
+    sys.exit(mica_cli.main(sys.argv[2:]))
+if _cmd == 'english':
+    from symblic.english import cli as english_cli
+    sys.exit(english_cli.main(sys.argv[2:]))
+if _cmd == 'inquiry':
+    from symblic.inquiry import selection as inquiry
+    sys.exit(inquiry.main(sys.argv[2:]))
+if _cmd in ('test', 'certify', 'lib', 'doc'):
+    from symblic.lang import abstraction as lang
+    sys.exit(lang.main(sys.argv[1:]))
+if _cmd == 'paper':
+    from symblic.authoring import paper
+    sys.exit(paper.main(sys.argv[2:]))
+if _cmd == 'lock':
+    from symblic.kernel import lockfile
+    rest = sys.argv[2:]
+    sys.exit(lockfile.main(rest if rest[:1] in (['show'], ['replay']) else ['lock'] + rest))
+if _cmd == 'constructor':
+    from symblic.constructor import inspect as constructor_inspect
+    sys.exit(constructor_inspect.main(sys.argv[2:]))
+if _cmd == 'spec':
+    from symblic.spec import build as spec_build
+    sys.exit(spec_build.main(sys.argv[2:]))
+if _cmd == 'grammar':
+    from symblic.authoring import helpers as authoring
+    sys.exit(authoring.main(sys.argv[2:]))
+if _cmd == 'graph':
+    from symblic.graph import compose as graph_compose
+    sys.exit(graph_compose.main(sys.argv[2:]))
+if _cmd == 'delegate':
+    from symblic.delegate import run as delegate_run
+    sys.exit(delegate_run.main(sys.argv[2:]))
+if _cmd == 'memory':
+    # The notebooks themselves are pure (symblic/memory/notebooks.py); this command keeps them in the
+    # original host's run store, so without that host it stops here with a clear message.
+    try:
+        from integration.host import symblic_memory_api as memory_api
+        sys.exit(memory_api.main(sys.argv[2:]))
+    except ImportError as error:
+        host_only('memory', error)
+
+p = argparse.ArgumentParser(prog='symblic', description='Symblic: formal statements any agent applies.')
+p.add_argument('cmd', choices=['check', 'preview', 'run', 'replay'])
+p.add_argument('path')
+p.add_argument('--by', default=None, help='default applicator, e.g. ollama:qwen3:4b-instruct or command:my-agent')
+p.add_argument('--input', action='append', default=[], help='name=value (JSON or text) for a given statement')
+p.add_argument('--dir', default='', help='keep the run record in this folder')
+p.add_argument('--json', action='store_true', help='print the report as JSON')
+p.add_argument('--agent-json', action='store_true', help='machine-readable diagnostics or result; no prose prefix')
+p.add_argument('--max-calls', type=int, default=2000, help='hard budget across votes, repairs and escalation')
+p.add_argument('--certificate', help='version-pinned test certificate JSON; checked escalation only')
+p.add_argument('--ollama-limits', metavar='JSON',
+               help='ceilings for local-model calls, e.g. \'{"num_predict": 2048, "timeout_seconds": 900}\' (also num_ctx, total_timeout_seconds); a looping small model otherwise runs to its 16k-token default')
+p.add_argument('--constructor', default=None, metavar='MODE',
+               help='run only: off (default), linear_diagnose, or linear; enabled modes require --dir and set determine=false / solve=off')
+p.add_argument('--constructor-attempts', metavar='N', help='total constructor attempts (default 16, max 64)')
+p.add_argument('--constructor-milliseconds', metavar='N', help='total constructor time allowance in ms (default 80000, max 320000)')
+p.add_argument('--constructor-attempt-ms', metavar='N', help='per-attempt time allowance in ms (default/max 5000)')
+p.add_argument('--constructor-resource-limit', metavar='N', help='configured Z3 work allocation (default 100000, max 1000000; not a measured global hard cap)')
+p.add_argument('--strict-model-pins', action='store_true', help='run only: require validated local model identity observations')
+a = p.parse_args()
+a.json = a.json or a.agent_json
+
+
+def cli_refusal(error):
+    refusal = {'status': 'failed', 'accepted': False,
+               'error': {'kind': getattr(error, 'kind', getattr(error, 'code', 'constructor')),
+                         'message': str(error)}}
+    if a.json:
+        print(json.dumps(refusal, ensure_ascii=False))
+    else:
+        print(refusal['error']['message'], file=sys.stderr)
+    sys.exit(1)
+
+
+def constructor_options():
+    values = {'attempts': a.constructor_attempts, 'milliseconds': a.constructor_milliseconds,
+              'attempt_ms': a.constructor_attempt_ms, 'resource_limit': a.constructor_resource_limit}
+    supplied = any(value is not None for value in values.values())
+    if a.constructor is None and not supplied:
+        return {}  # Preserve the old default options and optional-import behavior exactly.
+    if a.cmd != 'run':
+        raise S.SymblicError('constructor flags apply to run only; replay retains its recorded policy', kind='type')
+    if a.constructor not in ('off', 'linear_diagnose', 'linear'):
+        raise S.SymblicError('constructor limits require --constructor linear or linear_diagnose; mode must be off, linear_diagnose or linear', kind='type')
+    if a.constructor == 'off':
+        if supplied:
+            raise S.SymblicError('constructor limits require an enabled mode; --constructor off takes no limits', kind='type')
+        return {}  # Explicit off is byte-for-byte the original CLI policy.
+    if not a.dir:
+        raise S.SymblicError('enabled construction requires --dir FOLDER for its durable records', kind='type')
+    validate = getattr(SR, 'validate_constructor_options', None)
+    if not callable(validate):
+        raise S.SymblicError('Constructor policy needs the runtime update; no run was started.', kind='constructor')
+    options = {'constructor': a.constructor, 'determine': False, 'solve': False}
+    limits = validate(options)['limits']
+    for name, value in values.items():
+        if value is not None:
+            if not 1 <= len(value) <= 16 or any(ch < '0' or ch > '9' for ch in value):
+                raise S.SymblicError('constructor limits must be bounded positive decimal integers', kind='type')
+            limits[name] = int(value)
+    options['constructor_limits'] = limits
+    checked = validate(options)  # The runtime's own policy is authoritative, including cross-field bounds.
+    options['constructor_limits'] = checked['limits']
+    return options
+
+
+try:
+    constructor_opts = constructor_options()
+except S.SymblicError as error:
+    cli_refusal(error)
+
+if a.strict_model_pins:
+    if a.cmd != 'run':
+        p.error('--strict-model-pins applies to run only; replay retains its recorded policy')
+    identity_version = getattr(SR, 'MODEL_IDENTITY_VERSION', None)
+    if type(identity_version) is not int or identity_version != 1:
+        refusal = {'status': 'failed', 'accepted': False, 'error': {
+            'kind': 'model_identity', 'message': 'Strict model identity enforcement needs the runtime update; no model was called.'}}
+        if a.json:
+            print(json.dumps(refusal, ensure_ascii=False))
+        else:
+            print(refusal['error']['message'], file=sys.stderr)
+        sys.exit(1)
+
+
+def inputs():
+    out = {}
+    for kv in a.input:
+        k, _, v = kv.partition('=')
+        try:
+            out[k] = json.loads(v)
+        except ValueError:
+            out[k] = v
+    return out
+
+
+def constructor_preflight(folder, source, input_values, options):
+    """Read-only nondestructive resume checks, only for folders with constructor records."""
+    if not folder or not SR.constructor_records_gate(folder, mode=options.get('constructor', 'off')):
+        return False
+    from symblic.constructor import records as R
+    from symblic.kernel import evidence as E
+    import hashlib
+
+    def pairs(rows):
+        out = {}
+        for key, value in rows:
+            if key in out:
+                raise S.SymblicError('duplicate JSON key in constructor run metadata', kind='version')
+            out[key] = value
+        return out
+
+    def invalid_number(value):
+        raise S.SymblicError('nonfinite JSON number in constructor run metadata', kind='version')
+
+    def read_json(name, limit):
+        raw = R._regular_bytes(os.path.join(folder, name), limit)
+        if raw is None:
+            return None
+        return json.loads(raw.decode('utf-8'), object_pairs_hook=pairs, parse_constant=invalid_number)
+
+    def exact(value):
+        return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(',', ':'), allow_nan=False)
+
+    saved = R._regular_bytes(os.path.join(folder, 'program.sym'), S.MAX_SOURCE * 4)
+    meta = read_json('meta.json', 16 * 1024 * 1024)
+    if saved is None or saved.decode('utf-8') != source or type(meta) is not dict \
+            or 'inputs' not in meta or 'options' not in meta \
+            or exact(meta['inputs']) != exact(input_values) or exact(meta['options']) != exact(options):
+        raise S.SymblicError('constructor run source, inputs or options differ; use the exact original run command or replay the recorded folder', kind='version')
+    policy = SR.validate_constructor_options(options)
+    config = R.read_config(folder)
+    if config is None or policy['mode'] == 'off' or config['mode'] != policy['mode'] \
+            or config['limits'] != policy['limits']:
+        raise S.SymblicError('constructor configuration is missing or differs from the requested policy', kind='version')
+    kernel = S.kernel_id()
+    record = read_json(SR.KERNEL_RECORD, 65536)
+    if record is not None and (type(record) is not dict or type(record.get('version')) is not int \
+            or record['version'] != SR.KERNEL_RECORD_VERSION or record.get('id') != kernel['id'] \
+            or record.get('lang') != kernel['lang']):
+        raise S.SymblicError('constructor run kernel identity differs or is unreadable', kind='version')
+    journal = R.read_journal(folder)
+    if journal is not None:
+        R.bind_journal(R.validate_journal(journal), config,
+                       source_sha256=hashlib.sha256(source.encode('utf-8')).hexdigest(),
+                       input_sha256=E.digest(input_values), kernel_id=kernel['id'])
+    return True  # Do not rewrite even identical source/meta before the runtime's own continuation gates.
+
+
+def protect_english_run(folder):
+    """The native run command must not replace a retained English authoring record."""
+    if not folder:
+        return
+    found = os.path.lexists(os.path.join(folder, 'instructions.english'))
+    if not found:
+        # Read only bounded regular metadata. Preserve the existing ordinary-run tolerance of
+        # unrelated malformed metadata; a retained English declaration is enough to protect it.
+        try:
+            raw = SR._constructor_history_bytes(os.path.join(folder, 'meta.json'))
+            meta = SR._constructor_history_json(raw) if raw is not None else {}
+            found = meta.get('authoring') is not None
+        except (OSError, ValueError, RecursionError, UnicodeError):
+            pass
+    if found:
+        raise S.SymblicError('This folder retains English instructions; use english resume for its saved '
+                             'run, replay for recorded answers, or choose a new empty --dir.', kind='version')
+
+
+def show_report(rep):
+    if a.json:
+        print(json.dumps(rep, indent=1, ensure_ascii=False, default=str))
+        return
+    for o in rep['outputs']:
+        label = f' {o["label"]}' if o.get('label') else ''
+        print(f'{o["kind"]}{label} (line {o["line"]}): ' + (o.get('file') or o.get('text', '')) + f'  [{o["hash"]}]')
+    err = rep.get('error')
+    print(f'{rep["status"]}: fingerprint {rep["fingerprint"]} · {rep["asks"]} asks · {rep["calls"]} calls '
+          f'({rep["cached"]} replayed)' + (f' · line {err["line"]}: {err["message"]}' if err else ''))
+
+
+if a.cmd == 'replay':
+    folder = os.path.abspath(a.path)
+
+    class NoModels:
+        def call(self, req):
+            return {'ok': False, 'fatal': True, 'error': 'replay: this call is not in the record'}
+    meta = json.load(open(os.path.join(folder, 'meta.json'))) if os.path.exists(os.path.join(folder, 'meta.json')) else {}
+    source = open(os.path.join(folder, 'program.sym')).read()
+    if (isinstance(meta, dict) and meta.get('authoring') is not None) \
+            or os.path.lexists(os.path.join(folder, 'instructions.english')):
+        try:
+            from symblic.english.authoring import validate_saved
+            if not isinstance(meta, dict):
+                raise S.SymblicError('Saved English metadata is malformed; retain the folder for recovery.', kind='version')
+            validate_saved(folder, source, meta)
+        except (S.SymblicError, OSError, ValueError, UnicodeError, RecursionError, ImportError) as error:
+            cli_refusal(error)
+    if isinstance(meta, dict) and 'delegation' in meta:
+        from symblic.delegate import contracts as D
+        from symblic.delegate import run as DR
+        try:
+            # Verify the saved declaration before replay changes execution policy
+            # or Run can touch the durable record. Replay is no new authority.
+            DR.verify_declaration(meta['delegation'], source, meta.get('inputs'), meta.get('options'))
+        except (D.ContractError, S.SymblicError, OSError, ValueError) as error:
+            refusal = {'status': 'failed', 'accepted': False,
+                       'error': {'kind': getattr(error, 'code', getattr(error, 'kind', 'contract')),
+                                 'message': str(error)}}
+            if a.json:
+                print(json.dumps(refusal, ensure_ascii=False))
+            else:
+                print(refusal['error']['message'], file=sys.stderr)
+            sys.exit(1)
+    replay_opts = {**dict(meta.get('options') or {}), 'replay': True, 'side_effects': False}
+    rep = SR.Run(source, meta.get('inputs') or {}, NoModels(), replay_opts, folder=folder,
+                 log=lambda t: print(t, file=sys.stderr if a.json else sys.stdout, flush=True)).execute()
+    show_report(rep)
+    sys.exit(0 if rep['status'] == 'done' else 1)
+
+source = open(a.path, encoding='utf-8').read()
+if a.path.endswith('.symd'):
+    from symblic.authoring import paper
+    if a.cmd == 'check':
+        c = paper.check_paper(source)
+        if a.json:
+            print(json.dumps(c, ensure_ascii=False, default=str))
+            sys.exit(0 if c['ok'] else 1)
+        for e in c['errors']:
+            print(f'error paper line {e.get("line", 0)}: {e["message"]}')
+        for w in c['warnings']:
+            print(f'warning paper line {w.get("line", 0)}: {w["message"]}')
+        for r in c['plan']:
+            print(f'{r.get("line", 0):>4}  {"  " * r.get("depth", 0)}{r["label"]:<34} {r.get("class", "")}')
+        print(f'{c.get("title")}: {"ok" if c["ok"] else "errors"} · {len(c.get("terms") or [])} terms')
+        sys.exit(0 if c['ok'] else 1)
+    source = paper.compile_paper(source)['source']
+if a.cmd == 'check':
+    c = S.check(source)
+    if a.json:
+        print(json.dumps(c, ensure_ascii=False, default=str))
+        sys.exit(0 if c['ok'] else 1)
+    for e in c['errors']:
+        print(f'error line {e.get("line", 0)}: {e["message"]}')
+    for w in c['warnings']:
+        print(f'warning line {w.get("line", 0)}: {w["message"]}')
+    for r in c['plan']:
+        cls = r.get('class', '')
+        print(f'{r["line"]:>4}  {"  " * r.get("depth", 0)}{r["label"]:<28} {cls:<11} {r.get("type", "")}')
+    print(f'{c["name"]}: {"ok" if c["ok"] else "errors"} · profile {c["profile"]}')
+    sys.exit(0 if c['ok'] else 1)
+
+if a.cmd == 'preview':
+    # The preview runs in its own bounded child (symblic/kernel/process_limits.py `preview`).
+    from symblic.kernel import preview as PV
+    try:
+        out = PV.preview({'source': source, 'inputs': inputs(), 'by': a.by})
+    except PV.RequestError as error:
+        cli_refusal(error)
+    if a.json:
+        print(json.dumps(out, ensure_ascii=False, default=str))
+        sys.exit(1 if out.get('error') else 0)
+    for b in out.get('bindings') or []:
+        print(f'{b["name"]} : {b["type"]} = {b["value"]}  [{b["hash"]}]')
+    if out.get('next'):
+        n = out['next']
+        print(f'\n--- {n["app"]} would be sent, for {n["name"]} (line {n["line"]}) ---\n{n["prompt"]}')
+        print('schema: ' + json.dumps(n['schema']))
+    elif out.get('error'):
+        err = out['error']
+        print(f'line {err.get("line", 0)}: {err.get("message", err)}' if isinstance(err, dict) else str(err))
+    sys.exit(1 if out.get('error') else 0)
+
+from symblic.providers import applicators
+options = {'max_calls': a.max_calls, **constructor_opts}
+if a.strict_model_pins:
+    options['model_pins'] = 'strict'
+if a.by:
+    options['by'] = a.by
+if a.certificate:
+    with open(a.certificate, encoding='utf-8') as stream:
+        options['certificate'] = json.load(stream)
+if a.ollama_limits:
+    try:
+        options['ollama_limits'] = json.loads(a.ollama_limits)
+    except ValueError as exc:
+        sys.exit(f'--ollama-limits must be a JSON object: {exc}')
+folder = os.path.abspath(a.dir) if a.dir else None
+try:
+    protect_english_run(folder)
+    preserve_constructor_records = constructor_preflight(folder, source, inputs(), options)
+except (S.SymblicError, OSError, ValueError, UnicodeError, RecursionError, ImportError) as error:
+    cli_refusal(error)
+if folder and not preserve_constructor_records:
+    os.makedirs(folder, mode=0o700, exist_ok=True)
+    with open(os.path.join(folder, 'program.sym'), 'w', encoding='utf-8') as f:
+        f.write(source)
+    with open(os.path.join(folder, 'meta.json'), 'w', encoding='utf-8') as f:
+        json.dump({'inputs': inputs(), 'options': options}, f)
+apps = applicators.Applicators(owner_label='operator (tools/symblic)', run_id=os.path.basename(folder or 'cli'))
+rep = SR.Run(source, inputs(), apps, options, folder=folder,
+             log=lambda t: print(t, file=sys.stderr if a.json else sys.stdout, flush=True)).execute()
+show_report(rep)
+sys.exit(0 if rep['status'] == 'done' else 1)
+PY

@@ -1,0 +1,265 @@
+{
+  "family": "frontier_F4_expression_tokenizer_v1",
+  "hidden_tests": [
+    [
+      "tokenize(\" \\t\\r\\n \")",
+      "[]"
+    ],
+    [
+      "tokenize(\"x\")",
+      "[{\"type\":\"id\",\"value\":\"x\",\"pos\":0}]"
+    ],
+    [
+      "tokenize(\"  42  \")",
+      "[{\"type\":\"num\",\"value\":42,\"pos\":2}]"
+    ],
+    [
+      "tokenize(\"007+0.50\")",
+      "[{\"type\":\"num\",\"value\":7,\"pos\":0},{\"type\":\"op\",\"value\":\"+\",\"pos\":3},{\"type\":\"num\",\"value\":0.5,\"pos\":4}]"
+    ],
+    [
+      "tokenize(\"3x\")",
+      "[{\"type\":\"num\",\"value\":3,\"pos\":0},{\"type\":\"id\",\"value\":\"x\",\"pos\":1}]"
+    ],
+    [
+      "tokenize(\"x3\")",
+      "[{\"type\":\"id\",\"value\":\"x3\",\"pos\":0}]"
+    ],
+    [
+      "tokenize(\"_a_1^-2\")",
+      "[{\"type\":\"id\",\"value\":\"_a_1\",\"pos\":0},{\"type\":\"op\",\"value\":\"^\",\"pos\":4},{\"type\":\"op\",\"value\":\"-\",\"pos\":5},{\"type\":\"num\",\"value\":2,\"pos\":6}]"
+    ],
+    [
+      "tokenize(\"a+b-c*d/e^f\")",
+      "[{\"type\":\"id\",\"value\":\"a\",\"pos\":0},{\"type\":\"op\",\"value\":\"+\",\"pos\":1},{\"type\":\"id\",\"value\":\"b\",\"pos\":2},{\"type\":\"op\",\"value\":\"-\",\"pos\":3},{\"type\":\"id\",\"value\":\"c\",\"pos\":4},{\"type\":\"op\",\"value\":\"*\",\"pos\":5},{\"type\":\"id\",\"value\":\"d\",\"pos\":6},{\"type\":\"op\",\"value\":\"/\",\"pos\":7},{\"type\":\"id\",\"value\":\"e\",\"pos\":8},{\"type\":\"op\",\"value\":\"^\",\"pos\":9},{\"type\":\"id\",\"value\":\"f\",\"pos\":10}]"
+    ],
+    [
+      "tokenize(\"((1))\")",
+      "[{\"type\":\"op\",\"value\":\"(\",\"pos\":0},{\"type\":\"op\",\"value\":\"(\",\"pos\":1},{\"type\":\"num\",\"value\":1,\"pos\":2},{\"type\":\"op\",\"value\":\")\",\"pos\":3},{\"type\":\"op\",\"value\":\")\",\"pos\":4}]"
+    ],
+    [
+      "tokenize(\"1 2\")",
+      "[{\"type\":\"num\",\"value\":1,\"pos\":0},{\"type\":\"num\",\"value\":2,\"pos\":2}]"
+    ],
+    [
+      "tokenize(\"9007199254740991\")",
+      "[{\"type\":\"num\",\"value\":9007199254740991,\"pos\":0}]"
+    ],
+    [
+      "tokenize(\"0.1+0.2\")",
+      "[{\"type\":\"num\",\"value\":0.1,\"pos\":0},{\"type\":\"op\",\"value\":\"+\",\"pos\":3},{\"type\":\"num\",\"value\":0.2,\"pos\":4}]"
+    ],
+    [
+      "tokenize(\"a\\nb\")",
+      "[{\"type\":\"id\",\"value\":\"a\",\"pos\":0},{\"type\":\"id\",\"value\":\"b\",\"pos\":2}]"
+    ],
+    [
+      "tokenize(\"abc_DEF_123\")",
+      "[{\"type\":\"id\",\"value\":\"abc_DEF_123\",\"pos\":0}]"
+    ],
+    [
+      "tokenize(\"1e5\")",
+      "[{\"type\":\"num\",\"value\":1,\"pos\":0},{\"type\":\"id\",\"value\":\"e5\",\"pos\":1}]"
+    ],
+    [
+      "tokenize(\"ZZ9 _ 0.25\")",
+      "[{\"type\":\"id\",\"value\":\"ZZ9\",\"pos\":0},{\"type\":\"id\",\"value\":\"_\",\"pos\":4},{\"type\":\"num\",\"value\":0.25,\"pos\":6}]"
+    ],
+    [
+      "tokenize(\"(-x)\")",
+      "[{\"type\":\"op\",\"value\":\"(\",\"pos\":0},{\"type\":\"op\",\"value\":\"-\",\"pos\":1},{\"type\":\"id\",\"value\":\"x\",\"pos\":2},{\"type\":\"op\",\"value\":\")\",\"pos\":3}]"
+    ],
+    [
+      "tokenize(\"radius*radius*3.14159\")",
+      "[{\"type\":\"id\",\"value\":\"radius\",\"pos\":0},{\"type\":\"op\",\"value\":\"*\",\"pos\":6},{\"type\":\"id\",\"value\":\"radius\",\"pos\":7},{\"type\":\"op\",\"value\":\"*\",\"pos\":13},{\"type\":\"num\",\"value\":3.14159,\"pos\":14}]"
+    ],
+    [
+      "tokenize(\"\\t4.5\\t) y2\\n*\\t0.125\\t_t x\")",
+      "[{\"type\":\"num\",\"value\":4.5,\"pos\":1},{\"type\":\"op\",\"value\":\")\",\"pos\":5},{\"type\":\"id\",\"value\":\"y2\",\"pos\":7},{\"type\":\"op\",\"value\":\"*\",\"pos\":10},{\"type\":\"num\",\"value\":0.125,\"pos\":12},{\"type\":\"id\",\"value\":\"_t\",\"pos\":18},{\"type\":\"id\",\"value\":\"x\",\"pos\":21}]"
+    ],
+    [
+      "tokenize(\"  ^  4.5  abc\")",
+      "[{\"type\":\"op\",\"value\":\"^\",\"pos\":2},{\"type\":\"num\",\"value\":4.5,\"pos\":5},{\"type\":\"id\",\"value\":\"abc\",\"pos\":10}]"
+    ],
+    [
+      "tokenize(\"abc abc 0.125\\t^\\t23\\t-x\\t0.125\")",
+      "[{\"type\":\"id\",\"value\":\"abc\",\"pos\":0},{\"type\":\"id\",\"value\":\"abc\",\"pos\":4},{\"type\":\"num\",\"value\":0.125,\"pos\":8},{\"type\":\"op\",\"value\":\"^\",\"pos\":14},{\"type\":\"num\",\"value\":23,\"pos\":16},{\"type\":\"op\",\"value\":\"-\",\"pos\":19},{\"type\":\"id\",\"value\":\"x\",\"pos\":20},{\"type\":\"num\",\"value\":0.125,\"pos\":22}]"
+    ],
+    [
+      "tokenize(\" )\\t^\\t23\\n+ /(  / - 23\")",
+      "[{\"type\":\"op\",\"value\":\")\",\"pos\":1},{\"type\":\"op\",\"value\":\"^\",\"pos\":3},{\"type\":\"num\",\"value\":23,\"pos\":5},{\"type\":\"op\",\"value\":\"+\",\"pos\":8},{\"type\":\"op\",\"value\":\"/\",\"pos\":10},{\"type\":\"op\",\"value\":\"(\",\"pos\":11},{\"type\":\"op\",\"value\":\"/\",\"pos\":14},{\"type\":\"op\",\"value\":\"-\",\"pos\":16},{\"type\":\"num\",\"value\":23,\"pos\":18}]"
+    ],
+    [
+      "tokenize(\"\\n0.125 _t  x\\tx 23\")",
+      "[{\"type\":\"num\",\"value\":0.125,\"pos\":1},{\"type\":\"id\",\"value\":\"_t\",\"pos\":7},{\"type\":\"id\",\"value\":\"x\",\"pos\":11},{\"type\":\"id\",\"value\":\"x\",\"pos\":13},{\"type\":\"num\",\"value\":23,\"pos\":15}]"
+    ],
+    [
+      "tokenize(\"\\n-  x\\n(  x\\n23\")",
+      "[{\"type\":\"op\",\"value\":\"-\",\"pos\":1},{\"type\":\"id\",\"value\":\"x\",\"pos\":4},{\"type\":\"op\",\"value\":\"(\",\"pos\":6},{\"type\":\"id\",\"value\":\"x\",\"pos\":9},{\"type\":\"num\",\"value\":23,\"pos\":11}]"
+    ],
+    [
+      "tokenize(\"\\t_t x  _t-  x  _t\\n4.5 abc\")",
+      "[{\"type\":\"id\",\"value\":\"_t\",\"pos\":1},{\"type\":\"id\",\"value\":\"x\",\"pos\":4},{\"type\":\"id\",\"value\":\"_t\",\"pos\":7},{\"type\":\"op\",\"value\":\"-\",\"pos\":9},{\"type\":\"id\",\"value\":\"x\",\"pos\":12},{\"type\":\"id\",\"value\":\"_t\",\"pos\":15},{\"type\":\"num\",\"value\":4.5,\"pos\":18},{\"type\":\"id\",\"value\":\"abc\",\"pos\":22}]"
+    ],
+    [
+      "tokenize(\"\\ty2  *\")",
+      "[{\"type\":\"id\",\"value\":\"y2\",\"pos\":1},{\"type\":\"op\",\"value\":\"*\",\"pos\":5}]"
+    ],
+    [
+      "tokenize(\"y2 abc\\t*\\n)\\ny2(y2  )\")",
+      "[{\"type\":\"id\",\"value\":\"y2\",\"pos\":0},{\"type\":\"id\",\"value\":\"abc\",\"pos\":3},{\"type\":\"op\",\"value\":\"*\",\"pos\":7},{\"type\":\"op\",\"value\":\")\",\"pos\":9},{\"type\":\"id\",\"value\":\"y2\",\"pos\":11},{\"type\":\"op\",\"value\":\"(\",\"pos\":13},{\"type\":\"id\",\"value\":\"y2\",\"pos\":14},{\"type\":\"op\",\"value\":\")\",\"pos\":18}]"
+    ],
+    [
+      "tokenize(\"*  _t 23\")",
+      "[{\"type\":\"op\",\"value\":\"*\",\"pos\":0},{\"type\":\"id\",\"value\":\"_t\",\"pos\":3},{\"type\":\"num\",\"value\":23,\"pos\":6}]"
+    ],
+    [
+      "(()=>{try{tokenize(\"1.\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\".5\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"1.2.3\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"a = 1\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"$x\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"x,y\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"\\u00e9\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"\\u0663\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"2 % 3\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"a\\u00a0b\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"x;\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"\\\"s\\\"\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"a\\u000bb\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(\"1..2\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(42);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize(null);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize([\"1\"]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{tokenize();return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ]
+  ],
+  "id": "frontier-f4-expression-tokenizer-v1",
+  "request": {
+    "allowed_outputs": [
+      "result.js"
+    ],
+    "artifact_format": "javascript_script",
+    "assumptions": [],
+    "budget": {
+      "context_chars": 32768,
+      "max_calls": 8,
+      "max_candidates": 4,
+      "max_depth": 4,
+      "max_units": 64,
+      "max_workers": 3,
+      "retries": 2,
+      "wall_seconds": 300
+    },
+    "exports": [
+      {
+        "name": "tokenize",
+        "signature": "tokenize(source)"
+      }
+    ],
+    "language": "javascript",
+    "objective": "Build tokenize(source), the tokenizer of a small arithmetic expression language. Return plain JavaScript source defining tokenize as a top-level function.",
+    "requirements": [
+      {
+        "acceptance": "TESTED",
+        "id": "lexical",
+        "text": "tokenize(source) splits a string into tokens of a small expression language. A number is one or more ASCII digits, optionally followed by '.' and one or more ASCII digits (no sign, no exponent, at most one '.'); its value is the JavaScript number it spells. An identifier is an ASCII letter or '_' followed by ASCII letters, digits or '_'. An operator is one of + - * / ^ ( ). Space, tab, carriage return and line feed only separate tokens. Tokens may touch without whitespace, and the longest possible number or identifier is always taken."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "tokens",
+        "text": "tokenize returns an array of token objects {type, value, pos} in source order: type is \"num\", \"id\" or \"op\"; value is the number, the identifier text or the operator character; pos is the zero-based index of the token's first character in source. An empty or whitespace-only source gives []."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "lexErrors",
+        "text": "tokenize throws an Error when source is not a string or contains any other character, such as '.', ',', '=', '%', '$', a non-ASCII letter or digit, or other whitespace; a '.' is only valid between the digits of one number."
+      }
+    ],
+    "tests": [
+      {
+        "call": "tokenize(\"a+12.5*(b-3)\")",
+        "expected": "[{\"type\":\"id\",\"value\":\"a\",\"pos\":0},{\"type\":\"op\",\"value\":\"+\",\"pos\":1},{\"type\":\"num\",\"value\":12.5,\"pos\":2},{\"type\":\"op\",\"value\":\"*\",\"pos\":6},{\"type\":\"op\",\"value\":\"(\",\"pos\":7},{\"type\":\"id\",\"value\":\"b\",\"pos\":8},{\"type\":\"op\",\"value\":\"-\",\"pos\":9},{\"type\":\"num\",\"value\":3,\"pos\":10},{\"type\":\"op\",\"value\":\")\",\"pos\":11}]",
+        "requirement_ids": [
+          "lexical",
+          "tokens"
+        ]
+      },
+      {
+        "call": "tokenize(\"  x1 ^ 2\")",
+        "expected": "[{\"type\":\"id\",\"value\":\"x1\",\"pos\":2},{\"type\":\"op\",\"value\":\"^\",\"pos\":5},{\"type\":\"num\",\"value\":2,\"pos\":7}]",
+        "requirement_ids": [
+          "tokens"
+        ]
+      },
+      {
+        "call": "tokenize(\"\")",
+        "expected": "[]",
+        "requirement_ids": [
+          "tokens"
+        ]
+      },
+      {
+        "call": "(()=>{try{tokenize(\"2 = 2\");return false}catch(e){return e instanceof Error}})()",
+        "expected": "true",
+        "requirement_ids": [
+          "lexErrors"
+        ]
+      }
+    ],
+    "version": 1
+  },
+  "split": "dev"
+}

@@ -1,0 +1,239 @@
+{
+  "assignment": {
+    "attempt_timeout_seconds": 120,
+    "cache": false,
+    "conditions": [
+      "valid_only",
+      "obligation_enforced"
+    ],
+    "controller_seconds": 2400,
+    "fresh_context_each_statement": true,
+    "maximum_attempts_per_slot": 2,
+    "models": [
+      "llama3.2:1b",
+      "granite3.3:2b"
+    ],
+    "project_seconds": 1080,
+    "projects": 4,
+    "seed": 7,
+    "slots": 16,
+    "state": "Each arm advances only its own actually adopted prefix; unreached stages remain in denominators.",
+    "statement_seconds": 270
+  },
+  "audit": {
+    "independent_scorer_unchanged": true,
+    "original_scorer_labels": {
+      "data_kind": "unverified_event_records",
+      "status": "draft_offline_audit"
+    },
+    "scope": "Evidence bindings are independently checked in a separate artifact audit; historical scorer labels were retained."
+  },
+  "date_utc": "2026-10-05T14:59:00.381681+00:00",
+  "economics": {
+    "authoring_cost": null,
+    "complete_total_tokens": null,
+    "cost_per_completed_project": null,
+    "note": "13,459 input and 42 output tokens are observed subtotals from six calls. Three timeouts lack usage; schema counters are unavailable on all nine.",
+    "tokens": {
+      "input_tokens": {
+        "complete_total": null,
+        "missing_calls": 3,
+        "observed_calls": 6,
+        "observed_sum": 13459
+      },
+      "output_tokens": {
+        "complete_total": null,
+        "missing_calls": 3,
+        "observed_calls": 6,
+        "observed_sum": 42
+      },
+      "schema_tokens": {
+        "complete_total": null,
+        "missing_calls": 9,
+        "observed_calls": 0,
+        "observed_sum": 0
+      }
+    }
+  },
+  "evidence_sha256": {
+    "admission": "8e52d117e945e51a047eebad36b6eeaf9f85549f1b73d7c0fa115e467f31a686",
+    "candidate": "2053d5156afe88a49f1c89f1918ab6b0cf549f884762c70726fbb28730ff7da3",
+    "controller": "789bffe6777dd5a840d042bf3038a6d08d4532efc2326a167ecdb03992508ecd",
+    "freeze": "c68581b9387b9045dfc77717724195b58c38291021e693bc4b087cf55bc29b6a",
+    "independent_review": "7918e69d2d06c0dad82872685c1383955caaa7de2fd88dcbbd7a78deef4c604a",
+    "power_restoration": "9ae812bd58c22e87321063388c235047e267726877a32a59cd4d4a6c47561796",
+    "score": "7f946474fe29dac4c03c781cd8f95f9d6d2c78bc0aad2123c98565c2a1a49c5e",
+    "terminal_review": "269e0f988ab3711689aa6571c87d6c287e7fd9b0b780726c3f13590a901b9a63"
+  },
+  "experiment": "Paired obligation-enforcement feasibility with author-supplied four-step decomposition",
+  "identity": {
+    "matching_before_after_manifest_observations": 6,
+    "scope": "Server-manifest observations, not attested loaded weight bytes.",
+    "unavailable_failed_calls": 3
+  },
+  "interpretation": [
+    "The enforced condition rejected three native-valid but wrong-formula selections; valid-only adopted one such selection.",
+    "No assigned milestone or original goal completed. Timeouts are censored delivery outcomes, not independently observed incorrect answers.",
+    "All six delivered replies used the strict ordinal wire; the tested configuration failed semantic task completion.",
+    "This small feasibility trial does not establish a general quality gain, token saving, cross-model determinism, or causal superiority.",
+    "A target-first numbered card and focused context are separate improvements to test in a newly frozen experiment; this completed trial was not rerun or modified."
+  ],
+  "operations": {
+    "active_provider_rows": 0,
+    "assigned_nodes_loaded_models": 0,
+    "controller": "inactive/dead, success, empty cgroup",
+    "controller_elapsed_seconds": 493.612636117,
+    "fresh_exact_remote_unit_inactive": 9,
+    "is_active_return_code": 3,
+    "owned_power_lease_restored_nodes": 8,
+    "registered_done_exit0": 6,
+    "registered_failed_exit28": 3,
+    "reservations_preserved": true
+  },
+  "requests": {
+    "basis": "Exact native system/prompt/schema plus nine captured actual remote generation bodies, each bound to its saved plan.",
+    "characters_max": 7654,
+    "characters_min": 7330,
+    "effective_generation_options": {
+      "num_ctx": 16384,
+      "num_predict": 16384,
+      "num_thread": 2,
+      "seed": 7,
+      "temperature": 0
+    },
+    "later_repair_pairs": "Not claimed identical when previous outcomes/feedback differ.",
+    "master_settings_are_not_effective_settings": true,
+    "shared_initial_pairs_identical": 2,
+    "units": "System, prompt and JSON-serialized schema characters under the frozen adapter rule."
+  },
+  "results": {
+    "calls": 9,
+    "completed_projects": 0,
+    "conditions": {
+      "obligation_enforced": {
+        "adopted": 0,
+        "all_obligations_completed": 0,
+        "assigned_projects": 2,
+        "assigned_slots": 8,
+        "attempt_endpoints": {
+          "all_recorded_attempts_including_unreached_or_invalid_records": 4,
+          "exact_raw_wire_selections": 3,
+          "formula_matches": 0,
+          "independently_scored_attempts": 4,
+          "obligation_satisfied": 0,
+          "original_goal_complete": 0,
+          "scope_matches": 3,
+          "valid": 3
+        },
+        "costs": {
+          "completed_projects": 0,
+          "owned_attempt_records": 4,
+          "tokens": {
+            "input_tokens": {
+              "complete_total": null,
+              "missing_calls": 1,
+              "observed_calls": 3,
+              "observed_sum": 6913,
+              "per_completed_project": null
+            },
+            "output_tokens": {
+              "complete_total": null,
+              "missing_calls": 1,
+              "observed_calls": 3,
+              "observed_sum": 21,
+              "per_completed_project": null
+            },
+            "schema_tokens": {
+              "complete_total": null,
+              "missing_calls": 4,
+              "observed_calls": 0,
+              "observed_sum": 0,
+              "per_completed_project": null
+            }
+          }
+        },
+        "false_accepted_milestone": 0,
+        "formula_matches": 0,
+        "milestones_per_assigned_slot": 0.0,
+        "milestones_per_reached_slot": 0.0,
+        "obligation_satisfied": 0,
+        "original_goal_complete": 0,
+        "reached": 2,
+        "scope_matches": 0,
+        "strict_delivered_milestone": 0,
+        "strict_sequence_completed": 0,
+        "structurally_admitted": 2,
+        "successful_repair": 0,
+        "valid_step": 0
+      },
+      "valid_only": {
+        "adopted": 1,
+        "all_obligations_completed": 0,
+        "assigned_projects": 2,
+        "assigned_slots": 8,
+        "attempt_endpoints": {
+          "all_recorded_attempts_including_unreached_or_invalid_records": 5,
+          "exact_raw_wire_selections": 3,
+          "formula_matches": 0,
+          "independently_scored_attempts": 5,
+          "obligation_satisfied": 0,
+          "original_goal_complete": 0,
+          "scope_matches": 1,
+          "valid": 1
+        },
+        "costs": {
+          "completed_projects": 0,
+          "owned_attempt_records": 5,
+          "tokens": {
+            "input_tokens": {
+              "complete_total": null,
+              "missing_calls": 2,
+              "observed_calls": 3,
+              "observed_sum": 6546,
+              "per_completed_project": null
+            },
+            "output_tokens": {
+              "complete_total": null,
+              "missing_calls": 2,
+              "observed_calls": 3,
+              "observed_sum": 21,
+              "per_completed_project": null
+            },
+            "schema_tokens": {
+              "complete_total": null,
+              "missing_calls": 5,
+              "observed_calls": 0,
+              "observed_sum": 0,
+              "per_completed_project": null
+            }
+          }
+        },
+        "false_accepted_milestone": 1,
+        "formula_matches": 0,
+        "milestones_per_assigned_slot": 0.0,
+        "milestones_per_reached_slot": 0.0,
+        "obligation_satisfied": 0,
+        "original_goal_complete": 0,
+        "reached": 3,
+        "scope_matches": 1,
+        "strict_delivered_milestone": 0,
+        "strict_sequence_completed": 0,
+        "structurally_admitted": 3,
+        "successful_repair": 0,
+        "valid_step": 1
+      }
+    },
+    "delivered_strict_replies": 6,
+    "generation_timeouts": 3,
+    "reached_slots": 5,
+    "satisfied_milestones": 0,
+    "unreached_slots": 11
+  },
+  "runtime": {
+    "kernel": "57eb572dd1395767",
+    "scope": "Frozen experimental snapshot; excludes installed /8 focus and this bounded-analysis release",
+    "template": "symblic.delegate/proof_step_obligation/7"
+  },
+  "status": "completed_independently_scored_and_externally_audited",
+  "version": 1
+}

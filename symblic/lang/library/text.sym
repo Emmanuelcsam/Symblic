@@ -1,0 +1,147 @@
+program Text.
+note Routines for everyday language work, each a contract: the answer has a closed or bounded type, the
+note kernel checks it (an item must be quoted from the passage, a choice must be one of the options, a
+note summary must fit its word limit), and a failed check is sent back to the model with the reason.
+note They use effort=high (three votes) unless the caller's `use` says otherwise; choose who answers
+note with `use by=...` in the program that imports them.
+
+note True or false: a yes/no question about the world or about a given passage.
+routine yes_or_no(question: Text) -> Bool with effort=high do
+  ask answer: Bool "{question} Answer true for yes, false for no."
+  return answer.
+end.
+
+note The one option that fits. The model answers with the option's number, a closed answer, and the
+note routine returns the option's text.
+routine choose_one(question: Text, options: List of Text length 2..50) -> Text with effort=high do
+  let numbered = join(["{i}. {options[i]}" for i in 1..len(options)], "\n").
+  ask pick: Int in 1..50 "{question}\nOPTIONS:\n{numbered}\nGive the number of the one option that fits best."
+  ensure pick <= len(options) else retry because "there are only {len(options)} options".
+  return options[pick].
+end.
+
+note How many distinct things of a kind a passage mentions.
+routine count_in(what: Text, passage: Text) -> Int with effort=high do
+  ask n: Int in 0..100000 "How many distinct {what} does the passage mention? Count each one once.\nPASSAGE:\n{passage}"
+  return n.
+end.
+
+note A number the passage states (in the passage's own units).
+routine number_in(what: Text, passage: Text) -> Number with effort=high do
+  ask x: Number "What is the {what} stated in the passage? Give the number only, in the units the passage uses.\nPASSAGE:\n{passage}"
+  return x.
+end.
+
+note Whether the quote is a span of the passage and the value is one of the numbers written in the quote.
+note `quotes` (kernel) is exact: the same letters and case, as whole words and whole numbers, so "20" is not a
+note quote of "120". This establishes only that the number is written in a span of the passage. It does not
+note establish what the number refers to, its unit, or that the passage is right.
+function quoted_number(passage: Text, quote: Text, value: Number) -> Bool = quotes(passage, quote) and value in numbers(quote).
+
+note A number the passage states, with the span that states it. The kernel checks that the span is copied from
+note the passage and that the number is written in it; it does not check what the number refers to.
+routine quoted_number_in(what: Text, passage: Text) -> Number with effort=high do
+  ask x: Record {value: Number, quote: Text} "What is the {what} stated in the passage? Give the number as value, in the units the passage uses, and as quote the shortest span of the passage that states it, copied exactly.\nPASSAGE:\n{passage}"
+  ensure quoted_number(passage, x.quote, x.value) else retry because "the quote must be copied exactly from the passage, and the value must be a number written in the quote".
+  return x.value.
+end.
+
+note Every item of a kind, each copied word for word from the passage, in order of first appearance.
+note The check establishes only returned-item occurrence and uniqueness: it does not establish category,
+note source order, completeness, or that an empty list is the right answer. Use witnessed_items_in when
+note a caller-held finite catalog or nonempty obligation is available.
+routine items_in(what: Text, passage: Text) -> List of Text with effort=high do
+  ask xs: List of Text "List every {what} named in the passage, in the order they first appear, each copied exactly as written in the passage.\nPASSAGE:\n{passage}"
+  ensure all x in xs: contains(passage, x) else retry because "every item must occur word for word in the passage".
+  ensure len(unique(xs)) = len(xs) else retry because "list each item once".
+  return xs.
+end.
+
+note Request a summary using only the passage's facts; the check establishes its word limit only.
+note Semantic fidelity and preservation of exceptions remain model proposals. Use witnessed_summary_of
+note for exact extraction with caller-declared required spans, including known exceptions.
+routine summary_of(passage: Text, limit: Int in 5..400 = 40) -> Text with effort=medium do
+  ask s: Text "Summarize the passage in at most {limit} words, using only facts it states.\nPASSAGE:\n{passage}"
+  ensure len(words(s)) <= limit else retry because "the summary has {len(words(s))} words; the limit is {limit}".
+  return s.
+end.
+
+note Whether two statements say the same thing (each implies the other).
+routine same_meaning(a: Text, b: Text) -> Bool with effort=high do
+  ask same: Bool "Do these two statements say the same thing, so that each implies the other?\nA: {a}\nB: {b}"
+  return same.
+end.
+
+note Source witnesses are additive APIs. The source and contract are separate caller-held inputs;
+note models construct candidate spans and repeat the contract hash, never supply the acceptance contract.
+note Offsets are zero-based Unicode code points with an exclusive end. Exact source relationships and
+note declared coverage are checked; source truth and undeclared semantic obligations remain unknown.
+define _SourceWitnessSpan as Record {source_id: Text, revision: Int, source_sha256: Text, start: Int, end: Int, quote: Text}.
+define _SourceWitnessItem as Record {id: Text, span: _SourceWitnessSpan}.
+
+note Propose the declared label and decimal-value spans. Return a checked field receipt, including the
+note exact numerator/denominator and unit/currency declarations; never return an unchecked bare number.
+routine witnessed_number_in(source: Any, contract: Any) -> Any with effort=low do
+  ask candidate: Record {contract_sha256: Text, label: _SourceWitnessSpan, value: _SourceWitnessSpan} "Construct exact source witnesses for the caller's literal field contract. Copy contract.sha256 into contract_sha256. Give label and numeric value spans from source, with exact source ID, revision, SHA-256, zero-based Unicode code-point start, exclusive end, and quote. Preserve signs and decimal text. Do not replace the contract or invent unsupported associations." from source, contract with coercion=strict
+  let checked = verify_source_field(source, contract, candidate).
+  ensure checked.accepted else retry because "the source witness does not satisfy the caller-held field contract: {checked.issues}".
+  return checked.
+end.
+
+note Extract source spans in source order and retain every caller-declared required span. A paraphrase
+note is not an exact extraction; source_proposed_summary can record it as a proposal with checked links.
+routine witnessed_summary_of(source: Any, contract: Any) -> Any with effort=low do
+  ask candidate: Record {contract_sha256: Text, spans: List of _SourceWitnessSpan, text: Text} "Construct an extractive summary under the caller's contract. Copy contract.sha256 into contract_sha256. Select disjoint spans in source order that cover every contract.required witness. Copy source identity, revision, SHA-256 and exact zero-based Unicode code-point offsets/quotes into each span. The text must equal the selected quotes joined by contract.joiner. Do not paraphrase, omit a required exception, or replace the contract." from source, contract with coercion=strict
+  let checked = verify_source_summary(source, contract, candidate).
+  ensure checked.accepted else retry because "the source extraction misses the caller-held summary contract: {checked.issues}".
+  return checked.
+end.
+
+note Check each returned source item and, when supplied, the caller's finite catalog. Without a catalog,
+note enumeration_complete stays unknown even if every returned quote exists; emptiness proves no absence.
+routine witnessed_items_in(source: Any, contract: Any) -> Any with effort=low do
+  ask candidate: Record {contract_sha256: Text, items: List of _SourceWitnessItem} "Construct item witnesses under the caller's contract. Copy contract.sha256 into contract_sha256. If a catalog exists, return every declared item with its exact ID and source span. Otherwise propose distinct nonempty source spans with distinct IDs; completeness remains unknown. Each span uses exact source ID, revision, SHA-256, zero-based Unicode code-point start, exclusive end, and quote. Respect require_nonempty and never replace the contract." from source, contract with coercion=strict
+  let checked = verify_source_items(source, contract, candidate).
+  ensure checked.accepted else retry because "the source items do not satisfy the caller-held catalog contract: {checked.issues}".
+  return checked.
+end.
+
+test "quoted_number" do
+  assert quoted_number("Total due: 1,250.00 dollars for 3 items.", "1,250.00 dollars", 1250).
+  assert quoted_number("Total due: 1,250.00 dollars for 3 items.", "for 3 items", 3).
+  assert not quoted_number("Total due: 1,250.00 dollars for 3 items.", "for 3 items", 4).
+  assert not quoted_number("Total due: 1,250.00 dollars for 3 items.", "1,250 dollars", 1250).
+  assert not quoted_number("The bath was held at 85 degrees.", "", 85).
+  assert quoted_number("The bath was held\nat 85 degrees.", "held at 85 degrees", 85).
+  assert not quoted_number("Total: 120 units.", "20 units", 20).
+  assert not quoted_number("The change was -5 points.", "5 points", 5).
+  assert quoted_number("The change was -5 points.", "-5 points", -5).
+  assert not quoted_number("The laser gives 1 mW.", "1 MW", 1).
+  assert not quoted_number("Mix 3/4 cup of water.", "3/4 cup", 3).
+end.
+
+note Certification tests: they ask models, so run them with an applicator
+note (python3 -m symblic.lang.abstraction test text --by ollama:qwen3:4b); every capable model should pass them.
+test "yes_or_no on a plain fact" do
+  assert yes_or_no("Is water made of hydrogen and oxygen?") = true.
+  assert yes_or_no("Is the Moon larger than the Earth?") = false.
+end.
+
+test "choose_one returns the option's text" do
+  assert choose_one("Which of these is a fruit?", ["carrot", "apple", "potato"]) = "apple".
+end.
+
+test "items_in quotes the passage" do
+  let metals = items_in("metal", "The alloy mixes copper and tin with a little zinc.").
+  assert set(metals) = {"copper", "tin", "zinc"}.
+end.
+
+test "count_in and number_in" do
+  assert count_in("planets", "Mercury, Venus and Mars are rocky; Jupiter is a gas giant.") = 4.
+  assert number_in("boiling point in degrees Celsius", "At sea level water boils at 100 degrees Celsius.") = 100.
+end.
+
+test "summary_of keeps to the limit" do
+  let s = summary_of("Honeybees live in colonies led by a single queen. They pollinate about a third of the crops people eat.", 12).
+  assert len(words(s)) <= 12.
+end.

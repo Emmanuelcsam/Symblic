@@ -1,0 +1,1637 @@
+{
+  "catalog": {
+    "assurance": "Compilation and JSON shape checks execute no model. Runtime acceptance covers only the declared checks.",
+    "request_schema": {
+      "$defs": {
+        "output_schema": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "dependentRequired": {
+                "maximum": [
+                  "minimum"
+                ],
+                "minimum": [
+                  "maximum"
+                ]
+              },
+              "properties": {
+                "maximum": {
+                  "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "type": "integer"
+                },
+                "minimum": {
+                  "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                  "type": "integer"
+                },
+                "type": {
+                  "const": "integer"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "enum": [
+                    "string",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "items": {
+                  "$ref": "#/$defs/output_schema"
+                },
+                "maxItems": {
+                  "maximum": 128,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "minItems": {
+                  "maximum": 128,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "type": {
+                  "const": "array"
+                }
+              },
+              "required": [
+                "type",
+                "items",
+                "minItems",
+                "maxItems"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "additionalProperties": {
+                  "const": false
+                },
+                "properties": {
+                  "additionalProperties": {
+                    "$ref": "#/$defs/output_schema"
+                  },
+                  "maxProperties": 16,
+                  "minProperties": 1,
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$"
+                  },
+                  "type": "object"
+                },
+                "required": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "type": {
+                  "const": "object"
+                }
+              },
+              "required": [
+                "type",
+                "properties",
+                "required",
+                "additionalProperties"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "checks": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "expected": {},
+                      "op": {
+                        "enum": [
+                          "equals",
+                          "sum_equals"
+                        ]
+                      },
+                      "path": {
+                        "items": {
+                          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$",
+                          "type": "string"
+                        },
+                        "maxItems": 8,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "op",
+                      "path",
+                      "expected"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 16,
+                  "type": "array"
+                },
+                "data": {},
+                "instruction": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "output_schema": {
+                  "$ref": "#/$defs/output_schema"
+                }
+              },
+              "required": [
+                "instruction",
+                "data",
+                "output_schema"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "typed_transform"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 0,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "left": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "denominator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "numerator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "numerator",
+                    "denominator"
+                  ],
+                  "type": "object"
+                },
+                "operation": {
+                  "enum": [
+                    "add",
+                    "subtract",
+                    "multiply",
+                    "divide"
+                  ]
+                },
+                "right": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "denominator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "numerator": {
+                      "maximum": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "minimum": -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "numerator",
+                    "denominator"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "operation",
+                "left",
+                "right"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "exact_arithmetic"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "else": {
+                "properties": {
+                  "calls": {
+                    "default": 3,
+                    "maximum": 6
+                  }
+                }
+              },
+              "if": {
+                "properties": {
+                  "params": {
+                    "properties": {
+                      "certificate_format": {
+                        "const": "incremental"
+                      }
+                    },
+                    "required": [
+                      "certificate_format"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "calls": {
+                    "default": 32,
+                    "maximum": 64
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "calls": {
+              "maximum": 64,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "step_limit"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "inference_format"
+                        ]
+                      }
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "certificate_format": {
+                        "const": "incremental"
+                      }
+                    },
+                    "required": [
+                      "certificate_format"
+                    ]
+                  }
+                }
+              ],
+              "properties": {
+                "certificate_format": {
+                  "enum": [
+                    "terms",
+                    "steps",
+                    "incremental"
+                  ]
+                },
+                "domains": {
+                  "additionalProperties": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 128,
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+                  },
+                  "type": "object"
+                },
+                "goal": {
+                  "type": "string"
+                },
+                "inference_format": {
+                  "enum": [
+                    "json",
+                    "command"
+                  ]
+                },
+                "premises": {
+                  "oneOf": [
+                    {
+                      "maxLength": 32768,
+                      "type": "string"
+                    },
+                    {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "formula": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "formula"
+                        ],
+                        "type": "object"
+                      },
+                      "maxItems": 64,
+                      "type": "array"
+                    }
+                  ]
+                },
+                "step_limit": {
+                  "maximum": 32,
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "premises",
+                "goal"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "proof"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "categories": {
+                  "additionalProperties": {
+                    "maxLength": 131072,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxProperties": 32,
+                  "minProperties": 1,
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]{0,47}$"
+                  },
+                  "type": "object"
+                },
+                "data": {},
+                "instruction": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "instruction",
+                "data",
+                "categories"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "enum_classification"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "instruction": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "revision": {
+                  "maximum": 9007199254740991,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "source_id": {
+                  "type": "string"
+                },
+                "text": {
+                  "maxLength": 131072,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "instruction",
+                "text",
+                "source_id"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "witnessed_line"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "commands": {
+                  "items": {
+                    "maxLength": 131072,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 32,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "require_complete": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "session": {
+                  "description": "Caller-owned session; native prefix checks do not authenticate its author.",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "session",
+                "commands"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "proof_step"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calls": {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "capsule": {
+              "default": "full",
+              "enum": [
+                "full",
+                "compact"
+              ]
+            },
+            "context_budget": {
+              "maximum": 131072,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "expected_contract_id": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "max_steps": {
+              "maximum": 1000000,
+              "minimum": 1000,
+              "type": "integer"
+            },
+            "params": {
+              "additionalProperties": false,
+              "properties": {
+                "commands": {
+                  "items": {
+                    "maxLength": 131072,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 32,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "obligation": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "formula": {
+                      "description": "Existing controlled propositional formula syntax; parsed into the exact required AST.",
+                      "maxLength": 131072,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "open_assumptions": {
+                      "default": [],
+                      "description": "Exact required free-assumption set: existing assume IDs or the next line ID.",
+                      "items": {
+                        "pattern": "^s[1-9][0-9]*$",
+                        "type": "string"
+                      },
+                      "maxItems": 512,
+                      "type": "array",
+                      "uniqueItems": true
+                    }
+                  },
+                  "required": [
+                    "formula"
+                  ],
+                  "type": "object"
+                },
+                "require_complete": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "session": {
+                  "description": "Caller-owned session; native prefix checks do not authenticate its author.",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "session",
+                "commands",
+                "obligation"
+              ],
+              "type": "object"
+            },
+            "template": {
+              "const": "proof_step_obligation"
+            }
+          },
+          "required": [
+            "template",
+            "params"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "semantic_validation": [
+      "Output schema depth <=8; min bounds <= max bounds.",
+      "Every object property is required exactly once.",
+      "Check paths and expected values must match output types.",
+      "Finite domains and human formulas follow the existing logic compiler.",
+      "proof_step rechecks the caller-owned session and every command syntax/reference before dispatch; it never establishes premise truth, authenticates the caller or searches for a correct command.",
+      "proof_step_obligation also requires the exact parsed intermediate formula and free-assumption set; duplicate, unknown and non-assumption IDs refuse; assumption IDs canonicalize in session line order. require_complete additionally requires the obligation to equal the original goal with no free assumptions.",
+      "JSON is limited to 512 KiB, depth 24 and 20000 visited values; cycles and nonfinite numbers refuse."
+    ],
+    "templates": [
+      {
+        "id": "typed_transform",
+        "template_id": "symblic.delegate/typed_transform/5"
+      },
+      {
+        "id": "exact_arithmetic",
+        "template_id": "symblic.delegate/exact_arithmetic/5"
+      },
+      {
+        "id": "proof",
+        "template_id": "symblic.delegate/proof/5"
+      },
+      {
+        "id": "enum_classification",
+        "template_id": "symblic.delegate/enum_classification/5"
+      },
+      {
+        "id": "witnessed_line",
+        "template_id": "symblic.delegate/witnessed_line/5"
+      },
+      {
+        "id": "proof_step",
+        "template_id": "symblic.delegate/proof_step/6"
+      },
+      {
+        "id": "proof_step_obligation",
+        "template_id": "symblic.delegate/proof_step_obligation/7"
+      }
+    ],
+    "version": 7
+  },
+  "fixtures": [
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof",
+            "selected line equals the caller intermediate formula",
+            "selected line has exactly the caller free-assumption set"
+          ],
+          "conditional": true,
+          "evaluation_status": "obligation interface is unmeasured; other interfaces are not evidence for it",
+          "goal_closure": "not_required; inspect inference.complete",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "intermediate_obligation": "exact native formula AST and exact free-assumption IDs; not goal completion",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_satisfying_exact_caller_formula_and_assumption_scope",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules",
+                "obligation"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "obligation",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "fe26da6e82149b61bcd70c269efc31cf26cd2f749191cac36148663f3aa04b08",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "obligation": {
+            "formula": [
+              "atom",
+              "B"
+            ],
+            "open_assumptions": [],
+            "reading": "\"B\""
+          },
+          "require_complete": false,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 2
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "obligation": {
+              "formula": [
+                "atom",
+                "B"
+              ],
+              "open_assumptions": [],
+              "reading": "\"B\""
+            },
+            "require_complete": false,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 2
+          },
+          "obligation": {
+            "formula": [
+              "atom",
+              "B"
+            ],
+            "open_assumptions": [],
+            "reading": "\"B\""
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "a29cad785b5fa37a690fb11bf41f454314a9a8e7765602e33eb3db7373d0623e",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 3,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "full",
+          "max_calls": 3,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "obligation": {
+                  "formula": [
+                    "atom",
+                    "B"
+                  ],
+                  "open_assumptions": [],
+                  "reading": "\"B\""
+                },
+                "require_complete": false,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 2
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            },
+            "obligation_satisfied": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff",
+            "obligation_satisfied"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof obligation.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\ngiven obligation: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. Its formula must exactly match obligation.formula, rendered in obligation.reading, and its free assumption IDs must exactly match obligation.open_assumptions. The session goal stays fixed. If require_complete is true, that inference must also close the original goal. Otherwise satisfying the exact obligation is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules, obligation with context=none, effort=low, route=escalate, retries=2, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure inference.line.formula = obligation.formula else retry because \"Derive the caller's exact intermediate formula.\".\nensure inference.line.free = obligation.open_assumptions else retry because \"Meet the caller's exact assumption scope.\".\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding, obligation_satisfied: true}.\nshow answer.\n",
+        "source_sha256": "aae87ff61f93a32ca7424e0975e2fa6d5d69f6bb4487bf7a808b8a9908fa9f9e",
+        "template": "proof_step_obligation",
+        "template_id": "symblic.delegate/proof_step_obligation/7",
+        "version": 7
+      },
+      "request": {
+        "capsule": "full",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "obligation": {
+            "formula": "\"B\""
+          },
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step_obligation"
+      }
+    },
+    {
+      "compiled": {
+        "assurance": {
+          "checked": [
+            "caller session prefix",
+            "every menu command syntax and references",
+            "bounded ordinal membership",
+            "selected inference validity",
+            "independent certificate recheck whenever the selected step completes the proof",
+            "selected line equals the caller intermediate formula",
+            "selected line has exactly the caller free-assumption set"
+          ],
+          "conditional": true,
+          "evaluation_status": "obligation interface is unmeasured; other interfaces are not evidence for it",
+          "goal_closure": "not_required; inspect inference.complete",
+          "inference_validity": "unchanged native proof_session_command checker",
+          "intermediate_obligation": "exact native formula AST and exact free-assumption IDs; not goal completion",
+          "menu_membership": "bounded ordinal selects an unchanged exact caller command",
+          "origin": "derived",
+          "scope": "one_checked_inference_satisfying_exact_caller_formula_and_assumption_scope",
+          "selection_search": "none; determine=false and solve=false; no option is preselected or filtered",
+          "selection_wire": "native bounded integer; numeric wire normalization follows the recorded strict profile",
+          "session_authority": "caller_owned_not_authenticated",
+          "unassessed": [
+            "premise truth",
+            "premise consistency",
+            "caller authentication",
+            "intended prose meaning",
+            "menu completeness",
+            "proof search completeness",
+            "model selection quality",
+            "cross-model output equality"
+          ]
+        },
+        "check": {
+          "asks": 1,
+          "errors": [],
+          "execution_profile": "verified",
+          "ok": true,
+          "warnings": []
+        },
+        "context": {
+          "ask_dependencies": [
+            {
+              "binding": "choice",
+              "required_names": [
+                "frontier",
+                "commands",
+                "require_complete",
+                "proof_rules",
+                "obligation"
+              ]
+            }
+          ],
+          "ask_dependencies_scope": "all_static_branches",
+          "input_names": [
+            "commands",
+            "handoff_binding",
+            "obligation",
+            "proof_rules",
+            "require_complete",
+            "session"
+          ],
+          "mode": "none",
+          "overflow": "native runner must refuse missing required context",
+          "raw_parent_history": false
+        },
+        "contract_id": "f9968a911f350fb99108fb7e699badee944ee22421141e71527d82e20884f4f8",
+        "handoff": {
+          "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+          "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+          "obligation": {
+            "formula": [
+              "atom",
+              "B"
+            ],
+            "open_assumptions": [],
+            "reading": "\"B\""
+          },
+          "require_complete": false,
+          "session_authority": "caller_owned_not_authenticated",
+          "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+          "version": 2
+        },
+        "inputs": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "handoff_binding": {
+            "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+            "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+            "obligation": {
+              "formula": [
+                "atom",
+                "B"
+              ],
+              "open_assumptions": [],
+              "reading": "\"B\""
+            },
+            "require_complete": false,
+            "session_authority": "caller_owned_not_authenticated",
+            "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+            "version": 2
+          },
+          "obligation": {
+            "formula": [
+              "atom",
+              "B"
+            ],
+            "open_assumptions": [],
+            "reading": "\"B\""
+          },
+          "proof_rules": {
+            "commands": [
+              "premise NAME",
+              "assume :: FORMULA",
+              "implies_intro ASSUME_LINE BODY_LINE",
+              "implies_elim IMPLICATION_LINE ANTECEDENT_LINE",
+              "and_intro LEFT_LINE RIGHT_LINE",
+              "and_left CONJUNCTION_LINE",
+              "and_right CONJUNCTION_LINE",
+              "or_left LEFT_LINE :: RIGHT_FORMULA",
+              "or_right RIGHT_LINE :: LEFT_FORMULA",
+              "or_elim OR_LINE LEFT_ASSUME LEFT_BODY RIGHT_ASSUME RIGHT_BODY",
+              "false_elim FALSE_LINE :: TARGET_FORMULA"
+            ],
+            "formulas": "Use the controlled text displayed in the frontier: JSON-double-quoted opaque propositions, false, not, and, or, implies, and parentheses. Precedence high to low: not, and, or, implies. Implication associates right. A quoted \"false\" is an atom; bare false is falsity. Use JSON escapes inside an atom for line breaks; never a literal newline in the command.",
+            "references": "NAME is an exact key in frontier.premises; quote it as a JSON string if needed. Use JSON escapes for line breaks in quoted names. Every LINE is an exact existing frontier.lines id. The host assigns next_id.",
+            "rules": [
+              {
+                "gives": "that premise",
+                "rule": "premise"
+              },
+              {
+                "gives": "A, depending on this new line",
+                "rule": "assume"
+              },
+              {
+                "gives": "A implies B, no longer depending on that assume line",
+                "rule": "implies_intro"
+              },
+              {
+                "gives": "B",
+                "rule": "implies_elim"
+              },
+              {
+                "gives": "A and B",
+                "rule": "and_intro"
+              },
+              {
+                "gives": "A",
+                "rule": "and_left"
+              },
+              {
+                "gives": "B",
+                "rule": "and_right"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_left"
+              },
+              {
+                "gives": "A or B",
+                "rule": "or_right"
+              },
+              {
+                "gives": "C, no longer depending on either branch assume line",
+                "rule": "or_elim"
+              },
+              {
+                "gives": "C",
+                "rule": "false_elim"
+              }
+            ],
+            "semantics": "Args name earlier line ids; premise args name premises. A line depends on the assume lines in its free list. An or_elim branch line cannot depend on the other branch's assume line. The proof is complete when a line with an empty free list has exactly the goal formula. Not A is A implies false. Never restate the premises, goal or lines. Atoms are opaque; premise truth and consistency are not checked.",
+            "unrelated_example": {
+              "command": "premise sample",
+              "frontier": {
+                "complete": false,
+                "goal": "\"An unrelated sample flag\"",
+                "lines": [],
+                "next_id": "s1",
+                "premises": {
+                  "sample": "\"An unrelated sample flag\""
+                },
+                "steps_left": 512
+              }
+            },
+            "version": 1,
+            "wire": "The answer value is the one-based integer index of your chosen entry in commands. Preserve the enclosing native response object and its schema. The command forms and unrelated command example below describe menu entries only. Do not output command text, a proof-step object, assigned line ID, comment or code fence as the answer value."
+          },
+          "require_complete": false,
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "inputs_sha256": "a29cad785b5fa37a690fb11bf41f454314a9a8e7765602e33eb3db7373d0623e",
+        "limits": {
+          "context_characters": 24000,
+          "max_calls": 3,
+          "max_steps": 200000,
+          "wall_time": "native_host_and_provider_policy"
+        },
+        "options": {
+          "capsule": "compact",
+          "max_calls": 3,
+          "max_steps": 200000,
+          "parallel": 1,
+          "profile": "verified",
+          "side_effects": false
+        },
+        "output_binding": "answer",
+        "output_encoding": "symblic.canon/3",
+        "output_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "choice": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "command": {
+              "enum": [
+                "and_left s1",
+                "premise a",
+                "implies_elim s2 s1"
+              ],
+              "type": "string"
+            },
+            "handoff": {
+              "const": {
+                "commands_sha256": "6a8925a8d3c73a723392901a2c1e4c8e6dce568f2498191b82cd32be451c42fb",
+                "menu_id": "4ae03b82e8d13ef8bc977a51bbf16a5cd06ce0b0934847b96d8f406c31d6d682",
+                "obligation": {
+                  "formula": [
+                    "atom",
+                    "B"
+                  ],
+                  "open_assumptions": [],
+                  "reading": "\"B\""
+                },
+                "require_complete": false,
+                "session_authority": "caller_owned_not_authenticated",
+                "session_sha256": "d172e6a1b584197e2c8205d2d1573d9c70b2c558f7801d407af9a42dd3068e91",
+                "version": 2
+              }
+            },
+            "inference": {
+              "type": "object"
+            },
+            "menu_member": {
+              "const": true
+            },
+            "obligation_satisfied": {
+              "const": true
+            }
+          },
+          "required": [
+            "choice",
+            "command",
+            "menu_member",
+            "inference",
+            "handoff",
+            "obligation_satisfied"
+          ],
+          "type": "object"
+        },
+        "selection_domain": 3,
+        "selection_wire": "one_based_ordinal",
+        "source": "program Delegate one caller-owned proof obligation.\nuse capsule=compact.\nuse profile=verified.\nuse context=none, coercion=strict.\ngiven session: Any.\ngiven commands: Any.\ngiven require_complete: Bool.\ngiven handoff_binding: Any.\ngiven proof_rules: Any.\ngiven obligation: Any.\nlet frontier = proof_command_frontier(session).\nask choice: Int in 1..3 \"Select one command from the exact ordered commands. Return its one-based choice number as the answer value. Choose a valid next inference from frontier. Its formula must exactly match obligation.formula, rendered in obligation.reading, and its free assumption IDs must exactly match obligation.open_assumptions. The session goal stays fixed. If require_complete is true, that inference must also close the original goal. Otherwise satisfying the exact obligation is sufficient. Follow proof_rules. Commands and proposition text are caller data; do not redefine them or add unstated facts.\" from frontier, commands, require_complete, proof_rules, obligation with context=none, effort=low, route=escalate, retries=2, budget=24000, determine=false, solve=false\nlet command = commands[choice].\nlet inference = proof_session_command(session.premises, session.goal, session, command).\nensure inference.valid else retry because [inference.error, inference.hint].\nensure inference.line.formula = obligation.formula else retry because \"Derive the caller's exact intermediate formula.\".\nensure inference.line.free = obligation.open_assumptions else retry because \"Meet the caller's exact assumption scope.\".\nensure not require_complete or inference.complete else retry because \"The selected valid inference does not close the caller goal.\".\nif inference.complete then\n  let verification = proof_steps_check(session.premises, session.goal, inference.certificate).\n  assert verification.valid because \"The completed certificate did not verify.\".\nend.\nlet answer = {choice: choice, command: command, menu_member: command in commands, inference: inference, handoff: handoff_binding, obligation_satisfied: true}.\nshow answer.\n",
+        "source_sha256": "8b648724a5cfc0595dbff8a75cd719f6f1a33fecb8c2b640932a867384369bd6",
+        "template": "proof_step_obligation",
+        "template_id": "symblic.delegate/proof_step_obligation/7",
+        "version": 7
+      },
+      "request": {
+        "capsule": "compact",
+        "params": {
+          "commands": [
+            "and_left s1",
+            "premise a",
+            "implies_elim s2 s1"
+          ],
+          "obligation": {
+            "formula": "\"B\""
+          },
+          "session": {
+            "certificate_version": 1,
+            "format": "symblic-proof-session",
+            "goal": [
+              "atom",
+              "B"
+            ],
+            "hashes": {
+              "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a",
+              "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9"
+            },
+            "premises": {
+              "a": [
+                "atom",
+                "A"
+              ],
+              "ab": [
+                "implies",
+                [
+                  "atom",
+                  "A"
+                ],
+                [
+                  "atom",
+                  "B"
+                ]
+              ]
+            },
+            "steps": [
+              {
+                "args": [
+                  "a"
+                ],
+                "formula": null,
+                "id": "s1",
+                "rule": "premise"
+              },
+              {
+                "args": [
+                  "ab"
+                ],
+                "formula": null,
+                "id": "s2",
+                "rule": "premise"
+              }
+            ],
+            "version": 1
+          }
+        },
+        "template": "proof_step_obligation"
+      }
+    }
+  ],
+  "kernel": {
+    "ask_policy": 1,
+    "canon": 3,
+    "capsule_manifest": 5,
+    "discrete": 1,
+    "epistemic": 1,
+    "epistemic_runtime": 1,
+    "feedback": 1,
+    "finite_logic": 1,
+    "geometry": 2,
+    "grounding": 1,
+    "grounding_rules": 4,
+    "id": "57eb572dd1395767",
+    "js": "6+node22.17.0+assets9e4d61505d824e78baadfcefb5f9cf541650b315ec7b11bd26cb762839fec6ad",
+    "js_declarations": "2+acorn8.8.1+node22.17.0+assetsc972fb55edc84e5ce398c24769706129058a8839225fa6cd4fcd67cd936a1a64",
+    "knowledge": 1,
+    "lang": "2.5",
+    "max_digits": 4000,
+    "module_logic": 1,
+    "operators": 1,
+    "parser": 1,
+    "parser_limits": {
+      "ast_depth": 128,
+      "syntax_depth": 60
+    },
+    "profiles": 2,
+    "projection": 1,
+    "proof": 4,
+    "proof_command": 1,
+    "proof_session": 1,
+    "proof_steps": 1,
+    "proof_terms": 1,
+    "python": "3.12.3",
+    "quantities": 1,
+    "transport": 1,
+    "unicode": "15.0.0",
+    "variational": 1
+  }
+}

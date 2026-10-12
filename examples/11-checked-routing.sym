@@ -1,0 +1,10 @@
+program Checked routing and kernel solving.
+# Offline default: tools/symblic run examples/11-checked-routing.sym --by kernel --max-calls 0 --json
+# The finite domain has one admitted value, so solve=true uses no model.
+# To exercise checked escalation, pass --input solve_in_kernel=false and an authorized
+# ordered applicator list through the embedding API. Each candidate still faces the predicate.
+given solve_in_kernel: Bool = true.
+ask answer: Int in 1..9 "Return the integer whose double is six."
+  with route=escalate, solve=solve_in_kernel, retries=0
+ensure answer * 2 = 6 else retry.
+return answer.

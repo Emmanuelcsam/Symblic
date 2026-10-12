@@ -1,0 +1,86 @@
+{
+  "behavior": [
+    "A child selects one exact caller-authored command in a fresh context.",
+    "Acceptance requires a valid inference, the exact intermediate formula AST and the exact free-assumption set.",
+    "The original session goal is retained; require_complete additionally demands a closed original-goal certificate.",
+    "The parent helper independently rechecks the selected command and complete canonical receipt before adopting state."
+  ],
+  "catalog_version": 7,
+  "compatibility": {
+    "native_parser_checker_runner": "unchanged",
+    "old_compiled_contracts": "16 fixtures for the five version-5 templates and eight version-6 proof_step fixtures remain exact.",
+    "source_identity": "The changed compiler is captured in execution pins; prepared route identities change."
+  },
+  "date_utc": "2026-10-05T12:54:24.678623+00:00",
+  "deployment": {
+    "dependency_guards": 284,
+    "effective_dependencies": 59,
+    "effective_files": 238,
+    "payload_files": 13,
+    "plan_sha256": "e58bc511b42ba5f0bbe2a1d2f9ee79dda1f06636335a69cb498056ee685546ef",
+    "rollback": "Exact-postimage guarded bundle retained privately; reverse later layers first."
+  },
+  "evidence_sha256": {
+    "devcheck": "7adedf0f5bc3be3b524b11983b745f4f09e1833b5098be93dbd237dba8046c8d",
+    "entry": "e738d6f1171c5e43223fbcc1488ae8576bf12e86c4f33cd701a1b03c793e2289",
+    "implementation": "98ad98fbe97b8d98cde7dab3768a96482704a6e30f32ba23eb918ffcde7b8c8f",
+    "independent_review": "bde8221bf308db12a7c2bd1c2c2952583f0bb14ed22a64fb5ac1fd41623574f0",
+    "installation_manifest": "c7140063909b058f305f985faac0a42743c024e81868617c92e9831deb8de81a",
+    "integrated_tests": "d85aa50961a1b7149ebe3fc23de4e48bf98c22b0943248c2b80a2206ff1e4f9f",
+    "live_verification": "19d0f3a457678faba54ba2da7e4640e297463bfd2fd6ab79cf09078fc38e8302",
+    "markers": "7b236a0900a50f534138f1273349eaa4243be595f821efa0490fed8d4f5a75e8"
+  },
+  "kernel_id": "57eb572dd1395767",
+  "limits": [
+    "A valid partial inference and an exact milestone are distinct from completing the original goal.",
+    "Distinct valid commands may satisfy the same obligation; this is not a unique proof representation.",
+    "Caller premises and decomposition remain explicit assumptions; no autonomous decomposition or empirical model-quality claim is made.",
+    "This release has no new real-model observations or measured overall cost improvement."
+  ],
+  "status": "installed_and_live_verified",
+  "template_id": "symblic.delegate/proof_step_obligation/7",
+  "validation": {
+    "devcheck": {
+      "blocking": 0,
+      "existing_reviewed_ui_warnings": 1
+    },
+    "independent_adversarial": {
+      "passed": 9,
+      "seconds": 3.185,
+      "source_and_evidence_checks": 101
+    },
+    "integrated_tests": {
+      "passed": 133,
+      "scope": "Final delegation/authoring/execution-pin checks, including actual CLI and operator API through fake providers and temporary stores.",
+      "seconds": 35.686
+    },
+    "live": {
+      "arithmetic": {
+        "calls": 0,
+        "canonical": {
+          "#q": "1/2"
+        }
+      },
+      "http_checks": {
+        "catalog": 200,
+        "compile_compact": 200,
+        "compile_full": 200,
+        "meta": 200,
+        "preview_compact": 200,
+        "preview_full": 200,
+        "prior_template_contract": 200,
+        "scope_duplicate": 200,
+        "scope_nonassumption": 200,
+        "scope_unknown": 200
+      },
+      "malformed_scopes": "compile returns HTTP 200 with ok:false, a scoped error and no executable source",
+      "production_runs_created": 0,
+      "real_model_calls": 0,
+      "restarted": true
+    },
+    "markers": 43,
+    "verification_correction": "Initial smoke harness expected HTTP 400 for compile refusal; corrected to the existing inspect endpoint HTTP 200/ok:false contract. Production code was unchanged."
+  },
+  "version": 1,
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

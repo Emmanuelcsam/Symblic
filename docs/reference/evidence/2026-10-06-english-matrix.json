@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-06",
+  "scope": "One actual Qwen construction of Matrix rain from an English-only author document",
+  "authoring": {
+    "compiler": "symblic-english-build/2",
+    "source": "examples/english/matrix-rain.english.txt",
+    "source_sha256": "fc5e516220ceeae1ddeb031f1f0d4c93c9696f47bfa75603d5cbb602239a1921",
+    "sentences": 60,
+    "model_tasks": 9,
+    "author_code_or_numeric_literals": false,
+    "unsupported_sentences": "refused with original source positions",
+    "model_requests": "Original step sentences plus generated implementation interfaces, finite examples and explicitly selected prior code"
+  },
+  "baseline": {
+    "run_id": "22e0d48e9d0b",
+    "status": "failed",
+    "model_calls": 9,
+    "accepted_units": 5,
+    "rejected_candidates": 4,
+    "failure": "Frame construction repeatedly placed trail cells on their leader row",
+    "accepted_animation": false
+  },
+  "revision": "Split character construction, column construction and frame composition into separate model tasks; preserve earlier grammar and failure records",
+  "actual_run": {
+    "run_id": "693f1db5a5e0",
+    "url": "(original host; not public)",
+    "status": "done",
+    "model": "ollama:qwen3:4b-instruct@node-f",
+    "observed_model_manifest_sha256": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "accepted_units": 9,
+    "model_calls": 10,
+    "runtime_seconds": 1115.5,
+    "rejected_candidates": 1,
+    "correction": "Trail direction corrected by Qwen within its native retry budget",
+    "character_column_frame_and_sequence_passed_first_attempt": true,
+    "host_candidate_bodies_or_fallback": false,
+    "implementation_sha256": "71fb4875975e8cb1dfa20a758eca7a107c63ddbf58f45619d89e57651ba364df",
+    "frames_sha256": "206d51adf20b1e1e7d9b65a4c3d9abd319d8883d8207196f3e9df41d20250a31",
+    "frames": 24,
+    "cells_per_frame": 256
+  },
+  "independent_validation": {
+    "frozen_before_second_run": true,
+    "case_sha256": "f236cf5e90ccd73cc1a06e6d99f5333b6a79e5f2780b5fbe3f7e5a04730583c5",
+    "verifier_sha256": "60f1b3b694015ac5e0ba34eacc29fd4710279b67744ab69aace2e64c8fd3c297",
+    "held_out_passed": 44,
+    "held_out_planned": 44,
+    "separate_construction_domain_rechecks_passed": 1,
+    "full_frames_inspected": 99,
+    "cells_in_full_frames_inspected": 18057,
+    "shape_failures": 0,
+    "provider_calls": 0,
+    "repairs": 0
+  },
+  "component_validation": {
+    "python_tests_passed": 112,
+    "circuit_tests_passed": 16,
+    "old_and_new_source_desktop_phone_journeys_passed": 4,
+    "live_saved_run_desktop_phone_playback_passed": true,
+    "live_canvas_matches_saved_cells": true,
+    "live_loop_returns_to_identical_pixels": true,
+    "inline_replay_desktop_and_320_pixel_phone_passed": true,
+    "inline_play_pause_and_state_restoration_passed": true,
+    "inline_frames_equal_saved_run": true,
+    "inline_fragment_sha256": "9318c4ad8857bc18ad19ca55acba94045d1cc228cb337d3dfa5e84872ee178b5"
+  },
+  "observed_helper_use": {
+    "scope": "Separate instrumented execution of the accepted bodies on the standard canvas",
+    "saved_frames_reproduced_unchanged": true,
+    "all_nine_functions_called": true,
+    "sequence_calls": 1,
+    "frame_calls": 24,
+    "column_calls": 768,
+    "calls_to_each_primitive_and_character_function": 6144,
+    "declared_edge_not_observed": "heads to movement; heads inlines wrapping, while trails calls movement",
+    "provider_calls": 0,
+    "model_feedback": false
+  },
+  "resource_release": {
+    "checked_at": "2026-10-06T15:00:45Z",
+    "model_unloaded": true,
+    "active_run_resources_released": true,
+    "power_mode_changed": false,
+    "owned_verification_browser_closed": true
+  },
+  "limits": [
+    "Bounded supported English vocabulary, not arbitrary English verification",
+    "Finite checks of this exact artifact, not a universal correctness proof or model benchmark",
+    "Selected dependencies constrain context and runtime availability, not mandatory helper calls on every path",
+    "The accepted head function inlines wrapping instead of calling the selected movement helper; the trail function calls movement, so all nine functions contribute to the final program",
+    "Qwen produces the implementation and frame data; the existing character player supplies drawing, playback timing and controls",
+    "Per-ask output-token limits are not currently forwarded to Ollama; global model settings were preserved"
+  ],
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

@@ -1,0 +1,15 @@
+program Count and primality.
+note Local beta fixture (2026-10-11). Two typed asks. The kernel computes each true value itself and the model never sees it.
+note Expected output: "count and primality" = [3, false].
+
+given word: Text = "banana".
+given n: Int = 91.
+let letter_count = len(word) - len(replace(word, "a", "")).
+
+ask count_a: Int in 0..10 "How many times does the letter a occur in the word {word}? Count every occurrence and return the number." from word
+ensure count_a = letter_count else retry because "count every occurrence of the letter a in the word".
+
+ask prime: Bool "Is {n} a prime number?" from n
+ensure prime = is_prime(n) else retry because "a prime number has no divisor other than 1 and itself".
+
+show [count_a, prime] as "count and primality".

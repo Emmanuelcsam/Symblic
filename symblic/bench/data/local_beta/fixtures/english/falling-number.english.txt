@@ -1,0 +1,48 @@
+Remember digit is 7.
+Remember width is 20.
+Remember height is 7.
+Remember x is 5.
+Remember 'row 0' is 6.
+Display digit at column x and row 'row 0' on a grid width columns by height rows.
+
+Ask for 'row 1' as a whole number: "Subtract 1 from the numeric CONTEXT value named row_0. Return the difference.".
+Using only 'row 0'.
+Accept only if 'row 1' equals 'row 0' minus 1.
+Accept only if 'row 1' is at least 0.
+Accept only if 'row 1' is at most height minus 1.
+Display digit at column x and row 'row 1' on a grid width columns by height rows.
+
+Ask for 'row 2' as a whole number: "Subtract 1 from the numeric CONTEXT value named row_1. Return the difference.".
+Using only 'row 1'.
+Accept only if 'row 2' equals 'row 1' minus 1.
+Accept only if 'row 2' is at least 0.
+Accept only if 'row 2' is at most height minus 1.
+Display digit at column x and row 'row 2' on a grid width columns by height rows.
+
+Ask for 'row 3' as a whole number: "Subtract 1 from the numeric CONTEXT value named row_2. Return the difference.".
+Using only 'row 2'.
+Accept only if 'row 3' equals 'row 2' minus 1.
+Accept only if 'row 3' is at least 0.
+Accept only if 'row 3' is at most height minus 1.
+Display digit at column x and row 'row 3' on a grid width columns by height rows.
+
+Ask for 'row 4' as a whole number: "Subtract 1 from the numeric CONTEXT value named row_3. Return the difference.".
+Using only 'row 3'.
+Accept only if 'row 4' equals 'row 3' minus 1.
+Accept only if 'row 4' is at least 0.
+Accept only if 'row 4' is at most height minus 1.
+Display digit at column x and row 'row 4' on a grid width columns by height rows.
+
+Ask for 'row 5' as a whole number: "Subtract 1 from the numeric CONTEXT value named row_4. Return the difference.".
+Using only 'row 4'.
+Accept only if 'row 5' equals 'row 4' minus 1.
+Accept only if 'row 5' is at least 0.
+Accept only if 'row 5' is at most height minus 1.
+Display digit at column x and row 'row 5' on a grid width columns by height rows.
+
+Ask for 'row 6' as a whole number: "Subtract 1 from the numeric CONTEXT value named row_5. Return the difference.".
+Using only 'row 5'.
+Accept only if 'row 6' equals 'row 5' minus 1.
+Accept only if 'row 6' is at least 0.
+Accept only if 'row 6' is at most height minus 1.
+Display digit at column x and row 'row 6' on a grid width columns by height rows.

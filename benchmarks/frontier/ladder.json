@@ -1,0 +1,117 @@
+{
+  "budget": {
+    "context_chars": 32768,
+    "max_calls": 8,
+    "max_candidates": 4,
+    "max_depth": 4,
+    "max_units": 64,
+    "max_workers": 3,
+    "retries": 2,
+    "wall_seconds": 300
+  },
+  "default_families": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5"
+  ],
+  "families": [
+    {
+      "exports": [
+        "gcd",
+        "lcm",
+        "isPrime"
+      ],
+      "family": "frontier_F1_integer_arithmetic_v1",
+      "file": "F1-integer-arithmetic.fixture.json",
+      "hidden_tests": 56,
+      "id": "frontier-f1-integer-arithmetic-v1",
+      "key": "F1",
+      "public_tests": 4,
+      "sha256": "d62d62ffb70e387e764a6e7b6694611584f13e671f6b4aa5a9c70df0238df445",
+      "structure": "Three independent pure functions over safe integers; lcm may reuse gcd.",
+      "title": "Integer arithmetic"
+    },
+    {
+      "exports": [
+        "slugify",
+        "padLeft",
+        "wordCount"
+      ],
+      "family": "frontier_F2_string_utilities_v1",
+      "file": "F2-string-utilities.fixture.json",
+      "hidden_tests": 56,
+      "id": "frontier-f2-string-utilities-v1",
+      "key": "F2",
+      "public_tests": 7,
+      "sha256": "04220f4238b0c64c3e2a249653a10e05358ec5fa80f935e7f9a133835e7b71df",
+      "structure": "Three independent string functions with exact Unicode rules (NFD, code points, \\p{L}/\\p{M}/\\p{Nd}).",
+      "title": "String utilities"
+    },
+    {
+      "exports": [
+        "groupBy",
+        "histogram",
+        "sortBy"
+      ],
+      "family": "frontier_F3_collection_algebra_v1",
+      "file": "F3-collection-algebra.fixture.json",
+      "hidden_tests": 52,
+      "id": "frontier-f3-collection-algebra-v1",
+      "key": "F3",
+      "public_tests": 7,
+      "sha256": "de31c6fa652fac04a72a3123d5bac70aec5bd04e0ca543192381dd282460fbf5",
+      "structure": "Three collection functions with own-key result objects, adversarial names and a stable two-direction sort.",
+      "title": "Collection algebra"
+    },
+    {
+      "exports": [
+        "tokenize"
+      ],
+      "family": "frontier_F4_expression_tokenizer_v1",
+      "file": "F4-expression-tokenizer.fixture.json",
+      "hidden_tests": 46,
+      "id": "frontier-f4-expression-tokenizer-v1",
+      "key": "F4",
+      "public_tests": 4,
+      "sha256": "340a1742e00f7b4d365d22701574cb7da58a103ca6e06d8b34e955ef61c6883f",
+      "structure": "One scanner with three token classes, longest match, positions and character-level errors.",
+      "title": "Expression tokenizer"
+    },
+    {
+      "exports": [
+        "tokenize",
+        "parse",
+        "evaluate"
+      ],
+      "family": "frontier_F5_expression_evaluator_v1",
+      "file": "F5-expression-evaluator.fixture.json",
+      "hidden_tests": 59,
+      "id": "frontier-f5-expression-evaluator-v1",
+      "key": "F5",
+      "public_tests": 8,
+      "sha256": "d5e12c15fe61722ecffea32a5960dd4d3b10021718966171e50a584202436b8e",
+      "structure": "Tokenizer, recursive-descent parser with precedence and associativity, tree output and an evaluator with variable and numeric errors.",
+      "title": "Expression parser and evaluator"
+    },
+    {
+      "exports": [
+        "vend"
+      ],
+      "family": "frontier_F6_vending_machine_v1",
+      "file": "F6-vending-machine.fixture.json",
+      "hidden_tests": 48,
+      "id": "frontier-f6-vending-machine-v1",
+      "key": "F6",
+      "public_tests": 3,
+      "sha256": "46a4c248aa09a9195b393516c2b63bcd2c0f45fda8336af983f7f62f7d5f0161",
+      "structure": "A sequential state machine: credit state, four event kinds, per-event outputs and whole-call refusal.",
+      "title": "Vending state machine"
+    }
+  ],
+  "kind": "symblic_frontier_ladder_fixtures",
+  "scope": "Evaluator-owned fixtures. Every *.fixture.json file contains hidden tests; only its request field may enter construction context.",
+  "split": "dev",
+  "version": 1
+}

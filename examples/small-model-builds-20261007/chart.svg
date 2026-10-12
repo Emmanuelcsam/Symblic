@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" role="img" aria-labelledby="chart-title chart-desc">
+  <title id="chart-title">synthetic measurements in ms</title>
+  <desc id="chart-desc">A 2 ms; B 5 ms; C 3 ms</desc>
+  <line x1="20" y1="180" x2="340" y2="180" stroke="#234" stroke-width="2"/>
+  <rect x="40" y="140" width="50" height="40" fill="#234"/>
+  <rect x="140" y="80" width="50" height="100" fill="#234"/>
+  <rect x="240" y="120" width="50" height="60" fill="#234"/>
+  <text x="65" y="202" fill="#234" font-size="14" text-anchor="middle">A</text>
+  <text x="165" y="202" fill="#234" font-size="14" text-anchor="middle">B</text>
+  <text x="265" y="202" fill="#234" font-size="14" text-anchor="middle">C</text>
+  <text x="65" y="132" fill="#234" font-size="14" text-anchor="middle">2 ms</text>
+  <text x="165" y="72" fill="#234" font-size="14" text-anchor="middle">5 ms</text>
+  <text x="265" y="112" fill="#234" font-size="14" text-anchor="middle">3 ms</text>
+</svg>

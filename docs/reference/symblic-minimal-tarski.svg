@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Background: Pristine Matte Obsidian (#0A0A0A) -->
+  <rect width="512" height="512" fill="#0A0A0A" />
+
+  <!-- Symblic Tarski Semantic Satisfaction Mark:
+       Grounded in Alfred Tarski's (1933) Semantic Conception of Truth and Model Theory.
+       The double vertical pillar represents the double turnstile (⊨),
+       interlocking with orthogonal semantic mapping arms to form an architectural 'S'. -->
+  <g fill="#FFFFFF">
+    <!-- Double Turnstile Vertical Axiom Pillars -->
+    <!-- Pillar 1 (Left Model Boundary) -->
+    <rect x="160" y="140" width="22" height="232" />
+    <!-- Pillar 2 (Right Semantic Relation) -->
+    <rect x="194" y="140" width="22" height="232" />
+
+    <!-- Top Premise Branch (Rightward projection) -->
+    <rect x="216" y="140" width="136" height="22" />
+    <rect x="330" y="140" width="22" height="116" />
+
+    <!-- Central Entailment Bridge -->
+    <rect x="216" y="245" width="136" height="22" />
+
+    <!-- Bottom Satisfiability Grounding (Rightward to Leftward Return) -->
+    <rect x="216" y="350" width="136" height="22" />
+    <rect x="330" y="256" width="22" height="116" />
+  </g>
+
+  <!-- Model-Theoretic Evaluation Point (.) -->
+  <circle cx="171" cy="402" r="11" fill="#FFFFFF" />
+</svg>

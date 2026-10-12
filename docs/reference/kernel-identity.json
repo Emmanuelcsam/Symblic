@@ -1,0 +1,199 @@
+{
+  "recorded": "2026-10-02",
+  "how": "symblic/kernel/language.py + symblic/adapters/render.py + symblic/kernel/run.py copied to each node with /api/cluster/copy, the two kernel-only programs run there with /api/cluster/map (probe.py: SR.Run(source).execute()). No model involved.",
+  "rows": [
+    {
+      "node": "host",
+      "python": "3.12.3",
+      "machine": "x86_64",
+      "os": "Ubuntu 24.04",
+      "program": "02-flower-formal.sym",
+      "fingerprint": "c2351a32c05cc58d",
+      "svg": [
+        "ae7a56c405193dc1"
+      ]
+    },
+    {
+      "node": "host",
+      "python": "3.12.3",
+      "machine": "x86_64",
+      "os": "Ubuntu 24.04",
+      "program": "10-kernel-identity.sym",
+      "fingerprint": "fff6d4efbecb4a3a",
+      "svg": [
+        "7da63d1bac6a8f9b",
+        "803dc9f465b040aa",
+        "6ff2b7905cb8b047"
+      ]
+    },
+    {
+      "node": "node-arm (aarch64)",
+      "python": "3.13.5",
+      "machine": "aarch64",
+      "os": "Debian 13",
+      "program": "02-flower-formal.sym",
+      "fingerprint": "c2351a32c05cc58d",
+      "svg": [
+        "ae7a56c405193dc1"
+      ]
+    },
+    {
+      "node": "node-arm (aarch64)",
+      "python": "3.13.5",
+      "machine": "aarch64",
+      "os": "Debian 13",
+      "program": "10-kernel-identity.sym",
+      "fingerprint": "fff6d4efbecb4a3a",
+      "svg": [
+        "7da63d1bac6a8f9b",
+        "803dc9f465b040aa",
+        "6ff2b7905cb8b047"
+      ]
+    },
+    {
+      "node": "node-a",
+      "python": "3.11.2",
+      "machine": "x86_64",
+      "os": "Debian 12",
+      "program": "02-flower-formal.sym",
+      "fingerprint": "c2351a32c05cc58d",
+      "svg": [
+        "ae7a56c405193dc1"
+      ]
+    },
+    {
+      "node": "node-a",
+      "python": "3.11.2",
+      "machine": "x86_64",
+      "os": "Debian 12",
+      "program": "10-kernel-identity.sym",
+      "fingerprint": "fff6d4efbecb4a3a",
+      "svg": [
+        "7da63d1bac6a8f9b",
+        "803dc9f465b040aa",
+        "6ff2b7905cb8b047"
+      ]
+    },
+    {
+      "node": "node-b",
+      "python": "3.11.2",
+      "machine": "x86_64",
+      "os": "Debian 12",
+      "program": "02-flower-formal.sym",
+      "fingerprint": "c2351a32c05cc58d",
+      "svg": [
+        "ae7a56c405193dc1"
+      ]
+    },
+    {
+      "node": "node-b",
+      "python": "3.11.2",
+      "machine": "x86_64",
+      "os": "Debian 12",
+      "program": "10-kernel-identity.sym",
+      "fingerprint": "fff6d4efbecb4a3a",
+      "svg": [
+        "7da63d1bac6a8f9b",
+        "803dc9f465b040aa",
+        "6ff2b7905cb8b047"
+      ]
+    },
+    {
+      "node": "node-d",
+      "python": "3.11.2",
+      "machine": "x86_64",
+      "os": "Debian 12",
+      "program": "02-flower-formal.sym",
+      "fingerprint": "c2351a32c05cc58d",
+      "svg": [
+        "ae7a56c405193dc1"
+      ]
+    },
+    {
+      "node": "node-d",
+      "python": "3.11.2",
+      "machine": "x86_64",
+      "os": "Debian 12",
+      "program": "10-kernel-identity.sym",
+      "fingerprint": "fff6d4efbecb4a3a",
+      "svg": [
+        "7da63d1bac6a8f9b",
+        "803dc9f465b040aa",
+        "6ff2b7905cb8b047"
+      ]
+    },
+    {
+      "node": "node-f",
+      "python": "3.11.2",
+      "machine": "x86_64",
+      "os": "Debian 12",
+      "program": "02-flower-formal.sym",
+      "fingerprint": "c2351a32c05cc58d",
+      "svg": [
+        "ae7a56c405193dc1"
+      ]
+    },
+    {
+      "node": "node-f",
+      "python": "3.11.2",
+      "machine": "x86_64",
+      "os": "Debian 12",
+      "program": "10-kernel-identity.sym",
+      "fingerprint": "fff6d4efbecb4a3a",
+      "svg": [
+        "7da63d1bac6a8f9b",
+        "803dc9f465b040aa",
+        "6ff2b7905cb8b047"
+      ]
+    },
+    {
+      "node": "node-h",
+      "python": "3.13.5",
+      "machine": "x86_64",
+      "os": "Debian 13",
+      "program": "02-flower-formal.sym",
+      "fingerprint": "c2351a32c05cc58d",
+      "svg": [
+        "ae7a56c405193dc1"
+      ]
+    },
+    {
+      "node": "node-h",
+      "python": "3.13.5",
+      "machine": "x86_64",
+      "os": "Debian 13",
+      "program": "10-kernel-identity.sym",
+      "fingerprint": "fff6d4efbecb4a3a",
+      "svg": [
+        "7da63d1bac6a8f9b",
+        "803dc9f465b040aa",
+        "6ff2b7905cb8b047"
+      ]
+    },
+    {
+      "node": "node-i",
+      "python": "3.13.5",
+      "machine": "x86_64",
+      "os": "Debian 13",
+      "program": "02-flower-formal.sym",
+      "fingerprint": "c2351a32c05cc58d",
+      "svg": [
+        "ae7a56c405193dc1"
+      ]
+    },
+    {
+      "node": "node-i",
+      "python": "3.13.5",
+      "machine": "x86_64",
+      "os": "Debian 13",
+      "program": "10-kernel-identity.sym",
+      "fingerprint": "fff6d4efbecb4a3a",
+      "svg": [
+        "7da63d1bac6a8f9b",
+        "803dc9f465b040aa",
+        "6ff2b7905cb8b047"
+      ]
+    }
+  ],
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

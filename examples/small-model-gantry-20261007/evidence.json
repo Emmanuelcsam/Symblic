@@ -1,0 +1,1075 @@
+{
+ "version": 1,
+ "date": "2026-10-07",
+ "provider": "Qwen3:4b-instruct only through Symblic, served by Ollama on a CPU-only machine",
+ "functional_code_origin": "Model replies only; no hand repair",
+ "author_contribution": "Objectives, finite validators, independent exact oracle, orchestration, STL encoding and presentation",
+ "units": {
+  "rect_ring": {
+   "file": "rect_ring.js",
+   "reused": true,
+   "code_sha256": "aa4045d294e068c1f66f0dadc2d605d43af501629dc005be05bf51002dea4773",
+   "native_report_sha256": "c169aadd11049513b61168947e3bcd5f748b7ec348d91c3b019a90cf0923940c",
+   "native_source_sha256": "72cf313a177cdcbc81f704fd32333337959eab61b90b87dc9702925ce41a8716",
+   "fingerprint": "83cb06c18665292e",
+   "kernel_id": "ff1c88f8276e85b1",
+   "calls_in_original_unit_run": 1
+  },
+  "join_rings": {
+   "file": "join_rings.js",
+   "reused": true,
+   "code_sha256": "82032f0e8e0dc68ec533b4ab080f2921dc7242d624b11439165d5f459cc460e4",
+   "native_report_sha256": "f76daaf52079f528515339ba177a072dbca343df7fafee2f9f43be0325816c21",
+   "native_source_sha256": "e5ff1df001219049837df5ba06d7f1ff7b784520ee9ecba270a78e621218c971",
+   "fingerprint": "25474bad69e3a8da",
+   "kernel_id": "ff1c88f8276e85b1",
+   "calls_in_original_unit_run": 1
+  },
+  "caps": {
+   "file": "caps.js",
+   "reused": true,
+   "code_sha256": "e520586fc739613e53829cefd310dadb8d5040ca4da85e5efd3120121c5cc63a",
+   "native_report_sha256": "a84740e6965c52f2c3154f99c376e70f7050ba1a00fbca0fda00627cb63b0780",
+   "native_source_sha256": "f0abea82d0d5224875704800aaad310dd14b4db57d317171502cec3bf4bb0b21",
+   "fingerprint": "d4add1773548fa63",
+   "kernel_id": "ff1c88f8276e85b1",
+   "calls_in_original_unit_run": 3
+  },
+  "box": {
+   "file": "box.js",
+   "reused": true,
+   "code_sha256": "44ed954dc41e898fefd295923f843743f90047266798078d094e8ef4172a29e3",
+   "native_report_sha256": "ccf86da9b4b464174e9d4224c16a71b8a331719e0b436c96e7c5b9d869c254a7",
+   "native_source_sha256": "3d44e4c7cfb24e29d37155b55e455362ca6e73de0f46f5d004c1af5328256cb8",
+   "fingerprint": "07526ec460eea20c",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls_in_original_unit_run": 2
+  },
+  "translate": {
+   "file": "translate.js",
+   "reused": true,
+   "code_sha256": "774b7fd21e7e5ac8fd898e42878347a7dc6e444097d49e0f6d09314fcef050bc",
+   "native_report_sha256": "d2a83fc75ab8951580afa09aa73c57d809f3431089f38dcb3efdc8ff6fd89947",
+   "native_source_sha256": "f556d2cc85f7bfe44c1abf92062ec4fd07f0aae6c307c1031707fcac42266b0f",
+   "fingerprint": "5091a6cddfdc168d",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls_in_original_unit_run": 2
+  },
+  "gantry": {
+   "file": "gantry.js",
+   "reused": false,
+   "code_sha256": "ae956e4c53278f1a460a6e5a5a48071b0e9be950e441dfbff70127d333955951",
+   "native_report_sha256": "792ff723c21e98e3e64baa60844a4b8d59f8a7dcb6a353fd296229e6d314af09",
+   "native_source_sha256": "28ff4abc8883f4a8846b918c175439f9cb41f1bd2718d2da635fc79e1099835d",
+   "fingerprint": "44880c98a9d61276",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls_in_original_unit_run": 1
+  }
+ },
+ "new_attempts": [
+  {
+   "unit": "gantry",
+   "attempt": 1,
+   "accepted": true,
+   "receipt_sha256": "0a417c4a8c152c8f7fc4a3786e60cdd1cbd08e1e61d93ee6c429881367f41952",
+   "reply_sha256": "9eace835409abcfb1c4ec52ddf4c0c3be60e7dc449ad13bf57a98c078164164a",
+   "usage": {
+    "input_tokens": 1264,
+    "output_tokens": 266,
+    "duration_ms": 35891,
+    "load_ms": 2324,
+    "prompt_ms": 13854,
+    "eval_ms": 19689
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "initial-gantry-round",
+   "unit": "box",
+   "attempt": 1,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "4b71907ffd214d6975b0e9bab69b8f12ca80ab6dd89f9cee5c74f797611450b6",
+   "reply_sha256": "248eeb0b5f15fd41482597d98c3ee09fa1b850f2ba8284838a88352559ea849d",
+   "usage": {
+    "input_tokens": 1429,
+    "output_tokens": 167,
+    "duration_ms": 30732,
+    "load_ms": 2066,
+    "prompt_ms": 15994,
+    "eval_ms": 12648
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "initial-gantry-round",
+   "unit": "box",
+   "attempt": 2,
+   "accepted": true,
+   "outcome": "accepted",
+   "receipt_sha256": "881e41198f95bcb07680b15f0f5d4b4447908ffb56f2c0c1bd4958c08ca3aa16",
+   "reply_sha256": "0e23b354c83f8a3ced86682990fc90afe6ad589cb74c10bfb1b82879070ad36e",
+   "usage": {
+    "input_tokens": 1693,
+    "output_tokens": 791,
+    "duration_ms": 88560,
+    "load_ms": 2063,
+    "prompt_ms": 19293,
+    "eval_ms": 67177
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "initial-gantry-round",
+   "unit": "translate",
+   "attempt": 1,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "94af18e54ebd8b628528179243febb8cd68e210697e106baa91fbd7845c2b7df",
+   "reply_sha256": "ccf396bab4ab1a0689822a55288c0a5c4aac1329b15475dee53590cf9d5a98c5",
+   "usage": {
+    "input_tokens": 337,
+    "output_tokens": 69,
+    "duration_ms": 9907,
+    "load_ms": 2063,
+    "prompt_ms": 3516,
+    "eval_ms": 4309
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "initial-gantry-round",
+   "unit": "translate",
+   "attempt": 2,
+   "accepted": true,
+   "outcome": "accepted",
+   "receipt_sha256": "22e9887e3677e3e41207d35c5102f32eb9e2af05128468aa4471891d805913f7",
+   "reply_sha256": "9b32179796ef43f1a6814a9fed48d1a4252cfe5232925ba305bfedd35d18f4c4",
+   "usage": {
+    "input_tokens": 553,
+    "output_tokens": 445,
+    "duration_ms": 37974,
+    "load_ms": 2065,
+    "prompt_ms": 6078,
+    "eval_ms": 29811
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "initial-gantry-round",
+   "unit": "gantry",
+   "attempt": 1,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "b5ff094635c8faafd047a0ab0b2dd7cebacf6e409e40f6e31db89fa482ad053d",
+   "reply_sha256": "edc7c4602ee2f178ef347c42c52f1c78b0c6cbd57b8ed54d299aaa6e6c7f1413",
+   "usage": {
+    "input_tokens": 2271,
+    "output_tokens": 317,
+    "duration_ms": 57756,
+    "load_ms": 2314,
+    "prompt_ms": 27492,
+    "eval_ms": 27928
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "initial-gantry-round",
+   "unit": "gantry",
+   "attempt": 2,
+   "accepted": false,
+   "outcome": "provider_timeout_or_failure",
+   "receipt_sha256": "b4852855fa5668728f7a787b19472ba05890e12df0e8c99b7a3e1c945ab1fc3f",
+   "reply_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "usage": {},
+   "model": null,
+   "node": "node-a",
+   "model_identity": {
+    "status": "unavailable",
+    "digest": null,
+    "source": "none"
+   }
+  },
+  {
+   "stage": "initial-gantry-round",
+   "unit": "gantry",
+   "attempt": 3,
+   "accepted": false,
+   "outcome": "provider_timeout_or_failure",
+   "receipt_sha256": "7f20a8f7250fef194f2767c2d91e014581632c391be3309a27aff1d177eb7d61",
+   "reply_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "usage": {},
+   "model": null,
+   "node": "node-a",
+   "model_identity": {
+    "status": "unavailable",
+    "digest": null,
+    "source": "none"
+   }
+  }
+ ],
+ "new_call_count": 8,
+ "reused_history": "Original full cup build-family attempts remain in small-model-builds-20261007/evidence.json and private raw receipts; reuse makes no new generation claim",
+ "model_identity_limit": "Ollama manifest observations are not attestation of loaded weights",
+ "independent_verification": {
+  "passed": true,
+  "cases": [
+   {
+    "case": "target-left",
+    "passed": true,
+    "parts": {
+     "base": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 57600.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        60.0
+       ],
+       [
+        -30.0,
+        30.0
+       ],
+       [
+        0.0,
+        8.0
+       ]
+      ]
+     },
+     "left_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 5376.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        -52.0
+       ],
+       [
+        -4.0,
+        4.0
+       ],
+       [
+        8.0,
+        92.0
+       ]
+      ]
+     },
+     "right_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 5376.0,
+      "bounds_mm": [
+       [
+        52.0,
+        60.0
+       ],
+       [
+        -4.0,
+        4.0
+       ],
+       [
+        8.0,
+        92.0
+       ]
+      ]
+     },
+     "crossbar": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 7680.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        60.0
+       ],
+       [
+        -4.0,
+        4.0
+       ],
+       [
+        92.0,
+        100.0
+       ]
+      ]
+     },
+     "carriage": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 3840.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        -40.0
+       ],
+       [
+        -8.0,
+        8.0
+       ],
+       [
+        102.0,
+        114.0
+       ]
+      ]
+     }
+    },
+    "travel_mm": -50.0,
+    "clearance_mm": 2,
+    "total_material_volume_mm3": 79872.0,
+    "scope": "Geometric mock-up only; no bearing, connection, load, fabrication or control validation",
+    "negative_mutation_rejected": true
+   },
+   {
+    "case": "target-center",
+    "passed": true,
+    "parts": {
+     "base": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 57600.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        60.0
+       ],
+       [
+        -30.0,
+        30.0
+       ],
+       [
+        0.0,
+        8.0
+       ]
+      ]
+     },
+     "left_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 5376.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        -52.0
+       ],
+       [
+        -4.0,
+        4.0
+       ],
+       [
+        8.0,
+        92.0
+       ]
+      ]
+     },
+     "right_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 5376.0,
+      "bounds_mm": [
+       [
+        52.0,
+        60.0
+       ],
+       [
+        -4.0,
+        4.0
+       ],
+       [
+        8.0,
+        92.0
+       ]
+      ]
+     },
+     "crossbar": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 7680.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        60.0
+       ],
+       [
+        -4.0,
+        4.0
+       ],
+       [
+        92.0,
+        100.0
+       ]
+      ]
+     },
+     "carriage": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 3840.0,
+      "bounds_mm": [
+       [
+        -10.0,
+        10.0
+       ],
+       [
+        -8.0,
+        8.0
+       ],
+       [
+        102.0,
+        114.0
+       ]
+      ]
+     }
+    },
+    "travel_mm": 0,
+    "clearance_mm": 2,
+    "total_material_volume_mm3": 79872.0,
+    "scope": "Geometric mock-up only; no bearing, connection, load, fabrication or control validation",
+    "verified_binary_stls": {
+     "base": {
+      "sha256": "871261b6ece1a5dc206b9f4617d9c637830453cc9aa9001148063da4a7df0435",
+      "bytes": 684
+     },
+     "left_post": {
+      "sha256": "2741c78e469e1e58862a057a93e65af8b7ec34d8877e831498e018be4510ebc9",
+      "bytes": 684
+     },
+     "right_post": {
+      "sha256": "d368723ac08485564734a29ccade9116b149073199288912760bf5c7eb01ec23",
+      "bytes": 684
+     },
+     "crossbar": {
+      "sha256": "d5634a9f2c90dee6c3759511ac5ff48c533fda18d676a2dd53eec872c235dd7a",
+      "bytes": 684
+     },
+     "carriage": {
+      "sha256": "db5251038573d8eea7703f6482c33ea76e665ab9bb89057427337410874fb5b0",
+      "bytes": 684
+     }
+    },
+    "negative_mutation_rejected": true
+   },
+   {
+    "case": "target-right",
+    "passed": true,
+    "parts": {
+     "base": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 57600.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        60.0
+       ],
+       [
+        -30.0,
+        30.0
+       ],
+       [
+        0.0,
+        8.0
+       ]
+      ]
+     },
+     "left_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 5376.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        -52.0
+       ],
+       [
+        -4.0,
+        4.0
+       ],
+       [
+        8.0,
+        92.0
+       ]
+      ]
+     },
+     "right_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 5376.0,
+      "bounds_mm": [
+       [
+        52.0,
+        60.0
+       ],
+       [
+        -4.0,
+        4.0
+       ],
+       [
+        8.0,
+        92.0
+       ]
+      ]
+     },
+     "crossbar": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 7680.0,
+      "bounds_mm": [
+       [
+        -60.0,
+        60.0
+       ],
+       [
+        -4.0,
+        4.0
+       ],
+       [
+        92.0,
+        100.0
+       ]
+      ]
+     },
+     "carriage": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 3840.0,
+      "bounds_mm": [
+       [
+        40.0,
+        60.0
+       ],
+       [
+        -8.0,
+        8.0
+       ],
+       [
+        102.0,
+        114.0
+       ]
+      ]
+     }
+    },
+    "travel_mm": 50.0,
+    "clearance_mm": 2,
+    "total_material_volume_mm3": 79872.0,
+    "scope": "Geometric mock-up only; no bearing, connection, load, fabrication or control validation",
+    "negative_mutation_rejected": true
+   },
+   {
+    "case": "alternate-left",
+    "passed": true,
+    "parts": {
+     "base": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 23760.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        45.0
+       ],
+       [
+        -22.0,
+        22.0
+       ],
+       [
+        0.0,
+        6.0
+       ]
+      ]
+     },
+     "left_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 2088.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        -39.0
+       ],
+       [
+        -3.0,
+        3.0
+       ],
+       [
+        6.0,
+        64.0
+       ]
+      ]
+     },
+     "right_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 2088.0,
+      "bounds_mm": [
+       [
+        39.0,
+        45.0
+       ],
+       [
+        -3.0,
+        3.0
+       ],
+       [
+        6.0,
+        64.0
+       ]
+      ]
+     },
+     "crossbar": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 3240.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        45.0
+       ],
+       [
+        -3.0,
+        3.0
+       ],
+       [
+        64.0,
+        70.0
+       ]
+      ]
+     },
+     "carriage": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 2160.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        -27.0
+       ],
+       [
+        -6.0,
+        6.0
+       ],
+       [
+        71.5,
+        81.5
+       ]
+      ]
+     }
+    },
+    "travel_mm": -36.0,
+    "clearance_mm": 1.5,
+    "total_material_volume_mm3": 33336.0,
+    "scope": "Geometric mock-up only; no bearing, connection, load, fabrication or control validation",
+    "negative_mutation_rejected": true
+   },
+   {
+    "case": "alternate-center",
+    "passed": true,
+    "parts": {
+     "base": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 23760.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        45.0
+       ],
+       [
+        -22.0,
+        22.0
+       ],
+       [
+        0.0,
+        6.0
+       ]
+      ]
+     },
+     "left_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 2088.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        -39.0
+       ],
+       [
+        -3.0,
+        3.0
+       ],
+       [
+        6.0,
+        64.0
+       ]
+      ]
+     },
+     "right_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 2088.0,
+      "bounds_mm": [
+       [
+        39.0,
+        45.0
+       ],
+       [
+        -3.0,
+        3.0
+       ],
+       [
+        6.0,
+        64.0
+       ]
+      ]
+     },
+     "crossbar": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 3240.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        45.0
+       ],
+       [
+        -3.0,
+        3.0
+       ],
+       [
+        64.0,
+        70.0
+       ]
+      ]
+     },
+     "carriage": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 2160.0,
+      "bounds_mm": [
+       [
+        -9.0,
+        9.0
+       ],
+       [
+        -6.0,
+        6.0
+       ],
+       [
+        71.5,
+        81.5
+       ]
+      ]
+     }
+    },
+    "travel_mm": 0,
+    "clearance_mm": 1.5,
+    "total_material_volume_mm3": 33336.0,
+    "scope": "Geometric mock-up only; no bearing, connection, load, fabrication or control validation",
+    "verified_binary_stls": {
+     "base": {
+      "sha256": "101eca3fd6ee9fe9d0d798acc38d6abcf7a7dffcb2db0ed7b266a761bdaf37f8",
+      "bytes": 684
+     },
+     "left_post": {
+      "sha256": "c2aec053909550ec81174e859eaa3ad97e77f8b26abb8c942b3aa5ef72ad76f1",
+      "bytes": 684
+     },
+     "right_post": {
+      "sha256": "399e45463ecc2b720365b029c370ac4caf89782478fdede5964c595879002dc6",
+      "bytes": 684
+     },
+     "crossbar": {
+      "sha256": "5420c31e95722cac865c0726e7061340bbb67fc994f6917fb0f8a38331867007",
+      "bytes": 684
+     },
+     "carriage": {
+      "sha256": "0a3020a0ef8a2996bad70a82d29b367acf9150fd2b98995c9da7a8965286e53c",
+      "bytes": 684
+     }
+    },
+    "negative_mutation_rejected": true
+   },
+   {
+    "case": "alternate-right",
+    "passed": true,
+    "parts": {
+     "base": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 23760.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        45.0
+       ],
+       [
+        -22.0,
+        22.0
+       ],
+       [
+        0.0,
+        6.0
+       ]
+      ]
+     },
+     "left_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 2088.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        -39.0
+       ],
+       [
+        -3.0,
+        3.0
+       ],
+       [
+        6.0,
+        64.0
+       ]
+      ]
+     },
+     "right_post": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 2088.0,
+      "bounds_mm": [
+       [
+        39.0,
+        45.0
+       ],
+       [
+        -3.0,
+        3.0
+       ],
+       [
+        6.0,
+        64.0
+       ]
+      ]
+     },
+     "crossbar": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 3240.0,
+      "bounds_mm": [
+       [
+        -45.0,
+        45.0
+       ],
+       [
+        -3.0,
+        3.0
+       ],
+       [
+        64.0,
+        70.0
+       ]
+      ]
+     },
+     "carriage": {
+      "passed": true,
+      "vertices": 8,
+      "triangles": 12,
+      "volume_mm3": 2160.0,
+      "bounds_mm": [
+       [
+        27.0,
+        45.0
+       ],
+       [
+        -6.0,
+        6.0
+       ],
+       [
+        71.5,
+        81.5
+       ]
+      ]
+     }
+    },
+    "travel_mm": 36.0,
+    "clearance_mm": 1.5,
+    "total_material_volume_mm3": 33336.0,
+    "scope": "Geometric mock-up only; no bearing, connection, load, fabrication or control validation",
+    "negative_mutation_rejected": true
+   }
+  ],
+  "independent_oracle": "Exact rational boundary, edge, orientation, area, volume, clearance and STL roundtrip checks"
+ },
+ "validator_controls": {
+  "passed": true,
+  "cases": [
+   {
+    "case": "valid-reference",
+    "expected": true,
+    "native": true,
+    "independent": true,
+    "native_error": null,
+    "independent_error": null
+   },
+   {
+    "case": "fractional-translated-reference",
+    "expected": true,
+    "native": true,
+    "independent": true,
+    "native_error": null,
+    "independent_error": null
+   },
+   {
+    "case": "reversed-face",
+    "expected": false,
+    "native": false,
+    "independent": false,
+    "native_error": "Error: Box: face 0 indices [5,1,0] normal [0,6,0] expected axis 1 sign -",
+    "independent_error": "face 0 [5, 1, 0] normal [Fraction(0, 1), Fraction(6, 1), Fraction(0, 1)] points inward on (1, 0)"
+   },
+   {
+    "case": "missing-face",
+    "expected": false,
+    "native": false,
+    "independent": false,
+    "native_error": "Error: Box: 8 vertices / 12 triangles",
+    "independent_error": "8 vertices / 12 triangles"
+   },
+   {
+    "case": "duplicate-face",
+    "expected": false,
+    "native": false,
+    "independent": false,
+    "native_error": "Error: Box: opposite paired edge incidences",
+    "independent_error": "opposite paired edge incidences"
+   },
+   {
+    "case": "zero-area",
+    "expected": false,
+    "native": false,
+    "independent": false,
+    "native_error": "Error: Box: face 0 indices",
+    "independent_error": "face 0 indices"
+   },
+   {
+    "case": "wrong-bound",
+    "expected": false,
+    "native": false,
+    "independent": false,
+    "native_error": "Error: Box: exact bounds/corners",
+    "independent_error": "exact corner set and bounds"
+   },
+   {
+    "case": "wrong-vertex",
+    "expected": false,
+    "native": false,
+    "independent": false,
+    "native_error": "Error: Box: exact bounds/corners",
+    "independent_error": "exact corner set and bounds"
+   }
+  ],
+  "scope": "Validator oracle fixtures only; no candidate or STL generated"
+ },
+ "artifact_sha256": {
+  "alternate-left_post.stl": "c2aec053909550ec81174e859eaa3ad97e77f8b26abb8c942b3aa5ef72ad76f1",
+  "box.js": "44ed954dc41e898fefd295923f843743f90047266798078d094e8ef4172a29e3",
+  "validate_geometry.py": "610f059fe86224309165a0209e3001f9e75fd4922ee4a1ca8443086e402f16a7",
+  "cases.json": "6247327064a18a04278a3f7f08565c228f4b2835d2bc01b0de80a2a9bb6f4c10",
+  "translate.js": "774b7fd21e7e5ac8fd898e42878347a7dc6e444097d49e0f6d09314fcef050bc",
+  "gantry.js": "ae956e4c53278f1a460a6e5a5a48071b0e9be950e441dfbff70127d333955951",
+  "caps.js": "e520586fc739613e53829cefd310dadb8d5040ca4da85e5efd3120121c5cc63a",
+  "alternate-assembly.json": "9b114c740b085bd3812aa36c75e991601f9b740ae4f78cc3f1924327ce528809",
+  "target-base.stl": "871261b6ece1a5dc206b9f4617d9c637830453cc9aa9001148063da4a7df0435",
+  "rect_ring.js": "aa4045d294e068c1f66f0dadc2d605d43af501629dc005be05bf51002dea4773",
+  "alternate-right_post.stl": "399e45463ecc2b720365b029c370ac4caf89782478fdede5964c595879002dc6",
+  "alternate-crossbar.stl": "5420c31e95722cac865c0726e7061340bbb67fc994f6917fb0f8a38331867007",
+  "target-crossbar.stl": "d5634a9f2c90dee6c3759511ac5ff48c533fda18d676a2dd53eec872c235dd7a",
+  "assemblies.json": "cd60707ee0ca2b11d2fc6d8708d6bb81c32d2cd8e1383593e8a5a130d53d9d6c",
+  "alternate-base.stl": "101eca3fd6ee9fe9d0d798acc38d6abcf7a7dffcb2db0ed7b266a761bdaf37f8",
+  "target-right_post.stl": "d368723ac08485564734a29ccade9116b149073199288912760bf5c7eb01ec23",
+  "join_rings.js": "82032f0e8e0dc68ec533b4ab080f2921dc7242d624b11439165d5f459cc460e4",
+  "alternate-carriage.stl": "0a3020a0ef8a2996bad70a82d29b367acf9150fd2b98995c9da7a8965286e53c",
+  "validate-gantry.js": "ec8b7b97e169564baa921c40a8c4cabbcd6a1d4d956b79eff45817b2046cda25",
+  "target-assembly.json": "8308d98830d689dbb53ea7609b178606a8e8b0a4f8beed6c7715b3db73c635a4",
+  "verify.py": "b8f118801907ce1d3cea1b9d7817006c809f7f84241c87d9eb628c3ebddb431b",
+  "README.md": "26e512304905af6d84b6b18a510d16a3545233e9fd176c1ffb68b9d4bd5d6215",
+  "target-carriage.stl": "db5251038573d8eea7703f6482c33ea76e665ab9bb89057427337410874fb5b0",
+  "target-left_post.stl": "2741c78e469e1e58862a057a93e65af8b7ec34d8877e831498e018be4510ebc9"
+ },
+ "catalogue_source_sha256": "19b7fb0e336f4e58203e95efbebad60063962314252f44a47cc23bafbc1075ea",
+ "fresh_playback": [
+  {
+   "file": "46-small-model-gantry.sym",
+   "source_sha256": "19b7fb0e336f4e58203e95efbebad60063962314252f44a47cc23bafbc1075ea",
+   "status": "done",
+   "calls": 0,
+   "asks": 0,
+   "kernel_id": "a98acbe306cbc06e",
+   "fingerprint": "40804ec8619ff1d1"
+  }
+ ],
+ "published_edits": "2026-10-11, for publication: README.md was edited (the original host's names and private paths removed, commands pointed at this repository) and its hash above updated; node names were replaced by \"node-a\". Every other artifact is byte-identical to the original bundle."
+}

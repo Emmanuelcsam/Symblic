@@ -1,0 +1,32 @@
+---
+effort: high
+---
+# A furnace schedule (draft)
+
+A calcination protocol is written in ordinary lab language. A reader turns it into heating steps; the
+kernel computes how long the run takes. This draft is written the way protocols often are.
+
+## The protocol
+
+```symblic
+given protocol: Text = """Calcination of a alumina sample: heat from room temperature to 600 °C slowly, hold at the top temperature for a couple of hours, then let the furnace cool to 100 °C at about 3 °C per minute before removing the sample."""
+define Step as Record {kind: one of {ramp, hold, cool}, start_c: Number, end_c: Number, rate_c_per_min: Number, minutes: Number}
+```
+
+## Reading the steps
+
+List the steps in order. A ramp or a cool has a start and an end temperature and a rate (minutes is 0);
+a hold has its minutes (rate is 0, start and end are the hold temperature).
+
+```symblic
+ask steps: List of Step "List the heating steps of the protocol in order." from protocol
+ensure len(steps) = 3 else retry because "the protocol has three steps: heat, hold, cool".
+```
+
+## Duration
+
+```symblic
+let minutes = [if s.kind = "hold" then s.minutes else abs(s.end_c - s.start_c) / s.rate_c_per_min for s in steps].
+let total_minutes = sum(minutes).
+show total_minutes.
+```

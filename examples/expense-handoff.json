@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "source": {
+    "version": 1,
+    "id": "trip-notes",
+    "revision": 1,
+    "text": "Trip to Tokyo and San Francisco (March 2026).\nMarch 12: Lunch in Tokyo 4500 JPY. Flight to SFO 850 USD.\nMarch 13: Hotel in SFO 280 USD. Dinner with client 140 USD. Taxi 45 USD.\nMarch 14: Hotel in SFO 280 USD. Lunch 35 USD. Coffee 8 USD.\n",
+    "sha256": "4e12745ca329e0b3bb73c5cadb3b3d59c286ffe09fb7ea326c99332386f3ba90"
+  },
+  "entries": [
+    {
+      "id": "e01",
+      "start": 56,
+      "end": 79,
+      "label": "Lunch in Tokyo",
+      "day": "2026-03-12",
+      "category": "meal",
+      "currency": "JPY"
+    },
+    {
+      "id": "e02",
+      "start": 81,
+      "end": 102,
+      "label": "Flight to SFO",
+      "day": "2026-03-12",
+      "category": "travel",
+      "currency": "USD"
+    },
+    {
+      "id": "e03",
+      "start": 114,
+      "end": 134,
+      "label": "Hotel in SFO",
+      "day": "2026-03-13",
+      "category": "hotel",
+      "currency": "USD"
+    },
+    {
+      "id": "e04",
+      "start": 136,
+      "end": 162,
+      "label": "Dinner with client",
+      "day": "2026-03-13",
+      "category": "client_meal",
+      "currency": "USD"
+    },
+    {
+      "id": "e05",
+      "start": 164,
+      "end": 175,
+      "label": "Taxi",
+      "day": "2026-03-13",
+      "category": "travel",
+      "currency": "USD"
+    },
+    {
+      "id": "e06",
+      "start": 187,
+      "end": 207,
+      "label": "Hotel in SFO",
+      "day": "2026-03-14",
+      "category": "hotel",
+      "currency": "USD"
+    },
+    {
+      "id": "e07",
+      "start": 209,
+      "end": 221,
+      "label": "Lunch",
+      "day": "2026-03-14",
+      "category": "meal",
+      "currency": "USD"
+    },
+    {
+      "id": "e08",
+      "start": 223,
+      "end": 235,
+      "label": "Coffee",
+      "day": "2026-03-14",
+      "category": "meal",
+      "currency": "USD"
+    }
+  ],
+  "policy": {
+    "rates": {
+      "USD": {
+        "numerator": 1,
+        "denominator": 1
+      },
+      "JPY": {
+        "numerator": 67,
+        "denominator": 10000
+      }
+    },
+    "hotel_daily_cap": 250,
+    "meal_item_cap": 75,
+    "negative_amounts": "refuse"
+  },
+  "caller_scope": "The caller declares these eight regions complete for this example, supplies dates and category decisions, and stipulates rates/caps. These premises are not proven by source overlap."
+}

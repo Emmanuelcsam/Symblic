@@ -1,0 +1,10 @@
+.sy-memory {max-width:960px;margin:0 auto;}
+.sy-memory input:not([type=checkbox]), .sy-memory textarea, .sy-memory select {display:block;width:100%;box-sizing:border-box;font-size:16px;padding:12px;margin:8px 0 16px;border:1px solid var(--brd);border-radius:6px;background:var(--bg1);color:var(--tx1);}
+.sy-memory input[type=checkbox] {width:20px;height:20px;flex:none;}
+.sy-memory label {font-weight:600;overflow-wrap:anywhere;}
+.sy-memory-select {display:flex;align-items:center;gap:12px;min-height:44px;}
+.sy-memory button {min-height:44px;}
+.sy-memory pre {white-space:pre-wrap;overflow-wrap:anywhere;max-height:24rem;overflow:auto;}
+.sy-memory summary {padding:12px 0;cursor:pointer;}
+.sy-memory-error {color:var(--err);overflow-wrap:anywhere;}
+@media(max-width:600px) {.sy-memory .sy-acts {display:grid;grid-template-columns:1fr;}.sy-memory h2 {font-size:1.35rem;}}

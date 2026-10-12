@@ -1,0 +1,149 @@
+{
+  "schema": "symblic.finite-construction.result.v1",
+  "date": "2026-10-05",
+  "run_id": "ae4e46820f83",
+  "applicator": "ollama:qwen3:4b-instruct@node-b",
+  "status": "done",
+  "source": "examples/vorticity-construction.sym",
+  "source_sha256": "e5de948c75bdf38d5b12291f7f20d4fd2fa2971398b490bfbae71ce2646ee2e9",
+  "execution_pins_sha256": "71c8c9d62120b67394b70926e978935a023094fe2c2e3d9116d24089b84e9028",
+  "kernel_id": "59c87dc8a638abce",
+  "fresh_calls": 20,
+  "distinct_tasks": 20,
+  "repairs": 0,
+  "cached_calls": 0,
+  "seconds": 1348.82,
+  "host_call_budget": 30,
+  "construction_policy": {
+    "profile": "verified",
+    "determine": false,
+    "solve": false,
+    "constructor": "off",
+    "effort": "medium",
+    "per_task_retries": 1
+  },
+  "all20_selected_contexts_audited": true,
+  "actual_provider_options": {
+    "num_ctx": 16384,
+    "num_predict": 16384,
+    "num_thread": "omitted: provider default",
+    "temperature": 0,
+    "seed": 7,
+    "timeout_seconds": 3600
+  },
+  "phi": [
+    0,
+    1,
+    2,
+    1,
+    0
+  ],
+  "canonical_witness": {
+    "A": [
+      [
+        2,
+        -1,
+        0
+      ],
+      [
+        -1,
+        2,
+        -1
+      ],
+      [
+        0,
+        -1,
+        2
+      ]
+    ],
+    "D": [
+      2,
+      {
+        "#q": "3/2"
+      },
+      {
+        "#q": "4/3"
+      }
+    ],
+    "L": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        {
+          "#q": "-1/2"
+        },
+        1,
+        0
+      ],
+      [
+        0,
+        {
+          "#q": "-2/3"
+        },
+        1
+      ]
+    ],
+    "b": [
+      0,
+      2,
+      0
+    ],
+    "checks": {
+      "factorization": true,
+      "positive_pivots": true,
+      "stationary": true,
+      "symmetric": true,
+      "unique_minimum": true
+    },
+    "method": "exact-rational-ldlt",
+    "min_energy": -2,
+    "residual": [
+      0,
+      0,
+      0
+    ],
+    "schema": "symblic.quadratic-minimum.v1",
+    "scope": "explicit-finite-rational-quadratic",
+    "x": [
+      1,
+      2,
+      1
+    ]
+  },
+  "fingerprint": "4f8ee53abdc44057",
+  "replay": {
+    "ok": true,
+    "fingerprint": "4f8ee53abdc44057",
+    "expected": "4f8ee53abdc44057",
+    "status": "done",
+    "error": null,
+    "refused": [],
+    "calls": 0,
+    "cached": 20
+  },
+  "portable_lock_file_sha256": "101dfe128a3578b1c44fac5edff8fd376469e903be42e63f19601a4d81fe2f4f",
+  "retained_original_archive_files": 7,
+  "all_original_archive_files_matched_before_lock": true,
+  "prior_whole_program_failures_retained": [
+    "315f88648e42",
+    "8219c94f2275",
+    "0731a75ff11c"
+  ],
+  "supporting_substitution_diagnostic": {
+    "run_id": "09d7ff1df692",
+    "distinct_tasks": 9,
+    "fresh_calls": 10,
+    "repair": "forward3: 0/1 rejected, 4/3 accepted",
+    "scope": "Declared synthetic A,b,L,D; substitution only",
+    "zero_model_replay": true
+  },
+  "limits": [
+    "Dimensionless five-vertex connected finite graph with fixed zero endpoints and unit edge weights.",
+    "One successful small-model fixture run; no general model accuracy estimate.",
+    "No continuum convergence, dimensional plasma calibration, GPU implementation or arbitrary Neumann boundary solvability established."
+  ],
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

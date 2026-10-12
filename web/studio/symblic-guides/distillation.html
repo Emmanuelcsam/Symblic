@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f1eb"><title>Training a small model · Symblic</title>
+<link rel="stylesheet" href="guides.css"></head><body>
+<a class="guide-skip" href="#guide">Skip to guide</a>
+<header class="guide-header"><a href="../symblic.html#write">← Symblic</a><span>Guides</span><a href="../symblic.html#write">Open Write</a></header>
+<div class="guide-layout"><details class="guide-menu" open><summary>Browse guides</summary><nav aria-label="Symblic guides"><a href="index.html">Start here</a>
+<a href="editor.html">Underlines and instruction circuits</a>
+<a href="steps.html">Build one step at a time</a>
+<a href="steps-evidence.html">Small-model results</a>
+<a href="workcards.html">Workcards</a>
+<a href="supervisor.html">Supervisor</a>
+<a href="distillation.html" aria-current="page">Training a small model</a>
+<a href="portable.html">Portable execution</a>
+<a href="vorticity.html">Field construction</a></nav></details>
+<main id="guide" class="guide-prose"><h1>Symblic distillation (SFT/LoRA), version 1</h1>
+<p><strong>Status:</strong> implemented and locally verified, including an admitted real CPU pilot.</p>
+<ul>
+<li><strong>Implemented:</strong> accepted-run export, dataset/split/plan/compare, durable job worker, explicit adapter inference, and <code>tools/symblic-distill</code>.</li>
+<li><strong>Tested:</strong> 53 isolated core tests and 6 exporter tests; native export from four actual accepted runs; real LoRA training, frozen heldout comparison, checkpoint verification and inference on node-i (§10).</li>
+<li><strong>Limits:</strong> v1 supports CPU training only. Native generation checking supports registered closed pure scalar contracts (§11); unsupported contexts refuse. GRPO is unsupported. The pilot does not establish general accuracy improvement.</li>
+<li><strong>Execution:</strong> imports are inert. The planner CLI prints launch manifests; the explicit worker commands perform training/inference through the operator&#39;s admitted runner. Provisioning, model snapshots and cluster admission remain caller-owned.</li>
+</ul>
+<p><strong>What it is:</strong> supervised fine-tuning of a LoRA adapter on answers that Symblic runs already accepted under
+their native checks, with a frozen held-out baseline-vs-trained comparison. Verifiable-reward/GRPO is
+<strong>unsupported</strong> (see the end).</p>
+<h2>1. Environment (root provisions; verified 2026-10-06)</h2>
+<div class="guide-table" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>package</th>
+<th>exact pin</th>
+<th>used for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Python</td>
+<td>3.12 (≥3.10)</td>
+<td></td>
+</tr>
+<tr>
+<td>torch</td>
+<td>2.14.1 (<code>+cpu</code> wheel from the PyTorch CPU index on CPU nodes)</td>
+<td>model, AdamW, <code>torch.load(weights_only=True)</code></td>
+</tr>
+<tr>
+<td>transformers</td>
+<td>5.18.0</td>
+<td><code>AutoTokenizer</code>/<code>AutoModelForCausalLM.from_pretrained(local_files_only=True, trust_remote_code=False, use_safetensors=True, dtype=…)</code></td>
+</tr>
+<tr>
+<td>peft</td>
+<td>0.21.2</td>
+<td><code>LoraConfig</code>, <code>get_peft_model</code>, <code>PeftModel.from_pretrained(…, is_trainable=…)</code></td>
+</tr>
+<tr>
+<td>safetensors</td>
+<td>0.8.0</td>
+<td>adapter/weights format</td>
+</tr>
+<tr>
+<td>tokenizers</td>
+<td>0.23.2</td>
+<td>transformers dependency</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li><strong>Not used:</strong> trl, datasets, accelerate, bitsandbytes, deepspeed.</li>
+<li><strong>Version gate:</strong> <code>preflight</code> refuses (<code>package_version_mismatch</code>) unless the installed versions equal the
+plan&#39;s <code>packages</code> exactly. The <code>+cpu</code>/<code>+cuNNN</code> local suffix is ignored.</li>
+<li><strong>How the APIs were checked:</strong> the pinned set was co-installed in a scratch venv (Python 3.11.15, torch
+<code>2.14.1+cu130</code> from PyPI, because the PyTorch CPU index is not reachable from the cloud session). The
+signatures used here were introspected there, and peft&#39;s LoRA docs were read at tag <code>v0.21.2</code> and
+transformers&#39; model docs at <code>v5.18.0</code>.<ul>
+<li>In transformers 5.18, <code>dtype</code> is the parameter; <code>torch_dtype</code> is kept only for backward compatibility.</li>
+<li>peft 0.21.2 writes <code>adapter_model.safetensors</code> and <code>adapter_config.json</code>.</li>
+</ul>
+</li>
+<li><strong>Offline:</strong> the worker sets <code>HF_HUB_OFFLINE=1</code>, <code>TRANSFORMERS_OFFLINE=1</code>, <code>HF_DATASETS_OFFLINE=1</code> and
+<code>HF_HUB_DISABLE_TELEMETRY=1</code> before importing transformers, and passes <code>local_files_only=True</code> everywhere.</li>
+</ul>
+<p><strong>Model format:</strong> a local Hugging Face snapshot directory under the worker&#39;s <code>--models-root</code>:</p>
+<ul>
+<li>it needs <code>config.json</code>, the tokenizer files and <code>*.safetensors</code> weights;</li>
+<li>any symlink, <code>*.bin/.pt/.pth/.pkl/.pickle/.ckpt</code> or <code>*.py</code> file is refused (<code>model_format_unsupported</code>);</li>
+<li><code>trust_remote_code</code> is never enabled;</li>
+<li>Ollama/GGUF blobs cannot be trained.</li>
+</ul>
+<p>For the smoke run: <code>Qwen/Qwen2.5-0.5B-Instruct</code> at commit <code>7ae557604adf67be50417f59c2c2f167def9a775</code>. Its
+Qwen2 attention projections match the default LoRA targets <code>q_proj, k_proj, v_proj, o_proj</code>, and it has a
+chat template, which the worker uses.</p>
+<p><strong>Measured CPU pilot:</strong> 0.5B float32, 2 CPUs, 4 optimizer steps at a 1024-token training limit, complete training/evaluation/inference in 111.3 seconds and 4.5 GiB peak RAM (§10). Larger models have not been measured. CUDA and QLoRA are unsupported in v1; CPU RNG is checkpointed, so CUDA is refused rather than promising incorrect dropout resume.</p>
+<h2>2. Input: accepted Symblic ask records (exact schema, version 1)</h2>
+<p>The caller (root&#39;s exporter) derives one record per accepted ask from a run folder it chose explicitly.
+This module never scans stores. Unknown fields are rejected. <code>sha256</code> is 64 lowercase hex.
+<code>H(v) = sha256(canonical JSON)</code>, where canonical JSON means sorted keys, <code>(&#39;,&#39;, &#39;:&#39;)</code> separators,
+<code>ensure_ascii=False</code>, UTF-8 and no floats.</p>
+<pre tabindex="0" aria-label="Code example"><code>{
+  &quot;version&quot;: 1,
+  &quot;run_id&quot;: &quot;run-label&quot;,
+  &quot;source_sha256&quot;: &quot;&lt;sha256 of the program source&gt;&quot;,
+  &quot;statement_sha256&quot;: &quot;&lt;sha256 of the ask statement&gt;&quot;,
+  &quot;kernel_id&quot;: &quot;&lt;16 hex, symblic kernel_id()[&#39;id&#39;]&gt;&quot;,
+  &quot;checker&quot;: {&quot;id&quot;: &quot;symblic-native&quot;, &quot;version&quot;: 1, &quot;sha256&quot;: &quot;&lt;checker identity&gt;&quot;},
+  &quot;model&quot;: {&quot;requested&quot;: &quot;ollama:qwen3:4b@node-a&quot;, &quot;observed&quot;: &quot;qwen3:4b&quot;,
+            &quot;identity&quot;: &quot;observed&quot;, &quot;digest&quot;: &quot;&lt;sha256 of the observed model manifest&gt;&quot;},
+  &quot;prompt&quot;: {&quot;system&quot;: &quot;&lt;exact system text&gt;&quot;, &quot;user&quot;: &quot;&lt;exact prompt text&gt;&quot;, &quot;sha256&quot;: &quot;H([system, user])&quot;},
+  &quot;answer&quot;: {&quot;type&quot;: &quot;integer|boolean|string|label&quot;, &quot;value&quot;: 6, &quot;sha256&quot;: &quot;H(value)&quot;,
+             &quot;fingerprint&quot;: &quot;H(value)[:16]  (= symblic.fingerprint)&quot;, &quot;labels&quot;: [&quot;only&quot;, &quot;for&quot;, &quot;label&quot;]},
+  &quot;acceptance&quot;: {&quot;status&quot;: &quot;accepted&quot;, &quot;vote&quot;: &quot;single|uncontested&quot;,
+                 &quot;determination&quot;: &quot;typed_answer|unique_in_declared_domain|author_disabled&quot;,
+                 &quot;checks&quot;: [{&quot;id&quot;: &quot;&lt;receipt sha256&gt;&quot;, &quot;predicate_sha256&quot;: &quot;&lt;sha256&gt;&quot;, &quot;passed&quot;: true,
+                             &quot;scope&quot;: &quot;encoded_predicate&quot;, &quot;kernel_id&quot;: &quot;&lt;same kernel&gt;&quot;,
+                             &quot;predicate&quot;: &quot;optional text&quot;}]},
+  &quot;group_key&quot;: &quot;optional caller grouping label&quot;,
+  &quot;exposure_hashes&quot;: [&quot;optional sha256 of content already exposed elsewhere&quot;],
+  &quot;request_sha256&quot;: &quot;optional&quot;, &quot;capsule_sha256&quot;: &quot;optional&quot;,
+  &quot;sensitivity&quot;: &quot;shareable|internal (optional)&quot;
+}</code></pre>
+<p><strong>Refused with a finite code:</strong></p>
+<div class="guide-table" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>cause</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>missing_identity</code></td>
+<td>a missing or malformed identity</td>
+</tr>
+<tr>
+<td><code>prompt_hash_mismatch</code>, <code>answer_hash_mismatch</code>, <code>answer_fingerprint_mismatch</code></td>
+<td>a recorded hash does not match the content</td>
+</tr>
+<tr>
+<td><code>model_identity_drift</code></td>
+<td>the model identity drifted</td>
+</tr>
+<tr>
+<td><code>model_identity_unavailable</code></td>
+<td>no model identity, unless <code>--allow-unavailable-model-identity</code>, which is recorded in the dataset</td>
+</tr>
+<tr>
+<td><code>unsupported_outcome</code></td>
+<td>a status other than accepted</td>
+</tr>
+<tr>
+<td><code>ambiguous_outcome</code></td>
+<td>a contested vote</td>
+</tr>
+<tr>
+<td><code>acceptance_checks_missing</code></td>
+<td>zero checks</td>
+</tr>
+<tr>
+<td><code>check_not_passed</code>, <code>kernel_mismatch</code></td>
+<td>a check that did not pass, or one under another kernel</td>
+</tr>
+<tr>
+<td><code>unsupported_answer_type</code></td>
+<td>numbers with fractions, records, lists or code</td>
+</tr>
+<tr>
+<td><code>answer_not_in_labels</code></td>
+<td>a label outside its declared set</td>
+</tr>
+<tr>
+<td><code>duplicate_identity</code>, <code>conflicting_answers</code></td>
+<td>a duplicate item, or the same prompt with different answers</td>
+</tr>
+<tr>
+<td><code>secret_like_field</code>, <code>secret_like_content</code></td>
+<td>secret-like keys or values: password/token/api key/cookie/bearer/private key, <code>sk-…</code>, <code>ghp_…</code>, <code>AKIA…</code>, PEM keys, JWTs</td>
+</tr>
+<tr>
+<td><code>private_record</code></td>
+<td><code>sensitivity</code> private/confidential</td>
+</tr>
+</tbody></table>
+</div><p>The secret screen is a pattern check, not proof that no private data remains. Root must export only
+shareable runs.</p>
+<p><strong>Acceptance scope:</strong></p>
+<ul>
+<li><strong>Proves:</strong> this model produced this typed answer to this exact prompt, and the listed native predicates
+passed under the recorded kernel/checker.</li>
+<li><strong>Does not prove:</strong> the answer&#39;s truth, adequacy to intent, novelty to any model, independence, or that
+training helps.</li>
+</ul>
+<p>The training target is the applicator reply shape: <code>{&quot;answer&quot;:&lt;value&gt;}</code>.</p>
+<h2>3. Commands (CLI: <code>tools/symblic-distill</code>; every <code>--out</code> must not exist; JSON on stdout; refusals exit 2)</h2>
+<pre tabindex="0" aria-label="Code example"><code># 1. dataset from explicitly chosen records (a JSON list)
+tools/symblic-distill build --records records.json --out dataset.json
+# 2. freeze splits (deterministic from the seed; groups never straddle splits)
+tools/symblic-distill split --dataset dataset.json --seed smoke-1 --ratios 70,10,20 \
+    [--exposures exposures.json] [--group-by source,digit_skeleton] --out splits.json
+# 3. pin the local snapshot root prepared (hashes every file; prints files_sha256)
+tools/symblic-distill model-manifest --model-dir /models/qwen2.5-0.5b-instruct
+# model-spec.json: {&quot;dir&quot;: &quot;qwen2.5-0.5b-instruct&quot;, &quot;repo_id&quot;: &quot;Qwen/Qwen2.5-0.5B-Instruct&quot;,
+#                   &quot;revision&quot;: &quot;7ae557604adf67be50417f59c2c2f167def9a775&quot;, &quot;files_sha256&quot;: &quot;&lt;from step 3&gt;&quot;}
+# 4. freeze the training plan (options are optional; defaults below)
+tools/symblic-distill plan-train --dataset dataset.json --splits splits.json \
+    --model-spec model-spec.json --options options.json --out plan.json
+# 5. training job directory: train/validation rows only, never test rows
+tools/symblic-distill prepare-train --dataset dataset.json --splits splits.json --plan plan.json \
+    --jobs-root /srv/distill-jobs --name smoke-train --expect-plan-sha256 &lt;plan_sha256&gt;
+# 6. print (not run) the worker command for the admitted runner
+tools/symblic-distill launch --job-dir /srv/distill-jobs/smoke-train --models-root /models \
+    --python /opt/distill-venv/bin/python
+#    -&gt; root runs exactly argv with env (shell=False) inside its admitted unit:
+#    python symblic/distill/worker.py run --job-dir … --models-root … --backend torch-lora
+#    result.json: checkpoint &quot;step-NNNNNNNN&quot; and checkpoint_manifest_sha256
+# 7. freeze the evaluation (same held-out prompts and budgets for both arms; greedy)
+tools/symblic-distill plan-eval --dataset dataset.json --splits splits.json --plan plan.json \
+    --checker schema_and_reference --max-new-tokens 64 --out eval-plan.json
+# 8. evaluation job pinned to exactly one trained checkpoint
+tools/symblic-distill prepare-eval --eval-plan eval-plan.json --plan plan.json \
+    --adapter-manifest-sha256 &lt;checkpoint_manifest_sha256&gt; --jobs-root /srv/distill-jobs --name smoke-eval
+tools/symblic-distill launch --job-dir /srv/distill-jobs/smoke-eval --models-root /models \
+    --python /opt/distill-venv/bin/python \
+    --adapter-dir /srv/distill-jobs/smoke-train/checkpoints/step-NNNNNNNN
+#    result.json: every (arm, item) outcome and the comparison
+# 9. explicit inference: the trained model answers a NEW caller prompt (and the baseline, for contrast)
+tools/symblic-distill launch-infer --plan /srv/distill/plan.json --prompt /srv/distill/prompt.json \
+    --out /srv/distill/infer-trained.json --models-root /models --python /opt/distill-venv/bin/python \
+    --arm trained --adapter-dir /srv/distill-jobs/smoke-train/checkpoints/step-NNNNNNNN \
+    --adapter-manifest-sha256 &lt;checkpoint_manifest_sha256&gt; --max-new-tokens 64 \
+    --dataset /srv/distill/dataset.json --splits /srv/distill/splits.json
+# 10. re-run the pure comparison from saved outcomes at any time
+tools/symblic-distill compare --eval-plan eval-plan.json --outcomes outcomes.json
+tools/symblic-distill grpo-status</code></pre>
+<p><strong>Training options:</strong> <code>options.json</code>, exact ints, with decimals as strings (floats refused). The defaults are:</p>
+<pre tabindex="0" aria-label="Code example"><code>{&quot;epochs&quot;: 1, &quot;max_steps&quot;: 1000, &quot;batch_size&quot;: 1, &quot;grad_accum&quot;: 8, &quot;max_seq_len&quot;: 1024, &quot;seed&quot;: 1234,
+ &quot;checkpoint_every&quot;: 50, &quot;lora_r&quot;: 8, &quot;lora_alpha&quot;: 16, &quot;learning_rate&quot;: &quot;0.0002&quot;,
+ &quot;lora_dropout&quot;: &quot;0.05&quot;, &quot;weight_decay&quot;: &quot;0&quot;, &quot;target_modules&quot;: [&quot;q_proj&quot;, &quot;k_proj&quot;, &quot;v_proj&quot;, &quot;o_proj&quot;],
+ &quot;dtype&quot;: &quot;float32&quot;, &quot;device&quot;: &quot;cpu&quot;}</code></pre>
+<p>A smoke run might use <code>{&quot;max_steps&quot;: 20, &quot;grad_accum&quot;: 2, &quot;checkpoint_every&quot;: 5, &quot;max_seq_len&quot;: 512}</code>.</p>
+<ul>
+<li><code>float16</code> on CPU is refused.</li>
+<li><strong>One step</strong> is <code>grad_accum</code> micro-batches of <code>batch_size</code> items. The micro-batch order per epoch is
+<code>sha256(seed:epoch:item_id)</code>, so a resumed run continues the same schedule.</li>
+</ul>
+<p><strong>Trained-adapter inference:</strong> the evaluation job runs both arms:</p>
+<ul>
+<li><code>baseline</code> is the pinned base snapshot;</li>
+<li><code>trained</code> is the same snapshot plus <code>PeftModel.from_pretrained(base, checkpoint, is_trainable=False)</code>.</li>
+</ul>
+<p>Both arms use the exact frozen test prompts (system + user through the tokenizer&#39;s chat template), greedy
+decoding and the same <code>max_new_tokens</code>. The pinned adapter must verify:</p>
+<ul>
+<li>its MANIFEST digest equals <code>adapter_manifest_sha256</code>;</li>
+<li>every file hash matches;</li>
+<li>its plan and model identity match.</li>
+</ul>
+<p><strong>Explicit inference (<code>infer</code>):</strong> answers ONE caller-supplied prompt.</p>
+<ul>
+<li><strong>Input:</strong> <code>prompt.json</code> = <code>{&quot;version&quot;: 1, &quot;system&quot;: &quot;...&quot;, &quot;user&quot;: &quot;...&quot;, &quot;answer_type&quot;?: &quot;integer|boolean|string|label&quot;, &quot;labels&quot;?: [...]}</code>.</li>
+<li><strong>Arms:</strong> <code>--arm trained</code> loads the exact base snapshot plus the pinned, verified adapter (same checks as
+above; adapter pin required). <code>--arm baseline</code> loads the base only and refuses an adapter.</li>
+<li><strong>Receipt:</strong> written once to <code>--out</code> (never overwritten). It binds:<ul>
+<li>the plan hash;</li>
+<li>the model repo, revision and files hash;</li>
+<li>the adapter&#39;s MANIFEST digest, step, identity and file hashes;</li>
+<li>backend identity and package versions;</li>
+<li>options (greedy, <code>max_new_tokens</code>, dtype, device, seed);</li>
+<li>the exact prompt and its hash;</li>
+<li>the output text and its hash;</li>
+<li>an optional structural check (when <code>answer_type</code> is given);</li>
+<li><code>receipt_sha256</code>.</li>
+</ul>
+</li>
+<li><strong>Dataset overlap:</strong> with <code>--dataset/--splits</code>, the receipt lists any dataset item whose prompt equals this
+one (exactly, or after normalization) and its split. <code>novelty</code> stays <code>not_established</code> either way.</li>
+<li><strong>Claims:</strong> <code>quality: not_established</code>, <code>native_verification: not_performed</code> (a free prompt has no
+contract), <code>promotion: never_automatic</code>.</li>
+</ul>
+<p>There is no promotion. An adapter is never merged, converted to GGUF, installed into Ollama or used by
+Symblic routes by this code.</p>
+<h2>4. Splits, leakage and exposure</h2>
+<p>Items are joined into groups (union-find), and a whole group goes to one split. Groups always join on:</p>
+<ul>
+<li>the same prompt hash;</li>
+<li>the same normalized prompt (NFKC, casefold, collapsed whitespace);</li>
+<li>the same caller <code>group_key</code>;</li>
+<li>a declared exposure hash that equals another item&#39;s prompt hash or exposure hash.</li>
+</ul>
+<p>Optional <code>group_by</code>, both on by default and recorded in the manifest:</p>
+<ul>
+<li><strong><code>source</code>:</strong> the same program source. All asks of one run program stay together.</li>
+<li><strong><code>digit_skeleton</code>:</strong> prompts identical after replacing digit runs. Templated items such as &quot;What is 3
+plus 3?&quot; and &quot;What is 5 plus 5?&quot; stay together.</li>
+</ul>
+<p>These are conservative. A dataset from one program or one template cannot be split (<code>empty_test_split</code>).
+Turning a grouping off is a deliberate, recorded choice (<code>split --group-by source</code>, or <code>--group-by &#39;&#39;</code>). These are text heuristics, not paraphrase or semantic-duplicate detection.</p>
+<p><strong>Exposure:</strong> an <code>exposures.json</code> row is <code>{&quot;item_id&quot;, &quot;kind&quot;: &quot;prompt_or_feedback|prior_training|prior_evaluation|published&quot;, &quot;evidence_sha256&quot;}</code>. It makes that item&#39;s
+whole group test-ineligible.</p>
+<p><strong>Novelty:</strong> <code>novelty</code> is always <code>not_established</code>. Disjoint hashes say nothing about pretraining data.</p>
+<p><strong>What refuses:</strong></p>
+<ul>
+<li><code>verify_splits</code> recomputes the manifest from the dataset and refuses any change (<code>splits_changed</code>) or
+overlap;</li>
+<li><code>training_job</code> rebuilds the train/validation IDs and refuses a test item (<code>test_reuse_as_training</code>);</li>
+<li>an evaluation records <code>prior_test_uses</code>, and <code>heldout_status</code> becomes <code>reused</code> when it is above 0.
+Repinning cannot make a reused set fresh.</li>
+</ul>
+<h2>5. Worker, state and recovery</h2>
+<ul>
+<li><strong>Inert on import.</strong> <code>run()</code> takes an exclusive non-blocking <code>flock</code> on <code>JOB/lock</code>; a second worker gets
+<code>job_busy</code>. Paths must not contain symlinks. Every write is temporary file → fsync → rename → directory
+fsync.</li>
+<li><strong>State:</strong><ul>
+<li><code>state.json</code> keeps the status and an append-only history (bounded to 200 events) of attempts, failures,
+interruptions and quarantines.</li>
+<li>A torn <code>state.json</code> (<code>torn_state</code>) or an unknown version (<code>unknown_state</code>) refuses without writing.</li>
+<li>A <code>running</code> state found at start is recorded as an interrupted attempt with an unknown outcome.</li>
+</ul>
+</li>
+<li><strong>Checkpoints:</strong> <code>checkpoints/step-NNNNNNNN/</code> holds the backend&#39;s files (adapter, <code>optimizer.pt</code> with the
+optimizer and CPU RNG state) and a <code>MANIFEST.json</code>, written last, with every file&#39;s sha256 and
+identity = {job, plan, model files, backend identity}.</li>
+<li><strong>Resume:</strong><ul>
+<li>It uses the highest checkpoint that verifies.</li>
+<li>Torn <code>.tmp-*</code> directories and checkpoints that fail verification are moved to <code>checkpoints/quarantine/</code>
+and kept.</li>
+<li>A checkpoint from another job, plan, model or backend refuses (<code>checkpoint_identity_mismatch</code>); it is
+never deleted or silently restarted.</li>
+</ul>
+</li>
+<li><strong>Failures:</strong> a missing package, a version mismatch, no CUDA, a missing model, a manifest mismatch or a
+load failure leaves a <code>failed</code> status with its code, <code>completed: false</code> and the retained state. Nothing
+reports trained.</li>
+<li><strong>Evaluation resume:</strong> it keeps every recorded outcome. An interrupted in-flight item is re-run with its
+attempt count incremented. A generation exception is an <code>error</code> outcome; an arm whose model cannot load is
+<code>unavailable</code> for every pending item.</li>
+<li><strong>Result:</strong> <code>result.json</code> is written once. A re-run returns it (and repairs a state left <code>running</code> by a
+crash after the write).</li>
+</ul>
+<h2>6. Comparison (pure, <code>compare</code>)</h2>
+<ul>
+<li><p><strong>Denominator:</strong> the frozen test set. Every planned (arm, item) counts: <code>passed</code>, <code>failed</code>, <code>error</code>,
+<code>unavailable</code>, <code>interrupted</code>, or <code>missing</code> when no row exists. Duplicate or unplanned rows refuse.</p>
+</li>
+<li><p><strong>Pass rates:</strong> exact rationals, with a 95% Wilson interval.</p>
+</li>
+<li><p><strong>Paired discordance:</strong> baseline-only versus trained-only passes, with an exact two-sided binomial
+(McNemar) p-value.</p>
+</li>
+<li><p><strong>Verdict:</strong> <code>comparison</code> is <code>difference_observed_under_declared_checker</code> or <code>no_difference_observed</code>
+only when both arms are complete; otherwise it is <code>not_established</code>.</p>
+</li>
+<li><p><strong>Checkers</strong> (frozen in the evaluation plan, with an explicit <code>scope</code>):</p>
+<ul>
+<li><code>schema</code> (<code>structural_answer_schema</code>): the reply is exactly one JSON object <code>{&quot;answer&quot;: v}</code> with the
+declared type or label.</li>
+<li><code>schema_and_reference</code> (<code>…_and_reference_hash_agreement</code>): also requires equality with the stored
+accepted (teacher) answer. Each outcome records <code>reference_match</code>. This is <strong>agreement</strong>, never native
+verification: that answer was itself only predicate-checked.</li>
+<li><code>schema_and_native</code> (<code>…_and_native_encoded_predicates</code>): a pinned trusted native checker (§6a) re-runs the
+item&#39;s own predicates on the generated answer. Each outcome records <code>native</code> = <code>{ran, passed, scope, kernel_id, receipts, checker_module_sha256, checker_id}</code>. Items carry a contract, never the stored answer.</li>
+</ul>
+<p>The p-value is descriptive for this frozen item set; no generalization, causal or quality claim is made.</p>
+</li>
+</ul>
+<h2>6a. Native checker registration (root; trusted code only)</h2>
+<p>The fixed module <code>symblic/distill/checkers.py</code> registers <code>symblic-native-scalar-v1</code> for the bounded subset in §11. It requires an explicitly staged trusted private contract bundle; missing, changed or unsupported contracts refuse. The module path is fixed; no CLI or config option can name another module or executable.</p>
+<pre tabindex="0" aria-label="Code example"><code>CHECKERS = {&#39;symblic-native-scalar-v1&#39;: Factory}      # Factory() -&gt; checker
+# checker.identity() -&gt; {&#39;id&#39;, &#39;version&#39;, &#39;kernel_id&#39;, &#39;contract_version&#39;, &#39;source_sha256&#39;}
+# checker.check(contract, answer) -&gt; {&#39;passed&#39;: bool, &#39;scope&#39;: &#39;encoded_predicate&#39;, &#39;kernel_id&#39;: str,
+#                                     &#39;receipts&#39;: [&#39;&lt;sha256&gt;&#39;, ...]}</code></pre>
+<p><code>contract</code> = <code>{source_sha256, statement_sha256, kernel_id, checker, predicate_sha256s, answer_type, labels?}</code>. It holds no accepted answer. Root&#39;s checker resolves the original program from its own trusted
+storage and runs the native type coercion and those predicates on <code>answer</code> (for example via <code>symblic.kernel.run</code>
+on the original source with the answer bound), returning only the predicate receipts. Then:</p>
+<pre tabindex="0" aria-label="Code example"><code>tools/symblic-distill checker-identity --name symblic-native-scalar-v1 &gt; checker-pin.json   # module sha256 + identity
+tools/symblic-distill plan-eval ... --checker schema_and_native --native-checker checker-pin.json --out eval-plan.json</code></pre>
+<p>At evaluation, the worker re-hashes the module and compares it and the checker identity with the pin.</p>
+<div class="guide-table" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>situation</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>module missing, source changed, name unknown or identity changed</td>
+<td>the job <strong>fails</strong> before any generation (<code>checker_unavailable</code>, <code>checker_source_mismatch</code>, <code>checker_identity_mismatch</code>); nothing passes</td>
+</tr>
+<tr>
+<td>schema-invalid reply</td>
+<td><code>failed</code> (checker not run)</td>
+</tr>
+<tr>
+<td>item kernel ≠ checker kernel</td>
+<td><code>unavailable</code></td>
+</tr>
+<tr>
+<td>checker exception or malformed receipt</td>
+<td><code>error</code></td>
+</tr>
+<tr>
+<td>receipt with <code>passed: true</code></td>
+<td>the only way to pass</td>
+</tr>
+</tbody></table>
+</div><p>The module is executed from its exact hashed bytes, with the same trust as importing repository code.</p>
+<h2>7. Verifiable reward / GRPO: unsupported</h2>
+<p><code>plan-train --method grpo</code> refuses with <code>grpo_unsupported</code>; <code>grpo-status</code> lists the gap:</p>
+<ul>
+<li>an in-process native-checker reward pinned to kernel/checker identity, which never uses held-out or
+reference answers;</li>
+<li>recorded group sampling;</li>
+<li>a verified policy-gradient update with a reference model, a KL term and resume semantics;</li>
+<li>generation throughput that needs admitted GPU placement.</li>
+</ul>
+<p>This remains outstanding work for root; the operator&#39;s broader training request is not complete.</p>
+<h2>8. Integration status and remaining work</h2>
+<p>The local exporter, private dataset preparation, pinned environment/model, admitted CPU run, checkpointed training, comparison and explicit trained-adapter inference have executed (§10). The worker is not automatically dispatched, installed as an Ollama model, promoted, or connected to the dashboard&#39;s model selector.</p>
+<p>Remaining: expand the native checker beyond its closed pure scalar subset (§11), implement verifiable-reward/GRPO, and collect a substantially larger independently grouped evaluation before making accuracy claims. <code>schema_and_reference</code> always reports agreement only, independently of whether the separate native checker is registered.</p>
+<h2>9. Repeatable admitted CPU run recipe (example paths)</h2>
+<p>Assumptions: the private job root is <code>/srv/distill</code> (gitignored, never the host). The snapshot is
+<code>/models/qwen2.5-0.5b-instruct</code> (Qwen/Qwen2.5-0.5B-Instruct @ <code>7ae557604adf67be50417f59c2c2f167def9a775</code>),
+and the venv is <code>/opt/distill-venv</code> (CPython 3.12.14, torch 2.14.1+cpu, transformers 5.18.0, peft 0.21.2,
+safetensors 0.8.0, tokenizers 0.23.2). <code>records.json</code> is the exporter&#39;s output. Use as few as about 20
+records, as long as the split leaves ≥1 test item. Every <code>--out</code> must be new.</p>
+<pre tabindex="0" aria-label="Code example"><code>cd &lt;repo&gt; &amp;&amp; S=tools/symblic-distill &amp;&amp; R=/srv/distill &amp;&amp; PY=/opt/distill-venv/bin/python
+mkdir -p -m 700 $R/jobs
+$S build --records $R/records.json --out $R/dataset.json
+$S split --dataset $R/dataset.json --seed smoke-20261006 --ratios 70,10,20 --out $R/splits.json
+#   If grouping leaves an empty split, collect more independent task families.
+#   Keep the source/digit/family grouping; do not split near-duplicates to manufacture a heldout set.
+$S model-manifest --model-dir /models/qwen2.5-0.5b-instruct          # -&gt; files_sha256
+cat &gt; $R/model-spec.json &lt;&lt;&#39;JSON&#39;
+{&quot;dir&quot;: &quot;qwen2.5-0.5b-instruct&quot;, &quot;repo_id&quot;: &quot;Qwen/Qwen2.5-0.5B-Instruct&quot;,
+ &quot;revision&quot;: &quot;7ae557604adf67be50417f59c2c2f167def9a775&quot;, &quot;files_sha256&quot;: &quot;&lt;files_sha256&gt;&quot;}
+JSON
+cat &gt; $R/options.json &lt;&lt;&#39;JSON&#39;
+{&quot;max_steps&quot;: 20, &quot;batch_size&quot;: 1, &quot;grad_accum&quot;: 2, &quot;checkpoint_every&quot;: 5, &quot;max_seq_len&quot;: 512,
+ &quot;learning_rate&quot;: &quot;0.0002&quot;, &quot;lora_r&quot;: 8, &quot;lora_alpha&quot;: 16, &quot;dtype&quot;: &quot;float32&quot;, &quot;device&quot;: &quot;cpu&quot;}
+JSON
+$S plan-train --dataset $R/dataset.json --splits $R/splits.json --model-spec $R/model-spec.json \
+    --options $R/options.json --out $R/plan.json                      # -&gt; plan_sha256
+$S prepare-train --dataset $R/dataset.json --splits $R/splits.json --plan $R/plan.json \
+    --jobs-root $R/jobs --name smoke-train --expect-plan-sha256 &lt;plan_sha256&gt;
+$S launch --job-dir $R/jobs/smoke-train --models-root /models --python $PY &gt; $R/launch-train.json
+#   ROOT: run launch-train.json argv with its env (shell=False) in the admitted node-i unit. Re-running the same
+#   argv after an interruption resumes from the last verified checkpoint.
+#   -&gt; $R/jobs/smoke-train/result.json: checkpoint step-00000020, checkpoint_manifest_sha256
+$S plan-eval --dataset $R/dataset.json --splits $R/splits.json --plan $R/plan.json \
+    --checker schema_and_reference --max-new-tokens 64 --out $R/eval-plan.json
+$S prepare-eval --eval-plan $R/eval-plan.json --plan $R/plan.json \
+    --adapter-manifest-sha256 &lt;checkpoint_manifest_sha256&gt; --jobs-root $R/jobs --name smoke-eval
+$S launch --job-dir $R/jobs/smoke-eval --models-root /models --python $PY \
+    --adapter-dir $R/jobs/smoke-train/checkpoints/step-00000020 &gt; $R/launch-eval.json
+#   ROOT: run it -&gt; $R/jobs/smoke-eval/result.json (all outcomes + comparison; reference AGREEMENT only)
+cat &gt; $R/prompt.json &lt;&lt;&#39;JSON&#39;
+{&quot;version&quot;: 1, &quot;system&quot;: &quot;&lt;the same system text the records use&gt;&quot;, &quot;user&quot;: &quot;&lt;a new prompt&gt;&quot;,
+ &quot;answer_type&quot;: &quot;integer&quot;}
+JSON
+$S launch-infer --plan $R/plan.json --prompt $R/prompt.json --out $R/infer-trained.json --models-root /models \
+    --python $PY --arm trained --max-new-tokens 64 --dataset $R/dataset.json --splits $R/splits.json \
+    --adapter-dir $R/jobs/smoke-train/checkpoints/step-00000020 \
+    --adapter-manifest-sha256 &lt;checkpoint_manifest_sha256&gt; &gt; $R/launch-infer-trained.json
+$S launch-infer --plan $R/plan.json --prompt $R/prompt.json --out $R/infer-baseline.json --models-root /models \
+    --python $PY --arm baseline --max-new-tokens 64 --dataset $R/dataset.json --splits $R/splits.json \
+    &gt; $R/launch-infer-baseline.json
+#   ROOT: run both -&gt; $R/infer-trained.json / infer-baseline.json (output text + full identity receipt)</code></pre>
+<p>This recipe illustrates configurable parameters. The completed local pilot used four steps and a 1024-token training limit; its measured timings are in §10. Other sizes and configurations require their own admitted resource measurement.</p>
+<p><strong>Training context limit:</strong> when prompt plus target exceeds <code>max_seq_len</code>, the backend truncates the prompt from the left while retaining the entire target. That can remove instructions or needed context; this is not lossless training of the original capsule. Select a sufficient limit and inspect token lengths for your data. Inference uses the supplied prompt, subject to the model’s context capacity.</p>
+<p><strong>What a successful smoke run shows:</strong></p>
+<ul>
+<li><strong>Shows:</strong> the pipeline executes end to end with real libraries, the adapter loads, and the trained model
+answers a new prompt.</li>
+<li><strong>Does not show:</strong> that quality improved, unless a complete frozen comparison says so under its declared
+checker scope. Even then, it is only for that item set.</li>
+</ul>
+<h2>10. Local accepted-run exporter and actual pilot</h2>
+<p><code>tools/symblic-distill export-run --run-dir /private/symblic/runs/RUN_ID --group-key TASK_FAMILY --out /private/records.json</code> reconstructs the exact system/user prompts through an isolated native lock replay. Use <code>--lock-file /private/RUN_ID.lock.json</code> when the lock is retained separately, and <code>--repo /path/to/pinned/native/repo</code> when running a staged candidate. It requires a finished state matching that lock, zero fresh model calls, unchanged native evidence, observed pinned model identity, an unambiguous scalar answer, and a passed native predicate that references that exact answer hash. It excludes oracle/peer/feedback-exposed observations and unsupported record/list/fraction answers. The stdout receipt pins the input files, lock, replay fingerprint, accepted count and rejected reasons. Save it privately. Original run stores are read only; no cloud transport is involved. Related runs must use the same caller-supplied task family; keep default source and digit grouping at split time.</p>
+<p>A local pilot executed on 2026-10-06 UTC, on an admitted node-i CPU job with 2 CPUs and 8 GiB RAM. The pinned Qwen2.5-0.5B snapshot and documented package versions trained a rank-4 LoRA adapter for four optimizer steps. The full training/evaluation/inference job finished in 111.3 seconds with 4.5 GiB peak memory. No base weights were replaced or adapter promoted.</p>
+<p>The source data came from four actual accepted Symblic runs; all four native replays reproduced their fingerprints with zero fresh model calls. Twenty-two eligible scalar observations produced 21 unique dataset items (one duplicate identity rejected). Three task families remained intact, yielding 9 training, 9 validation, and 3 test items. The initial 60/20/20 requested allocation had no validation items because whole groups would not fit; before any training/evaluation, ratios were adjusted to 40/43/17 to reserve one intact group per split. No grouping was weakened and no split was selected using model scores.</p>
+<p>Under the frozen reference-agreement checker, the baseline matched 0/3 heldout answers and the adapter matched 1/3. All baseline completions failed the strict JSON schema under the 48-token budget; all three trained completions were valid JSON, two with wrong answers. This tiny result does not establish a general accuracy gain (paired exact p=1), novelty, or native verification of the generated answers. A separate falling-height question also failed: both arms answered 135, while direct evaluation gives 50. Keep that failure visible. Training capability and checkpointed inference are functional; reliable reasoning is not established by this pilot.</p>
+<p>A bounded native scalar checker is now implemented (§11). The earlier reference-agreement measurements remain unchanged and must not be called native predicate verification. GRPO remains unsupported.</p>
+<p>A subsequent admitted verification compared checkpoint steps 1 and 4: all 192 adapter tensors changed, maximum absolute tensor delta 0.0006021472. Reopening the completed training job returned the same result without invoking a backend; checkpoint digest and base-model file manifest were unchanged. Both baseline and trained adapters answered a separate <code>3 + 4</code> prompt with integer 7. That confirms useful basic inference, not broad reasoning accuracy.</p>
+<h2>11. Fixed native scalar checker and durable trusted contracts</h2>
+<p>The <code>symblic-native-scalar-v1</code> registry implementation evaluates the supplied answer with the native type coercer and native <code>Kernel</code>, using the original predicate AST. It contains no stored accepted answer and does not compare against a reference answer. A fresh isolated Python process verifies the frozen runtime source hashes, loaded-module identities and kernel ID. It parses the original source independently and requires the ask name/type and every predicate AST/hash/line to match that source. Predicates have a 100,000-step budget. A constant <code>-I -B</code> bootstrap executes the worker-loader’s exact approved checker bytes, preserving <code>__file__</code>, with scrubbed environment, child-only 5-second CPU / 512-MiB address-space / 256-KiB file-output limits and a 15-second wall timeout. Input is bounded to 16 MiB; parent output reads are bounded to 64 KiB. Parent limits are unchanged. Changed on-disk checker bytes refuse; child receipts bind the actual captured checker SHA. No applicator or effect runner is instantiated.</p>
+<p>Supported: top-level asks with top-level checks of integer/boolean/string/label answers with pure literal/arithmetic/comparison/collection predicates, including bounded comprehensions and calls to <code>abs</code>, <code>sum</code>, <code>product</code>, <code>min</code>, <code>max</code>, <code>len</code>, or <code>count</code>. Context bindings must be exact, created before the ask, have closed recorded dependency provenance, and exclude the target answer. Nested or conditional checks, queries, custom functions, external adapters, unresolved/conditional dependencies, post-answer context, changed source or kernel, and unknown contracts refuse; they never pass through reference agreement. A predicate may admit several answers: tests demonstrate that both 3 and 100 pass <code>candidate &gt; 2</code>, while 2 and wrong JSON types fail.</p>
+<p>Runtime snapshots retain the broad <code>symblic*.py</code> source hashes and include every dependency in
+<code>symblic.kernel.execution_pins.PYTHON_FILES</code>, including registered sources with other prefixes. Loaded-code identity
+checks use that explicit semantic registry: importing an inert API wrapper does not register it as a
+semantic module, while its disk bytes remain pinned. Missing registered source pins refuse as
+<code>incomplete_native_runtime</code>; retain old bundles and their original checker/runtime rather than relabeling them.</p>
+<p>Export a bundle from explicit trusted run/lock paths and the already verified dataset:</p>
+<pre tabindex="0" aria-label="Code example"><code>tools/symblic-distill export-contracts --repo /private/frozen-native-runtime \
+  --runs /private/run-list.json --dataset /private/dataset.json --out /private/native-contracts.json</code></pre>
+<p><code>run-list.json</code> is an array of <code>{&quot;run_dir&quot;:&quot;/private/run&quot;,&quot;lock_file&quot;:&quot;/private/run.lock.json&quot;}</code> entries (<code>lock_file</code> is optional when the run directory holds <code>run.lock.json</code>). Export repeats strict native lock replay with zero fresh calls and captures the actual predicate inputs. It reports unsupported items explicitly. The bundle includes the original source, closed predicate context, source/runtime/checker identities and replay receipts; keep it private and never send it to a model or cloud task.</p>
+<p>After reviewing the bundle, stage it as a regular private file at <code>~/.local/state/symblic-distill/native-contracts.json</code>, then run <code>tools/symblic-distill checker-identity --name symblic-native-scalar-v1 &gt; /private/checker-pin.json</code>. The pin binds both module bytes and bundle/runtime identity. Use that pin with <code>plan-eval --checker schema_and_native --native-checker /private/checker-pin.json</code>. Changing the bundle requires a new pin and evaluation plan. Retain old frozen runtimes for old contracts; a new kernel must never silently relabel old evidence.</p>
+<p>The actual pilot bundle freezes kernel <code>59c87dc8a638abce</code> from the retained pre-D17 runtime. It supports 6 of the 21 unique dataset items. Rechecking the six original accepted teacher outputs produced six native passes; adding one to each answer produced six native failures. This is reused teacher evidence and checker validation, <strong>not</strong> student accuracy evaluation. The three prior heldout vorticity items have nonclosed/post-answer context and are refused by this version, so no native improvement score is claimed for that heldout set. The prior 0/3 versus 1/3 reference result and failed physics example remain unchanged.</p>
+<p>For an explicit local check of a recorded scalar (no model call):</p>
+<pre tabindex="0" aria-label="Code example"><code>tools/symblic-distill native-check --dataset /private/dataset.json --item-id ITEM_SHA256 \
+  --answer-json &#39;3&#39; --native-checker /private/checker-pin.json</code></pre>
+<p>This registration is local to the root machine and its retained pre-D17 runtime. It is not deployed on node-i: the training worker uses a different Python installation and does not have this retained runtime path. Do not claim native generation evaluation on node-i from these local checks. Export refuses state/lock/call files changed across replay or reread; it pins the exact bytes parsed. The statement SHA remains the replay-validated contextual observation/capsule identity, not a raw ask-AST digest.</p>
+<footer><a href="index.html">Start here</a> · <a href="../symblic.html#write">Open Write</a><p>Commands and examples run only when you choose to execute them.</p></footer></main></div>
+</body></html>

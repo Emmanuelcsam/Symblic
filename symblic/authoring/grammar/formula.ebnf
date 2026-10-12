@@ -1,0 +1,24 @@
+(* Symblic authoring contract 1: controlled propositional formula surface.
+   Authority: symblic_proof.parse_formula. This is NOT the core expression lexer.
+   JSON atoms are opaque exact text, not empirical facts or interpreted prose.
+   Whitespace recognized by Python str.isspace may separate tokens. No comments.
+   Keywords are exact lower case; Unicode logic operator aliases are not accepted.
+   Actual parser enforces byte/node/depth/atom limits beyond this EBNF. *)
+
+formula = implication ;
+implication = disjunction, [ "implies", implication ] ;
+disjunction = conjunction, { "or", conjunction } ;
+conjunction = unary, { "and", unary } ;
+unary = "not", unary | "false" | json-atom | "(", formula, ")" ;
+json-atom = '"', { json-character | json-escape }, '"' ;
+json-escape = BACKSLASH, ( DQUOTE | BACKSLASH | "/" | "b" | "f" | "n" | "r" | "t" | "u", hex, hex, hex, hex ) ;
+BACKSLASH = ? U+005C reverse solidus ? ;
+DQUOTE = ? U+0022 quotation mark ? ;
+json-character = ? Unicode scalar except double quote, backslash or U+0000..U+001F ? ;
+hex = "0" .. "9" | "a" .. "f" | "A" .. "F" ;
+
+(* JSON surrogate pairs decode to one scalar; unpaired surrogates refuse.
+   Atom text may be empty; it must remain within the parser's MAX_TEXT.
+   Bare false is falsity; "false" is an atom. not A lowers to A implies false.
+   Implication associates right; and/or associate left. No quantifiers here:
+   finite quantified frontend contracts are a separate API, not this syntax. *)

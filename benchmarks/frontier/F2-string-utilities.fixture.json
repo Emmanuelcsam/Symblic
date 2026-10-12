@@ -1,0 +1,338 @@
+{
+  "family": "frontier_F2_string_utilities_v1",
+  "hidden_tests": [
+    [
+      "slugify(\"\")",
+      "\"\""
+    ],
+    [
+      "slugify(\"  Multiple   spaces\\there \")",
+      "\"multiple-spaces-here\""
+    ],
+    [
+      "slugify(\"Cr\\u00e8me Br\\u00fbl\\u00e9e \\u00e0 la mode\")",
+      "\"creme-brulee-a-la-mode\""
+    ],
+    [
+      "slugify(\"\\u00c5NGSTR\\u00d6M unit\")",
+      "\"angstrom-unit\""
+    ],
+    [
+      "slugify(\"na\\u00efve caf\\u00e9\")",
+      "\"naive-cafe\""
+    ],
+    [
+      "slugify(\"C++ & C#\")",
+      "\"c-c\""
+    ],
+    [
+      "slugify(\"Stra\\u00dfe\")",
+      "\"stra-e\""
+    ],
+    [
+      "slugify(\"\\ufb01le name\")",
+      "\"le-name\""
+    ],
+    [
+      "slugify(\"\\u0130stanbul\")",
+      "\"istanbul\""
+    ],
+    [
+      "slugify(\"Version 2.0.1\")",
+      "\"version-2-0-1\""
+    ],
+    [
+      "slugify(\"\\uff11\\uff12\\uff13 full-width\")",
+      "\"full-width\""
+    ],
+    [
+      "slugify(\"__init__.py\")",
+      "\"init-py\""
+    ],
+    [
+      "slugify(\"\\u0395\\u03bb\\u03bb\\u03b7\\u03bd\\u03b9\\u03ba\\u03ac and English\")",
+      "\"and-english\""
+    ],
+    [
+      "slugify(\"a\\u0301b\")",
+      "\"ab\""
+    ],
+    [
+      "slugify(\"\\u00d8 and \\u0152\")",
+      "\"and\""
+    ],
+    [
+      "padLeft(\"7\",3,\"0\")",
+      "\"007\""
+    ],
+    [
+      "padLeft(\"abc\",2,\"*\")",
+      "\"abc\""
+    ],
+    [
+      "padLeft(\"abc\",3,\"*\")",
+      "\"abc\""
+    ],
+    [
+      "padLeft(\"\",4,\"x\")",
+      "\"xxxx\""
+    ],
+    [
+      "padLeft(\"\\ud83d\\ude00\\ud83d\\ude00\",3,\"-\")",
+      "\"-\\ud83d\\ude00\\ud83d\\ude00\""
+    ],
+    [
+      "padLeft(\"ab\",4,\"\\ud83d\\ude00\")",
+      "\"\\ud83d\\ude00\\ud83d\\ude00ab\""
+    ],
+    [
+      "padLeft(\"e\\u0301\",3,\".\")",
+      "\".e\\u0301\""
+    ],
+    [
+      "padLeft(\"\\u00e9\",3,\".\")",
+      "\"..\\u00e9\""
+    ],
+    [
+      "padLeft(\"x\",3)",
+      "\"  x\""
+    ],
+    [
+      "padLeft(\"\\ud835\\udcb3\",2,\"\\ud835\\udcb4\")",
+      "\"\\ud835\\udcb4\\ud835\\udcb3\""
+    ],
+    [
+      "padLeft(\"q\",1000,\"z\")",
+      "\"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq\""
+    ],
+    [
+      "(()=>{try{padLeft(\"a\",-1,\"x\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{padLeft(\"a\",2.5,\"x\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{padLeft(\"a\",1001,\"x\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{padLeft(\"a\",3,\"xy\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{padLeft(\"a\",3,\"\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{padLeft(5,3,\"0\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{padLeft(\"a\",3,\"\\ud83d\\ude00\\ud83d\\ude00\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "wordCount(\"\")",
+      "0"
+    ],
+    [
+      "wordCount(\"   \\t\\n\")",
+      "0"
+    ],
+    [
+      "wordCount(\"rock'n'roll\")",
+      "1"
+    ],
+    [
+      "wordCount(\"'quoted' words\")",
+      "2"
+    ],
+    [
+      "wordCount(\"it\\u2019s fine\")",
+      "2"
+    ],
+    [
+      "wordCount(\"x''y\")",
+      "2"
+    ],
+    [
+      "wordCount(\"na\\u00efve caf\\u00e9\")",
+      "2"
+    ],
+    [
+      "wordCount(\"e\\u0301te\\u0301 2024\")",
+      "2"
+    ],
+    [
+      "wordCount(\"\\u6771\\u4eac \\u30bf\\u30ef\\u30fc\")",
+      "2"
+    ],
+    [
+      "wordCount(\"\\u043a\\u043b\\u044e\\u0447-\\u0441\\u043b\\u043e\\u0432\\u043e\")",
+      "2"
+    ],
+    [
+      "wordCount(\"\\u0663\\u0664 apples\")",
+      "2"
+    ],
+    [
+      "wordCount(\"\\u00bd cup\")",
+      "1"
+    ],
+    [
+      "wordCount(\"\\ud83d\\ude00 smile \\ud83d\\ude00\")",
+      "1"
+    ],
+    [
+      "wordCount(\"tab\\tnew\\nline\")",
+      "3"
+    ],
+    [
+      "wordCount(\"__init__\")",
+      "1"
+    ],
+    [
+      "wordCount(\"3.14 is pi\")",
+      "4"
+    ],
+    [
+      "wordCount(\"o'\")",
+      "1"
+    ],
+    [
+      "wordCount(\"l'\\u00e9t\\u00e9\")",
+      "1"
+    ],
+    [
+      "wordCount(\"Chapter \\u216b\")",
+      "1"
+    ],
+    [
+      "(()=>{try{slugify(null);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{slugify();return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{slugify([\"a\"]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{wordCount(5);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ]
+  ],
+  "id": "frontier-f2-string-utilities-v1",
+  "request": {
+    "allowed_outputs": [
+      "result.js"
+    ],
+    "artifact_format": "javascript_script",
+    "assumptions": [],
+    "budget": {
+      "context_chars": 32768,
+      "max_calls": 8,
+      "max_candidates": 4,
+      "max_depth": 4,
+      "max_units": 64,
+      "max_workers": 3,
+      "retries": 2,
+      "wall_seconds": 300
+    },
+    "exports": [
+      {
+        "name": "slugify",
+        "signature": "slugify(text)"
+      },
+      {
+        "name": "padLeft",
+        "signature": "padLeft(text,width,fill)"
+      },
+      {
+        "name": "wordCount",
+        "signature": "wordCount(text)"
+      }
+    ],
+    "language": "javascript",
+    "objective": "Build three JavaScript string utilities, slugify, padLeft and wordCount, with exact Unicode handling. Return plain JavaScript source defining slugify, padLeft and wordCount as top-level functions.",
+    "requirements": [
+      {
+        "acceptance": "TESTED",
+        "id": "slug",
+        "text": "slugify(text) builds a URL slug: apply String.prototype.normalize('NFD'); delete combining marks U+0300 to U+036F; lowercase ASCII A-Z; replace each maximal run of characters other than ASCII a-z and 0-9 with one '-'; remove leading and trailing '-'. The result may be the empty string."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "pad",
+        "text": "padLeft(text,width,fill) prefixes copies of fill until the result has width Unicode code points (an emoji or any other astral character counts as one code point, not two UTF-16 units); text that already has width or more code points is returned unchanged. fill defaults to one space when omitted or undefined."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "words",
+        "text": "wordCount(text) returns the number of words: maximal runs of Unicode letters (\\p{L}), marks (\\p{M}) and decimal digits (\\p{Nd}). An apostrophe (U+0027 or U+2019) with a word character immediately before and after it joins them into one word. Every other character (whitespace, punctuation including '_' and '-', symbols, emoji) separates words."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "types",
+        "text": "Throw an Error when text is not a string, when width is not an integer from 0 to 1000, or when fill is not a string of exactly one code point."
+      }
+    ],
+    "tests": [
+      {
+        "call": "slugify(\"Hello, World!\")",
+        "expected": "\"hello-world\"",
+        "requirement_ids": [
+          "slug"
+        ]
+      },
+      {
+        "call": "slugify(\"\\u00c7a va?\")",
+        "expected": "\"ca-va\"",
+        "requirement_ids": [
+          "slug"
+        ]
+      },
+      {
+        "call": "padLeft(\"42\",5,\"0\")",
+        "expected": "\"00042\"",
+        "requirement_ids": [
+          "pad"
+        ]
+      },
+      {
+        "call": "padLeft(\"\\ud83d\\ude42\",3,\".\")",
+        "expected": "\"..\\ud83d\\ude42\"",
+        "requirement_ids": [
+          "pad"
+        ]
+      },
+      {
+        "call": "wordCount(\"one two  three\")",
+        "expected": "3",
+        "requirement_ids": [
+          "words"
+        ]
+      },
+      {
+        "call": "wordCount(\"don't panic\")",
+        "expected": "2",
+        "requirement_ids": [
+          "words"
+        ]
+      },
+      {
+        "call": "(()=>{try{slugify(7);return false}catch(e){return e instanceof Error}})()",
+        "expected": "true",
+        "requirement_ids": [
+          "types"
+        ]
+      }
+    ],
+    "version": 1
+  },
+  "split": "dev"
+}

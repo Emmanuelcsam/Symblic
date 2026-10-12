@@ -1,0 +1,52 @@
+{
+  "parcels": [
+    {
+      "actual": 13,
+      "denominator": 100,
+      "divisor": 10,
+      "fee": 19,
+      "height": 3,
+      "id": "demo",
+      "increment": 5,
+      "length": 7,
+      "limit": 12,
+      "numerator": 7,
+      "promotion": 11,
+      "rate": 17,
+      "threshold": 80,
+      "width": 11
+    },
+    {
+      "actual": 1,
+      "denominator": 100,
+      "divisor": 10,
+      "fee": 19,
+      "height": 3,
+      "id": "oversize",
+      "increment": 5,
+      "length": 13,
+      "limit": 12,
+      "numerator": 7,
+      "promotion": 11,
+      "rate": 17,
+      "threshold": 80,
+      "width": 11
+    },
+    {
+      "actual": 13,
+      "denominator": 100,
+      "divisor": 10,
+      "fee": 19,
+      "height": 3,
+      "id": "promotion-capped",
+      "increment": 5,
+      "length": 7,
+      "limit": 12,
+      "numerator": 7,
+      "promotion": 999,
+      "rate": 1,
+      "threshold": 0,
+      "width": 11
+    }
+  ]
+}

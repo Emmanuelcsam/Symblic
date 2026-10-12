@@ -1,0 +1,74 @@
+{
+  "canonical_form": 3,
+  "cloud_reviews": {
+    "cloud_reported_crash_deletion_cases": 576,
+    "cloud_reported_durable_save_failures": 24,
+    "cloud_reported_methods": 200,
+    "controls_artifacts_verified": 17,
+    "controls_manifest_sha256": "53080c7bdbab3fd3033d183a921cc2db8b6d9ff8025fdb1ff8697e04efaf0696",
+    "g1_artifacts_verified": 27,
+    "g1_manifest_sha256": "02e8aeab602f5f17f7a23f86b6aff7c72ce407a3374e60f4540c882338fab705",
+    "reviewed_source_manifest_sha256": "97f595340d38a22b42379a8756908dca17c7fcca079b06cbb7a075dcbebe00c5",
+    "root_amendments": "bound-task wording and enabled-task browser case; final combined checks run locally",
+    "unavailable_in_cloud": "12 HTTP-route methods import screened-out server.py; root executes them locally"
+  },
+  "constructor_bridge": 2,
+  "date": "2026-10-05",
+  "installation": {
+    "http": 200,
+    "payloads": 12,
+    "plan_sha256": "28a8d2f23351c1bbf3f7e12098c0173c5477e2b33a0d2d57be68b7aff56e837a",
+    "service_pid_after": 2031955,
+    "service_pid_before": 2000484,
+    "unchanged_guards": 378
+  },
+  "journal_version": 3,
+  "kernel": "59c87dc8a638abce",
+  "language": "2.5",
+  "limits": [
+    "Exact finite contract and replay checks, not a model-quality benchmark or universal determinism proof.",
+    "Original four-contract cgroup resource measurements remain tied to initial release source.",
+    "Changing a legacy folder to off after removing constructor records may erase ambiguity; no unfinished enabled live runs existed at install.",
+    "Process deaths and injected failures do not model power loss or malicious deletion of every informative host record.",
+    "Quarantine export refuses; journal repair event ordering and bounded empty-slot exhaustion remain unchanged."
+  ],
+  "live": {
+    "activity_durable_marker": true,
+    "bridge": 2,
+    "calls": 0,
+    "constructor_answers": 1,
+    "id": "99fe6ef1c652",
+    "journal_rows": 3,
+    "kernel": "59c87dc8a638abce",
+    "lock_format": 3,
+    "lock_replay_calls": 0,
+    "lock_replay_ok": true,
+    "ok": true,
+    "old_run_preserved": true,
+    "output": 22,
+    "resume_same_journal_and_epistemic": true,
+    "served_assets": {
+      "web/studio/symblic-help-content.json": "4f34d7e91bba4f131d82508f2fff6c92cd5bce084cc44b9fcefd9348dbced7f5",
+      "web/studio/symblic-page.js": "0eb4b0ceda46bc110d9a11a91744eae508b014bd4129c0961c8b9237e028f4b0"
+    }
+  },
+  "root_checks": {
+    "actual_cli_commands": 6,
+    "actual_cli_model_calls": 0,
+    "browser_seconds": 120.127550792,
+    "compatibility_seconds": 4.01180896,
+    "integrated_methods": 226,
+    "integrated_seconds": 21.682,
+    "legacy_direct_enabled_resume_cases": 192,
+    "legacy_redispatches_while_state_retained": 0,
+    "mocked_browser_journeys": 29,
+    "ruff_E9_F": "pass",
+    "scoped_compatibility_methods": 66,
+    "sets_may_overlap": true
+  },
+  "schema": 1,
+  "scope": "constructor crash recovery, portable export integrity and optional Write controls",
+  "source_manifest_sha256": "76a10ec8f9750578203ceb7d0a1a4ea0e2f5658b5d8c5e01b97ccef341acfaaa",
+  "status": "installed and live verified",
+  "publication_note": "Edited for publication on 2026-10-11: file paths were rewritten to this repository's layout (docs/MAP.md), and names of machines, people, paths and private services were replaced with neutral names (the host, node-a to node-i, node-arm). Values, counts and hashes are unchanged; hashes refer to the files as they were when recorded."
+}

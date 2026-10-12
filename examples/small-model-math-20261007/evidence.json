@@ -1,0 +1,481 @@
+{
+ "version": 1,
+ "date": "2026-10-07",
+ "provider": "Qwen3:4b-instruct only through Symblic, served by Ollama on a CPU-only machine",
+ "functional_code_origin": "Model replies only; never hand repaired",
+ "author_contribution": "Objectives, validators, independent oracle, orchestration and presentation",
+ "units": {
+  "fraction": {
+   "file": "fraction.js",
+   "code_sha256": "aec3ec8d1ece24d97cf65e3ea6b708911f2bb6232b528577fa938d621873de03",
+   "native_report_sha256": "53bfbe689c06731cb75a4a1d564b80c78803095ae78ea54c36bf9a7d3f97403b",
+   "native_source_sha256": "4548fed56948655507ff706f5c6189867b83de6835d8eaf9faffa19f2c0d17c5",
+   "fingerprint": "eef0c0f78783138c",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls": 2
+  },
+  "determinant": {
+   "file": "determinant.js",
+   "code_sha256": "8e8a81832032e73b40cee3c33bd88a265818574d80d1e261ae42ce83d55164c4",
+   "native_report_sha256": "b005a99b197cddd928a5cd9f13e01dc05ba6e4b07ad0c88ee4e90827b4f9b1d4",
+   "native_source_sha256": "a3862891ef6e5025505ca8188c91f5bb15dd1113c6275ee79ec10df7c6c99aee",
+   "fingerprint": "ae40a17cd920ab36",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls": 1
+  },
+  "rank": {
+   "file": "rank.js",
+   "code_sha256": "d5b3d7a6877776ea5c3bb6a4855f0186d93893404edee831fe851de1d7141f72",
+   "native_report_sha256": "1a613a83c8eb615c1445d0e974e1ec14bf9d3fd3f170d882a57db83d653e5a26",
+   "native_source_sha256": "e2e47657c9d0b5531e849d8b9b0ca1098a60c03ade09534e0ab459e3f30496d4",
+   "fingerprint": "e71ad60fabdfdc7f",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls": 1
+  },
+  "solver": {
+   "file": "solver.js",
+   "code_sha256": "90ca0c4ce25f39ee9af16bf3f7fcfaaf5866191a92b2891717545d80fbdc2e3e",
+   "native_report_sha256": "ab669d24724bf896cb638a1150b05c903e60893f5d920f6c457df0b71d750d23",
+   "native_source_sha256": "6ef643aa28ed4d8d34f714ede090d47c80b253b437f73d68207b2c2965b7c4d5",
+   "fingerprint": "6fce2c1dc34eaf21",
+   "kernel_id": "a98acbe306cbc06e",
+   "calls": 1
+  }
+ },
+ "attempts": [
+  {
+   "stage": "original-rational",
+   "unit": "fraction",
+   "attempt": 1,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "6cc8a5ae12e153c0e15bb4819f4af3cefdf361eedfb44c7d34a3122aa7514796",
+   "reply_sha256": "8520f0e1319af5c7e3ff76db22fa17d90acbd79afaa8f171ee3b33fa5d945d57",
+   "usage": {
+    "input_tokens": 328,
+    "output_tokens": 89,
+    "duration_ms": 11075,
+    "load_ms": 2072,
+    "prompt_ms": 3409,
+    "eval_ms": 5573
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "original-rational",
+   "unit": "fraction",
+   "attempt": 2,
+   "accepted": true,
+   "outcome": "accepted",
+   "receipt_sha256": "3bc753e80fac7a37c58ccc114ec757227bb4998840cfab52a5f32a0ce88d2a7a",
+   "reply_sha256": "89f31fb948318d66a5a54c648ec825006877568534a762df6669fdb580de8cba",
+   "usage": {
+    "input_tokens": 511,
+    "output_tokens": 341,
+    "duration_ms": 30002,
+    "load_ms": 2066,
+    "prompt_ms": 5330,
+    "eval_ms": 22586
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "original-rational",
+   "unit": "rational_op",
+   "attempt": 1,
+   "accepted": true,
+   "outcome": "accepted",
+   "receipt_sha256": "6c52b88f4d6e1e90748a68a2fb6eb47ac2eed6f41ef9beb3498507fc7155a770",
+   "reply_sha256": "a346f140a0162a11dcaab183ef3bea0993050f61a350d7725768e65ca486ba21",
+   "usage": {
+    "input_tokens": 714,
+    "output_tokens": 248,
+    "duration_ms": 26367,
+    "load_ms": 2062,
+    "prompt_ms": 7570,
+    "eval_ms": 16713
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "original-rational",
+   "unit": "solver",
+   "attempt": 1,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "afe447e67feb492f0aa6f464316bf393b8f20cd9fe39c1b0b558a6bbe16b81fd",
+   "reply_sha256": "4685eebc1555005666c25aefae5ca7f8f732e6f136740072a694d2418880f82b",
+   "usage": {
+    "input_tokens": 1346,
+    "output_tokens": 826,
+    "duration_ms": 81511,
+    "load_ms": 2065,
+    "prompt_ms": 15042,
+    "eval_ms": 64376
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "original-rational",
+   "unit": "solver",
+   "attempt": 2,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "db17ee799f43b51c4d7e1f686d8508ae818294d0d3452a7eb20c4d881b803aa3",
+   "reply_sha256": "f9e1abaa69b8b82c0750a4fb760a2021d35ccd6425fbac5601a61630e867543f",
+   "usage": {
+    "input_tokens": 1912,
+    "output_tokens": 990,
+    "duration_ms": 111623,
+    "load_ms": 2309,
+    "prompt_ms": 22545,
+    "eval_ms": 86743
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "original-rational",
+   "unit": "solver",
+   "attempt": 3,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "4113f8ec3b172b963ae330667ee710136a87d5e9dba914065546420064888efb",
+   "reply_sha256": "07af57ee53070d118c0c7413b6287f3042311fe77c8c7f2231e9204f9397c1d4",
+   "usage": {
+    "input_tokens": 1899,
+    "output_tokens": 982,
+    "duration_ms": 110990,
+    "load_ms": 2316,
+    "prompt_ms": 22293,
+    "eval_ms": 86357
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "row-decomposition",
+   "unit": "normalize_row",
+   "attempt": 1,
+   "accepted": true,
+   "outcome": "accepted",
+   "receipt_sha256": "23794375d33c65079cd7c78287cc2d8a384a07bf15a6ce93028d64ce8f970fd4",
+   "reply_sha256": "e9ceca3bb511dcdfac307861573c07f8c4880058206e340942d98889cee418ab",
+   "usage": {
+    "input_tokens": 891,
+    "output_tokens": 70,
+    "duration_ms": 18080,
+    "load_ms": 3836,
+    "prompt_ms": 9525,
+    "eval_ms": 4697
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "row-decomposition",
+   "unit": "solver",
+   "attempt": 1,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "20f13a2f004b6ea64f538f8fe5e126dfcd09c2e00cd5bfab4561cd349ee83cac",
+   "reply_sha256": "f56fa4729cd6d6f834fd9d2b8cef1a90651bd19a32fed84aeac95b0e2272c50a",
+   "usage": {
+    "input_tokens": 1154,
+    "output_tokens": 644,
+    "duration_ms": 63255,
+    "load_ms": 2068,
+    "prompt_ms": 12684,
+    "eval_ms": 48480
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "row-decomposition",
+   "unit": "solver",
+   "attempt": 2,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "b3ec5378da2734afb32b69e927c186a49f0797a9202039aff6e14ebe442c9e6d",
+   "reply_sha256": "12bc3a1cb8a3f3658da66d460d928a676e7e3025a6cb834f5b210de13c226f0c",
+   "usage": {
+    "input_tokens": 1671,
+    "output_tokens": 630,
+    "duration_ms": 73466,
+    "load_ms": 2063,
+    "prompt_ms": 19151,
+    "eval_ms": 52223
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "row-decomposition",
+   "unit": "solver",
+   "attempt": 3,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "1b03f5d27c20c6f10d31ef5219533fd956e7e2cdd5d0ab3ffe7eb3c9fe2c0331",
+   "reply_sha256": "059f9241a3e463b78af15b95d79fe67cc0e4584c50983ed29c0037d650c31cd2",
+   "usage": {
+    "input_tokens": 1747,
+    "output_tokens": 632,
+    "duration_ms": 74528,
+    "load_ms": 2316,
+    "prompt_ms": 20114,
+    "eval_ms": 52073
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "row-decomposition",
+   "unit": "subtract_row",
+   "attempt": 1,
+   "accepted": true,
+   "outcome": "accepted",
+   "receipt_sha256": "639345b8617c18e9fcfe70b6954af198e42ed864e288cdf98e3812317bef2f14",
+   "reply_sha256": "ac9e8855d062a1d98421a633d9e58782748e2c44d79b7b913fa445eaefc05c3c",
+   "usage": {
+    "input_tokens": 896,
+    "output_tokens": 102,
+    "duration_ms": 18500,
+    "load_ms": 2060,
+    "prompt_ms": 9499,
+    "eval_ms": 6921
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "minors-decomposition",
+   "unit": "determinant",
+   "attempt": 1,
+   "accepted": true,
+   "outcome": "accepted",
+   "receipt_sha256": "ccc939e59195f0335fd3abf5c06a0bb5dc24498897c298f340857f3177cd881e",
+   "reply_sha256": "f61f032441c10746a78c2cdb6096c3d6d3ad294f0fb0cd13cd656b2fc93e9b1f",
+   "usage": {
+    "input_tokens": 728,
+    "output_tokens": 200,
+    "duration_ms": 24869,
+    "load_ms": 3587,
+    "prompt_ms": 7725,
+    "eval_ms": 13535
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "minors-decomposition",
+   "unit": "rank",
+   "attempt": 1,
+   "accepted": false,
+   "outcome": "candidate_rejected",
+   "receipt_sha256": "3bccb1739bfbcf1df9f2d96ccafa52f918f9e62bfe0343b3205fea2aabb81f62",
+   "reply_sha256": "008bb96c413c57fd9e6f0519096fd8f71cf9ba914a8aeab64d1a1fdeb43bec92",
+   "usage": {
+    "input_tokens": 1295,
+    "output_tokens": 659,
+    "duration_ms": 66756,
+    "load_ms": 2057,
+    "prompt_ms": 14453,
+    "eval_ms": 50218
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "minors-decomposition",
+   "unit": "rank",
+   "attempt": 2,
+   "accepted": false,
+   "outcome": "provider_timeout_or_failure",
+   "receipt_sha256": "4e43088e967809643010922691e8232b0a88531025b55cf934b73ac25ff284ed",
+   "reply_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "usage": {},
+   "model": null,
+   "node": "node-a",
+   "model_identity": {
+    "status": "unavailable",
+    "digest": null,
+    "source": "none"
+   }
+  },
+  {
+   "stage": "minors-decomposition",
+   "unit": "rank",
+   "attempt": 3,
+   "accepted": false,
+   "outcome": "provider_timeout_or_failure",
+   "receipt_sha256": "5ecf8bf89d178ee0c94d9b29cc0a56e2b4713a46ab747568cf909d5304b95026",
+   "reply_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "usage": {},
+   "model": null,
+   "node": "node-a",
+   "model_identity": {
+    "status": "unavailable",
+    "digest": null,
+    "source": "none"
+   }
+  },
+  {
+   "stage": "bounded-minors-follow-on",
+   "unit": "rank",
+   "attempt": 1,
+   "accepted": true,
+   "outcome": "accepted",
+   "receipt_sha256": "4728148e0a24511ae8d69fe058f5a02ee254f3571195a892794600e6dcd8abe7",
+   "reply_sha256": "dc87bd212ec9a470d06291793499ad8c5eb843c2a82dc668e6206ddce809f3e7",
+   "usage": {
+    "input_tokens": 1379,
+    "output_tokens": 736,
+    "duration_ms": 74130,
+    "load_ms": 2068,
+    "prompt_ms": 15536,
+    "eval_ms": 56501
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  },
+  {
+   "stage": "bounded-minors-follow-on",
+   "unit": "solver",
+   "attempt": 1,
+   "accepted": true,
+   "outcome": "accepted",
+   "receipt_sha256": "2165d1254e7182acd0d9043e90c833e70c764df035ee16df6b562a54ef71a8db",
+   "reply_sha256": "4e6e49f271975bf853e27cf72a022b8ddffcd005845002cbe82979e62f7bf8f6",
+   "usage": {
+    "input_tokens": 3020,
+    "output_tokens": 266,
+    "duration_ms": 67579,
+    "load_ms": 2066,
+    "prompt_ms": 38497,
+    "eval_ms": 26978
+   },
+   "model": "qwen3:4b-instruct",
+   "node": "node-a",
+   "model_identity": {
+    "status": "observed",
+    "digest": "sha256:0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "source": "ollama_api_tags_bracket"
+   }
+  }
+ ],
+ "call_count": 17,
+ "prompt_contract": "Canonical spec-sheet unit_prompt includes exact examples and direct source on the first request; no kernel change",
+ "prior_failed_trials": 3,
+ "independent_verification": {
+  "passed": true,
+  "finite_cases": 19,
+  "classifications": {
+   "unique": 13,
+   "singular": 3,
+   "inconsistent": 3
+  },
+  "oracle": "Python Fraction with exact residual and reduced rational checks",
+  "negative_mutations_rejected": 2
+ },
+ "model_identity_limit": "Ollama manifest observations are not attestation of loaded weights",
+ "artifact_sha256": {
+  "rank.js": "d5b3d7a6877776ea5c3bb6a4855f0186d93893404edee831fe851de1d7141f72",
+  "cases.json": "7fc27b6ac09494dacb27577f698c71d5b12fc8ffada9838a0288796f20d5cdc9",
+  "solutions.json": "13edafc30e3182996531024a68af7f68b270ff02d2946deaafbdf7d1f7fd6dcb",
+  "solver.js": "90ca0c4ce25f39ee9af16bf3f7fcfaaf5866191a92b2891717545d80fbdc2e3e",
+  "fraction.js": "aec3ec8d1ece24d97cf65e3ea6b708911f2bb6232b528577fa938d621873de03",
+  "validate_math.py": "0207e6a16b0129271ae428cb5a055c47751f2d8b8343488cff084c8fe74e324c",
+  "spec-sheet.md": "8468d2e3604c1745dc67bedc89a05a4533e7b3b47ea1f50161e3f20fbcf3ddd0",
+  "determinant.js": "8e8a81832032e73b40cee3c33bd88a265818574d80d1e261ae42ce83d55164c4",
+  "verify.py": "2fa8caf00ee9735b72d4470ca4cc8738449fe9d984f454d1cde37c34b0031970",
+  "README.md": "0801411793b2b09d57a8f1f93fe7a42ac4ecc778c8f400ace77e7d7b5d90d7e0"
+ },
+ "catalogue_source_sha256": "4decfe42e33c17afd2cb144dbce64e8bb730a7e8a9697586c387c747af0bf9fd",
+ "fresh_playback": [
+  {
+   "file": "44-small-model-math.sym",
+   "source_sha256": "4decfe42e33c17afd2cb144dbce64e8bb730a7e8a9697586c387c747af0bf9fd",
+   "status": "done",
+   "calls": 0,
+   "asks": 0,
+   "fingerprint": "cfd81c2ca13bdd0e",
+   "kernel_id": "a98acbe306cbc06e"
+  }
+ ],
+ "published_edits": "2026-10-11, for publication: README.md was edited (the original host's names and private paths removed, commands pointed at this repository) and its hash above updated; node names were replaced by \"node-a\". Every other artifact is byte-identical to the original bundle."
+}

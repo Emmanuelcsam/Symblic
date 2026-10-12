@@ -1,0 +1,43 @@
+use profile=verified.
+let digit = 7.
+let width = 20.
+let height = 7.
+let x = 5.
+let row_0 = 6.
+show {kind: "grid", value: digit, x: x, y: row_0, width: width, height: height}.
+ask row_1: Int "Subtract 1 from the numeric CONTEXT value named row_0. Return the difference." from row_0 with context=none, determine=false, solve=false, retries=2, budget=12000.
+ensure row_1 = (row_0 - 1) else retry because "Accept only if 'row 1' equals 'row 0' minus 1.".
+ensure row_1 >= 0 else retry because "Accept only if 'row 1' is at least 0.".
+ensure row_1 <= (height - 1) else retry because "Accept only if 'row 1' is at most height minus 1.".
+assert row_1 >= 0 and row_1 < height.
+show {kind: "grid", value: digit, x: x, y: row_1, width: width, height: height}.
+ask row_2: Int "Subtract 1 from the numeric CONTEXT value named row_1. Return the difference." from row_1 with context=none, determine=false, solve=false, retries=2, budget=12000.
+ensure row_2 = (row_1 - 1) else retry because "Accept only if 'row 2' equals 'row 1' minus 1.".
+ensure row_2 >= 0 else retry because "Accept only if 'row 2' is at least 0.".
+ensure row_2 <= (height - 1) else retry because "Accept only if 'row 2' is at most height minus 1.".
+assert row_2 >= 0 and row_2 < height.
+show {kind: "grid", value: digit, x: x, y: row_2, width: width, height: height}.
+ask row_3: Int "Subtract 1 from the numeric CONTEXT value named row_2. Return the difference." from row_2 with context=none, determine=false, solve=false, retries=2, budget=12000.
+ensure row_3 = (row_2 - 1) else retry because "Accept only if 'row 3' equals 'row 2' minus 1.".
+ensure row_3 >= 0 else retry because "Accept only if 'row 3' is at least 0.".
+ensure row_3 <= (height - 1) else retry because "Accept only if 'row 3' is at most height minus 1.".
+assert row_3 >= 0 and row_3 < height.
+show {kind: "grid", value: digit, x: x, y: row_3, width: width, height: height}.
+ask row_4: Int "Subtract 1 from the numeric CONTEXT value named row_3. Return the difference." from row_3 with context=none, determine=false, solve=false, retries=2, budget=12000.
+ensure row_4 = (row_3 - 1) else retry because "Accept only if 'row 4' equals 'row 3' minus 1.".
+ensure row_4 >= 0 else retry because "Accept only if 'row 4' is at least 0.".
+ensure row_4 <= (height - 1) else retry because "Accept only if 'row 4' is at most height minus 1.".
+assert row_4 >= 0 and row_4 < height.
+show {kind: "grid", value: digit, x: x, y: row_4, width: width, height: height}.
+ask row_5: Int "Subtract 1 from the numeric CONTEXT value named row_4. Return the difference." from row_4 with context=none, determine=false, solve=false, retries=2, budget=12000.
+ensure row_5 = (row_4 - 1) else retry because "Accept only if 'row 5' equals 'row 4' minus 1.".
+ensure row_5 >= 0 else retry because "Accept only if 'row 5' is at least 0.".
+ensure row_5 <= (height - 1) else retry because "Accept only if 'row 5' is at most height minus 1.".
+assert row_5 >= 0 and row_5 < height.
+show {kind: "grid", value: digit, x: x, y: row_5, width: width, height: height}.
+ask row_6: Int "Subtract 1 from the numeric CONTEXT value named row_5. Return the difference." from row_5 with context=none, determine=false, solve=false, retries=2, budget=12000.
+ensure row_6 = (row_5 - 1) else retry because "Accept only if 'row 6' equals 'row 5' minus 1.".
+ensure row_6 >= 0 else retry because "Accept only if 'row 6' is at least 0.".
+ensure row_6 <= (height - 1) else retry because "Accept only if 'row 6' is at most height minus 1.".
+assert row_6 >= 0 and row_6 < height.
+show {kind: "grid", value: digit, x: x, y: row_6, width: width, height: height}.

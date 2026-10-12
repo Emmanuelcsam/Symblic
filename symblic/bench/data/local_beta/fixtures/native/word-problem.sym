@@ -1,0 +1,9 @@
+program Word problem, translated then computed.
+note Program-aided reasoning: models write the arithmetic as a formula; the kernel computes it. Votes are grouped by the formula's value (key=eval(it)), and a formula the kernel cannot read is discarded before the vote.
+
+given problem: Text = "A baker makes 12 trays of 18 rolls. She sells 3/4 of the rolls and gives 10 to a shelter. How many rolls are left?"
+
+ask formula: Text "Write ONE arithmetic expression whose value answers the problem. Use only numbers, + - * / and parentheses. Do not compute it." from problem with effort=high, votes=5, key=eval(it)
+let answer = eval(formula).
+ensure answer = floor(answer) and answer >= 0 else retry because "a count of rolls is a whole number, at least zero".
+show answer as "rolls left".

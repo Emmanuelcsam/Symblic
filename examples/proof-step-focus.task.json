@@ -1,0 +1,65 @@
+{
+  "template": "proof_step_focus",
+  "params": {
+    "session": {
+      "version": 1,
+      "format": "symblic-proof-session",
+      "certificate_version": 1,
+      "premises": {
+        "a": [
+          "atom",
+          "A"
+        ],
+        "ab": [
+          "implies",
+          [
+            "atom",
+            "A"
+          ],
+          [
+            "atom",
+            "B"
+          ]
+        ]
+      },
+      "goal": [
+        "atom",
+        "B"
+      ],
+      "steps": [
+        {
+          "id": "s1",
+          "rule": "premise",
+          "args": [
+            "a"
+          ],
+          "formula": null
+        },
+        {
+          "id": "s2",
+          "rule": "premise",
+          "args": [
+            "ab"
+          ],
+          "formula": null
+        }
+      ],
+      "hashes": {
+        "premises": "b9336a57e146115c5049334032012a91e60df9f4520dc1e844d3a93aa1f48ee9",
+        "goal": "26d585145470af2ab4084f8df06a1cdb9460769ee2b8fc15753be0b238fcfb7a"
+      }
+    },
+    "commands": [
+      "and_left s1",
+      "premise a",
+      "implies_elim s2 s1"
+    ],
+    "require_complete": true,
+    "obligation": {
+      "formula": "\"B\"",
+      "open_assumptions": []
+    }
+  },
+  "calls": 1,
+  "capsule": "compact"
+}

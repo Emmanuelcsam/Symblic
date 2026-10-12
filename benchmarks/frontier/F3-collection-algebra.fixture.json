@@ -1,0 +1,332 @@
+{
+  "family": "frontier_F3_collection_algebra_v1",
+  "hidden_tests": [
+    [
+      "groupBy([{\"k\":\"__proto__\",\"v\":1},{\"k\":\"constructor\",\"v\":2},{\"k\":\"__proto__\",\"v\":3}],\"k\")",
+      "{\"__proto__\":[{\"k\":\"__proto__\",\"v\":1},{\"k\":\"__proto__\",\"v\":3}],\"constructor\":[{\"k\":\"constructor\",\"v\":2}]}"
+    ],
+    [
+      "groupBy([{\"tag\":\"toString\"},{\"tag\":\"hasOwnProperty\"},{\"tag\":\"\"}],\"tag\")",
+      "{\"toString\":[{\"tag\":\"toString\"}],\"hasOwnProperty\":[{\"tag\":\"hasOwnProperty\"}],\"\":[{\"tag\":\"\"}]}"
+    ],
+    [
+      "groupBy([{\"id\":1,\"g\":1},{\"id\":2,\"g\":\"1\"},{\"id\":3,\"g\":0}],\"g\")",
+      "{\"1\":[{\"id\":1,\"g\":1},{\"id\":2,\"g\":\"1\"}],\"0\":[{\"id\":3,\"g\":0}]}"
+    ],
+    [
+      "groupBy([],\"k\")",
+      "{}"
+    ],
+    [
+      "groupBy([{\"valueOf\":\"x\",\"n\":1},{\"valueOf\":\"x\",\"n\":2}],\"valueOf\")",
+      "{\"x\":[{\"valueOf\":\"x\",\"n\":1},{\"valueOf\":\"x\",\"n\":2}]}"
+    ],
+    [
+      "groupBy([{\"k\":9007199254740991},{\"k\":-9007199254740991}],\"k\")",
+      "{\"9007199254740991\":[{\"k\":9007199254740991}],\"-9007199254740991\":[{\"k\":-9007199254740991}]}"
+    ],
+    [
+      "histogram([\"__proto__\",\"__proto__\",\"toString\",\"\"])",
+      "{\"__proto__\":2,\"toString\":1,\"\":1}"
+    ],
+    [
+      "histogram([1,\"1\",2])",
+      "{\"1\":2,\"2\":1}"
+    ],
+    [
+      "histogram([])",
+      "{}"
+    ],
+    [
+      "histogram([-0,0,\"0\"])",
+      "{\"0\":3}"
+    ],
+    [
+      "histogram([9007199254740991,\"valueOf\",\"valueOf\"])",
+      "{\"9007199254740991\":1,\"valueOf\":2}"
+    ],
+    [
+      "groupBy([{\"id\":0,\"k\":\"c\"},{\"id\":1,\"k\":\"a\"},{\"id\":2,\"k\":\"a\"},{\"id\":3,\"k\":2}],\"k\")",
+      "{\"c\":[{\"id\":0,\"k\":\"c\"}],\"a\":[{\"id\":1,\"k\":\"a\"},{\"id\":2,\"k\":\"a\"}],\"2\":[{\"id\":3,\"k\":2}]}"
+    ],
+    [
+      "groupBy([{\"id\":0,\"k\":-1},{\"id\":1,\"k\":\"x y\"},{\"id\":2,\"k\":3},{\"id\":3,\"k\":\"a\"},{\"id\":4,\"k\":\"b\"},{\"id\":5,\"k\":\"c\"},{\"id\":6,\"k\":2}],\"k\")",
+      "{\"-1\":[{\"id\":0,\"k\":-1}],\"x y\":[{\"id\":1,\"k\":\"x y\"}],\"3\":[{\"id\":2,\"k\":3}],\"a\":[{\"id\":3,\"k\":\"a\"}],\"b\":[{\"id\":4,\"k\":\"b\"}],\"c\":[{\"id\":5,\"k\":\"c\"}],\"2\":[{\"id\":6,\"k\":2}]}"
+    ],
+    [
+      "groupBy([{\"id\":0,\"k\":-3},{\"id\":1,\"k\":\"constructor\"},{\"id\":2,\"k\":3},{\"id\":3,\"k\":-1}],\"k\")",
+      "{\"-3\":[{\"id\":0,\"k\":-3}],\"constructor\":[{\"id\":1,\"k\":\"constructor\"}],\"3\":[{\"id\":2,\"k\":3}],\"-1\":[{\"id\":3,\"k\":-1}]}"
+    ],
+    [
+      "groupBy([{\"id\":0,\"k\":1},{\"id\":1,\"k\":\"b\"}],\"k\")",
+      "{\"1\":[{\"id\":0,\"k\":1}],\"b\":[{\"id\":1,\"k\":\"b\"}]}"
+    ],
+    [
+      "groupBy([{\"id\":0,\"k\":\"\\u00e9\"},{\"id\":1,\"k\":\"c\"},{\"id\":2,\"k\":\"c\"},{\"id\":3,\"k\":\"b\"},{\"id\":4,\"k\":-2},{\"id\":5,\"k\":\"__proto__\"}],\"k\")",
+      "{\"\\u00e9\":[{\"id\":0,\"k\":\"\\u00e9\"}],\"c\":[{\"id\":1,\"k\":\"c\"},{\"id\":2,\"k\":\"c\"}],\"b\":[{\"id\":3,\"k\":\"b\"}],\"-2\":[{\"id\":4,\"k\":-2}],\"__proto__\":[{\"id\":5,\"k\":\"__proto__\"}]}"
+    ],
+    [
+      "histogram([\"__proto__\",\"\\u00e9\",0,0])",
+      "{\"__proto__\":1,\"\\u00e9\":1,\"0\":2}"
+    ],
+    [
+      "histogram([\"c\",-1,0,\"x y\",-2])",
+      "{\"c\":1,\"-1\":1,\"0\":1,\"x y\":1,\"-2\":1}"
+    ],
+    [
+      "histogram([1,\"\\u00e9\"])",
+      "{\"1\":1,\"\\u00e9\":1}"
+    ],
+    [
+      "histogram([2,\"b\",-2,2,\"c\",-1])",
+      "{\"2\":2,\"b\":1,\"-2\":1,\"c\":1,\"-1\":1}"
+    ],
+    [
+      "sortBy([{\"n\":1,\"id\":\"a\"},{\"n\":2,\"id\":\"b\"},{\"n\":1,\"id\":\"c\"},{\"n\":2,\"id\":\"d\"}],\"n\",\"desc\")",
+      "[{\"n\":2,\"id\":\"b\"},{\"n\":2,\"id\":\"d\"},{\"n\":1,\"id\":\"a\"},{\"n\":1,\"id\":\"c\"}]"
+    ],
+    [
+      "sortBy([{\"n\":2,\"id\":\"a\"},{\"n\":1,\"id\":\"b\"},{\"n\":2,\"id\":\"c\"},{\"n\":1,\"id\":\"d\"}],\"n\",\"asc\")",
+      "[{\"n\":1,\"id\":\"b\"},{\"n\":1,\"id\":\"d\"},{\"n\":2,\"id\":\"a\"},{\"n\":2,\"id\":\"c\"}]"
+    ],
+    [
+      "sortBy([{\"s\":\"b\"},{\"s\":\"B\"},{\"s\":\"a\"},{\"s\":\"A\"},{\"s\":\"\"}],\"s\")",
+      "[{\"s\":\"\"},{\"s\":\"A\"},{\"s\":\"B\"},{\"s\":\"a\"},{\"s\":\"b\"}]"
+    ],
+    [
+      "sortBy([{\"s\":\"\\ufb01\"},{\"s\":\"\\ud83d\\ude00\"},{\"s\":\"z\"}],\"s\")",
+      "[{\"s\":\"z\"},{\"s\":\"\\ud83d\\ude00\"},{\"s\":\"\\ufb01\"}]"
+    ],
+    [
+      "sortBy([{\"v\":-1.5},{\"v\":10},{\"v\":2.25},{\"v\":-20},{\"v\":0}],\"v\")",
+      "[{\"v\":-20},{\"v\":-1.5},{\"v\":0},{\"v\":2.25},{\"v\":10}]"
+    ],
+    [
+      "sortBy([{\"v\":10},{\"v\":9},{\"v\":100}],\"v\")",
+      "[{\"v\":9},{\"v\":10},{\"v\":100}]"
+    ],
+    [
+      "sortBy([{\"v\":\"10\"},{\"v\":\"9\"},{\"v\":\"100\"}],\"v\")",
+      "[{\"v\":\"10\"},{\"v\":\"100\"},{\"v\":\"9\"}]"
+    ],
+    [
+      "sortBy([],\"v\",\"desc\")",
+      "[]"
+    ],
+    [
+      "sortBy([{\"v\":1,\"w\":\"only\"}],\"v\")",
+      "[{\"v\":1,\"w\":\"only\"}]"
+    ],
+    [
+      "sortBy([{\"id\":0,\"r\":0},{\"id\":1,\"r\":3},{\"id\":2,\"r\":3},{\"id\":3,\"r\":0},{\"id\":4,\"r\":2},{\"id\":5,\"r\":1}],\"r\",\"desc\")",
+      "[{\"id\":1,\"r\":3},{\"id\":2,\"r\":3},{\"id\":4,\"r\":2},{\"id\":5,\"r\":1},{\"id\":0,\"r\":0},{\"id\":3,\"r\":0}]"
+    ],
+    [
+      "sortBy([{\"id\":0,\"r\":2},{\"id\":1,\"r\":0},{\"id\":2,\"r\":3},{\"id\":3,\"r\":1},{\"id\":4,\"r\":3}],\"r\",\"desc\")",
+      "[{\"id\":2,\"r\":3},{\"id\":4,\"r\":3},{\"id\":0,\"r\":2},{\"id\":3,\"r\":1},{\"id\":1,\"r\":0}]"
+    ],
+    [
+      "sortBy([{\"id\":0,\"r\":4},{\"id\":1,\"r\":0},{\"id\":2,\"r\":4},{\"id\":3,\"r\":4}],\"r\",\"asc\")",
+      "[{\"id\":1,\"r\":0},{\"id\":0,\"r\":4},{\"id\":2,\"r\":4},{\"id\":3,\"r\":4}]"
+    ],
+    [
+      "sortBy([{\"id\":0,\"r\":3},{\"id\":1,\"r\":3},{\"id\":2,\"r\":4},{\"id\":3,\"r\":3},{\"id\":4,\"r\":4}],\"r\",\"desc\")",
+      "[{\"id\":2,\"r\":4},{\"id\":4,\"r\":4},{\"id\":0,\"r\":3},{\"id\":1,\"r\":3},{\"id\":3,\"r\":3}]"
+    ],
+    [
+      "(()=>{const xs=[{\"k\":\"b\"},{\"k\":\"a\"}];groupBy(xs,\"k\");return xs})()",
+      "[{\"k\":\"b\"},{\"k\":\"a\"}]"
+    ],
+    [
+      "(()=>{const xs=[\"q\",\"r\",\"q\"];histogram(xs);return xs})()",
+      "[\"q\",\"r\",\"q\"]"
+    ],
+    [
+      "(()=>{const xs=[{\"n\":3},{\"n\":1},{\"n\":2}];sortBy(xs,\"n\",\"desc\");return xs})()",
+      "[{\"n\":3},{\"n\":1},{\"n\":2}]"
+    ],
+    [
+      "(()=>{const xs=[{\"n\":1}];return sortBy(xs,\"n\")!==xs})()",
+      "true"
+    ],
+    [
+      "(()=>{try{groupBy(\"abc\",\"k\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{groupBy([{\"k\":1}],5);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{groupBy([null],\"k\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{groupBy([[1]],\"k\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{groupBy([{\"j\":1}],\"k\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{groupBy([{\"k\":1.5}],\"k\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{groupBy([{\"k\":true}],\"k\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{histogram(\"ab\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{histogram([true]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{histogram([[1]]);return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{sortBy([{\"v\":\"a\"},{\"v\":1}],\"v\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{sortBy([{\"v\":1}],\"v\",\"up\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{sortBy([{\"v\":1},{\"w\":2}],\"v\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{sortBy([{\"v\":null}],\"v\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ],
+    [
+      "(()=>{try{sortBy([{\"v\":NaN},{\"v\":1}],\"v\");return false}catch(e){return e instanceof Error}})()",
+      "true"
+    ]
+  ],
+  "id": "frontier-f3-collection-algebra-v1",
+  "request": {
+    "allowed_outputs": [
+      "result.js"
+    ],
+    "artifact_format": "javascript_script",
+    "assumptions": [],
+    "budget": {
+      "context_chars": 32768,
+      "max_calls": 8,
+      "max_candidates": 4,
+      "max_depth": 4,
+      "max_units": 64,
+      "max_workers": 3,
+      "retries": 2,
+      "wall_seconds": 300
+    },
+    "exports": [
+      {
+        "name": "groupBy",
+        "signature": "groupBy(items,key)"
+      },
+      {
+        "name": "histogram",
+        "signature": "histogram(values)"
+      },
+      {
+        "name": "sortBy",
+        "signature": "sortBy(items,key,order)"
+      }
+    ],
+    "language": "javascript",
+    "objective": "Build three JavaScript collection functions, groupBy, histogram and sortBy, that are pure and safe for any key name. Return plain JavaScript source defining groupBy, histogram and sortBy as top-level functions.",
+    "requirements": [
+      {
+        "acceptance": "TESTED",
+        "id": "group",
+        "text": "groupBy(items,key) groups an array of objects by String(item[key]). Every item must have key as an own property whose value is a string or a safe integer. Return an object mapping each group name to an array of the items with that name, in input order."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "hist",
+        "text": "histogram(values) counts String(value) for an array of strings and safe integers into an object mapping each name to its count; 1 and \"1\" share the name \"1\"."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "sort",
+        "text": "sortBy(items,key,order) returns a new array of the same items ordered by their own property key, ascending when order is \"asc\" or omitted and descending when order is \"desc\". The values must be all finite numbers (compared numerically) or all strings (compared by UTF-16 code units, like the JavaScript < operator). Items with equal values keep their input order in both directions."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "keys",
+        "text": "Returned objects hold every group or count name as an own enumerable property, including __proto__, constructor, toString and the empty string."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "pure",
+        "text": "Never mutate the input arrays or their items."
+      },
+      {
+        "acceptance": "TESTED",
+        "id": "errors",
+        "text": "Throw an Error when items or values is not an array, key is not a string, an item is not a non-null non-array object or lacks the own property key, a groupBy or histogram value is not a string or safe integer, a sortBy value is neither a finite number nor a string, sortBy values mix numbers and strings, or order is anything other than \"asc\", \"desc\" or omitted."
+      }
+    ],
+    "tests": [
+      {
+        "call": "groupBy([{\"t\":\"a\",\"v\":1},{\"t\":\"b\",\"v\":2},{\"t\":\"a\",\"v\":3}],\"t\")",
+        "expected": "{\"a\":[{\"t\":\"a\",\"v\":1},{\"t\":\"a\",\"v\":3}],\"b\":[{\"t\":\"b\",\"v\":2}]}",
+        "requirement_ids": [
+          "group"
+        ]
+      },
+      {
+        "call": "histogram([\"x\",\"y\",\"x\"])",
+        "expected": "{\"x\":2,\"y\":1}",
+        "requirement_ids": [
+          "hist"
+        ]
+      },
+      {
+        "call": "histogram([\"constructor\",\"constructor\"])",
+        "expected": "{\"constructor\":2}",
+        "requirement_ids": [
+          "keys"
+        ]
+      },
+      {
+        "call": "sortBy([{\"n\":3},{\"n\":1},{\"n\":2}],\"n\")",
+        "expected": "[{\"n\":1},{\"n\":2},{\"n\":3}]",
+        "requirement_ids": [
+          "sort"
+        ]
+      },
+      {
+        "call": "sortBy([{\"n\":1,\"id\":\"a\"},{\"n\":2,\"id\":\"b\"},{\"n\":1,\"id\":\"c\"}],\"n\",\"desc\")",
+        "expected": "[{\"n\":2,\"id\":\"b\"},{\"n\":1,\"id\":\"a\"},{\"n\":1,\"id\":\"c\"}]",
+        "requirement_ids": [
+          "sort"
+        ]
+      },
+      {
+        "call": "(()=>{const xs=[{\"n\":2},{\"n\":1}];sortBy(xs,\"n\");return xs})()",
+        "expected": "[{\"n\":2},{\"n\":1}]",
+        "requirement_ids": [
+          "pure"
+        ]
+      },
+      {
+        "call": "(()=>{try{histogram([null]);return false}catch(e){return e instanceof Error}})()",
+        "expected": "true",
+        "requirement_ids": [
+          "errors"
+        ]
+      }
+    ],
+    "version": 1
+  },
+  "split": "dev"
+}

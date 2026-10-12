@@ -1,0 +1,44 @@
+program Lab.
+note Named conventions for laboratory recipes and the arithmetic that follows from them, done by the kernel.
+note The module fixes what each named convention means; a paper still has to say which one its recipe uses
+note (in 2026-10-02 runs, three model families all read "1% dispersant" on the whole-slurry basis without saying so).
+
+term "w/w" means "mass of the component per mass of the whole mixture (mass fraction), as a percentage".
+term "w/v" means "grams of the component per 100 mL of the final solution".
+term "v/v" means "volume of the component per volume of the whole mixture, as a percentage".
+term "dry-weight basis" means "an additive's percentage is of the mass of the dry powder, not of the whole slurry".
+term "STP" means "standard temperature and pressure (IUPAC): 273.15 K (0 °C) and 100 kPa".
+term "SATP" means "standard ambient temperature and pressure (IUPAC): 298.15 K (25 °C) and 100 kPa".
+term "ppm" means "parts per million by mass (mg per kg) unless the text says by volume".
+
+define Slurry as Record {solids_g: Number, additive_g: Number, liquid_g: Number}.
+
+note The mass of a component that is pct % (w/w) of a whole of total_g grams.
+function mass_from_wt_pct(total_g: Number, pct: Number) -> Number = total_g * pct / 100.
+note An additive dosed at pct % on a dry-weight basis, for dry_g grams of powder.
+function additive_dry_basis(dry_g: Number, pct: Number) -> Number = dry_g * pct / 100.
+note A slurry of total_g grams with solids_pct % (w/w) solids and an additive at additive_pct % of the solids
+note (dry-weight basis); the liquid is the rest.
+function slurry_masses(total_g: Number, solids_pct: Number, additive_pct: Number) -> Slurry = {solids_g: total_g * solids_pct / 100, additive_g: total_g * solids_pct / 100 * additive_pct / 100, liquid_g: total_g - total_g * solids_pct / 100 - total_g * solids_pct / 100 * additive_pct / 100}.
+note The same slurry with the additive counted on the whole slurry (w/w), for comparison.
+function slurry_masses_whole_basis(total_g: Number, solids_pct: Number, additive_pct: Number) -> Slurry = {solids_g: total_g * solids_pct / 100, additive_g: total_g * additive_pct / 100, liquid_g: total_g - total_g * solids_pct / 100 - total_g * additive_pct / 100}.
+note Dilution (C1 V1 = C2 V2): the volume of stock (any one volume unit) for v_target of c_target from c_stock.
+function stock_volume(c_stock: Number, c_target: Number, v_target: Number) -> Number = c_target * v_target / c_stock.
+note Amount of substance and molarity (mol/L) from a mass in grams and a molar mass in g/mol.
+function moles(mass_g: Number, molar_mass: Number) -> Number = mass_g / molar_mass.
+function molarity(mass_g: Number, molar_mass: Number, volume_l: Number) -> Number = mass_g / molar_mass / volume_l.
+function mass_for_molarity(mol_per_l: Number, molar_mass: Number, volume_l: Number) -> Number = mol_per_l * molar_mass * volume_l.
+note A ppm by mass as a mass fraction, and grams of solute in a solution of total_g grams.
+function ppm_mass(ppm: Number, total_g: Number) -> Number = total_g * ppm / 1000000.
+
+test "a slurry on a dry-weight basis and on a whole-slurry basis" do
+  assert slurry_masses(200, 40, 1) = {solids_g: 80, additive_g: 0.8, liquid_g: 119.2}.
+  assert slurry_masses_whole_basis(200, 40, 1) = {solids_g: 80, additive_g: 2, liquid_g: 118}.
+end.
+
+test "dilution and molarity" do
+  assert stock_volume(10, 1, 100) = 10.
+  assert molarity(5.844, 58.44, 1) = 0.1.
+  assert mass_for_molarity(0.1, 58.44, 0.25) = 1.461.
+  assert ppm_mass(5, 1000) = 0.005.
+end.

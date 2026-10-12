@@ -1,0 +1,106 @@
+program Discrete vorticity construction.
+use profile=verified, determine=false, solve=false.
+note Synthetic dimensionless finite graph example of the supplied energy method, not a continuum PDE solution.
+note Five equally spaced vertices have endpoint values zero. Three interior values are unknown.
+note Every model call constructs one small part from explicit state. No solver is called.
+let incidence = [[1,0,0],[-1,1,0],[0,-1,1],[0,0,-1]].
+let weights = [1,1,1,1].
+let loads = [0,-2,0].
+let indices = [1,2,3].
+let edges = [1,2,3,4].
+
+let column1 = [incidence[e][1] for e in edges].
+let column2 = [incidence[e][2] for e in edges].
+let column3 = [incidence[e][3] for e in edges].
+
+ask a11: Int "Construct one integer coefficient: the weighted dot product of the CONTEXT vectors column1 and column1. For each of the four positions multiply column1, column1, and weights at that same position, then add the four products. Return only that integer coefficient." from column1, weights with context=none, effort=medium, retries=1
+ensure a11 = sum([column1[e] * weights[e] * column1[e] for e in edges]) else retry.
+
+ask a12: Int "Construct one integer coefficient: the weighted dot product of the CONTEXT vectors column1 and column2. For each of the four positions multiply column1, column2, and weights at that same position, then add the four products. Return only that integer coefficient." from column1, column2, weights with context=none, effort=medium, retries=1
+ensure a12 = sum([column1[e] * weights[e] * column2[e] for e in edges]) else retry.
+
+ask a13: Int "Construct one integer coefficient: the weighted dot product of the CONTEXT vectors column1 and column3. For each of the four positions multiply column1, column3, and weights at that same position, then add the four products. Return only that integer coefficient." from column1, column3, weights with context=none, effort=medium, retries=1
+ensure a13 = sum([column1[e] * weights[e] * column3[e] for e in edges]) else retry.
+
+ask a22: Int "Construct one integer coefficient: the weighted dot product of the CONTEXT vectors column2 and column2. For each of the four positions multiply column2, column2, and weights at that same position, then add the four products. Return only that integer coefficient." from column2, weights with context=none, effort=medium, retries=1
+ensure a22 = sum([column2[e] * weights[e] * column2[e] for e in edges]) else retry.
+
+ask a23: Int "Construct one integer coefficient: the weighted dot product of the CONTEXT vectors column2 and column3. For each of the four positions multiply column2, column3, and weights at that same position, then add the four products. Return only that integer coefficient." from column2, column3, weights with context=none, effort=medium, retries=1
+ensure a23 = sum([column2[e] * weights[e] * column3[e] for e in edges]) else retry.
+
+ask a33: Int "Construct one integer coefficient: the weighted dot product of the CONTEXT vectors column3 and column3. For each of the four positions multiply column3, column3, and weights at that same position, then add the four products. Return only that integer coefficient." from column3, weights with context=none, effort=medium, retries=1
+ensure a33 = sum([column3[e] * weights[e] * column3[e] for e in edges]) else retry.
+
+let A = [[a11,a12,a13],[a12,a22,a23],[a13,a23,a33]].
+assert all i in indices: all j in indices: A[i][j] = sum([incidence[e][i] * weights[e] * incidence[e][j] for e in edges]).
+let b = [-value for value in loads].
+define RationalPart as Record {numerator: Int, denominator: Int in 1..100}.
+
+ask pivot1: RationalPart "Construct the first positive LDL pivot d1 for A. d1 must equal A[1][1]. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from A with context=none, effort=medium, retries=1
+let d1 = pivot1.numerator / pivot1.denominator.
+ensure d1 > 0 and d1 = A[1][1] else retry.
+
+ask lower21: RationalPart "Construct L[2][1] for the unit lower triangular LDL factor. It must satisfy L[2][1] * d1 = A[2][1]. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from A, d1 with context=none, effort=medium, retries=1
+let l21 = lower21.numerator / lower21.denominator.
+ensure l21 * d1 = A[2][1] else retry.
+
+ask pivot2: RationalPart "Construct positive d2 satisfying d2 + l21 * l21 * d1 = A[2][2]. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from A, l21, d1 with context=none, effort=medium, retries=1
+let d2 = pivot2.numerator / pivot2.denominator.
+ensure d2 > 0 and d2 + l21 * l21 * d1 = A[2][2] else retry.
+
+ask lower32: RationalPart "For this tridiagonal matrix L[3][1]=0. Construct L[3][2] satisfying L[3][2] * d2 = A[3][2]. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from A, d2 with context=none, effort=medium, retries=1
+let l32 = lower32.numerator / lower32.denominator.
+ensure l32 * d2 = A[3][2] else retry.
+
+ask pivot3: RationalPart "Construct positive d3 satisfying d3 + l32 * l32 * d2 = A[3][3]. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from A, l32, d2 with context=none, effort=medium, retries=1
+let d3 = pivot3.numerator / pivot3.denominator.
+ensure d3 > 0 and d3 + l32 * l32 * d2 = A[3][3] else retry.
+
+let L = [[1,0,0],[l21,1,0],[0,l32,1]].
+let D = [d1,d2,d3].
+let b1 = b[1].
+let b2 = b[2].
+let b3 = b[3].
+
+ask forward1: RationalPart "Copy the CONTEXT value named b1 to construct y1. The name b1 identifies the selected value. Require y1 = b1. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from b1 with context=none, effort=medium, retries=1
+let y1 = forward1.numerator / forward1.denominator.
+ensure y1 = b1 else retry.
+
+ask forward2: RationalPart "Multiply the CONTEXT value named l21 by the CONTEXT value named y1. Subtract that product from the CONTEXT value named b2 to construct y2. Require y2 + l21 * y1 = b2. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from b2, l21, y1 with context=none, effort=medium, retries=1
+let y2 = forward2.numerator / forward2.denominator.
+ensure y2 + l21 * y1 = b2 else retry.
+
+ask forward3: RationalPart "Multiply the CONTEXT value named l32 by the CONTEXT value named y2. Subtract that product from the CONTEXT value named b3 to construct y3. Require y3 + l32 * y2 = b3. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from b3, l32, y2 with context=none, effort=medium, retries=1
+let y3 = forward3.numerator / forward3.denominator.
+ensure y3 + l32 * y2 = b3 else retry.
+
+ask diagonal1: RationalPart "Divide the CONTEXT value named y1 by the CONTEXT value named d1 to construct z1. Require d1 * z1 = y1. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from y1, d1 with context=none, effort=medium, retries=1
+let z1 = diagonal1.numerator / diagonal1.denominator.
+ensure d1 * z1 = y1 else retry.
+
+ask diagonal2: RationalPart "Divide the CONTEXT value named y2 by the CONTEXT value named d2 to construct z2. Require d2 * z2 = y2. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from y2, d2 with context=none, effort=medium, retries=1
+let z2 = diagonal2.numerator / diagonal2.denominator.
+ensure d2 * z2 = y2 else retry.
+
+ask diagonal3: RationalPart "Divide the CONTEXT value named y3 by the CONTEXT value named d3 to construct z3. Require d3 * z3 = y3. Return numerator and denominator. The numerator may be negative, zero, or positive; ONLY the denominator must be positive." from y3, d3 with context=none, effort=medium, retries=1
+let z3 = diagonal3.numerator / diagonal3.denominator.
+ensure d3 * z3 = y3 else retry.
+
+ask x3: Int "Copy the CONTEXT value named z3 to construct integer x3. The name z3 identifies the selected value. Require x3 = z3. Return only that integer, preserving its sign." from z3 with context=none, effort=medium, retries=1
+ensure x3 = z3 else retry.
+
+ask x2: Int "Multiply the CONTEXT value named l32 by the CONTEXT value named x3. Subtract that product from the CONTEXT value named z2 to construct integer x2. Require x2 + l32 * x3 = z2. Return only that integer, preserving its sign." from z2, l32, x3 with context=none, effort=medium, retries=1
+ensure x2 + l32 * x3 = z2 else retry.
+
+ask x1: Int "Multiply the CONTEXT value named l21 by the CONTEXT value named x2. Subtract that product from the CONTEXT value named z1 to construct integer x1. Require x1 + l21 * x2 = z1. Return only that integer, preserving its sign." from z1, l21, x2 with context=none, effort=medium, retries=1
+ensure x1 + l21 * x2 = z1 else retry.
+
+let solution = [x1,x2,x3].
+let residual = [sum([A[i][j] * solution[j] for j in indices]) - b[i] for i in indices].
+ensure residual = [0,0,0] else retry.
+let energy = sum([solution[i] * sum([A[i][j] * solution[j] for j in indices]) / 2 - b[i] * solution[i] for i in indices]).
+let witness = {schema: "symblic.quadratic-minimum.v1", method: "exact-rational-ldlt", scope: "explicit-finite-rational-quadratic", A: A, b: b, L: L, D: D, x: solution, residual: residual, min_energy: energy, checks: {symmetric: true, positive_pivots: true, factorization: true, stationary: true, unique_minimum: true}}.
+assert quadratic_verify(A, b, witness).
+let phi = [0,solution[1],solution[2],solution[3],0].
+show phi.
+show witness.

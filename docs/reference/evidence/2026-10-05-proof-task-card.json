@@ -1,0 +1,181 @@
+{
+  "behavior": [
+    "Caller-authored exact obligation is first in the fresh-context card, followed by explicitly numbered original commands and their checked references.",
+    "Generic guidance covers all eleven existing proof rules; no option is inferred, filtered, ranked or labelled correct.",
+    "Full original session remains authoritative in pre-dispatch checking, selected inference validation and parent adoption.",
+    "Card version and exact content hash bind the handoff. Old /5 through /8 compiled contracts remain unchanged."
+  ],
+  "compiler_sha256": "247839ecbd5da8324fa7f0fdd2a9c789f79d47a1130f76f2c5f9ab1be1197ec0",
+  "date_utc": "2026-10-05T15:35:31.272203+00:00",
+  "deployment": {
+    "dependencies": 321,
+    "payload_files": 14,
+    "plan_sha256": "091bfda7dce8e3dbee0e600e5a1efcdfa2d03cba92b0a01d8ffd1d29cc7f3830",
+    "production_runs_created": 0
+  },
+  "evidence_sha256": {
+    "independent_review": "8dee335a148d4ba0263597d19dc7243fc99e286d282c545cc6a27971bab7421b",
+    "live": "1c70e573918efe4e35bff82cf54164b1a958d1cb07e6d269fe438fa7a77a40fd",
+    "manifest": "539e35337b4de468876f295e7ab92a18a6aafd26f61600b7e14862ee6ebc0cb9",
+    "producer": "3d634f6c57f0fed94cf427f54e8b581fcfef2bd2b1220db3a183ecd58ef45ce1",
+    "root_review": "0ce94a49d744e2bb87e38fd6bec517393a3f6c3aaa68af4b610ac0fde129fd9a",
+    "surfaces": "5422722948c37b0ea6857ade891c467c57e7f08f28a10d7a23484c032f14fc5d"
+  },
+  "kernel_id": "1e87549328ddcdb6",
+  "limits": [
+    "Four captured requests use one synthetic 200-line parent session. Character counts are not token counts, cost, speed or model-quality estimates.",
+    "No improved small-model completion has yet been established for /9. The preceding /7 pilot motivated a separately testable presentation hypothesis.",
+    "Verified wire normalization accepts exact numeric strings as ordinals and records that transformation; booleans do not substitute for integers.",
+    "Formal inference checks establish the encoded obligation under the supplied premises; they do not establish empirical premise truth or equal fresh outputs across models."
+  ],
+  "review_corrections": [
+    "Sparse integration test imports were completed using unchanged dependencies; additive catalogue assertions were updated without changing old contract fixtures.",
+    "The initial live fake selected ordinal1, which native validation correctly rejected; corrected fixture selects the authored valid ordinal3.",
+    "Lint checks used the complete14-file diff; the sparse lint tree is not the native integration-test environment."
+  ],
+  "status": "installed_and_live_verified",
+  "template_id": "symblic.delegate/proof_step_card/9",
+  "validation": {
+    "actual_fake_captures": [
+      {
+        "accepted": true,
+        "budget": 24000,
+        "budget_scope": "system_prompt_schema",
+        "capsule": "full",
+        "contract_id": "f1f9ec9e0141786364f3dd0e774a4fb61e6988463e525d578021efc8b0a53207",
+        "exact_preview_equals_dispatch": true,
+        "fake_dispatches": 1,
+        "full_checked_output_lines": 201,
+        "prompt_characters": 6844,
+        "request_file": "REQUEST-proof_step_focus-full.json",
+        "request_file_sha256": "f034788daac733d25ecd9f23800624a292978ba48c6fd04131445fdacd3f7711",
+        "schema_characters": 135,
+        "source_sha256": "070ba8eceb7c2786f49b46dd0f567d8f5390bb0a7a827694dc11cff26ba3b89b",
+        "system_characters": 728,
+        "template": "proof_step_focus",
+        "total_characters": 7707
+      },
+      {
+        "accepted": true,
+        "budget": 24000,
+        "budget_scope": "system_prompt_schema",
+        "capsule": "compact",
+        "contract_id": "3f36078654b5ac8d630da928ad83a55907e90e5e2dbcdf7eaf391d7165d156a4",
+        "exact_preview_equals_dispatch": true,
+        "fake_dispatches": 1,
+        "full_checked_output_lines": 201,
+        "prompt_characters": 5646,
+        "request_file": "REQUEST-proof_step_focus-compact.json",
+        "request_file_sha256": "566239ccad868ed137226246424c35bc874582a96b37790214c9fad80b5d7541",
+        "schema_characters": 135,
+        "source_sha256": "7ad3de196caaa5be2587813774451b4fb24f2a657625f129c84c9655ea0d12e2",
+        "system_characters": 728,
+        "template": "proof_step_focus",
+        "total_characters": 6509
+      },
+      {
+        "accepted": true,
+        "budget": 24000,
+        "budget_scope": "system_prompt_schema",
+        "capsule": "full",
+        "contract_id": "3f24cc3fb6b62d1ae4617ac00767241564bb0940fb02a40091515c1dfadea41e",
+        "exact_preview_equals_dispatch": true,
+        "fake_dispatches": 1,
+        "full_checked_output_lines": 201,
+        "prompt_characters": 3699,
+        "request_file": "REQUEST-proof_step_card-full.json",
+        "request_file_sha256": "37e6ddf5bc3bf56b9d5f54abed735204c1ffc500c181100e44f1361baf971857",
+        "schema_characters": 135,
+        "source_sha256": "8560bf86840e3d67f9fb1da2ac112661c0a1c0e43a46143655e1327d58e65a11",
+        "system_characters": 728,
+        "template": "proof_step_card",
+        "total_characters": 4562
+      },
+      {
+        "accepted": true,
+        "budget": 24000,
+        "budget_scope": "system_prompt_schema",
+        "capsule": "compact",
+        "contract_id": "d2f79b991c359551d7aa8cf24972c8e8c85c9912eacc83296983ab6d4bc8c9ea",
+        "exact_preview_equals_dispatch": true,
+        "fake_dispatches": 1,
+        "full_checked_output_lines": 201,
+        "prompt_characters": 3533,
+        "request_file": "REQUEST-proof_step_card-compact.json",
+        "request_file_sha256": "105cb4ff6489db88756dc04a172e14512dd647d648d2ee5e1b8e11d98a3d66e1",
+        "schema_characters": 135,
+        "source_sha256": "e50051f79d610f85771ae202f83eb322ae651cb95edfe0c913b45bf60effb29a",
+        "system_characters": 728,
+        "template": "proof_step_card",
+        "total_characters": 4396
+      }
+    ],
+    "devcheck_blocking": 0,
+    "independent_methods_passed": 7,
+    "integrated_distinct_methods_passed": 138,
+    "live": {
+      "after_pid": 1876541,
+      "at": "2026-10-05T15:35:31.272203+00:00",
+      "before_pid": 1846766,
+      "card_request_surfaces": "Both full and compact live previews equal exact independently captured fake dispatch surfaces",
+      "dependency_guards": 74,
+      "http": {
+        "card_compile_compact": {
+          "bytes": 55429,
+          "status": 200
+        },
+        "card_compile_full": {
+          "bytes": 55404,
+          "status": 200
+        },
+        "card_preview_compact": {
+          "bytes": 76905,
+          "status": 200
+        },
+        "card_preview_full": {
+          "bytes": 76854,
+          "status": 200
+        },
+        "catalog": {
+          "bytes": 14657,
+          "status": 200
+        },
+        "focused_catalog": {
+          "bytes": 3138,
+          "status": 200
+        },
+        "meta": {
+          "bytes": 29175,
+          "status": 200
+        },
+        "prior_contract": {
+          "bytes": 8361,
+          "status": 200
+        }
+      },
+      "installed_files": 261,
+      "native": {
+        "actual_model_calls": 0,
+        "arithmetic": {
+          "#q": "1/2"
+        },
+        "ask_policy": 2,
+        "contract_id": "8fa32f53b456e7012baa61457bc1a2aa4eaef3a09db0b578fbac84b9b17e9978",
+        "fake_calls": 1,
+        "kernel_id": "1e87549328ddcdb6",
+        "parent_checked_lines": 3,
+        "replay": {
+          "calls": 0,
+          "fingerprint": "3bfd8fa1c1913cc1",
+          "ok": true
+        },
+        "template_id": "symblic.delegate/proof_step_card/9"
+      },
+      "scope": "Read-only API; fake-only native service-Python task-card parent handoff and lock replay in a temporary folder; zero models/effects/production runs"
+    },
+    "native_registered_source_markers": 43,
+    "prior_contracts_exact": 53,
+    "ruff": "E9,F clean"
+  },
+  "version": 1
+}

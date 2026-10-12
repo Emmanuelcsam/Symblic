@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Symblic</title>
+  <meta name="theme-color" content="#f4f1eb">
+  <!-- The Symblic studio page of the original host. It needs a host to work (see web/README.md):
+       /studio.css and /studio.js are the host's shared page library, /symblic-terminal.css, the team editor
+       and the task composer were host files that are not part of this repository, and every button calls
+       the host API (/api/automation/symblic/..., served by integration/host/symblic_engine.py).
+       The page's own scripts and styles are the relative files next to this one. -->
+  <link rel="stylesheet" href="/studio.css">
+  <link rel="stylesheet" href="symblic.css">
+  <link rel="stylesheet" href="symblic-frames.css">
+  <link rel="stylesheet" href="symblic-pixel-program.css">
+  <link rel="stylesheet" href="symblic-english.css">
+  <link rel="stylesheet" href="/symblic-terminal.css">
+  <link rel="stylesheet" href="/symblic-team-editor.css">
+  <link rel="stylesheet" href="symblic-editor-diagnostics.css">
+  <link rel="stylesheet" href="symblic-english-circuit.css">
+  <link rel="stylesheet" href="symblic-inquiry.css">
+  <link rel="stylesheet" href="symblic-experiments.css">
+  <link rel="stylesheet" href="symblic-intent.css">
+  <link rel="stylesheet" href="symblic-logic.css">
+  <link rel="stylesheet" href="symblic-memory.css">
+  <link rel="stylesheet" href="symblic-graphs.css">
+  <link rel="stylesheet" href="symblic-policies.css">
+  <link rel="stylesheet" href="symblic-help.css">
+  <link rel="stylesheet" href="symblic-picker.css">
+  <link rel="stylesheet" href="symblic-supervisor.css">
+</head>
+
+<body>
+  <script src="/studio.js"></script>
+  <script src="symblic-editor-diagnostics.js"></script>
+  <script src="symblic-english-circuit.js"></script>
+  <!-- The host serves symblic/js/acorn.js at this URL; symblic-pixel-program.js finds the parser's integrity by it. -->
+  <script src="/symblic_js_contract_acorn.js" integrity="sha256-yzstQ5hX1uRRTSOhIZ9jVMI0mPX6gf3yaRpanlPeQ8A="></script>
+  <script src="symblic-pixel-vm.js" integrity="sha256-r/iVi41G81MJtDRoWOAyynqmd/uAs3rFV5w/juJqwbg="></script>
+  <script src="symblic-pixel-program.js" integrity="sha256-BsgHZUV/nlWmcowAP1BQnr5iBf/edS7oT83EQ4CMYMM="></script>
+  <script src="/symblic-task-composer.js"></script>
+  <script src="/symblic-team-editor.js"></script>
+  <script src="symblic-english.js"></script>
+  <script src="symblic-inquiry.js"></script>
+  <script src="symblic-experiments.js"></script>
+  <script src="symblic-intent.js"></script>
+  <script src="symblic-logic.js"></script>
+  <script src="symblic-memory.js"></script>
+  <script src="symblic-graphs.js"></script>
+  <script src="symblic-policies.js"></script>
+  <script src="symblic-determinism.js"></script>
+  <script src="symblic-frames.js"></script>
+  <script src="symblic-picker.js"></script>
+  <script src="symblic-workcards.js"></script>
+  <script src="symblic-supervisor.js"></script>
+  <script src="symblic-page.js"></script>
+  <script src="symblic-help.js" defer></script>
+</body>
+
+</html>

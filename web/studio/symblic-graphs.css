@@ -1,0 +1,14 @@
+.sy-graphs { max-width: 960px; margin: 0 auto; overflow-wrap: anywhere; }
+.sy-graphs textarea { width: 100%; box-sizing: border-box; min-width: 0; margin: 12px 0; padding: 12px; border: 1px solid var(--brd); border-radius: 6px; background: var(--bg1); color: var(--tx1); font-family: var(--mono); font-size: 16px; line-height: 1.5; resize: vertical; }
+.sy-graphs button { min-height: 44px; white-space: normal; overflow-wrap: anywhere; }
+.sy-graphs summary { padding: 12px 0; cursor: pointer; }
+.sy-graphs details { margin: 12px 0; }
+.sy-graphs pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 28rem; overflow: auto; padding: 12px; border: 1px solid var(--brd); }
+.sy-graph-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 10px; }
+.sy-graph-check { border-left: 3px solid var(--acc); padding: 8px 16px; margin: 20px 0; }
+.sy-graph-nodes, .sy-graph-results { padding-left: 24px; }
+.sy-graph-nodes li, .sy-graph-results li { margin: 16px 0; padding-left: 4px; }
+.sy-graph-saved { display: block; width: 100%; margin: 10px 0; text-align: left; }
+.sy-graph-saved[aria-pressed=true] { border-color: var(--acc); }
+.sy-graph-error { color: var(--err); }
+@media (max-width: 600px) { .sy-graphs h2 { font-size: 1.35rem; } .sy-graph-actions button { width: 100%; } }

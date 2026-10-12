@@ -1,0 +1,29 @@
+/* A separate pointer-transparent layer preserves the native textarea and syntax highlighter. */
+.sy-editor-overlay { position: absolute; overflow: hidden; pointer-events: none; z-index: 2; border: 0; margin: 0; padding: 0; }
+.sy-editor-mirror { display: block; position: relative; box-sizing: border-box; border: 0; margin: 0; color: transparent;
+  background: transparent; -webkit-text-fill-color: transparent; pointer-events: none; min-height: 100%; }
+.sy-editor-mark { text-decoration-line: underline; text-decoration-style: wavy; text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px; text-decoration-skip-ink: none; text-decoration-color: var(--sy-diagnostic-color, #bc302c); }
+.sy-editor-mark[data-severity=error], .sy-editor-point[data-severity=error] { --sy-diagnostic-color: var(--err, #bc302c); }
+.sy-editor-mark[data-severity=warning], .sy-editor-point[data-severity=warning] { --sy-diagnostic-color: var(--warn, #a56a00); }
+.sy-editor-mark[data-severity=info], .sy-editor-point[data-severity=info] { --sy-diagnostic-color: var(--acc, #2872ae); }
+.sy-editor-point { position: relative; display: inline; }
+.sy-editor-point::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 7px; height: 3px;
+  border-bottom: 2px solid var(--sy-diagnostic-color, #bc302c); }
+.sy-editor-problems { margin-top: 8px; overflow-wrap: anywhere; }
+.sy-editor-status { color: var(--tx2, #555); font-size: 13px; margin: 6px 0; min-height: 1.3em; }
+.sy-editor-problem-list { padding: 0; margin: 0; list-style: none; max-height: 240px; overflow: auto; }
+.sy-editor-problem-list li { margin: 0; border-bottom: 1px solid var(--hair, #ddd); }
+.sy-editor-problem { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 5px 12px; width: 100%; min-height: 44px;
+  padding: 9px 4px; font: inherit; font-size: 14px; line-height: 1.45; color: var(--tx1, #222); background: transparent;
+  border: 0; text-align: left; white-space: normal; cursor: pointer; touch-action: manipulation; }
+.sy-editor-problem:hover, .sy-editor-problem:focus-visible { background: var(--bg2, #f3f3f3); outline: 2px solid var(--acc, #2872ae); outline-offset: -2px; }
+.sy-editor-problem[aria-disabled=true] { cursor: default; }
+.sy-editor-problem-location { font-family: var(--mono, monospace); font-size: 12px; color: var(--tx2, #555); }
+.sy-editor-problem-list [data-severity=error] .sy-editor-problem-location { color: var(--err, #bc302c); }
+.sy-editor-problem-list [data-severity=warning] .sy-editor-problem-location { color: var(--warn, #a56a00); }
+.sy-editor-tooltip { position: fixed; z-index: 10000; pointer-events: none; max-width: min(460px, calc(100vw - 32px)); padding: 9px 12px;
+  border: 1px solid var(--ctl, #aaa); border-radius: 4px; background: var(--bg1, white); color: var(--tx1, #222);
+  font: 14px/1.45 system-ui, sans-serif; white-space: pre-wrap; overflow-wrap: anywhere; box-shadow: 0 3px 14px #0003; }
+.sy-editor-tooltip[hidden] { display: none; }
+@media (forced-colors: active) { .sy-editor-mark { text-decoration-color: LinkText; } .sy-editor-point::after { border-color: LinkText; } }

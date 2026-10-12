@@ -1,0 +1,36 @@
+program Two accounts of one event.
+note Two people describe the same evening. Each account is split into observations, feelings, needs and
+note requests, and the kernel rejects any item that is not copied word for word from its own account (quotes).
+note The kernel checks only the quoting. Which kind an item is, and which observations the two accounts share,
+note are model judgements (text.same_meaning), not checks. Nothing here says whose account is accurate.
+
+import same_meaning from text.
+
+given account_a: Text = "On Tuesday you came home at eleven and did not call. I felt worried. I need to know when you will be late. Would you text me when you leave work?"
+given account_b: Text = "On Tuesday I came home at eleven. My phone battery was dead. I felt frustrated. I need some room after a long shift. Can we talk about it in the morning?"
+
+define Item as Record {kind: one of {
+    observation: "something that happened which a camera or a recording could have captured, with no judgement in it",
+    feeling: "an emotion the speaker says they had",
+    need: "something the speaker says they need or value, named without a person who must provide it",
+    request: "a concrete action the speaker asks someone to take"},
+  quote: Text}.
+
+ask items_a: List of Item "Split the account into items. Give each item's kind and, as quote, the words of the account that state it, copied exactly.\nACCOUNT:\n{account_a}"
+ensure len(items_a) > 0 else retry because "the account states at least one thing".
+ensure all x in items_a: quotes(account_a, x.quote) else retry because "every quote must be copied exactly from the account".
+
+ask items_b: List of Item "Split the account into items. Give each item's kind and, as quote, the words of the account that state it, copied exactly.\nACCOUNT:\n{account_b}"
+ensure len(items_b) > 0 else retry because "the account states at least one thing".
+ensure all x in items_b: quotes(account_b, x.quote) else retry because "every quote must be copied exactly from the account".
+
+function of_kind(xs: List of Item, k: Text) -> List of Text = [x.quote for x in xs if x.kind = k].
+function by_kind(xs: List of Item) -> Any = {observation: of_kind(xs, "observation"), feeling: of_kind(xs, "feeling"), need: of_kind(xs, "need"), request: of_kind(xs, "request")}.
+
+show by_kind(items_a) as "account A by kind".
+show by_kind(items_b) as "account B by kind".
+
+note For each observation of A, the observations of B that a model judges to say the same thing.
+let obs_b = of_kind(items_b, "observation").
+let pairs = [{a: o, b: [x for x in obs_b if same_meaning(o, x)]} for o in of_kind(items_a, "observation")].
+show [p for p in pairs if len(p.b) > 0] as "observations both accounts make (model judgement)".

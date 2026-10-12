@@ -1,0 +1,155 @@
+{
+  "composition": {
+    "version": 1,
+    "id": "RepeatedPair",
+    "definitions": {
+      "Pair": {
+        "nodes": [
+          {
+            "output_binding": "answer",
+            "output_schema": {
+              "type": "integer"
+            },
+            "allowed": {
+              "routes": [
+                "Local"
+              ],
+              "providers": [
+                "ollama"
+              ],
+              "models": [
+                "qwen3:4b-instruct"
+              ],
+              "nodes": [
+                "node-a"
+              ],
+              "local_only": true
+            },
+            "join": "require_all",
+            "effect_risk": "none",
+            "retries": 0,
+            "call_limit": 1,
+            "max_calls": 4,
+            "max_iterations": 32,
+            "assumptions": [
+              "This is a deterministic arithmetic fixture, not an empirical measurement."
+            ],
+            "id": "Draft",
+            "inputs": {},
+            "source": "given x: Int.\nlet answer = x + 1.\n",
+            "contract": "Return the value constrained by the explicit integer predicate.",
+            "checks": [
+              "answer = x + 1"
+            ]
+          },
+          {
+            "output_binding": "answer",
+            "output_schema": {
+              "type": "integer"
+            },
+            "allowed": {
+              "routes": [
+                "Local"
+              ],
+              "providers": [
+                "ollama"
+              ],
+              "models": [
+                "qwen3:4b-instruct"
+              ],
+              "nodes": [
+                "node-a"
+              ],
+              "local_only": true
+            },
+            "join": "require_all",
+            "effect_risk": "none",
+            "retries": 0,
+            "call_limit": 1,
+            "max_calls": 4,
+            "max_iterations": 32,
+            "assumptions": [
+              "This is a deterministic arithmetic fixture, not an empirical measurement."
+            ],
+            "id": "Check",
+            "inputs": {
+              "v": {
+                "node": "Draft"
+              }
+            },
+            "source": "given v: Int.\nlet answer = v * 2.",
+            "contract": "Return the value constrained by the explicit integer predicate.",
+            "checks": [
+              "answer = v * 2"
+            ]
+          }
+        ],
+        "inputs": {
+          "request": {
+            "targets": [
+              {
+                "node": "Draft",
+                "input": "x"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "answer": {
+            "node": "Check"
+          }
+        }
+      }
+    },
+    "instances": [
+      {
+        "id": "First",
+        "definition": "Pair",
+        "sha256": "d13764bf06e77e43c3d45864936e4992a7ef537ad49b88bb177e074ae3f14826",
+        "inputs": {
+          "request": {
+            "literal": {
+              "version": 1,
+              "value": 3,
+              "value_id": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+              "outcome": "supported",
+              "evidence": [],
+              "assumptions": [],
+              "provenance": [],
+              "independence": "not_established"
+            }
+          }
+        }
+      },
+      {
+        "id": "Second",
+        "definition": "Pair",
+        "sha256": "d13764bf06e77e43c3d45864936e4992a7ef537ad49b88bb177e074ae3f14826",
+        "inputs": {
+          "request": {
+            "instance": "First",
+            "port": "answer"
+          }
+        }
+      }
+    ],
+    "nodes": [],
+    "iterations": 1,
+    "max_calls": 8
+  },
+  "policy": {
+    "version": 1,
+    "routes": [
+      {
+        "id": "Local",
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "node": "node-a",
+        "local": true
+      }
+    ],
+    "order": [
+      "Local"
+    ]
+  }
+}

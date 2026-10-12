@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Automation Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="top-row">
+        <h1>Automation Studio</h1>
+        <nav class="mode-switch" aria-label="Mode">
+          <a class="mode-link active" href="index.html">Studio</a>
+          <a class="mode-link" href="symblic.html">Symblic</a>
+        </nav>
+        <span class="badge" id="autosaveStatus">Not saved</span>
+      </div>
+      <div class="actions">
+        <div class="field compact">
+          <label for="workflowSelect">Saved Workflows</label>
+          <select id="workflowSelect" class="workflow-select"></select>
+        </div>
+        <div class="action-group">
+          <button id="newWorkflow" class="primary">New Workflow</button>
+          <button id="saveWorkflow" class="success">Save Workflow</button>
+        </div>
+        <div class="action-group">
+          <button id="runWorkflow" class="primary">Run Now</button>
+          <button id="stopRun" class="danger">Stop Run</button>
+        </div>
+      </div>
+    </header>
+
+    <aside class="sidebar" aria-label="Automation tools">
+      <section class="panel start-here">
+        <h2>Start Here (Super Simple)</h2>
+        <p class="muted small">Pick a big button and we will build a starter workflow for you.</p>
+        <div class="quick-actions" id="quickActions">
+          <button class="quick-btn" data-quick="email">Send an Email</button>
+          <button class="quick-btn" data-quick="search-summary">Search + Summarize</button>
+          <button class="quick-btn" data-quick="schedule-email">Schedule an Email</button>
+          <button class="quick-btn" data-quick="run-script">Run a Script</button>
+        </div>
+        <div class="muted small" id="quickActionStatus" aria-live="polite">Waiting for your choice.</div>
+      </section>
+
+      <section class="panel method-panel">
+        <h2>Automation Methods</h2>
+        <p class="muted small">Choose how you want to build your automation.</p>
+        <div class="method-buttons" id="methodButtons">
+          <button data-scroll="nodeButtons">Visual Canvas (Nodes)</button>
+          <button data-scroll="pipelineSummary">Linear Pipeline Builder</button>
+          <button data-scroll="templateList">Template Gallery</button>
+          <button data-scroll="scriptList">Script Library</button>
+          <a class="method-link" href="symblic.html">Text Mode (Symblic)</a>
+        </div>
+      </section>
+
+      <section class="panel run-center">
+        <h2>Run Center</h2>
+        <p class="muted small">Pick how to run this automation.</p>
+        <div class="run-buttons">
+          <button id="runWorkflowBig" class="primary">Run Now</button>
+          <button id="runWorkflowTest" class="secondary">Test Run (No LLM)</button>
+          <button id="runWorkflowSchedule" class="secondary">Schedule Run</button>
+          <button id="stopRunBig" class="danger">Stop Run</button>
+        </div>
+        <div class="muted small" id="runModeStatus" aria-live="polite">Ready.</div>
+      </section>
+
+      <section class="panel help-panel">
+        <h2>Explain This</h2>
+        <div class="help-title" id="helpPanelTitle">Hover or focus an item.</div>
+        <div class="help-text" id="helpPanelText">Simple explanations will appear here.</div>
+      </section>
+
+      <section class="panel workflow-tools">
+        <h2>Workflow Tools</h2>
+        <div class="field">
+          <label for="workflowName">Workflow Name</label>
+          <input type="text" id="workflowName" placeholder="My Automation" />
+        </div>
+        <div class="inline">
+          <button id="renameWorkflow" class="small">Rename</button>
+          <button id="duplicateWorkflow" class="small">Duplicate</button>
+        </div>
+        <div class="inline">
+          <button id="exportWorkflowJson" class="small">Export JSON</button>
+          <button id="importWorkflowJson" class="small">Import JSON</button>
+          <input type="file" id="importWorkflowFile" accept=".json" hidden />
+        </div>
+        <div class="muted small" id="workflowToolStatus">Ready.</div>
+      </section>
+
+      <section class="panel canvas-tools">
+        <h2>Canvas Tools</h2>
+        <div class="field">
+          <label for="canvasZoom">Zoom</label>
+          <input type="range" id="canvasZoom" min="50" max="200" value="100" />
+        </div>
+        <div class="inline">
+          <button id="zoomOut" class="small">-</button>
+          <button id="zoomIn" class="small">+</button>
+          <button id="zoomReset" class="small">Reset</button>
+        </div>
+        <div class="inline">
+          <button id="zoomFit" class="small">Fit</button>
+          <button id="zoomSelection" class="small">Center Selected</button>
+          <button id="autoLayout" class="small">Auto Layout</button>
+        </div>
+        <div class="field">
+          <label class="toggle"><input type="checkbox" id="gridToggle" checked /> Show grid</label>
+        </div>
+        <div class="field">
+          <label class="toggle"><input type="checkbox" id="snapToggle" /> Snap to grid</label>
+        </div>
+        <div class="field">
+          <label class="toggle"><input type="checkbox" id="easyModeToggle" /> Easy mode (big text)</label>
+        </div>
+        <div class="field">
+          <label for="themeSelect">Theme</label>
+          <select id="themeSelect">
+            <option value="playful" selected>Paper</option>
+            <option value="midnight">Night</option>
+          </select>
+        </div>
+        <div class="muted small" id="canvasStatus">Zoom 100%</div>
+      </section>
+
+      <section class="panel node-navigator">
+        <h2>Node Navigator</h2>
+        <div class="field">
+          <label for="nodeSearch">Find Node</label>
+          <input type="text" id="nodeSearch" placeholder="search by name or type" />
+        </div>
+        <div class="node-count" id="nodeCount">0 nodes</div>
+        <div class="node-list" id="nodeList">No nodes yet.</div>
+      </section>
+
+      <h2>Nodes</h2>
+      <p class="muted small">Tap a node button to add it to the canvas.</p>
+      <div class="node-buttons" id="nodeButtons"></div>
+      <div class="field">
+        <label class="toggle"><input type="checkbox" id="autoConnectNodes" checked /> Auto-connect new steps</label>
+      </div>
+      <div class="inline">
+        <button id="connectMode" class="primary">Connect Nodes</button>
+        <button id="deleteNode" class="danger">Delete Selected Node</button>
+      </div>
+      <h2>Script Library</h2>
+      <div class="field">
+        <label for="scriptSearch">Search</label>
+        <input type="text" id="scriptSearch" placeholder="filter scripts" />
+      </div>
+      <div class="field">
+        <label for="scriptCategory">Category</label>
+        <select id="scriptCategory"></select>
+      </div>
+      <div class="field">
+        <label for="scriptView">View</label>
+        <select id="scriptView">
+          <option value="All">All</option>
+          <option value="Favorites">Favorites</option>
+          <option value="Recent">Recent</option>
+        </select>
+      </div>
+      <div class="script-list" id="scriptList" tabindex="0">Loading scripts...</div>
+      <div class="script-details" id="scriptDetails">Select a script to see details.</div>
+      <div class="inline">
+        <button id="scriptAddNode" class="primary small" disabled>Add Script Node</button>
+        <button id="scriptOpenCode" class="small" disabled>Open in VS Code</button>
+        <button id="scriptEdit" class="small" disabled>Edit</button>
+        <button id="scriptReload" class="small">Reload</button>
+      </div>
+      <div class="field">
+        <label for="scriptsDirInput">Scripts folder</label>
+        <input type="text" id="scriptsDirInput" placeholder="automation_data/automation_studio/scripts" />
+      </div>
+      <div class="inline">
+        <button id="scriptsDirApply" class="primary small">Apply</button>
+      </div>
+      <details class="advanced" open>
+        <summary id="pipelineSummary">Linear Pipeline Builder</summary>
+        <div class="pipeline-list" id="pipelineList">No pipeline steps yet.</div>
+        <div class="inline">
+          <button id="pipelineAddStep" class="primary small" disabled>Add Selected Script</button>
+          <button id="pipelineRemoveStep" class="danger small" disabled>Remove</button>
+          <button id="pipelineClear" class="small">Clear</button>
+        </div>
+        <div class="field">
+          <label class="toggle"><input type="checkbox" id="pipelineReplace" checked /> Replace current workflow</label>
+        </div>
+        <div class="field">
+          <label class="toggle"><input type="checkbox" id="pipelineSync" checked /> Sync with canvas (two-way)</label>
+        </div>
+        <div class="inline">
+          <button id="pipelineApply" class="success small">Apply to Canvas</button>
+          <button id="pipelineExport" class="small">Export JSON</button>
+          <button id="pipelineImport" class="small">Import JSON</button>
+          <input type="file" id="pipelineImportFile" accept=".json" hidden />
+        </div>
+        <div class="muted small" id="pipelineStatus">Sync enabled.</div>
+        <div class="pipeline-details" id="pipelineDetails">Select a step to edit.</div>
+      </details>
+      <h2>Templates</h2>
+      <div class="template-list" id="templateList"></div>
+      <h2>Connections</h2>
+      <div class="edges-list" id="edgesList">No connections yet.</div>
+      <div>
+        <h2>Run Options</h2>
+        <div class="inline">
+          <label class="toggle"><input type="checkbox" id="useLLM" checked /> Enable LLM nodes</label>
+        </div>
+        <div class="field">
+          <label for="contextPolicy">Context policy</label>
+          <select id="contextPolicy">
+            <option value="persist">Reuse &amp; extend across runs</option>
+            <option value="clear">Clear before run</option>
+            <option value="isolated">Isolated (do not read/save)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="runFocus">Run focus (optional)</label>
+          <textarea id="runFocus" placeholder="e.g., focus on employer outreach, keep outputs concise"></textarea>
+        </div>
+        <div class="field">
+          <label for="runAt">Run at (optional)</label>
+          <input type="datetime-local" id="runAt" />
+        </div>
+        <div class="field">
+          <label for="maxSteps">Max steps (0 = unlimited)</label>
+          <input type="number" id="maxSteps" value="240" min="0" />
+        </div>
+        <div class="field">
+          <label for="maxConcurrency">Max parallel tasks</label>
+          <input type="number" id="maxConcurrency" value="4" min="1" />
+        </div>
+        <details class="advanced">
+          <summary id="llmDefaultsSummary">LLM Defaults (optional)</summary>
+          <div class="field">
+            <label for="defaultResponseStyle">Default response style</label>
+            <textarea id="defaultResponseStyle" placeholder="e.g., bullet points, JSON, formal tone"></textarea>
+          </div>
+          <div class="field">
+            <label for="defaultOutputMode">Default output mode</label>
+            <select id="defaultOutputMode">
+              <option value="">Use node setting</option>
+              <option value="both">Both (app + email)</option>
+              <option value="app">App only</option>
+              <option value="email">Email only</option>
+              <option value="silent">Silent</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="defaultMaxMessages">Default max messages</label>
+            <input type="number" id="defaultMaxMessages" min="0" placeholder="e.g., 12" />
+          </div>
+          <div class="field">
+            <label for="defaultMaxChars">Default max chars</label>
+            <input type="number" id="defaultMaxChars" min="0" placeholder="e.g., 8000" />
+          </div>
+          <div class="field">
+            <label for="defaultMaxTokens">Default max tokens</label>
+            <input type="number" id="defaultMaxTokens" min="0" placeholder="e.g., 800" />
+          </div>
+          <div class="field">
+            <label for="defaultContextWindow">Default Ollama context window</label>
+            <input type="number" id="defaultContextWindow" min="0" placeholder="e.g., 4096" />
+          </div>
+          <div class="field">
+            <label for="defaultTemperature">Default temperature</label>
+            <input type="number" id="defaultTemperature" step="0.1" placeholder="e.g., 0.7" />
+          </div>
+        </details>
+        <p class="muted" id="runOptionsTip">Tip: Use edge labels like <strong>if:great meeting</strong> or <strong>else</strong> for Branch, and <strong>loop</strong>/<strong>after</strong> for Loop. Queue prompts with Schedule + Loop, and reset memory using Context Control nodes.</p>
+      </div>
+      <div>
+        <h2>Server</h2>
+        <div class="field">
+          <label for="apiBaseInput">API Base (optional)</label>
+          <input type="text" id="apiBaseInput" placeholder="http://localhost:8085" />
+        </div>
+        <div class="inline">
+          <button id="apiBaseSave" class="primary small">Apply</button>
+          <span id="apiStatus" class="muted small">Default server</span>
+        </div>
+      </div>
+      <div>
+        <h2>Run History</h2>
+        <div class="history-list" id="runHistory" tabindex="0">No runs yet.</div>
+      </div>
+    </aside>
+
+    <main class="canvas-wrap">
+      <div id="canvas" tabindex="0" role="group" aria-label="Workflow canvas">
+        <svg id="links"></svg>
+        <div id="nodes"></div>
+      </div>
+    </main>
+
+    <aside class="inspector" aria-label="Selected node properties">
+      <h2>Inspector</h2>
+      <div id="inspectorContent" class="muted">Select a node to edit.</div>
+    </aside>
+
+    <section class="status" aria-label="Automation status">
+      <div>
+        <h3>Run Log</h3>
+        <pre id="runLog" tabindex="0" role="region" aria-label="Run log">No run yet.</pre>
+      </div>
+      <div>
+        <h3>Last Output</h3>
+        <pre id="lastOutput" tabindex="0" role="region" aria-label="Last output">---</pre>
+      </div>
+    </section>
+  </div>
+
+  <div id="tooltip" class="tooltip" role="tooltip" aria-hidden="true"></div>
+  <div id="commandPalette" class="modal" aria-hidden="true">
+    <div class="modal-content palette">
+      <div class="modal-header">
+        <strong>Command Palette</strong>
+        <button id="paletteClose" class="small">Close</button>
+      </div>
+      <input type="text" id="paletteInput" aria-label="Find a command" placeholder="Type a command..." />
+      <div class="palette-list" id="paletteList">Type to search commands.</div>
+      <div class="muted small">Shortcut: Ctrl/Cmd + K</div>
+    </div>
+  </div>
+  <div id="scriptEditor" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong>Edit Script</strong>
+        <button id="scriptEditorClose" class="small">Close</button>
+      </div>
+      <textarea id="scriptEditorText" aria-label="Script source" spellcheck="false"></textarea>
+      <div class="modal-actions">
+        <button id="scriptEditorSave" class="primary small">Save</button>
+        <button id="scriptEditorReload" class="small">Reload</button>
+      </div>
+      <div id="scriptEditorStatus" class="muted small"></div>
+    </div>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

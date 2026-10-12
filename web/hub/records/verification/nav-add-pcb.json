@@ -1,0 +1,11 @@
+[
+  {"op": "add", "page": {
+    "title": "Symblic Beta: Laptop PCB",
+    "href": "/symblic-beta-pcb",
+    "group": "Build",
+    "keywords": ["symblic", "beta", "pcb", "circuit", "board", "3d", "laptop", "mistral"],
+    "dir": "symblic-beta-pcb",
+    "index": "index.html",
+    "sub": "3D laptop motherboard explorer with component detail and a circuit-board maker, built from English statements by fresh Mistral sessions"
+  }}
+]

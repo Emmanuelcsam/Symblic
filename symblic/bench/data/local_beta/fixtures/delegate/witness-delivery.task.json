@@ -1,0 +1,10 @@
+{
+  "template": "witnessed_line",
+  "calls": 3,
+  "params": {
+    "instruction": "Select the delivery date line.",
+    "source_id": "order-7",
+    "revision": 1,
+    "text": "Order: 7\nDelivery: Monday\n"
+  }
+}

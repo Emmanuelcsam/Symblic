@@ -1,0 +1,121 @@
+{
+  "allowed_outputs": [
+    "result.js"
+  ],
+  "assumptions": [],
+  "budget": {
+    "context_chars": 40000,
+    "max_calls": 24,
+    "max_candidates": 4,
+    "max_depth": 4,
+    "max_units": 20,
+    "max_workers": 2,
+    "retries": 1,
+    "wall_seconds": 1800
+  },
+  "exports": [
+    {
+      "name": "clamp",
+      "signature": "clamp(x,lo,hi)"
+    },
+    {
+      "name": "sum",
+      "signature": "sum(values)"
+    },
+    {
+      "name": "mean",
+      "signature": "mean(values)"
+    },
+    {
+      "name": "histogram",
+      "signature": "histogram(values)"
+    },
+    {
+      "name": "movingAverage",
+      "signature": "movingAverage(values,width)"
+    },
+    {
+      "name": "summarize",
+      "signature": "summarize(values)"
+    }
+  ],
+  "language": "javascript",
+  "objective": "Build a small JavaScript arithmetic and collections library with reusable units and an integrating summary.",
+  "requirements": [
+    {
+      "acceptance": "TESTED",
+      "id": "clamp",
+      "text": "clamp(x,lo,hi) returns min(hi,max(lo,x)); finite numeric inputs with lo<=hi."
+    },
+    {
+      "acceptance": "TESTED",
+      "id": "sum",
+      "text": "sum(values) sums finite numeric values in input order; empty array returns 0; never mutate input."
+    },
+    {
+      "acceptance": "TESTED",
+      "id": "mean",
+      "text": "mean(values) returns sum(values)/values.length or null for empty; never mutate input."
+    },
+    {
+      "acceptance": "TESTED",
+      "id": "histogram",
+      "text": "histogram(values) counts String(value) keys into an own-key object for string or integer values, including __proto__ and constructor; never mutate input."
+    },
+    {
+      "acceptance": "TESTED",
+      "id": "moving",
+      "text": "movingAverage(values,width) returns means of each consecutive full-width window, width a positive integer; width>length returns []; never mutate input."
+    },
+    {
+      "acceptance": "TESTED",
+      "id": "summary",
+      "text": "summarize(values) for integer arrays returns exactly {count,total,mean,min,max,histogram}; min/max/mean null when empty, total zero, histogram from histogram(values); never mutate input."
+    }
+  ],
+  "tests": [
+    {
+      "call": "clamp(12,0,10)",
+      "expected": "10",
+      "requirement_ids": [
+        "clamp"
+      ]
+    },
+    {
+      "call": "sum([1,2,3])",
+      "expected": "6",
+      "requirement_ids": [
+        "sum"
+      ]
+    },
+    {
+      "call": "mean([])",
+      "expected": "null",
+      "requirement_ids": [
+        "mean"
+      ]
+    },
+    {
+      "call": "histogram([\"a\",\"b\",\"a\"])",
+      "expected": "{\"a\":2,\"b\":1}",
+      "requirement_ids": [
+        "histogram"
+      ]
+    },
+    {
+      "call": "movingAverage([1,2,3,4],2)",
+      "expected": "[1.5,2.5,3.5]",
+      "requirement_ids": [
+        "moving"
+      ]
+    },
+    {
+      "call": "summarize([1,2,2])",
+      "expected": "{\"count\":3,\"total\":5,\"mean\":1.6666666666666667,\"min\":1,\"max\":2,\"histogram\":{\"1\":1,\"2\":2}}",
+      "requirement_ids": [
+        "summary"
+      ]
+    }
+  ],
+  "version": 1
+}

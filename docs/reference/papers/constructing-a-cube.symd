@@ -1,0 +1,59 @@
+---
+effort: medium
+---
+# Constructing a cube from its description
+
+This paper describes one cube so exactly that any reader who follows it builds the same object, written
+the same way. A reader turns the description into a list of corner points and faces; the kernel then
+checks the end state. The checks admit exactly one record, so every answer the kernel accepts is
+identical, whoever wrote it. Readers who cannot reach that record are rejected rather than accepted with
+a different cube: the measured part is how many readers reach acceptance.
+
+## Definitions
+
+- **coordinate system**: right-handed x, y and z axes meeting at the origin (0, 0, 0); every length is in units
+- **vertex**: a corner point of the solid, written as [x, y, z]
+- **face**: a flat side of the solid, written as the numbers of its vertices in counter-clockwise order seen from outside the solid
+- **edge length**: the distance between two vertices joined by an edge
+- **canonical numbering**: vertices numbered from 1 in ascending order of x, then y, then z; each face starts at its smallest vertex number; faces sorted in ascending order, comparing the first number, then the second
+
+## The object
+
+The solid is a cube. Every edge is 2 units long. The centre of the cube is the origin. Every face is
+perpendicular to the x axis, the y axis or the z axis. It follows that every coordinate of every vertex
+is 1 or -1, so the cube has 8 vertices and 6 square faces of 4 vertices each.
+
+```symblic
+define Shape as Record {vertices: List of (List of Number length 3) length 8, faces: List of (List of Int length 4) length 6}.
+```
+
+## Construction
+
+The reader writes the cube's vertices and faces using the canonical numbering. Nothing else is needed.
+
+```symblic
+ask cube_solid: Shape "Construct the cube this paper describes. Give its 8 vertices and 6 faces using the canonical numbering." with retries=3
+```
+
+## End state
+
+The kernel accepts the construction only if every check holds: it is a closed solid, it is a cube with
+edges 2 units long, every coordinate is 1 or -1, and it is written in the canonical numbering. Together
+these admit exactly one record.
+
+```symblic
+ensure solid_check(cube_solid).valid_solid because solid_check(cube_solid).problems.
+ensure is_cube(cube_solid, 2) because "the solid must be a cube with every edge 2 units long".
+ensure all p in cube_solid.vertices: all c in p: c = 1 or c = -1 because "the cube is centred at the origin with faces perpendicular to the axes, so every coordinate is 1 or -1".
+ensure cube_solid = canonical_shape(cube_solid) because "use the canonical numbering: vertices by x, then y, then z; faces counter-clockwise from outside, starting at the smallest number, sorted".
+```
+
+## Result
+
+The accepted cube, its fingerprint and its drawing are computed by the kernel.
+
+```symblic
+show hash(cube_solid) as "cube fingerprint".
+show shape_facts(cube_solid).volume as "volume".
+draw draw_shape(cube_solid) as "cube.svg".
+```

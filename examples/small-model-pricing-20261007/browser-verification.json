@@ -1,0 +1,73 @@
+{
+  "sha256": "9d982374153f25d42c05e3f1e3276a5fdda5bbd11f1e9a0e45fd2f7e3d5b0282",
+  "rows": [
+    {
+      "mobile": false,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "boxes": [
+        {
+          "x": 16,
+          "y": 95.875,
+          "width": 405.328125,
+          "height": 193.8125
+        },
+        {
+          "x": 437.328125,
+          "y": 95.875,
+          "width": 405.328125,
+          "height": 193.8125
+        },
+        {
+          "x": 858.65625,
+          "y": 95.875,
+          "width": 405.34375,
+          "height": 193.8125
+        }
+      ],
+      "violations": [],
+      "blocked": [],
+      "errors": [],
+      "screenshot": "pricing-desktop.png",
+      "keyboardButtons": 3,
+      "minimumButtonHeight": 44,
+      "scope": "Static presentation, focus and clickability; Select buttons have no purchase/navigation action."
+    },
+    {
+      "mobile": true,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "boxes": [
+        {
+          "x": 16,
+          "y": 95.875,
+          "width": 358,
+          "height": 193.8125
+        },
+        {
+          "x": 16,
+          "y": 305.6875,
+          "width": 358,
+          "height": 193.8125
+        },
+        {
+          "x": 16,
+          "y": 515.5,
+          "width": 358,
+          "height": 193.8125
+        }
+      ],
+      "violations": [],
+      "blocked": [],
+      "errors": [],
+      "screenshot": "pricing-phone.png",
+      "keyboardButtons": 3,
+      "minimumButtonHeight": 44,
+      "scope": "Static presentation, focus and clickability; Select buttons have no purchase/navigation action."
+    }
+  ]
+}
